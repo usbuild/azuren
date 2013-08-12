@@ -35,7 +35,7 @@
  */
 
 (function(wnd,d,$){
-	nJDSK.widgets = {
+	$.extend(nJDSK.widgets, {
 		/**
 		 * Adds a new widget
 		 * @param string wdgId 			widget id
@@ -60,5 +60,5 @@
 	        });
             
 	    }
-	} 
+	} );
 })(window,document,jQuery);

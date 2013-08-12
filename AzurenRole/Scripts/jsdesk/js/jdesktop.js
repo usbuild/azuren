@@ -1,7 +1,7 @@
 /* Virtual Desktop system*/
 var nJDSK = (function(wnd,d,$){
     return{
-        /*These settings can be changed*/
+    /*These settings can be changed*/
     taskbarHeight: 30,
     widgetWidth: 200,
     iconWidth:96,
@@ -62,28 +62,23 @@ var nJDSK = (function(wnd,d,$){
      */
     Window:function(width,height,title,toolbar,content,id,dialog,modal,fullGlass,createCallback){
                var self = this;
-               var desktop = $("#desktop");
-               /**
-                * Restore standard content area
-                */
-               this.removeFullGlass = function()
-               {
-                   self.$content.removeClass('fullGlass');
-               }
+               var desktop = nJDSK.desktop;
+               var taskbar = $("#taskbarbuttons");
 
-               /**
-                * Turn content area backgrounds and borders transparent
-                */
-               this.setFullGlass = function()
-               {
-                   self.$content.addClass('fullGlass');
-               }
-
+               var setTopActive = function() {
+                   $(".win-active").removeClass("win-active");
+                   var top = nJDSK.WindowList.get_top();
+                   $(".activetsk").removeClass("activetsk");
+                   if (top) {
+                       top.$base.addClass("win-active");
+                       top.unnotify();
+                       top.$taskbarBtn.addClass("activetsk");
+                   }
+               };
 
                /*
                 * Provide basic cascading on window creation
                 */
-
                this.modal = modal;
                this.id = id;
 
@@ -147,8 +142,7 @@ var nJDSK = (function(wnd,d,$){
                    return self.$base.hasClass("win-active");
                };
 
-               this.unnotify = function() {
-               };
+               this.unnotify = function() { };
 
                /*
                 * Increase last Z index
@@ -175,8 +169,6 @@ var nJDSK = (function(wnd,d,$){
                this.$titlebar.append(this.$titleButtons);
                this.$titleButtons.addClass('titlebuttons')
 
-                   /*create title buttons depending on window type (dialog or not)*/
-                       this.minMax = function(){ };
                        /*minimize button*/
                        this.$minimizeBtn = $("<a />");
                        this.$titleButtons.append(this.$minimizeBtn);
@@ -184,17 +176,8 @@ var nJDSK = (function(wnd,d,$){
                            .attr('href','#')
                            .html('').addClass('minimizebtn')
                            .click(function () {
-                               $('#win_' + id).hide();
-
-                               $(".win-active").removeClass("win-active");
-                               var top = nJDSK.WindowList.get_top();
-                               $(".activetsk").removeClass("activetsk");
-                               if (top) {
-                                   top.$base.addClass("win-active");
-                                   top.unnotify();
-                                   top.$taskbarBtn.addClass("activetsk");
-                               }
-
+                                self.$base.hide();
+                               setTopActive();
                            });
 
                        /*maximize button*/
@@ -203,10 +186,11 @@ var nJDSK = (function(wnd,d,$){
                        this.$maximizeBtn.attr('href','#').html('').addClass('maximizebtn')
                            .click(function(){
                                self.$base.addClass('transitioner');  
-                               if ((self.$base.outerWidth()==desktop.width()-10)&&(self.$base.outerHeight()==desktop.height()-10)){
+                               if (self.$base.outerWidth()==desktop.width()&&self.$base.outerHeight()==desktop.height()){
                                    self.$base.animate({'width':w,'height':h,'left':l,'top':t},0,function()
                                        {
-                                           self.$base.removeClass('transitioner').children('.contentarea').css({
+                                           self.$base.removeClass('transitioner');
+                                           self.$content.css({
                                                'height':self.$base.height()-self.$titlebar.height()-2
                                            });
                                        });
@@ -216,9 +200,10 @@ var nJDSK = (function(wnd,d,$){
                                    h = self.$base.css('height');
                                    l = self.$base.css('left');
                                    t = self.$base.css('top');
-                                   self.$base.animate({'width':(desktop.width()-10),'height':(desktop.height()-10),'left':0,'top':0},0,function()
+                                   self.$base.animate({'width':desktop.width(),'height':desktop.height(),'left':0,'top':0},0,function()
                                        {
-                                           self.$base.removeClass('transitioner').children('.contentarea').css({
+                                           self.$base.removeClass('transitioner');
+                                           self.$content.css({
                                                'height':self.$base.height()-self.$titlebar.height()-2
                                            });
                                        });
@@ -244,13 +229,7 @@ var nJDSK = (function(wnd,d,$){
                        /*this line with tinymce should be removed, if you aren't using tinyMCE, as it will cause an error*/
                        self.$base.fadeOut('fast', function () {
                            self.$base.remove();
-                           var top = nJDSK.WindowList.get_top();
-                           if (top) {
-                               top.$taskbarBtn.addClass("activetsk");
-                               top.$base.addClass("win-active");
-                               top.unnotify();
-                           }
-
+                           setTopActive();
                        });
                        self.$taskbarBtn.hide('fast',function(){
                            $(this).remove();
@@ -279,12 +258,7 @@ var nJDSK = (function(wnd,d,$){
                this.close=function(){
                    self.$base.fadeOut('fast',function(){
                        self.$base.remove();
-                       var top = nJDSK.WindowList.get_top();
-                       if (top) {
-                           top.$base.addClass("win-active");
-                           top.unnotify();
-                           top.$taskbarBtn.addClass("activetsk");
-                       }
+                       setTopActive();
                    });
                    self.$taskbarBtn.hide('fast',function(){
                        self.$taskbarBtn.remove();
@@ -299,23 +273,17 @@ var nJDSK = (function(wnd,d,$){
                    .html(title)
                    .addClass('taskbarbutton')
                    .addClass('activetsk');
-               $('#taskbarbuttons').append(this.$taskbarBtn);
+               taskbar.append(this.$taskbarBtn);
                $('.taskbarbutton').removeClass('activetsk');
                this.$taskbarBtn.addClass('activetsk');
-               $('#taskbarbuttons').scrollTo(this.$taskbarBtn,'fast');
+               taskbar.scrollTo(this.$taskbarBtn,'fast');
 
                // add taskbar button behavior
                this.$taskbarBtn.click(function(){
                    if (self.$taskbarBtn.hasClass('activetsk') && self.$base.is(':visible'))
                {
                    self.$base.hide().removeClass("win-active");
-                   var top = nJDSK.WindowList.get_top();
-                   $(".activetsk").removeClass("activetsk");
-                   if (top) {
-                       top.$base.addClass("win-active");
-                       top.unnotify();
-                       top.$taskbarBtn.addClass("activetsk");
-                   }
+                   setTopActive();
                    return;
                } else {
                    $(".win-active").removeClass("win-active");
@@ -335,8 +303,7 @@ var nJDSK = (function(wnd,d,$){
                    self.$taskbarBtn.addClass('activetsk');
 
                    // reveal taskbar button if it's outside the visible taskbar area
-                   $('#taskbarbuttons').scrollTo($('#tskbrbtn_'+id),'fast');
-
+                   taskbar.scrollTo(self.$taskbarBtn,'fast');
                        $(".win-active").removeClass("win-active");
                        self.$base.css({ 'z-index': nJDSK.WindowList.lastZIndex }).addClass("win-active");
                        nJDSK.WindowList.get_window(id).unnotify();
@@ -354,9 +321,6 @@ var nJDSK = (function(wnd,d,$){
                    'height':self.$base.height()-self.$titlebar.height()-2
                });
 
-               if (fullGlass === true) {
-                   this.setFullGlass();
-               }
 
                // insert the content
                this.$content.html(content);
@@ -428,7 +392,7 @@ var nJDSK = (function(wnd,d,$){
                      */
                     addIcon: function(iconId,iconTitle,iconImage,callback){
 
-                                 $('#desktop #desktop_iconarea').append('<a class="icon" id="'+iconId+'" style="display:none"><img src="'+iconImage+'" /><span>'+iconTitle+'</span></a>');
+                                 nJDSK.icons.append('<a class="icon" id="'+iconId+'" style="display:none"><img src="'+iconImage+'" /><span>'+iconTitle+'</span></a>');
                                  if (nJDSK.nextIconPos.top+nJDSK.iconMaxHeight+(nJDSK.iconMargin*2)+(nJDSK.iconBorderWeight*2) < nJDSK.desktopHeight)
                                  {
                                      $('#'+iconId).css({'left':nJDSK.nextIconPos.left+'px','top':nJDSK.nextIconPos.top+'px'});
@@ -475,7 +439,7 @@ var nJDSK = (function(wnd,d,$){
                     reArrangeIcons: function(){
                                         nJDSK.nextIconPos.left = 0;
                                         nJDSK.nextIconPos.top = 0;
-                                        $('#desktop_iconarea .icon').each(function(){
+                                        nJDSK.icons.each(function(){
 
                                             if (nJDSK.nextIconPos.top+nJDSK.iconMaxHeight+(nJDSK.iconMargin*2)+(nJDSK.iconBorderWeight*2) < nJDSK.desktopHeight)
                                         {
@@ -503,7 +467,6 @@ var nJDSK = (function(wnd,d,$){
     {
         $('#nJDSKBG').remove();
         $('body').prepend('<img id="nJDSKBG" src="'+bgimage+'" />');
-
     },
 
     /**
@@ -517,19 +480,23 @@ var nJDSK = (function(wnd,d,$){
     /**
      * Put desktop system together
      */
+    desktop: $("#desktop"),
+    widgets: $("#widgets"),
+    taskbar: $("#taskbarbuttons"),
+    icons : $("#desktop_iconarea"),
     init:function(){
              $(wnd).resize(function()
                  {
                      nJDSK.desktopWidth = $(wnd).width();
                      nJDSK.desktopHeight = $(wnd).height()-nJDSK.taskbarHeight;
-                     $('#desktop').css({"height":(nJDSK.desktopHeight)+'px',"width":nJDSK.desktopWidth+'px', "top":'0'});
-                     $('#widgets').css({"height":$('#desktop').height()+'px','top':'0'});
+                     nJDSK.desktop.css({"height":(nJDSK.desktopHeight)+'px',"width":nJDSK.desktopWidth+'px', "top":'0'});
+                     nJDSK.widgets.css({"height":$('#desktop').height()+'px','top':'0'});
                      nJDSK.iconHelper.reArrangeIcons();
                  });	
 
-             $('#taskbar').css({"height":nJDSK.taskbarHeight+'px'});
-             $('#widgets').css({"width":nJDSK.widgetWidth+'px'});
-             $('#desktop').click(function(e){
+             nJDSK.taskbar.css({"height":nJDSK.taskbarHeight+'px'});
+             nJDSK.widgets.css({"width":nJDSK.widgetWidth+'px'});
+             nJDSK.desktop.click(function(e){
                  nJDSK.clearActive(e);
              });
              $(wnd).resize();
@@ -551,14 +518,11 @@ var nJDSK = (function(wnd,d,$){
              // Show/hide windows on desktop
              $('a#showdesktop').click(function(e){
                  nJDSK.clearActive();
-                 if ($('.window').is(':visible'))
-             {
-                 $('.window').hide();
-             }
-                 else
-             {
-                 $('.window').show();
-             }
+                 if ($('.window').is(':visible')) {
+                     $('.window').hide();
+                 } else {
+                     $('.window').show();
+                 }
              });
 
          }
