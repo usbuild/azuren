@@ -54,7 +54,7 @@ $(document).ready(function () {
 	};
 
     Azuren.widget.install('wdgClock', '/Widget/Clock', 200, 160);
-    Azuren.widget.install('wdgWeather', '/Widget/Weather', 250, 250);
+    Azuren.widget.install('wdgWeather', '/Widget/Weather', 250, 150);
     /*
     Set Terminal
     */

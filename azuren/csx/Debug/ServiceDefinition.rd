@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="azuren" generation="1" functional="0" release="0" Id="08ce9200-cfd7-42f2-94c0-44b0a5b994a0" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="azuren" generation="1" functional="0" release="0" Id="15d1e27d-4810-4a35-a22f-c41613786428" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="azurenGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -236,9 +236,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="ef0f9c05-ea6f-4d21-a1f3-41ce739356da" ref="Microsoft.RedDog.Contract\ServiceContract\azurenContract@ServiceDefinition">
+    <implementation Id="d3c720ed-2b3f-416a-91e8-bff01930db5e" ref="Microsoft.RedDog.Contract\ServiceContract\azurenContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="b4d05c0c-4b96-4f74-a872-fa48c17600e1" ref="Microsoft.RedDog.Contract\Interface\AzurenRole:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="0711b415-a1c9-44e7-ad05-455e10b9cd6f" ref="Microsoft.RedDog.Contract\Interface\AzurenRole:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/azuren/azurenGroup/AzurenRole:Endpoint1" />
           </inPort>
