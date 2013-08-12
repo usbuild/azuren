@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="azuren" generation="1" functional="0" release="0" Id="15d1e27d-4810-4a35-a22f-c41613786428" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="azuren" generation="1" functional="0" release="0" Id="9732e727-9a8c-4feb-b5f4-1ef4a4b4a44d" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="azurenGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -127,7 +127,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="AzurenRole" generation="1" functional="0" release="0" software="F:\Workspace\azuren\azuren\csx\Debug\roles\AzurenRole" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+          <role name="AzurenRole" generation="1" functional="0" release="0" software="D:\workspace\azuren\azuren\csx\Debug\roles\AzurenRole" entryPoint="base\x86\WaHostBootstrapper.exe" parameters="base\x86\WaIISHost.exe " memIndex="1792" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Endpoint1" protocol="http" portRanges="80" />
               <outPort name="CacheWorkerRole:Microsoft.WindowsAzure.Plugins.Caching.cacheArbitrationPort" protocol="tcp">
@@ -172,7 +172,7 @@
           </sCSPolicy>
         </groupHascomponents>
         <groupHascomponents>
-          <role name="CacheWorkerRole" generation="1" functional="0" release="0" software="F:\Workspace\azuren\azuren\csx\Debug\roles\CacheWorkerRole" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="CacheWorkerRole" generation="1" functional="0" release="0" software="D:\workspace\azuren\azuren\csx\Debug\roles\CacheWorkerRole" entryPoint="base\x86\WaHostBootstrapper.exe" parameters="base\x86\WaWorkerHost.exe " memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Microsoft.WindowsAzure.Plugins.Caching.cacheArbitrationPort" protocol="tcp" />
               <inPort name="Microsoft.WindowsAzure.Plugins.Caching.cacheClusterPort" protocol="tcp" />
@@ -236,9 +236,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="d3c720ed-2b3f-416a-91e8-bff01930db5e" ref="Microsoft.RedDog.Contract\ServiceContract\azurenContract@ServiceDefinition">
+    <implementation Id="b13295ce-b338-4061-a57d-c25570825b06" ref="Microsoft.RedDog.Contract\ServiceContract\azurenContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="0711b415-a1c9-44e7-ad05-455e10b9cd6f" ref="Microsoft.RedDog.Contract\Interface\AzurenRole:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="a05d90df-f956-4806-ba9c-919f3f97405e" ref="Microsoft.RedDog.Contract\Interface\AzurenRole:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/azuren/azurenGroup/AzurenRole:Endpoint1" />
           </inPort>

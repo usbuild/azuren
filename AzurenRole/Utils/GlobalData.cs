@@ -10,22 +10,23 @@ namespace AzurenRole.Utils
 {
     public class GlobalData
     {
-        //static ConcurrentDictionary<string, User> dict = new ConcurrentDictionary<string, User>();  
+        static ConcurrentDictionary<string, User> dict = new ConcurrentDictionary<string, User>();  
+        //static DataCache cache = new DataCache("default");;
         public static User getUser(string name)
         {
                 User user;
-                //dict.TryGetValue(name, out user);
-            
-                DataCache cache = new DataCache("default");
-                user = (User)cache.Get(name);
+                dict.TryGetValue(name, out user);
+                //user = (User)cache.Get(name);
              
                 if (user != null) return user;
                 AzurenEntities context = new AzurenEntities();
                 ObjectQuery<User> query = context.Users.Where("it.username = @username", new ObjectParameter("username", name));
                 string sql = query.ToString();
                 user = query.First();
-                //dict.TryAdd(name, user);
-                cache.Put(name, user);
+
+                dict.TryAdd(name, user);
+                //cache.Put(name, user);
+
                 return user;
         }
         public static User user

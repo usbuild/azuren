@@ -105,6 +105,7 @@ var nJDSK = (function(wnd,d,$){
 	  	 * @param function createCallback //a function to call after window creation
 	  	 */
 	  	Window:function(width,height,title,toolbar,content,id,dialog,modal,fullGlass,createCallback){
+            var self = this;
 	  		
 		  	  /**
 		  	   * Restore standard content area
@@ -162,7 +163,6 @@ var nJDSK = (function(wnd,d,$){
 			$('.taskbarbutton').removeClass('activetsk');
 			$('#tskbrbtn_' + id).addClass('activetsk');
 			$('#win_' + id).css({ 'z-index': nJDSK.WindowList.lastZIndex }).show();
-			$('#mainmenu').fadeOut('fast');
 			nJDSK.WindowList.lastZIndex+=1;
 			var obj = nJDSK.WindowList.items[nJDSK.WindowList.index_of(id)].window_object;
 			obj['isNew'] = false;
@@ -180,15 +180,14 @@ var nJDSK = (function(wnd,d,$){
 		  nJDSK.clearActive();	
 		
 	  	  this.base = document.createElement('div');
-	  	  $('#mainmenu').fadeOut('fast');
+          this.$base = $(this.base);
 	  	  if (this.modal !==true)
 	  	  {
 	  		  $('#desktop').append(this.base);
 	  	  }
 	  	  else
 	  	  {
-	  		  $('body').append('<div id="Winbg_'+id+'" class="modalbg"></div>');
-	  		  $('body').append(this.base);
+	  		  $('body').append('<div id="Winbg_'+id+'" class="modalbg"></div>').append(this.base);
 	  	  }
 	  	  
 	  	  if (this.modal!=true)
@@ -197,7 +196,7 @@ var nJDSK = (function(wnd,d,$){
 	  		   * Cascade the window if it's not modal (new windows will be shown with a small offset, 
 	  		   * obeying desktop size)
 	  		   * */
-		  	  $(this.base).css({
+		  	  this.$base.css({
 		  	    'position':'absolute',
 		  	    'top':nJDSK.WindowList.top+'px',
 		  	    'left':nJDSK.WindowList.left+'px',
@@ -210,7 +209,7 @@ var nJDSK = (function(wnd,d,$){
 	  		  /*
 	  		   * if modal, place window on the screen center
 	  		   * */
-	  		  $(this.base).css({
+	  		  this.$base.css({
 	  			    'position':'absolute',
 	  			    'top':'50%',
 	  			    'left':'50%',
@@ -244,24 +243,25 @@ var nJDSK = (function(wnd,d,$){
 	  	   * set up attributes, parts and skinning for the window
 	  	   * */
 
-	  	  $(this.base).addClass('window');
-	  	  $(this.base).attr('id','win_'+id);
+	  	  this.$base.addClass('window').attr('id','win_'+id);
 	  	  
 	  	  /*title bar*/
 	  	  this.titlebar = document.createElement('div');
+          this.$titlebar = $(this.titlebar);
 	  	  this.base.appendChild(this.titlebar);
-	  	  $(this.titlebar).addClass('titlebar');
-	  	  $(this.titlebar).css({'cursor':'default'});
+	  	  this.$titlebar.addClass('titlebar').css({'cursor':'default'});
 	  	  
 	  	  /*title bar text area*/
 	  	  this.titleText = document.createElement('span');
+          this.$titleText = $(this.titleText);
 	  	  this.titlebar.appendChild(this.titleText);
-	  	  $(this.titleText).html(title);
+	  	  this.$titleText.html(title);
 	  	  
 	  	  /*title buttons container*/
 	  	  this.titleButtons = document.createElement('div');
 	  	  this.titlebar.appendChild(this.titleButtons);
-	  	  $(this.titleButtons).addClass('titlebuttons')
+          this.$titleButtons = $(this.titleButtons);
+	  	  this.$titleButtons.addClass('titlebuttons')
 	  	//  this.sysIcon = document.createElement('a'); // not implemented yet
 	  	  
 	  	  /*create title buttons depending on window type (dialog or not)*/
@@ -272,131 +272,85 @@ var nJDSK = (function(wnd,d,$){
 	  		  };
 	  		  /*minimize button*/
 	  		  this.minimizeBtn = document.createElement('a');
+              this.$minimizeBtn = $(this.minimizeBtn);
 	  		  this.titleButtons.appendChild(this.minimizeBtn);
-	  		  $(this.minimizeBtn).attr('href','#');
-	  		  $(this.minimizeBtn).html('');
-	  		  $(this.minimizeBtn).addClass('minimizebtn');
-	  		  $(this.minimizeBtn).click(function () {
-	  		    
+	  		  this.$minimizeBtn
+                  .attr('href','#')
+                  .html('').addClass('minimizebtn')
+	  		      .click(function () {
 	  		      $('#win_' + id).hide();
+
 	  		      $(".win-active").removeClass("win-active");
 	  		      var top = nJDSK.WindowList.get_top();
 	  		      $(".activetsk").removeClass("activetsk");
 	  		      if (top) {
-	  		          $("#win_" + top.id).addClass("win-active");
+	  		          top.$base.addClass("win-active");
 	  		          top.unnotify();
-	  		          $("#tskbrbtn_" + top.id).addClass("activetsk");
+	  		          top.$taskbarBtn.addClass("activetsk");
 	  		      }
 
 	  		  });
 
 	  	      /*maximize button*/
 	  		  this.maximizeBtn = document.createElement('a');
+              this.$maximizeBtn = $(this.maximizeBtn);
 	  		  this.titleButtons.appendChild(this.maximizeBtn);
-	  		  $(this.maximizeBtn).attr('href','#');
-	  		  $(this.maximizeBtn).html('');
-	  		  $(this.maximizeBtn).addClass('maximizebtn');
-	  		  $(this.maximizeBtn).click(function(){
-	  			$('#win_'+id).addClass('transitioner');  
-	  		    if (($('#win_'+id).outerWidth()==$('#desktop').width()-10)&&($('#win_'+id).outerHeight()==$('#desktop').height()-10)){
-	  		       $('#win_'+id).animate({'width':w,'height':h,'left':l,'top':t},0,function()
+	  		  this.$maximizeBtn.attr('href','#').html('').addClass('maximizebtn')
+	  		  .click(function(){
+	  			self.$base.addClass('transitioner');  
+	  		    if ((self.$base.outerWidth()==$('#desktop').width()-10)&&(self.$base.outerHeight()==$('#desktop').height()-10)){
+	  		       self.$base.animate({'width':w,'height':h,'left':l,'top':t},0,function()
 	  			   {
-	  		    	 $('#win_'+id).removeClass('transitioner');
-	  		            $('#win_'+id).children('.contentarea').css({
-	  		            	'height':$('#win_'+id).height()-$('.titlebar').height()-2-$('#win_'+id).find('.statusbar').height()-$('#win_'+id).find('.toolbar').height()-10
+	  		    	 self.$base.removeClass('transitioner').children('.contentarea').css({
+	  		            	'height':self.$base.height()-self.$titlebar.height()-2
 	  		            });
-	  		            if ($('#win_'+id+' .mceIframeContainer iframe').get(0)!=undefined){
-	  						$('#win_'+id+' .mceIframeContainer iframe').get(0).style.height = parseInt($('#win_'+id).children('.contentarea').css('height').replace('px'))-$('#win_'+id+' .mceToolbar').get(0).offsetHeight-$('#win_'+id+' .mceStatusbar').get(0).offsetHeight-2+'px';
-	  					}
-	  		            
 	  			   });
 	  		    } else {
-	  		    	$('#win_'+id).addClass('transitioner');
-	  		       w = $('#win_'+id).css('width');
-	  		       h = $('#win_'+id).css('height');
-	  		       l = $('#win_'+id).css('left');
-	  		       t = $('#win_'+id).css('top');
-	  		       $('#win_'+id).animate({'width':($('#desktop').width()-10),'height':($('#desktop').height()-10),'left':0,'top':0},0,function()
+	  		       self.$base.addClass('transitioner');
+	  		       w = self.$base.css('width');
+	  		       h = self.$base.css('height');
+	  		       l = self.$base.css('left');
+	  		       t = self.$base.css('top');
+	  		       self.$base.animate({'width':($('#desktop').width()-10),'height':($('#desktop').height()-10),'left':0,'top':0},0,function()
 	  			   {
-	  		    	   $('#win_'+id).removeClass('transitioner');
-	  		           $('#win_'+id).children('.contentarea').css({
-	  		        	   'height':$('#win_'+id).height()-$('.titlebar').height()-2-$('#win_'+id).find('.statusbar').height()-$('#win_'+id).find('.toolbar').height()-10
+	  		    	   self.$base.removeClass('transitioner').children('.contentarea').css({
+	  		        	   'height':self.$base.height()-self.$titlebar.height()-2
 	  		            });
-	  		
-	  		           if ($('#win_'+id+' .mceIframeContainer iframe').get(0)!=undefined){
-	  						$('#win_'+id+' .mceIframeContainer iframe').get(0).style.height = parseInt($('#win_'+id).children('.contentarea').css('height').replace('px'))-$('#win_'+id+' .mceToolbar').get(0).offsetHeight-$('#win_'+id+' .mceStatusbar').get(0).offsetHeight-2+'px';
-	  		           }
-	  		
 	  			   });
 	  		    }
 	  		    
-	  		    $('#win_'+id).children('.contentarea').children('.list_header').css({'top':$(this).scrollTop()+'px'});
 	  		  });
 	  		  
 	  		  /* maximize/restore on title bar doubleclick */
-	  		  $(this.titlebar).dblclick(function(){
-		  		    if (($('#win_'+id).width()==$('#desktop').width()-10)&&($('#win_'+id).height()==$('#desktop').height()-10)){
-			  		       $('#win_'+id).animate({'width':w,'height':h,'left':l,'top':t},50,function()
-			  			   {
-			  		            $('#win_'+id).children('.contentarea').css({
-			  		            	'height':$('#win_'+id).height()-$('.titlebar').height()-2-$('#win_'+id).find('.statusbar').height()-$('#win_'+id).find('.toolbar').height()-10
-			  		            });
-			  		            if ($('#win_'+id+' .mceIframeContainer iframe').get(0)!=undefined){
-			  						$('#win_'+id+' .mceIframeContainer iframe').get(0).style.height = parseInt($('#win_'+id).children('.contentarea').css('height').replace('px'))-$('#win_'+id+' .mceToolbar').get(0).offsetHeight-$('#win_'+id+' .mceStatusbar').get(0).offsetHeight-2+'px';
-			  					}
-			  			   });
-			  		    } else {
-			  		       w = $('#win_'+id).css('width');
-			  		       h = $('#win_'+id).css('height');
-			  		       l = $('#win_'+id).css('left');
-			  		       t = $('#win_'+id).css('top');
-			  		       $('#win_'+id).animate({'width':($('#desktop').width()-10),'height':($('#desktop').height()-10),'left':0,'top':0},50,function()
-			  			   {
-			  		           $('#win_'+id).children('.contentarea').css({
-			  		        	 'height':$('#win_'+id).height()-$('.titlebar').height()-2-$('#win_'+id).find('.statusbar').height()-$('#win_'+id).find('.toolbar').height()-10
-			  		            });
-			  		
-			  		           if ($('#win_'+id+' .mceIframeContainer iframe').get(0)!=undefined){
-			  						$('#win_'+id+' .mceIframeContainer iframe').get(0).style.height = parseInt($('#win_'+id).children('.contentarea').css('height').replace('px'))-$('#win_'+id+' .mceToolbar').get(0).offsetHeight-$('#win_'+id+' .mceStatusbar').get(0).offsetHeight-2+'px';
-			  		           }
-			  		
-			  			   });
-			  		    }
-			  		    
-			  		    $('#win_'+id).children('.contentarea').children('.list_header').css({'top':$(this).scrollTop()+'px'});
+	  		  this.$titlebar.dblclick(function(){
+                  self.$maximizeBtn.trigger("click");
 	  		  });
 	  	  }
 	  	  
-
-	  	  
 	  	  /*close button - always visible*/
 	  	  this.closeBtn = document.createElement('a');
+          this.$closeBtn = $(this.closeBtn);
 	  	  this.titleButtons.appendChild(this.closeBtn);
 	  	  $(".win-active").removeClass("win-active");
-	  	  $("#win_" + id).addClass("win-active");
+	  	  self.$base.addClass("win-active");
 	  	  this.unnotify();
-	  	  $(this.closeBtn).attr('href','#');
-	  	  $(this.closeBtn).html('');
-	  	  $(this.closeBtn).addClass('closebtn');
-	  	  $(this.closeBtn).click(function(){
-	  		  
-	  		  
+	  	  self.$closeBtn.attr('href','#')
+	  	  .html('')
+	  	  .addClass('closebtn')
+	  	  .click(function(){
 	  		  /*this line with tinymce should be removed, if you aren't using tinyMCE, as it will cause an error*/
-	  		  //$('#win_'+id+' textarea.tinymce').tinymce().remove();
-	  	      $('#win_' + id).fadeOut('fast', function () {
-	  	          
-	  	          $('#win_' + id).remove();
+	  	      self.$base.fadeOut('fast', function () {
+	  	          self.$base.remove();
 	  	          var top = nJDSK.WindowList.get_top();
 	  	          if (top) {
-	  	              $("#tskbrbtn_" + top.id).addClass("activetsk");
-	  	              $("#win_" + top.id).addClass("win-active");
+	  	              top.$taskbarBtn.addClass("activetsk");
+	  	              top.$base.addClass("win-active");
 	  	              top.unnotify();
 	  	          }
 
 	  	      });
 	  		  $('#Winbg_'+id).remove();
-	  		  $('#mainmenu').fadeOut('fast');
-	  		  $('#tskbrbtn_'+id).hide('fast',function(){
+	  		  self.$taskbarBtn.hide('fast',function(){
 	  			  $(this).remove();
 	  		  });
 	  		  
@@ -410,44 +364,40 @@ var nJDSK = (function(wnd,d,$){
 	  	  var titlebar = this.titlebar;
 	  	  
 	  	  $(wnd).resize(function(){
-	  	          $(this.base).draggable({handle:titlebar/*, containment: "parent" */});
-	  	          $(this.base).resizable({ /*containment: "parent" */});
-
+	  	          self.$base.draggable({handle:titlebar}).resizable();
 	  	  });
 
 	  	  
 	  	  /*make the window draggable all around the screen*/
-	  	  $(this.base).draggable({handle:this.titlebar/*, containment: "parent" */});
+	  	  this.$base.draggable({handle:this.titlebar});
 	  	  if (dialog != true)
 	  	  {
-	  		  $(this.base).resizable({ containment: "parent" });
+	  		  this.$base.resizable({ containment: "parent" });
 	  	  }
 	  	  
-	  	  
 	  	  /*show the base div*/
-	  	  $(this.base).fadeIn();
+	  	  this.$base.fadeIn();
 
 	  	  /*add close function - for the window be removable from outside*/
 	  	  this.close=function(){
 	  		  /*this line with tinymce should be removed, if you aren't using tinyMCE, as it will cause an error*/
 	  		//$('#win_'+id+' textarea.tinymce').tinymce().remove();
-	  		  $('#win_'+id).fadeOut('fast',function(){
-	  		      $('#win_' + id).remove();
+	  		  self.$base.fadeOut('fast',function(){
+	  		      self.$base.remove();
 	  		      var top = nJDSK.WindowList.get_top();
 	  		      if (top) {
-	  		          $("#win_" + top.id).addClass("win-active");
+	  		          top.$base.addClass("win-active");
 	  		          top.unnotify();
-	  		          $("#tskbrbtn_" + top.id).addClass("activetsk");
+	  		          top.$taskbarBtn.addClass("activetsk");
 	  		      }
 	  		  });
 	  		  if (this.modal==true)
 	  		  {
 	  			  $('#Winbg_'+id).remove();
 	  		  }
-	  		  $('#tskbrbtn_'+id).hide('fast',function(){
-	  			  $(this).remove();
+	  		  self.$taskbarBtn.hide('fast',function(){
+	  			  self.$taskbarBtn.remove();
 	  		  });
-	  		  $('#mainmenu').fadeOut('fast');
 	  		  
 	  		  /*unregister this window instance*/
 	  		  nJDSK.WindowList.delete_item(id);
@@ -456,319 +406,116 @@ var nJDSK = (function(wnd,d,$){
 	  	  
 	  	  // create the taskbar button
 	  	  this.taskbarBtn=document.createElement('div');
-	  	  $(this.taskbarBtn).attr('id','tskbrbtn_'+id);
-	  	  $(this.taskbarBtn).html(title);
-	  	  $(this.taskbarBtn).addClass('taskbarbutton');
-	  	  $(this.taskbarBtn).addClass('activetsk');
+          this.$taskbarBtn = $(this.taskbarBtn);
+	  	  this.$taskbarBtn.attr('id','tskbrbtn_'+id)
+	  	  .html(title)
+	  	  .addClass('taskbarbutton')
+	  	  .addClass('activetsk');
 	  	  document.getElementById('taskbarbuttons').appendChild(this.taskbarBtn);
 	  	  $('.taskbarbutton').removeClass('activetsk');
-	  	  $('#tskbrbtn_'+id).addClass('activetsk');
-	  	  $('#taskbarbuttons').scrollTo($(this.taskbarBtn),'fast');
+	  	  this.$taskbarBtn.addClass('activetsk');
+	  	  $('#taskbarbuttons').scrollTo(this.$taskbarBtn,'fast');
 	  	  
 	  	  // add taskbar button behavior
-	  	  $(this.taskbarBtn).click(function(){
-	  		  if (($('#tskbrbtn_'+id).hasClass('activetsk')) && ($('#win_'+id).is(':visible')))
+	  	  this.$taskbarBtn.click(function(){
+	  		  if (self.$taskbarBtn.hasClass('activetsk') && self.$base.is(':visible'))
 	  		  {
-	  		      $('#win_' + id).hide().removeClass("win-active");
+	  		      self.$base.hide().removeClass("win-active");
 	  		      var top = nJDSK.WindowList.get_top();
 	  		      $(".activetsk").removeClass("activetsk");
 	  		      if (top) {
-	  		          $("#win_" + top.id).addClass("win-active");
+	  		          top.$base.addClass("win-active");
 	  		          top.unnotify();
-	  		          $("#tskbrbtn_" + top.id).addClass("activetsk");
+	  		          top.$taskbarBtn.addClass("activetsk");
 	  		      }
-
 	  		      return;
-	  		  }
-	  		  else
-	  		  {
+	  		  } else {
 	  		      $(".win-active").removeClass("win-active");
-	  		      $('#win_' + id).show().addClass("win-active");
+	  		      self.$base.show().addClass("win-active");
 	  		      nJDSK.WindowList.get_window(id).unnotify();
 
 	  		  }
 	  		  $('.taskbarbutton').removeClass('activetsk');
-	  		  $('#tskbrbtn_'+id).addClass('activetsk');
-	  		  $('#win_'+id).css({'z-index':nJDSK.WindowList.lastZIndex});
-	  		  $('#mainmenu').fadeOut('fast');
+	  		  self.$taskbarBtn.addClass('activetsk');
+	  		  self.$base.css({'z-index':nJDSK.WindowList.lastZIndex});
 	  		  nJDSK.WindowList.lastZIndex+=1;
 	  	  });
 	  	  
 	  	  // add window behavior on activation
-	  	  $(this.base).mousedown(function(){
+	  	  self.$base.mousedown(function(){
 	  		  $('.taskbarbutton').removeClass('activetsk');
-	  		  $('#tskbrbtn_'+id).addClass('activetsk');
-	  		  
-	  		  $('#mainmenu').fadeOut('fast');
+	  		  self.$taskbarBtn.addClass('activetsk');
 	  	    
 	  		  // reveal taskbar button if it's outside the visible taskbar area
 	  		  $('#taskbarbuttons').scrollTo($('#tskbrbtn_'+id),'fast');
 	  		  
 	  		  if (!modal) {
 	  		      $(".win-active").removeClass("win-active");
-	  		      $('#win_' + id).css({ 'z-index': nJDSK.WindowList.lastZIndex }).addClass("win-active");
+	  		      self.$base.css({ 'z-index': nJDSK.WindowList.lastZIndex }).addClass("win-active");
 	  		      nJDSK.WindowList.get_window(id).unnotify();
 	  			  nJDSK.WindowList.lastZIndex+=1;
 	  		  }
 	  	  });
 	  	  
-
-	  	  if (!dialog){
-	  		  /*add toolbar area*/
-	  		  this.toolbar = document.createElement('div');
-	  		  this.base.appendChild(this.toolbar);
-	  		  $(this.toolbar).addClass('toolbar');
-	  		  $(this.toolbar).html(toolbar);
-	  		  if (toolbar == '')
-	  			  $(this.toolbar).css({'height':0});
-	  		  var windowToolbar = this.toolbar;
-	  		
-	  		  /*add status bar area*/
-	  		  this.statusbar = document.createElement('div');
-	  		  this.base.appendChild(this.statusbar);
-	  		  $(this.statusbar).addClass('statusbar');
-	  		  $(this.statusbar).css({'height':0});
-	  	  }
-	  	  
 	  	  // add content area this will hold all the stuff
 	  	  this.contentArea = document.createElement('div');
+          this.$content = $(this.contentArea);
 	  	  this.base.appendChild(this.contentArea);
-	  	  
 	  	  // set up contentarea look and feel
-	  	  $(this.contentArea).addClass('contentarea');
-	  	  if (dialog)
-	  	  {
-	  	        $(this.contentArea).addClass('dialog');
+	  	  this.$content.addClass('contentarea');
+	  	  if (dialog) {
+	  	    this.$content.addClass('dialog');
 	  	  }
 	  	  
-	  	  if (!dialog){
-	  		  $(this.contentArea).css({
-	  			 
-	  		    'height':$('#win_'+id).height()-$('.titlebar').height()-2-$(this.base).find('.statusbar').height()-$(this.base).find('.toolbar').height()-10
-	  		  });
-	  	  } 
-	  	  else
-	  	  {
-	  		  $(this.contentArea).css({
-	  		    'height':$('#win_'+id).height()-$('.titlebar').height()-2
-	  		  });
-	  	  }
+          this.$content.css({
+            'height':self.$base.height()-self.$titlebar.height()-2
+          });
 	  	  
-	  	  if (fullGlass === true)
-	  	  {
+	  	  if (fullGlass === true) {
 	  		  this.setFullGlass();
 	  	  }
 	  	  
 	  	  // insert the content
-
-	  	  $(this.contentArea).html(content);
+	  	  this.$content.html(content);
 
 	  	  /*
 	  	   * window behavior on resize
 	  	   * handles embedded tinyMCE editor if available
 	  	   * */
-	  	  $(this.base).resize(function(){
-	  		  	  
-	  	          $(this).children('.contentarea').css({
-	  	            'height':$('#win_'+id).height()-$('.titlebar').height()-2-$(this).find('.statusbar').height()-$(this).find('.toolbar').height()-10
+	  	  this.$base.resize(function(){
+	  	          self.$content.css({
+	  	            'height':self.$base.height()-self.$titlebar.height()-2
 	  	          });
-	  				if ($('#win_'+id+' .mceIframeContainer iframe').get(0)!=undefined){
-	  					$('#win_'+id+' .mceIframeContainer iframe').get(0).style.height = parseInt($(this).children('.contentarea').css('height').replace('px'))-$('#win_'+id+' .mceToolbar').get(0).offsetHeight-$('#win_'+id+' .mceStatusbar').get(0).offsetHeight-2+'px';
-	  				}
-	  				$(this).children('.contentarea').children('.list_header').css({'top':$(this).scrollTop()+'px'});
 
 	  	  });
 	  	  
 	  	  // arbitrary resize through program
 	  	  this.setDimensions = function(left,top,width,height)
 	  	  {
-	  		  $(this.base).css({"left" : left + 'px',"top" : top + 'px', 'width' : (width - 10) + 'px', 'height' : (height - 10) + 'px'});
-	  		  // trigger resize event
-	  		  $(this.base).resize();
+	  		  self.$base.css({"left" : left + 'px',"top" : top + 'px', 'width' : (width - 10) + 'px', 'height' : (height - 10) + 'px'}).resize();
 	  	  }
 	  	  
-	  	  //adds some behavior for standard bws list 
-	  	  var awidth = 0;
-	  	  $('.list_header div').each(function(){
-	  		  awidth += $(this).width()+21;
-	  		  $('.list_header').css({"min-width":awidth+'px'});
-	  		  $('.list_item').css({"min-width":awidth+'px'});
-	  	  });
-
-	  	  $('.contentarea').scroll(function(){
-	  		  $(this).children('.list_header').css({'top':$(this).scrollTop()+'px'});
-	  	  });
 	  		
 
 	  	  this.lastSelected=null;
 	  	  this.sortColumn=null;
 
-	  	  // adds basic multi select feature for standard BWS list
-	  	  $('#win_'+id+' .list_item').click(function(e){
-	  		  if ((!e.ctrlKey)&&(!e.shiftKey))
-	  				{
-	  	                $('#win_'+id+' .list_item').removeClass('selected');
-	  					$(this).addClass('selected');
-	  				}
-	  				if (e.ctrlKey)
-	  				{
-	  					$(this).toggleClass('selected');
-	  				}
-	  				if (e.shiftKey)
-	  				{
-	  					$(this).toggleClass('selected');
-	  				}
-	  	  });
-	  	  
-	  	  $('#win_'+id+' .list_item').dblclick(function(e){
-	  			if ($(this).hasClass('folder'))
-	  			{
-	  				$('#'+id+'-folder-ed').text($(this).children('.name_item').text());
-	  				$('#'+id+'-folder').val($(this).children('.id_item').text());
-	  				  refresh_page_list(id,$(this).children('.id_item').text());
-	  			}
-	  		  });
-	  	  
-
-
 	  	  /*facility to change title from outside*/
 	  	  this.setTitle = function(ititle)
 	  	  {
-	  			$(this.taskbarBtn).html(ititle);
-	  			$(this.titleText).html(ititle);
+	  			this.$taskbarBtn.html(ititle);
+	  			this.$titleText.html(ititle);
 	  	  }
 	  	  
 	  	  // facility to make a window unclosable
 	  	  this.noClose = function(){
 	  		$(this.base).find('a.closebtn').remove();  
 	  	  }
-	  	  
-	  	  /*facility to change footer contents.outside*/
-
-	  	  this.setFooter = function(content)
-	  	  {
-	  		 if (this.statusbar)
-	  			{
-	  			 	if (content !='')
-	  			 	{
-	  			 		$(this.statusbar).css({'height':'auto'});
-	  			 	}
-	  			 	else
-	  			 	{
-	  			 		$(this.statusbar).css({'height':0});
-	  			 	}
-	  			 	$(this.statusbar).html(content);
-	  			 	$(this.base).resize();
-	  			}
-	  	  }
 	  		
 	  	  this.editor = null;
 	  	  this.data = null;
 	  	  
 	  	  var windowBase = this.base;
-	  	  
-	  	  /**
-	  	   * Toolbar helper plugin
-	  	   */
-	  	  this.toolbarHelper = {
-	  			  
-	  		 /**
-	  		  * Adds a new toolbar icon
-	  		  * @param string row 			The id of the row (if the row doesn't exist, it will be created)
-	  		  * @param string id 			The unique id of the toolbar item(required)
-	  		  * @param string title			The toolbar icon title
-	  		  * @param string image			Toolbar icon url
-	  		  * @param function callback 	The function called on click 
-	  		  */
-	  		 addItem: function(row,id,title,image,callback){
-	  			
-	  			// check if row id is given, if not, use default 
-	  			if (row=='')
-	  				row = 'row1';
-	  			// check if row exists
-	  			var xrow = $(windowToolbar).find('.'+row);
-	  			if (xrow.length == 0)
-	  			{
-	  				//if not, create it and select it
-	  				$(windowToolbar).append('<div class="toolbarRow '+row+'"></div>');
-	  				xrow = $(windowToolbar).find('.'+row);
-	  			}
-	  			// check what kind of toolbar item is added
-	  			if (title == 'separator')
-	  				xrow.append('<span class="toolbar-separator"></span>');
-	  			else
-	  				xrow.append('<a class="toolbar" id="'+$(windowBase).attr('id')+'_'+id+'" title="'+title+'" href="#"><img src="'+image+'" /></a>');
-	  			
-	  			// connect the callback function
-	  			if (typeof(callback) == 'function')
-	  			{
-	  				// fixed by Max Rondon (the id selector was wrong)
-	  				$('#'+$(windowBase).attr('id')+'_'+id).click(function(e){
-	  					return callback($(this));
-	  				});
-	  			}
-	  			
-	  			// notify window
-	  			$(windowToolbar).css({"height":'auto'});
-	  			$(windowBase).resize();
-	  		},
-	  		
-	  		/**
-	  		 * Removes selected toolbar icon
-	  		 * @param string id	The icon id to remove 
-	  		 */
-	  		removeItem: function(id)
-	  		{
-	  			var itemid = '#'+$(windowBase).attr('id')+'_'+id; 
-	  			var iparent = $(itemid).parents('.toolbarRow');
-	  			
-	  			// remove the item
-	  			$(itemid).remove();
-	  			
-	  			// if the row which contained the item is empty, delete it
-	  			if (iparent.find('a.toolbar').length == 0)
-	  				iparent.remove();
-	  			
-	  			// if there are no rows, disable toolbar
-	  			if ($(windowToolbar).find('.toolbarRow').length == 0)
-	  			{
-	  				$(windowToolbar).css({"height":0});
-	  			}
-	  			
-	  			// notify the window
-	  			$(windowBase).resize();
-	  		},
-	  		
-	  		/**
-	  		 * Add arbitrary content to the toolbar
-	  		 * @param string s The new content HTML
-	  		 */
-	  		setToolbar: function(s)
-	  		{
-	  			// ad new content
-	  			$(windowToolbar).html(s);
-	  			if (s='')
-	  				$(windowToolbar).css({'height':0});
-	  			else
-	  				$(windowToolbar).css({'height':'auto'});
-	  			
-	  			// notify the window
-	  			$(windowBase).resize();
-	  		},
-	  		
-	  		/**
-	  		 * Clears the toolbar
-	  		 */
-	  		clearToolbar: function()
-	  		{
-	  			// clear the toolbar
-	  			$(windowToolbar).html('');
-	  			
-	  			// notify the window
-	  			$(windowToolbar).css({'height':0});
-	  			$(windowBase).resize();
-	  		}
-	  	  }
 	  	  
 	  	  
 	  	  //register the window object and store array index
@@ -796,76 +543,10 @@ var nJDSK = (function(wnd,d,$){
 	  		}
 	  	},
 
-	  	/**
-	  	 * Confirmation window, using our window class
-	  	 */
-	  	confirm: function(title,message,buttons)
-	  	{
-	  	    nJDSK.customHeaderDialog('Confirm', title, message, buttons)
-	  	},
-	  	
-
-	  	/**
-	  	 * Custom form dialog
-	  	 */
-	  	customFormDialog: function(width,height,winTitle,title,message,buttons,modal,isFullGlass,callback)
-	  	{
-	  		var aWinId = 'w'+nJDSK.uniqid();
-	  		var win = new nJDSK.Window(width,height,winTitle,'','<form action="" method="post"><h1>'+title+'</h1>'+message+'<div class="buttonarea"></div></form>',aWinId,true,modal,isFullGlass,callback);
-	  		for (var i = 0; i<buttons.length;i++)
-	  		{
-	  			var btnType = 'button';
-	  			if (buttons[i].type == 'submit')
-	  				btnType = 'submit';
-	  			$('#win_'+aWinId+' .buttonarea').append('<button type="'+btnType+'" class="button '+buttons[i].type+'">'+buttons[i].value+'</button>');
-	  			$('#win_'+aWinId+' .buttonarea .'+buttons[i].type).click(nJDSK.return_confirm_callback_func(buttons,i,win));
-	  		}
-	  		return win;
-	  	},
-	  	
-	  	
-	  	/**
-	  	 * Custom size dialog
-	  	 */
-	  	customSizeDialog: function(width,height,winTitle,title,message,buttons,isFullGlass)
-	  	{
-	  		var aWinId = 'w'+nJDSK.uniqid();
-	  		var win = new nJDSK.Window(width,height,winTitle,'','<h1>'+title+'</h1>'+message+'<div class="buttonarea"></div>',aWinId,true,true,isFullGlass);
-	  		for (var i = 0; i<buttons.length;i++)
-	  		{
-	  			$('#win_'+aWinId+' .buttonarea').append('<button type="button" class="button '+buttons[i].type+'">'+buttons[i].value+'</button>');
-	  			$('#win_'+aWinId+' .buttonarea .'+buttons[i].type).click(nJDSK.return_confirm_callback_func(buttons,i,win));
-	  		}
-	  		return win;
-	  	},
-
 	  	frameDialog: function (title, id, src, args) {
 	  	    var html = '<iframe src="' + src + '" class="win-frame"></iframe>';
 	  	    var win = new nJDSK.Window(600, 480, title, '', html, id);
 	  	    return win;
-	  	},
-	  	
-		/**
-	  	 * Custom dialog
-	  	 */
-	  	customHeaderDialog: function(winTitle,title,message,buttons,isFullGlass)
-	  	{
-	  		var aWinId = 'w'+nJDSK.uniqid();
-	  		var win = new nJDSK.Window(400,200,winTitle,'','<h1>'+title+'</h1><p>'+message+'</p><div class="buttonarea"></div>',aWinId,true,true,isFullGlass);
-	  		for (var i = 0; i<buttons.length;i++)
-	  		{
-	  			$('#win_'+aWinId+' .buttonarea').append('<button type="button" class="button '+buttons[i].type+'">'+buttons[i].value+'</button>');
-	  			$('#win_'+aWinId+' .buttonarea .'+buttons[i].type).click(nJDSK.return_confirm_callback_func(buttons,i,win));
-	  		}
-	  		return win;
-	  	},
-	  	
-	  	/**
-	  	 * Alert dialog
-	  	 */
-	  	alert: function(title,message,buttons)
-	  	{
-	  		nJDSK.customHeaderDialog('Alert',title,message,buttons);
 	  	},
 	  	
 	  	/**
@@ -1171,65 +852,6 @@ var nJDSK = (function(wnd,d,$){
 		  	}
 	  	},
 	  	
-	  	menuHelper:{
-		  	/**
-		  	 * Adds a new menu item to the top menu bar
-		  	 * @param string parentId //the id of the parent item. If left empty, a new top level item will be created
-		  	 * @param string menuId // the id of the new menu. Required. Cannot be duplicate.
-		  	 * @param string menuTitle // The menu link text
-		  	 * @param string menuHref // the target location of the link. can be a normal url, empty or '#'
-		  	 * @param string menuIcon // menu image url, optional
-		  	 * @param function clickCallBack // A callback function when the link is clicked - available only when menuHref is emtpty or '#'
-		  	 */
-		  	addMenu:function(parentId,menuId,menuTitle,menuHref,menuIcon,clickCallback){
-		  		if ($.trim(menuId) == ''){
-		  			return;
-		  		}
-		  		var menuParent = $('#topmenu>ul');
-		  		if ($.trim(parentId) !=='')
-		  		{
-		  			var tmpParent = $('#'+parentId);
-		  			if (tmpParent.length > 0)
-		  			{
-		  				tmpParent2 = tmpParent;
-		  				tmpParent = tmpParent.find('ul');
-		  				
-		  				if (tmpParent.length > 0)
-		  					menuParent = tmpParent;
-		  				else{
-		  					tmpParent2.append('<ul></ul>');
-		  					menuParent =$('#'+parentId).find('ul');
-		  				}
-		  					
-		  			}
-		  		}
-		  		
-		  		var mh = menuHref;
-		  		if ($.trim(mh) == '')
-		  			mh = '#';
-		  		var mi = menuIcon;
-		  		if ($.trim(mi)!='')
-		  		{
-		  			mi = '<img src="'+mi+'" />';
-		  		}
-		  		menuParent.append('<li id="'+menuId+'"><a href="'+mh+'"><span class="menu_icon">'+mi+'</span><span class="menu_title">'+menuTitle+'</span></a></li>');
-		  		$('#'+menuId+'>a').click(function(e){
-		  			
-		  			if (mh == '#')
-		  			{
-		  				
-		  				if (typeof(clickCallback) == 'function')
-		  				{
-		  					
-		  					clickCallback();
-		  					nJDSK.clearActive();
-		  				}
-		  			}
-		  		});
-		  	}
-	  	},
-	  	
-	  	
 	  	/**
 	  	 * idea borrowed From JQuery Desktop http://desktop.sonspring.com/
 	  	 * Sets background image for the Desktop environment - can be called at any time
@@ -1248,8 +870,6 @@ var nJDSK = (function(wnd,d,$){
 	  	 */
 	  	clearActive: function(){
 	  		$('.activeIcon').removeClass('activeIcon');
-	  		$('.activeMenu').removeClass('activeMenu');
-	  		$('#topmenu ul ul').hide();
 	  	},
 	  	
 	  	/**
@@ -1265,25 +885,12 @@ var nJDSK = (function(wnd,d,$){
 	  			nJDSK.iconHelper.reArrangeIcons();
 	  		});	
 		  
-	  		//$(d).ready(function(){
-  			$('#topmenu').css({"height":nJDSK.topMenuHeight+'px'});
   			$('#taskbar').css({"height":nJDSK.taskbarHeight+'px'});
   			$('#widgets').css({"width":nJDSK.widgetWidth+'px'});
   			$('#desktop').click(function(e){
   				nJDSK.clearActive(e);
   			});
   			$(wnd).resize();
-	  		//});
-	  		
-	  		// Cancel mousedown. Taken from JQuery Desktop http://desktop.sonspring.com/
-	        $(d).mousedown(function(ev) {
-	          /*var tags = ['a', 'button', 'input', 'select', 'textarea', 'tr', '.contentarea'];
-
-	          if (!$(ev.target).closest(tags).length) {
-	            nJDSK.clearActive();
-	            ev.stopPropagation();
-	          }*/
-	        });	  		
 	  		
 	  		// taken from JQuery Desktop http://desktop.sonspring.com/
 	  		$(d).on('click','a',function(e){
@@ -1298,28 +905,6 @@ var nJDSK = (function(wnd,d,$){
 	  			}
 	  		
 	  		});
-	  		
-	  		// adapted from JQuery Desktop http://desktop.sonspring.com/
-	  		// activate menu
-	  		$(d).on('mousedown', '#topmenu>ul>li>a', function() {
-	            if ($(this).siblings('ul').is(':hidden')) {
-	              nJDSK.clearActive();
-	              $(this).parents('li').addClass('activeMenu');
-	              $(this).siblings('ul').show();
-	            }
-	            else {
-	            	nJDSK.clearActive();
-	            }
-	          });
-	          
-	  		// Transfer focus, if already open.
-	        $(d).on('mouseenter', '#topmenu>ul>li>a', function() {
-	          if ($('#topmenu>ul>li>ul').is(':visible')) {
-	        	  nJDSK.clearActive();
-	            $(this).parents('li').addClass('activeMenu');
-	            $(this).siblings('ul').show();
-	          }
-	        });
 	        
 	        // Show/hide windows on desktop
 	        $('a#showdesktop').click(function(e){
