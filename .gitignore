@@ -1,0 +1,7 @@
+azuren/bin
+azuren/obj
+AzurenRole/bin
+AzurenRole/obj
+CacheWorkerRole/bin
+CacheWorkerRole/obj
+*.swp

@@ -1,0 +1,48 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Azuren</title>
+        @Styles.Render("~/Content/themes/base/css")
+        @Styles.Render("~/Content/jsdesk")
+        
+        <!--[if IE]>
+        <link href="~/Scripts/jsdesk/css/jdesktop.ie.all.css" rel="stylesheet" type="text/css" />  
+        <![endif]-->
+        <!--[if lte IE 8]>
+        <link href="~/Scripts/jsdesk/css/jdesktop.ie.css" rel="stylesheet" type="text/css" />  
+        <![endif]-->
+        @Styles.Render("~/Scripts/terminal/jquery.terminal.css")
+        @Styles.Render("~/Content/Site.css")
+        
+    </head>
+
+<body>
+    <div id="terminal"></div>
+    <div id="wrapper">
+		<div id="desktop">
+			<div id="desktop_iconarea"></div>
+		    <div id="widgets"></div>
+		</div>
+		<div id="taskbar">
+			<a id="showdesktop" href="#" title="Show desktop">Menu</a>
+			<div class="separator"></div>
+			<div class="taskbarbuttons" id="taskbarbuttons"></div>
+		</div>
+	</div>
+    
+
+
+    @Scripts.Render("~/bundles/jsdesk")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/backbone")
+    @Scripts.Render("~/bundles/jquerysignalr")
+    @Scripts.Render("~/bundles/ueditor")
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/Scripts/jquery.form.js")
+    @Scripts.Render("~/Scripts/terminal/jquery.mousewheel-min.js")
+    @Scripts.Render("~/Scripts/terminal/jquery.terminal-min.js")
+
+    
+    <script type="text/javascript" src="~/Content/desk.js"></script>
+
+</body>
+</html>

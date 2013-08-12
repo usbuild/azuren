@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<RoleModule 
+  xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition"
+  namespace="Microsoft.WindowsAzure.Plugins.Caching">
+  <Startup priority="-2">
+    <Task commandLine="DotNetUpdate.cmd" executionContext="elevated" taskType="simple">
+     <Environment>
+      <Variable name="IsEmulated">
+        <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+      </Variable>
+      <Variable name="CachingLocalStorePath">
+        <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='DiagnosticStore']/@path" />
+      </Variable>
+     </Environment>
+    </Task>
+    <Task commandLine="CacheInstaller.exe" executionContext="elevated" taskType="simple" />
+  </Startup>
+  <ConfigurationSettings>
+      <Setting name="NamedCaches" />
+      <Setting name="DiagnosticLevel" />
+      <Setting name="CacheSizePercentage" />
+      <Setting name="ConfigStoreConnectionString" />
+  </ConfigurationSettings>
+  <Endpoints>
+      <InternalEndpoint name="cacheClusterPort" protocol="tcp" />
+      <InternalEndpoint name="cacheArbitrationPort" protocol="tcp" />
+      <InternalEndpoint name="cacheReplicationPort" protocol="tcp" />
+      <InternalEndpoint name="cacheServicePortInternal" protocol="tcp" />
+      <InternalEndpoint name="cacheSocketPort" protocol="tcp" />
+  </Endpoints>
+</RoleModule>

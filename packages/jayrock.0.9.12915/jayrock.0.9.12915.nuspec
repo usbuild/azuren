@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>jayrock</id>
+    <version>0.9.12915</version>
+    <title>Jayrock</title>
+    <authors>Atif Aziz</authors>
+    <owners>Atif Aziz</owners>
+    <licenseUrl>http://www.opensource.org/licenses/lgpl-3.0.html</licenseUrl>
+    <projectUrl>http://jayrock.berlios.de/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Jayrock is a modest implementation of JSON, JsonML and JSON-RPC for the Microsoft .NET Framework, including ASP.NET.</description>
+    <summary>Jayrock is a modest implementation of JSON, JsonML and JSON-RPC for the Microsoft .NET Framework, including ASP.NET.</summary>
+    <releaseNotes />
+    <copyright>Copyright (c) 2005, Atif Aziz. All rights reserved.</copyright>
+    <language />
+    <tags>json rpc ajax services</tags>
+    <dependencies>
+      <dependency id="jayrock-json" version="0.9.12915" />
+    </dependencies>
+  </metadata>
+</package>

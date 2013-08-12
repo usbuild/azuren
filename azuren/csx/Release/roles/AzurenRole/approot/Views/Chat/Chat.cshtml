@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+<input type="hidden" class="chat-name" value="@ViewData["name"]"/>
+<div class="chat-box-container">
+    <div class="chat-top-area">
+        <div class="chat-box-log"></div>
+        <div class="chat-box-user">
+
+    <div class="chat-box-user-toggle">用<br/>户<br/>列<br/>表</div>
+    
+            <div class="chat-box-user-list">
+                <ul>
+                </ul>
+            </div>
+        </div>
+        </div>
+    <div class="chat-box-post" style="width:100%;">
+        <textarea id="chat-editor-@ViewData["name"]" name="@ViewData["name"]"></textarea>
+
+        <button id="chat-btn-@ViewData["name"]" class="btn btn-primary" style="display: none;">Post</button>
+
+    </div>
+    
+</div>
+<script type="text/javascript">
+
+    window['ue_chat_' + "@ViewData["name"]" ]  = UE.getEditor("chat-editor-@ViewData["name"]", {
+        initialFrameHeight: 119,
+        initialFrameWidth: "100%"
+    });
+    $(window['ue_chat_' + "@ViewData["name"]" ].container).find(".edui-editor-iframeholder").css("width", "100%");
+    window['ue_chat_' + "@ViewData["name"]" ].addListener("keypress", function(e, e2){
+        if(e2.ctrlKey && e2.keyCode == 10) {
+            $("#chat-btn-@ViewData["name"]").trigger('click', window['ue_chat_' + "@ViewData["name"]" ]);
+            e2.stopPropagation();
+            e2.preventDefault();
+            return false;
+        }
+    });
+    
+</script>

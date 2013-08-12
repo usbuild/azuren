@@ -1,0 +1,46 @@
+﻿@model AzurenRole.Models.RegisterForm
+<html>
+<head>
+    <title>Register</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+</head>
+<body>
+    <div class="signup-form">
+@using (Html.BeginForm())
+{
+        <legend>Register</legend>
+        <fieldset>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert">
+            @Html.ValidationSummary("Please fix following errors:")
+            </div>
+        }
+            <div class="form-group">
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                    @Html.LabelFor(m => m.DisplayName)
+                    @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+
+            <div class="login-link">
+            Already have an account? &nbsp;&nbsp; @Html.ActionLink("Login", "Login", null, new { @style="font-weight:bold;"})&nbsp!
+            </div>
+            <button type="submit" class="btn btn-primary signup-btn">Register</button>
+        </fieldset>
+}
+    </div>
+</body>
+</html>

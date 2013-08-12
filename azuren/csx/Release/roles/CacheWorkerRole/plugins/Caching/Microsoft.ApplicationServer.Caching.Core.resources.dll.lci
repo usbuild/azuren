@@ -1,0 +1,1848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LCX SchemaVersion="6.0" Name="Microsoft.ApplicationServer.Caching.Core.resources.dll" PsrId="211" FileType="1" SrcCul="en-US" Desc="Commenting file created by LCXAdmin. For more information, please visit http://localizability/longhorn/LcxAdmin.asp" xmlns="http://schemas.microsoft.com/locstudio/2006/6/lcx">
+  <OwnedComments>
+    <Cmt Name="LcxAdmin" />
+  </OwnedComments>
+  <Item ItemId=";GlobalResourceStrings.resources" ItemType="0" PsrId="211" Leaf="false">
+    <Disp Icon="Str" Expand="true" Disp="true" LocTbl="false" Path=" \ ;Managed Resources \ 0 \ 0" />
+    <Item ItemId=";Strings" ItemType="0" PsrId="211" Leaf="false">
+      <Disp Icon="Str" LocTbl="false" />
+      <Item ItemId=";AdminUIAddHighAvailabilityCache" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Requires all nodes in the cluster to be Enterprise or Datacenter edition. If the cluster does not support this configuration there could be a catastrophic failure. Do you want to continue?]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Enterprise and Datacenter are editions of Windows Server]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIAdvanceConfigModifyWarning" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The changes will take effect only when the hosts are restarted.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Host here is a machine in a cache cluster - cache host]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUICacheAdminOperationAborted" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Operation was aborted because user selected not to enable Cache with secondaries.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUICacheConfigModifyWarning" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[To reflect these changes, any clients currently referring to this Cache must create a new DataCacheFactory instance and call GetCache on this Cache.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[ {StrContains="DataCacheFactory","GetCache"} DataCacheFactory is a class type, GetCache is a Velocity API. "Cache" is a Velocity term, synonym for "named cache".  'client' is Velocity term - synonym for "cache client". "named cache" is another term.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUICacheCreateRetry" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Create cache failed. The cache may be in an inconsistent state. Please retry the create operation after sometime to fix this. Inner exception [{0}]5D;]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0 represents the exception message that we got from the server. cache is a velocity term in this message.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUICacheStatsError" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error: Could not get statistics for the specified Cache.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIClusterConfig" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cluster configuration.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Technical term referring to information stored for a cluster of Velocity machines.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIClusterOperationStatus" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cluster position: Status={0}, PercentComplete={1}, ClusterOperationComplete={2}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[This message is for reporting status of current 'cluster' operation. 0=Represents current operation. 1=PercentComplete represent the status of operation completed in percentage. 2=This value is either 'true' or 'false' representing whether this cluster operation is completed or not.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIClusterStarted" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cluster started.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Signifies AppFabric cache cluster has started running.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIClusterStopped" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cluster stopped.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Information message to signify AppFabric cache cluster has stopped running.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIConfigurationNotChanged" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Configuration will not be updated. No new values were provided.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[This message is shown as a warning signifying configuration values have not been updated as the user did not provide any values that were different from existing values.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIHostNameAndPortNumber" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[{0}:{1}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=HostName, 1=PortNumber]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIHostStatsError" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error: Could not get statistics for the specified host.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Host here is a machine in a cache cluster - cache host]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIInsufficientPrivilegesWarning" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[This session is not elevated or the current user is not an administrator. You might have permission issues when connecting to cache hosts.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['session' corresponds to a Powershell session.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIQuorumTimeoutNotUsed" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Lead host management is not being used. QuorumTimeout will be ignored.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="QuorumTimeout"} 'Lead host' is a Velocity term. Lead host management is a feature in Velocity, QuorumTimeout is a parameter name in a command.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIRegionAndRole" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[{0}({1})]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=String, 1="Primary"/"Secondary" (Primary and Secondary are keywords)]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIReplaceClusterConfig" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Replace cluster configuration.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[This is an informational message (shown while configuration for cluster is to be replaced).]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIRestartCluster" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Restart cluster.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[This is an informational message]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIStartedHost" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Started host {0}:{1}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=HostName, 1=PortNumber]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIStartingHost" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Starting host {0}:{1}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=HostName, 1=PortNumber]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIStopCacheHostShutdownError" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cancel shutdown error: {0}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Error message]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIStoppedHost" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Stopped host {0}:{1}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=HostName, 1 = PortNumber]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIStoppingHost" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Stopping host {0}:{1}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=HostName, 1=PortNumber]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AdminUIUpdateClusterConfig" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Update cluster configuration.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[This is an informational message (shown while upgrading cluster configuration.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AnonymousIdentity" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Anonymous]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[This corresponds to the Anonymous Windows logon identity, similar to "NT AUTHORITY\Anonymous".]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";AvailableSystemMemoryLow" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Available System Memory low]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[System Memory is corresponding to the RAM on the machine]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";CacheAdminGetVersionRangeError" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Getting allowed Server version range failed : Host - {0} : Exception - {1}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Host Name,  1=Exception trace]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";CacheItemPool" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[CacheItem]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{Locked="CacheItem"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";DataCacheItemVersionInvalid" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid DataCacheItemVersion has been passed.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="DataCacheItemVersion"} DataCacheItemVersion is a type name]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";Directory" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Directory]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{Locked="Directory"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Client referring to the object has an older version of the object. Latest version of the objects should be fetched for this client operation.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['client' is Velocity term - synonym for "cache client".]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error opening the registry key {0}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Registry Key, registry key referes to a key in Windows registry.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[At least one of the required arguments is invalid. Refer to API documentation for expected parameter definitions.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[API = Application Programming Interface]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0005" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Region referred to does not exist. Use CreateRegion API to fix the error.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="CreateRegion"} "CreateRegion" is an API name. "Region" is a Velocity term - synonym for "cache region"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0006" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Key referred to does not exist. Create objects based on a Key to fix the error.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Key" is a Velocity term.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0007" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[An attempt is being made to create a Region that already exists.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Region" is a Velocity term - synonym for "cache region"]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0008" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[An attempt is being made to create an object with a Key that already exists in the Cache. Cache will only accept unique Key values for objects.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Key" is a Velocity term. "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0009" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cache referred to does not exist. Contact administrator or use the Cache administration tool to create a Cache.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0010" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Maximum Cache count exceeded. Cannot create any more Caches. Contact administrator or use Cache administration tool to increase cluster capacity.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Cache' is a Velocity term, logical entity in Velocity.'caches' is to be plural of reserved word 'Cache', please make it as appropriate.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0011" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Object being referred to is currently locked, and cannot be accessed until it is unlocked by the locking client. Please retry later.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Object here refers to a cache item stored in the named cache.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0013" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The DataCacheLockHandle passed is invalid.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{Locked="DataCacheLockHandle"} 'DataCacheLockHandle' is a type of object]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0015" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Notification-based invalidation is not supported because the Cache is not configured to support Notifications.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". Notification is a Velocity term - synonym for "cache notification"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0016" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The connection was terminated, possibly due to server or network problems or serialized Object size is greater than MaxBufferSize on server. Result of the request is unknown.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="MaxBufferSize"} MaxBufferSize is a configuration parameter]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0022" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cache server is out of memory. Contact administrator or refer to product help documentation for possible reasons.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache".]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0030" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[ACS request for token failed. One of the reasons could be an invalid authorization token.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[ACS refers to Access Control Service of Windows Azure.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0033" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[There was an unhandled exception on one of CcrGlobal Threads]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{Locked="CcrGlobal"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCA0034" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The Read-Through provider could not return the requested object, because the specified Region does not exist. Use CreateRegion API to fix the error.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="CreateRegion"} "CreateRegion" is an API name. "Region" is a Velocity term - synonym for "cache region". Read-Through refers to a feature in Velocity.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The operation has timed out and the result is unknown. Stop the cluster and run Export-CacheClusterConfig followed by Import-CacheClusterConfig to make the cluster configuration consistent.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="Export-CacheClusterConfig"} {StrContains="Import-CacheClusterConfig"} These 2 are command names.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin006" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Insufficient number of lead hosts present in cluster.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Lead host' is a AppFabric term]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin009" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Specified Cache does not exist in cluster.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin011" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Specified Cache is already present in cluster.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin013" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Sufficient lead hosts will not be running after stopping this lead host.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[host refers to a 'cache host', part of cache cluster]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin019" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Failure encountered while creating the default Cache.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". 'default Cache' refers to a cache which is always present in Velocity.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin020" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Deletion of this Cache is in progress. Please retry later.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin021" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Configuration store was not consistent for this Cache. Removing the inconsistency. Please retry later.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin026" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Remote registry access failed on host {0}. Check if the required permissions are available and the host is not down.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Hostname]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin027" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The Windows account {0} is not valid.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="Windows"} 0=Windows account]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin028" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The Windows account {0} is already present as a granted account with name {1}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="Windows"} 0=Windows account 1=value]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin029" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The Windows account {0} is not present as a granted account.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="Windows"} 0=Windows account]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin030" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Failed to grant permissions to the client account {0}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Windows account]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin031" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Failed to revoke permissions for the client account {0}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Windows account]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin032" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid operation encountered on {0}:{1} : {2}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Hostname 1=ServiceName 2=Error message]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin033" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The cluster is not ready for admin operations. Please retry later.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[admin operations = administrational operations (done through administration tool)]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin034" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Refreshing of Cache host {0} failed : {1}. You may need to restart this host for the changes to take effect.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". 0=Hostname. 1 = Error message]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin036" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Graceful shutdown was not started on this machine.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Graceful Shutdown' is a feature of AppFabric Caching]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin038" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The operation is not supported on the server version {0}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Placeholder value represents version number.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin039" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cache host {0} is not reachable.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Hostname]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCAdmin041" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Graceful Shutdown of this cache host is not possible without losing the required quorum of servers in the cache cluster.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Graceful Shutdown' is a feature of AppFabric Caching]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMC0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[dataCacheClient with name "{0}" is not specified in the application configuration file.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=XML file tag name]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMC0002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid value ("{1}") specified for "{0}", expected values "{2}" or "{3}" in the application configuration file. Create and configure the application configuration file for your application. Refer to product help documentation for more information.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[1=Value, 0=parameter name, 2,3=Possible values]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error while trying to load configuration: {0}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=ErrorMessage]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA["{0}" tag is not specified in the configuration file. Specify a valid tag in the configuration file.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=XML file tag name]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0004" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Configuration file (file name:"{0}") not found. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=FileName]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0005" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid value ("{1}") specified for "{0}", expected value "{2}" in the cluster configuration. Refer to product help documentation for more information.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[1=Value, 0=Parameter name, 2=Possible value]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0006" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error while loading the provider "{0}". Check {1}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Name of a provider]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0007" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Provider "{0}" instantiation failed: {1} ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Provider name, 1=Error message]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0008" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Provider "{0}" registration failed: {1} ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Provider name, 1 = Error message]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0009" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The High Availability feature of AppFabric Server caching features requires all nodes in the cache cluster to be running Windows Server Enterprise Edition or higher. Please confirm that all High Availability cache nodes are running on a supported operating system.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["High Availability" is a feature of Velocity. 'Windows Server Enterprise Edition' refers to Windows Server Enterprise edition.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRCMS0010" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error - SSL is enabled, but 'certificateSubject' is missing in configuration]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["certificateSubject" is velocity configuration file tag name.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRDM0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Object with the specified Key already exists. Specify a unique Key for Add operations.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Key" is a Velocity term. "Add" is an API name]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRDM0002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Object with the specified Key was not found in the Cache. Specify a valid Key.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Key" is a Velocity term. "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRDM0003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Object with the specified version was not found in the Cache. Specify a valid version.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["version" corresponds to a parameter value referring to version of an object]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRDM0004" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Object with the specified Key is already locked. This is a duplicate call and will result in no action on the object.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Key" is a Velocity term.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRDM0008" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Enumerator specified is invalid. Specify a valid enumerator.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Enumerator refers to the enumerator type object in C#]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRDM0009" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Key is already latched.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Key" is a Velocity term.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRDRM0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[CAS initialization failed on the client. No user action required.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="CAS"} 'CAS' is an internal term, this is a debug message.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERROM0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[OM fatal error. No user action required.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="OM"} "OM" is an internal term, this is a debug message.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERROM0002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Region specified is invalid. Specify a valid Region.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Region" is a Velocity term - synonym for "cache region"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERROM0003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Region specified already exists. Specify a unique Region name.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Region" is a Velocity term - synonym for "cache region"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERROM0004" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Number of Caches exceeds the configured maximum number.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Caches' is a plural of Velocity term 'named cache'.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERROM0005" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cache with specified name already exists. Specify a unique Cache name.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERROM0006" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cache specified was not found. Specify a valid Cache name.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERROM0007" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The Read-Through provider could not return the requested object, because the specified Region does not exist. Specify a valid Region.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Region" is a Velocity term - synonym for "cache region". Read-Through refers to a feature in Velocity.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid provider and connection string read. Please provide the values manually.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["connection string" refers to a string to a backedn provider like SQL or Oracle or any other database (containing server name, connection properties, protocol etc)]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The maximum limit of {0} for the number of Caches has already been reached.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Caches' is a plural of Velocity term 'named cache'. 0=Number]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS004" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Duplicate port numbers provided. Verify that all port numbers are unique.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['port' refers to a TCP port]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS006" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Some hosts could not be connected to. Cache statistics may be incorrect. Examine the admin log file for any errors.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". admin log implies log file for administrator tool commands.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS007" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid security settings provided. With SecurityMode "None", ProtectionLevel can only be "None".]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="SecurityMode"} {Locked="None"} {StrContains="ProtectionLevel"} These 3 are parameter and value names that cannot be translated.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS008" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error: Could not read installation path from registry.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[registry is the Windows registry]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS012" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error occurred while performing the operation on host {0}:{1} : {2}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Hostname, 1=Port number, 2=Error message]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS013" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Error: No valid cluster settings were provided with Use-CacheCluster.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="Use-CacheCluster"} 'Cluster' refers to the AppFabric term "cache cluster". This error signifies the cmdlet Use-CacheCluster needs to be run prior to the command in which this error occured.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS014" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[MinSecondaries should be between 0 and Secondaries (both inclusive).]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="Secondaries","MinSecondaries"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS017" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Keys for ProviderSettings should be strings.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="ProviderSettings"} ProviderSettings is a hashtable, 'Keys' refers to the key names in the hashtable]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS018" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[ProviderType must be specified when the parameters WriteBehindEnabled or ReadThroughEnabled are set to true.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="ProviderType"} {StrContains="WriteBehindEnabled"} {StrContains="ReadThroughEnabled"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS020" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cache name can contain only alphanumeric characters.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". This error signifies the value for Cache name parameter has alpha-numeric characters which is not acceptable.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS021" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Could not make the Cache configuration changes on hosts {0}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". This message signifies that the requestd changes to configuration (stored somewhere) for the cache were not successfully done.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS022" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Could not make the requested host configuration changes.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Host here implies one of the machines in Velocity cluster - cache host]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS024" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[This command is not currently allowed. Changes to the cache cluster configuration is restricted during a rolling upgrade of the caching service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Rolling Upgrade' is the process for upgrading the hosts in a cache cluster.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRPS025" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Incompatible expiration settings provided. If IsExpirable property is true then ExpirationType has to be either Sliding or Absolute. And if IsExpirable property is false then ExpirationType has to be None. In future, the IsExpirable property will become obsolete.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Expiration settings specify the expiration policy for items. It can be either None, Absolute or Sliding. IsExpirable specifies whether items are expirable or not.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRSS0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid attribute specified within SessionState provider configuration. Valid configurable attributes are "cacheName" and "regionName". Create and configure your Web configuration file by using the sample Web.config file installed with the product. Refer to product help documentation for more information.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="SessionState", "cacheName", "regionName", "Web.config"} The words in StrContains are parameter names which are constant, cannot be translated.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRSS0002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Invalid session state data received from Cache.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". 'session' here referes to an ASP.Net session.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRSS0003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Web configuration error. Check your Web.config file, or revert to the last working version.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="Web.config"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRSS0005" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Empty string configured as cacheName in session store configuration.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="cacheName"} "cacheName" is a configuration parameter name. 'session' here referes to an ASP.Net session.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRSS0006" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Empty string configured as applicationName in session store configuration.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="applicationName"} "applicationName" is a configuration parameter name. 'session' here referes to an ASP.Net session.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRService0002" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The service has crashed and requires a restart. {0}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Error message]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ERRService0003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Replication to secondary replicas failed.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["secondary" is a Velocity term denoting the failover hosts for High availability.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ES0001" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[No specific SubStatus.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[SubStatus refers to the type DataCacheErrorSubStatus]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ES0003" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Sufficient secondaries not present or they are in throttled state.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['secondary' is a Velocity term, denotes a host in cluster where a second copy of data is stored for High Availability. 'secondaries' is plural for 'secondary'.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ES0004" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Replication queue was full. This may happen during reconfiguration of cluster hosts.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Replication queue" is a Velocity term denoting an internal queue name. The queue name is for debugging purposes. Do not translate this term.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ES0006" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[One or more specified cache servers are unavailable, which could be caused by busy network or servers. For on-premises cache clusters, also verify the following conditions. Ensure that security permission has been granted for this client account, and check that the AppFabric Caching Service is allowed through the firewall on all cache hosts. Also the MaxBufferSize on the server must be greater than or equal to the serialized object size sent from the client.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache" {StrContains="MaxBufferSize"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ErrorMessageFormat" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[ErrorCode<{0}>:SubStatus<{1}>:{2}]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{Locked="ErrorCode", "SubStatus"} 0=Error Code  1=Error Substatus  2=Error message]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";InvalidItemLevelMask" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Only item-level Cache operations can be registered for notifications.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". "notifications" is plural for the term "cache notification"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";InvalidOperationMask" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Only Cache operations can be registered for notifications.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". "notifications" is plural for the term "cache notification"]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";InvalidRegionName" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Region names should contain only alphanumeric characters.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Region" is a Velocity term - synonym for "cache region"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";MaxQueueLengthZero" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Queue length should be a positive value.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[Queue length refers to a parameter value]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";MemoryPoolExhausted" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Memory exhausted : {0}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[0=Error message, Memory is the corresponds to RAM on the machine]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";NotPermittedForDefaultRegion" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[This operation is not permitted on a default Region.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Region" is a Velocity term - synonym for "cache region", 'default' Regions are in-built regions in Velocity, also called 'system' regions]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";NotificationNotSupported" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Notifications are not supported because the Cache is not configured to support notifications.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Cache" is a Velocity term, synonym for "named cache". "notifications" is plural for the term "cache notification"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";ObjectCountZero" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Object count in local Cache should be a positive value.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['local Cache' is a Velocity term]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";OneKeyNull" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[A Key is passed with value null.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Key" is a Velocity term.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";OneTagNull" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Either the collection passed is empty or one of the tags passed is null.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA['Tags' is a plural of Velocity term "cache tag"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheBasePercentageMissHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Base counter for Cache miss percentage.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} 'cache miss percentage' is the percent of operations that resulted in cache miss. "Cache" is a Velocity term, synonym for "named cache"]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheCategoryHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[A category for multiple-instance performance counters pertaining to all Caches in the host. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} Maximum length of 255 is a Windows limit .This limit is true for all other strings wherever MaxLength of 255 has been put.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCachePercentageMissHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The percentage of unsuccessful Cache requests to the total number of requests since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalDataSizeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total size of data stored in the Cache, not including Cache overhead. Indicates the current data memory usage of the server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalGetAndLockRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of GetAndLock requests since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"} 'GetAndLock' is an API name.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalGetAndLockRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of GetAndLock requests per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"} 'GetAndLock'  is an API name.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalMissCountHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of unsuccessful Cache requests since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalMissCountPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of unsuccessful Cache requests per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalObjectCountHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total number of objects stored in the Cache.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalObjectReturnedHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of objects returned by client read requests. This counter along with the total read requests counter indicates the success of read operations.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalObjectReturnedPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of objects returned by client read requests per second. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalPrimaryDataSizeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total size of primary data stored in the Cache, not including Cache overhead. Indicates the current primary memory data usage of the server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalReadRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of read requests (BulkGet, Get, and Enumeration) received from all clients since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="BulkGet", "Get"} 'Enumeration' refers to Velocity operations done by receving IEnumerator objects from an API]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalReadRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of read requests (BulkGet, Get, and Enumeration) received per second from all clients since start of service. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="BulkGet", "Get"} 'Enumeration' refers to Velocity operations done by receving IEnumerator objects from an API]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of client requests, including all API calls.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} API=Application Programming Interface]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of client requests per second, including all API calls.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} API=Application Programming Interface]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalSecondaryDataSizeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total size of secondary data stored in the Cache, not including Cache overhead. Indicates the current secondary memory data usage of the server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalSuccessfulGetAndLockRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of successful GetAndLock requests since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalSuccessfulGetAndLockRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of successful GetAndLock requests per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalWriteRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of write requests (Put, Add, and Lock) since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="Put", "Add", "Lock"} API names]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonCacheTotalWriteRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of write requests (Put, Add, and Lock) per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="Put"} {StrContains="Add"} {StrContains="Lock"} API names]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostAverageAllSecondaryResponseTimeBaseHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Base counter for average secondary response time per operation.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostAverageAllSecondaryResponseTimeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The average time spent to get responses from all the secondary servers.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostAverageQuorumResponseTimeBaseHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Base counter for average quorum response time per operation.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostAverageQuorumResponseTimeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The average time spent in quorum response. It indicates the amount of time spent by write operations in replication.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostBasePercentageMissHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Base counter for Cache miss percentage.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostCategoryHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[A category for single-instance performance counters pertaining to a single Cache host.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostHostTotalObjectReturnedHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of objects returned by client read requests. This counter along with the total read requests counter indicates the success of read operations.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostPercentageMissHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The percentage of unsuccessful Cache requests to the total number of requests since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalDataSizeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total size of data stored in the host, not including Cache overhead. Indicates the current data memory usage of the server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalEvictedObjectsHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of evicted objects since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalEvictionRunHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of eviction runs since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalExceptionHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of exceptions thrown by the server since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalExceptionPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of exceptions thrown per second by the server since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalExpiredObjectsHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of expired objects since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalGetAndLockRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of GetAndLock requests since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"} 'GetAndLock' is an API name]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalGetAndLockRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of GetAndLock requests per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"} 'GetAndLock' is an API name]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalGetRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of Get requests received from all clients since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="Get"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalGetRequestMissCountHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of Get misses from all clients since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} Get is an API name, please avoid translation]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalGetRequestMissCountPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of Get misses per second from all clients since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="Get"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalGetRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of Get requests per second received from all clients since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="Get"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalMemoryEvictedHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The amount of memory freed from Cache since start of service. This counter also includes expired object memory. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalMissCountHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of unsuccessful Cache requests since start of service. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalMissCountPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of unsuccessful Cache requests per second since start of service. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalNotificationDeliveredHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of notifications delivered to clients.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "notifications" is plural for the term "cache notification"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalNotificationDeliveredPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of notifications per second delivered to clients.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "notifications" is plural for the term "cache notification"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalObjectCountHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total number of objects stored in the host.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalObjectReturnedPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of objects returned by client read requests per second. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalPollRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of poll requests from the client since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalPollRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of poll requests per second from the client since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalPrimaryDataSizeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total size of primary data stored in the Cache, not including Cache overhead. Indicates the current primary memory data usage of the server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalReadRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of read requests (BulkGet, Get, and Enumeration) received from all clients since start of service. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="BulkGet", "Get"} 'BulkGet' and 'Get' are APIs. 'Enumeration' refers to Velocity operations done by receving IEnumerator objects from an API]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalReadRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of read requests (BulkGet, Get, and Enumeration) received per second from all clients since start of service. ]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="BulkGet", "Get"} 'BulkGet' and 'Get' are APIs. 'Enumeration' refers to Velocity operations done by receving IEnumerator objects from an API]A;]A;]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of client requests, including all API calls.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} API=Application Programming Interface]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of client requests per second, including all API calls.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} API=Application Programming Interface]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalResponseHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of requests served and responses sent by the server since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalResponsePerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of requests served and responses sent by the server per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalRetryExceptionHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of retry operation exceptions since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalRetryExceptionPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of retry operation exceptions per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalSecondaryDataSizeHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Represents the total size of secondary data stored in the Cache, not including Cache overhead. Indicates the current secondary memory data usage of the server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} "Cache" is a Velocity term, synonym for "named cache"]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalSuccessfulGetAndLockRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of successful GetAndLock requests since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalSuccessfulGetAndLockRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of successful GetAndLock requests per second since start of service.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="GetAndLock"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalWriteRequestHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of write requests since start of service. Put, Add, and Lock methods are included with write operations.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="Put", "Add", "Lock"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonHostTotalWriteRequestPerSecondHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The number of write requests per second since start of service. Put, Add, and Lock methods are included with write operations.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} {StrContains="Put", "Add", "Lock"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonPerSecondaryMachineCategoryHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[This counter is of multiple instance type and each instance represents a secondary server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255} 'secondary' is a Velocity term, denotes a host in cluster where a second copy of data is stored for High Availability.]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";PerfmonPerSecondaryTotalReplicationRetriesHelp" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The total number of retry replication operations for each secondary server.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{MaxLength=255}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";Usage" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[CacheConfigure.exe -command <command name> <parameters passed through to command>]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="CacheConfigure.exe", "-command"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";UsageExample" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Example CacheConfigure.exe -command RegisterCacheHost -Provider xml -ConnectionString \\\\machine\\config]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{StrContains="CacheConfigure.exe", "-command", "RegisterCacheHost", "-Provider", "xml", "-ConnectionString"}]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";VersionValueModified" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Code version cannot be changed at runtime. Version changed from {0} to {1}.]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA["Code version" is a product term]]></Cmt>
+        </Cmts>
+      </Item>
+      <Item ItemId=";WBItemPool" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[WriteBehindItemPool]]></Val>
+        </Str>
+        <Disp Icon="Str" />
+        <Cmts>
+          <Cmt Name="LcxAdmin"><![CDATA[{Locked="WriteBehindItemPool"}]]></Cmt>
+        </Cmts>
+      </Item>
+    </Item>
+  </Item>
+  <Item ItemId=";Managed Resources" ItemType="0" PsrId="211" Leaf="true">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
+  </Item>
+  <Item ItemId=";Version" ItemType="0" PsrId="211" Leaf="false">
+    <Disp Icon="Ver" Disp="true" LocTbl="false" Path=" \ ;Version \ 8 \ 0" />
+    <Item ItemId=";InternalName" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[Microsoft.ApplicationServer.Caching.Core.resources.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Cmts>
+        <Cmt Name="LcxAdmin"><![CDATA[{Locked="Microsoft.ApplicationServer.Caching.Core.resources.dll"}]]></Cmt>
+      </Cmts>
+    </Item>
+    <Item ItemId=";OriginalFilename" ItemType="0" PsrId="211" InstFlg="true" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[Microsoft.ApplicationServer.Caching.Core.resources.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Cmts>
+        <Cmt Name="LcxAdmin"><![CDATA[{Locked="Microsoft.ApplicationServer.Caching.Core.resources.dll"}]]></Cmt>
+      </Cmts>
+    </Item>
+  </Item>
+  <Item ItemId=";Version" ItemType="8" PsrId="211" Leaf="true">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
+  </Item>
+</LCX>

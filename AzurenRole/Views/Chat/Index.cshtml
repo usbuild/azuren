@@ -1,0 +1,31 @@
+﻿@using AzurenRole.Utils
+@{
+    Layout = null;
+}
+<div class="chat-container">
+    <div class="chat-my-info">
+        <span class="username">@GlobalData.user.displayname</span>
+        &nbsp;
+        <span class="btn-small btn-info glyphicon glyphicon-cog chat-info-setting"></span>
+        </div>
+    <input type="hidden" value="@GlobalData.user.id" id="logged-id"/>
+    <div class="add-new-room">
+        <input type="text" name="name" value=" " class="form-control add-new-room-text" />
+        <a class="btn btn-default add-new-room-btn">+</a>
+    </div>
+    <div class="room-list-box">
+        <table class="table-condensed">
+            @foreach (var x in (IEnumerable<string>)ViewData["roomList"])
+            {
+                <tr>
+                    <td class="room-list-name">
+                        <a href="javascript:;" data-id="@x" class="btn-default btn-small">@x</a>
+                    </td>
+                    <td class="room-list-op btn-group">
+                        <a class="btn btn-danger btn-small group-remove" data-id="@x"><span class="glyphicon glyphicon-minus"></span></a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

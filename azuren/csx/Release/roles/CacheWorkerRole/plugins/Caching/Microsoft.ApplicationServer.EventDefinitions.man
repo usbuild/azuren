@@ -1,0 +1,927 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events" xmlns:trace="http://schemas.microsoft.com/win/2004/08/events/trace" xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/win/2004/08/events eventman.xsd">
+  <instrumentation>
+    <events>
+      <provider guid="{54A5365C-3AD9-405C-B1E8-7D9A257EAC9F}" helpLink="http://www.microsoft.com/NET/Dublin.aspx" message="$(string.Microsoft-Windows-Application Server.message)" messageFileName="Microsoft.ApplicationServer.EventDefinitions.dll" name="Microsoft-Windows-Application Server-System Services" resourceFileName="Microsoft.ApplicationServer.EventDefinitions.dll" symbol="ApplicationServerEtwProvider">
+        <events>
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Informational" message="$(string.Microsoft-Windows-Application Server.event.50404.message)" symbol="ServiceStarted" template="ServiceNameTemplate" value="50404" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Informational" message="$(string.Microsoft-Windows-Application Server.event.50405.message)" symbol="ServiceStopped" template="ServiceNameTemplate" value="50405" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server.event.50506.message)" symbol="UnhandledException" template="ExceptionTemplate" value="25001" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server.event.50507.message)" symbol="UnhandledExceptionDuringServiceStart" template="ServiceExceptionMessageException" value="50507" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server.event.50508.message)" symbol="UnhandledExceptionDuringServiceStop" template="ServiceExceptionMessageException" value="50508" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Informational" message="$(string.Microsoft-Windows-Application Server.event.50800.message)" symbol="HandledException" template="ExceptionMessageTemplate" value="50800" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server.event.50801.message)" symbol="ShipAssertExceptionMessage" template="DescriptionTemplate" value="50801" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server.event.50802.message)" symbol="ThrowingException" template="ExceptionMessageTemplate" value="25002" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-System Services.event.50501.message)" symbol="InvalidCommandlineArgument" template="CommandLineArgumentTemplate" value="50501" version="0" />
+        </events>
+        <channels>
+          <channel chid="Microsoft-Windows-Application Server-System Services/Admin" enabled="true" message="$(string.Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Admin.message)" name="Microsoft-Windows-Application Server-System Services/Admin" symbol="Microsoft_Windows_Application_Server_Admin" type="Admin" />
+          <channel chid="Microsoft-Windows-Application Server-System Services/Operational" enabled="true" message="$(string.Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Operation.message)" name="Microsoft-Windows-Application Server-System Services/Operational" symbol="Microsoft_Windows_Application_Server_Operational" type="Operational" />
+          <channel chid="Microsoft-Windows-Application Server-System Services/Debug" enabled="false" message="$(string.Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Debug.message)" name="Microsoft-Windows-Application Server-System Services/Debug" symbol="Microsoft_Windows_Application_Server_Debug" type="Debug" />
+          <channel chid="Microsoft-Windows-Application Server-System Services/Analytic" enabled="false" message="$(string.Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Analytic.message)" name="Microsoft-Windows-Application Server-System Services/Analytic" symbol="Microsoft_Windows_Application_Server_Analytic" type="Analytic" />
+        </channels>
+        <templates>
+          <template tid="ExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="ServiceNameTemplate">
+            <data inType="win:UnicodeString" name="Service Name" outType="xs:string" />
+          </template>
+          <template tid="ServiceExceptionMessageException">
+            <data inType="win:UnicodeString" name="Service Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="ExceptionTemplate">
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="DescriptionTemplate">
+            <data inType="win:UnicodeString" name="Description" outType="xs:string" />
+          </template>
+          <template tid="CommandLineArgumentTemplate">
+            <data inType="win:UnicodeString" name="Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Value" outType="xs:string" />
+          </template>
+        </templates>
+      </provider>
+      <provider guid="{FECFA0CD-B2F7-4AA6-9295-4516404B6830}" helpLink="http://www.microsoft.com/NET/Dublin.aspx" message="$(string.Microsoft-Windows-Application Server Hosting.message)" messageFileName="Microsoft.ApplicationServer.EventDefinitions.dll" name="Microsoft-Windows-Application Server-System Services Hosting" resourceFileName="Microsoft.ApplicationServer.EventDefinitions.dll" symbol="HostingEtwProvider">
+        <events>
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Hosting.event.50500.message)" symbol="AutoStartOfServiceFailed" template="ServiceVAppSiteException" value="50500" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Hosting.event.50501.message)" symbol="AutoStartOfServiceSucceeded" template="ServiceVAppSite" value="50501" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Hosting.event.50502.message)" symbol="AutoStartOfVirtualApplicationFailed" template="VAppSiteException" value="50502" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Hosting.event.50503.message)" symbol="AutoStartOfVirtualApplicationSucceeded" template="AutoStartOfVirtualApplicationCompletedTemplate" value="50503" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Hosting.event.50504.message)" symbol="AutoStartNoServicesAreFoundORConfigured" template="VAppSite" value="50504" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Hosting.event.50505.message)" symbol="SMEActivationSucceeded" template="SMEActivationSucceededTemplate" value="50505" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Hosting.event.50506.message)" symbol="SMEActivationFailed" template="SMEActivationFailedTemplate" value="50506" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Hosting.event.50507.message)" symbol="SMEServiceOpened" template="SMEServiceOpenedTemplate" value="50507" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Hosting.event.50503.message)" symbol="AutoStartOfVirtualApplicationWarning" template="AutoStartOfVirtualApplicationCompletedTemplate" value="50508" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server Hosting.event.25001.message)" symbol="UnhandledException" template="ExceptionTemplate" value="25001" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server Hosting.event.25002.message)" symbol="ThrowingException" template="ExceptionMessageTemplate" value="25002" version="0" />
+        </events>
+        <channels>
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Admin" name="Microsoft-Windows-Application Server-System Services/Admin" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Operational" name="Microsoft-Windows-Application Server-System Services/Operational" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Debug" name="Microsoft-Windows-Application Server-System Services/Debug" />
+        </channels>
+        <templates>
+          <template tid="ExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="ServiceVAppSiteException">
+            <data inType="win:UnicodeString" name="Service Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Virtual Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="AutoStartOfVirtualApplicationCompletedTemplate">
+            <data inType="win:UnicodeString" name="Virtual Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site Name" outType="xs:string" />
+            <data inType="win:Int32" name="Services Succeeded" outType="xs:int" />
+            <data inType="win:Int32" name="Services Failed" outType="xs:int" />
+          </template>
+          <template tid="ServiceVAppSite">
+            <data inType="win:UnicodeString" name="Service Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Virtual Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site Name" outType="xs:string" />
+          </template>
+          <template tid="VAppSite">
+            <data inType="win:UnicodeString" name="Virtual Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site Name" outType="xs:string" />
+          </template>
+          <template tid="VAppSiteException">
+            <data inType="win:UnicodeString" name="Virtual Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="ExceptionTemplate">
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="SMEActivationSucceededTemplate">
+            <data inType="win:UnicodeString" name="Service" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site" outType="xs:string" />
+          </template>
+          <template tid="SMEActivationFailedTemplate">
+            <data inType="win:UnicodeString" name="Service" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="SMEServiceOpenedTemplate">
+            <data inType="win:UnicodeString" name="Addresses" outType="xs:string" />
+          </template>
+        </templates>
+      </provider>
+      <provider guid="{A174E94E-A6F8-4041-9206-BF7B345729B0}" helpLink="http://www.microsoft.com/NET/Dublin.aspx" message="$(string.Microsoft-Windows-Application Server Event Collector.message)" messageFileName="Microsoft.ApplicationServer.EventDefinitions.dll" name="Microsoft-Windows-Application Server-System Services Event Collector" resourceFileName="Microsoft.ApplicationServer.EventDefinitions.dll" symbol="EventCollectorEtwProvider">
+        <events>
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.150.message)" symbol="BufferUnavailableEventDropped" template="BufferUnavailableMessageTemplate" value="150" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.101.message)" symbol="CannotStartEtwSession" template="SessionNameExceptionMessageTemplate" value="101" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.103.message)" symbol="CollectorOpened" template="SessionNameTemplate" value="103" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.104.message)" symbol="CollectorStarted" template="SessionNameTemplate" value="104" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.105.message)" symbol="CollectorStopped" template="SessionNameTemplate" value="105" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.108.message)" symbol="DatabaseWriteFailed" template="HostReferenceSqlExceptionMessageTemplate" value="108" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.109.message)" symbol="DebugTrace" template="ClassMethodMessageTemplate" value="109" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.110.message)" symbol="DebugTraceEntry" template="ClassMethodTemplate" value="110" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.111.message)" symbol="DebugTraceExit" template="ClassMethodTemplate" value="111" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.112.message)" symbol="EtwAccessDenied" template="MethodNameTemplate" value="112" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Event Collector.event.113.message)" symbol="EtwSessionAlreadExists" template="SessionNameTemplate" value="113" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Event Collector.event.148.message)" symbol="FieldValueToLongForDatabaseColumn" template="FieldNameTemplate" value="148" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.115.message)" symbol="GeneralEtwFailure" template="InstanceNameSessionNameTemplate" value="115" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.120.message)" symbol="ProcessRecordExceptionEvent" template="ProcessRecordExceptionMessageTemplate" value="120" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.121.message)" symbol="RegisterTraceProviderEtwError" template="ProviderCollectorErrorcode" value="121" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.122.message)" symbol="RegisterTraceProviderToManySessions" template="ProviderIdCollectorName" value="122" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.124.message)" symbol="ServiceStarted" template="ServiceTemplate" value="124" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.125.message)" symbol="ServiceStopped" template="ServiceTemplate" value="125" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.126.message)" symbol="SqlConnectionExceptionEvent" template="HostReferenceSqlExceptionMessageTemplate" value="126" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.142.message)" symbol="SqlUnavailableEventDropped" template="HostReferenceEventId" value="142" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.127.message)" symbol="TraceListenerOpened" template="SessionNameTemplate" value="127" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.128.message)" symbol="TraceListenerStarted" template="SessionNameTemplate" value="128" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.129.message)" symbol="TraceListenerStopped" template="SessionNameTemplate" value="129" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.149.message)" symbol="UnableToDecodeFieldMissingColumnSize" template="FieldNameColoumnName" value="149" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.130.message)" symbol="UnableToLoadCollectorConfiguration" template="CollectorConfigurationExceptionMessage" value="130" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.131.message)" symbol="UnableToLoadHostInformation" template="DefaultInstanceName" value="131" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.134.message)" symbol="UnableToOpenEtwTrace" template="SessionNameTemplate" value="134" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.135.message)" symbol="UnableToProcessEtwTrace" template="SessionNameTemplate" value="135" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.146.message)" symbol="UnableToUnregisterTraceProvider" template="ProviderCollectorErrorcode" value="146" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.137.message)" symbol="UndecodableEventFieldPropertyAccessFailed" template="FieldNameEventIdErrorCode" value="137" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.147.message)" symbol="UndecodableEventFieldValue" template="FieldNameEventIdExceptionMessage" value="147" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.138.message)" symbol="UndecodableEventUnknownEventType" template="EventIdProviderId" value="138" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.139.message)" symbol="UndecodableTransferEventMissingEtwData" template="DefaultInstanceName" value="139" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.140.message)" symbol="UndecodableTransferEventNoRelatedActivityId" template="DefaultInstanceName" value="140" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.141.message)" symbol="UnhandledException" template="InstancedExceptionTemplate" value="25001" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.152.message)" symbol="DefaultSqlConnectionStringReferenceInvalid" template="SqlConfigErrorMessageTemplate" value="152" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.153.message)" symbol="ProviderSqlConnectionStringReferenceInvalid" template="SqlProviderConfigErrorMessageTemplate" value="153" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.154.message)" symbol="DuplicateProviderIdDefinedForApplication" template="ApplicationsProviderIdMessageTemplate" value="154" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.155.message)" symbol="DatabaseBufferWriteFailed" template="DatabaseWriteFailedtemplate" value="155" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Event Collector.event.157.message)" symbol="InvalidScopeIsBeingDiscarded" template="InvalidScopeTemplate" value="157" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.25002.message)" symbol="ThrowingException" template="InstancedExceptionMessageTemplate" value="25002" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.158.message)" symbol="EtwBufferStatistics" template="EtwBufferStatistics" value="158" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Event Collector.event.159.message)" symbol="EventCollectorConfiguredWithoutScope" template="DefaultInstanceName" value="159" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.107.message)" symbol="EmptyAdoNetProviderName" template="SqlConfigErrorMessageTemplate" value="107" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Event Collector.event.156.message)" symbol="CannotActivateBulkCopyPlugin" template="CannotActivateBulkCopyPlugintemplate" value="156" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.161.message)" symbol="DatabaseBatchWriteRemaingBufferDropped" template="DatabaseWriteFailedtemplate" value="161" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.500.message)" symbol="DebugFilteredEvent" template="DebugFilteredEventTemplate" value="500" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" message="$(string.Microsoft-Windows-Application Server Event Collector.event.501.message)" symbol="DebugIgnoredEvent" template="DebugFilteredEventTemplate" value="501" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.502.message)" symbol="DebugDatabaseWriteComplete" template="DebugBulkWriteCompleteTemplate" value="502" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.504.message)" symbol="DebugSqlInitializeFailed" template="DefaultInstanceName" value="504" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.505.message)" symbol="DebugAddProvider" template="DebugProviderId" value="505" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Event Collector.event.506.message)" symbol="DebugRemoveProvider" template="DebugProviderId" value="506" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.200.message)" symbol="CouldNotReadCollectorConfiguration" template="CollectorConfigurationReadFailed" value="200" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.201.message)" symbol="ExceptionCaughtDuringReconfigure" template="InstancedExceptionTemplate" value="201" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Event Collector.event.202.message)" symbol="ColumnNotFoundInStagingTable" template="StagingTableColumnNotFound" value="202" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-System Services Event Collector.event.162.message)" symbol="MissingCollectorConfiguration" template="DefaultInstanceName" value="162" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-System Services Event Collector.event.163.message)" symbol="UnableToStartServiceInvalidCollectorConfiguration" template="InstancedExceptionTemplate" value="163" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server-System Services Event Collector.event.164.message)" symbol="EventCollectorConfigurationUpdated" template="DefaultInstanceName" value="164" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server-System Services Event Collector.event.165.message)" symbol="DatabaseWriterStatistics" template="DatabaseWriterStatistics" value="165" version="0" />
+        </events>
+        <channels>
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Admin" name="Microsoft-Windows-Application Server-System Services/Admin" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Operational" name="Microsoft-Windows-Application Server-System Services/Operational" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Debug" name="Microsoft-Windows-Application Server-System Services/Debug" />
+        </channels>
+        <maps>
+          <valueMap name="OccurrenceMap">
+            <map message="$(string.Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.0.message)" value="0" />
+            <map message="$(string.Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.1.message)" value="1" />
+            <map message="$(string.Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.2.message)" value="2" />
+            <map message="$(string.Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.3.message)" value="3" />
+            <map message="$(string.Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.4.message)" value="4" />
+            <map message="$(string.Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.5.message)" value="5" />
+            <map message="$(string.Microsoft-Windows-Application Server-System Services Event Collector.map.OccurrenceMap.6.message)" value="6" />
+            <map message="$(string.Microsoft-Windows-Application Server-System Services Event Collector.map.OccurrenceMap.7.message)" value="7" />
+          </valueMap>
+        </maps>
+        <templates>
+          <template tid="BufferUnavailableMessageTemplate">
+            <data inType="win:UnicodeString" name="HostReference" outType="xs:string" />
+            <data inType="win:UInt32" name="EventId" outType="xs:unsignedInt" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="SessionNameExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="EventTraceSession" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="InstancedExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="ProcessRecordExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="EventTraceSession" outType="xs:string" />
+          </template>
+          <template tid="ClassMethodMessageTemplate">
+            <data inType="win:UnicodeString" name="Class" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Method" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="ClassMethodTemplate">
+            <data inType="win:UnicodeString" name="Class" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Method" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="MethodNameTemplate">
+            <data inType="win:UnicodeString" name="MethodName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="EventTraceSession" outType="xs:string" />
+          </template>
+          <template tid="SessionNameTemplate">
+            <data inType="win:UnicodeString" name="EventTraceSession" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="FieldNameTemplate">
+            <data inType="win:UnicodeString" name="FieldName" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="InstancedExceptionTemplate">
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="ServiceTemplate">
+            <data inType="win:UnicodeString" name="Service" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="ProviderCollectorErrorcode">
+            <data inType="win:GUID" name="ProviderId" outType="xs:GUID" />
+            <data inType="win:UnicodeString" name="EventTraceSession" outType="xs:string" />
+            <data inType="win:Int64" name="ErrorCode" outType="xs:long" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="ProviderIdCollectorName">
+            <data inType="win:GUID" name="ProviderId" outType="xs:GUID" />
+            <data inType="win:UnicodeString" name="EventTraceSession" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="HostReferenceEventId">
+            <data inType="win:UnicodeString" name="HostReference" outType="xs:string" />
+            <data inType="win:UInt32" name="EventId" outType="xs:unsignedInt" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="FieldNameColoumnName">
+            <data inType="win:UnicodeString" name="FieldName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ColumnName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="FieldNameEventIdErrorCode">
+            <data inType="win:UnicodeString" name="FieldName" outType="xs:string" />
+            <data inType="win:UInt32" name="EventId" outType="xs:unsignedInt" />
+            <data inType="win:UInt32" name="ErrorCode" outType="xs:unsignedInt" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="FieldNameEventIdExceptionMessage">
+            <data inType="win:UnicodeString" name="FieldName" outType="xs:string" />
+            <data inType="win:UInt32" name="EventId" outType="xs:unsignedInt" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="EventIdProviderId">
+            <data inType="win:UInt32" name="EventId" outType="xs:unsignedInt" />
+            <data inType="win:GUID" name="ProviderId" outType="xs:GUID" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="SqlConfigErrorMessageTemplate">
+            <data inType="win:UnicodeString" name="VirtualPath" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ConnectionStringName" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="SqlProviderConfigErrorMessageTemplate">
+            <data inType="win:UnicodeString" name="VirtualPath" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ConnectionStringName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ProviderId" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="HostReferenceSqlExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="HostReference" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionData" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="ApplicationsProviderIdMessageTemplate">
+            <data inType="win:UnicodeString" name="HostReference" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ProviderId" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="DatabaseWriteFailedtemplate">
+            <data inType="win:UnicodeString" name="DatabaseName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="HostReference" outType="xs:string" />
+            <data inType="win:Int32" name="RetryCount" outType="xs:int" />
+            <data inType="win:Int32" name="NumberEventsDropped" outType="xs:int" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="InvalidScopeTemplate">
+            <data inType="win:UnicodeString" name="Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ScopePath" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="EtwBufferStatistics">
+            <data inType="win:UInt64" name="BuffersRead" outType="xs:unsignedLong" />
+            <data inType="win:UInt64" name="EventsLost" outType="xs:unsignedLong" />
+            <data inType="win:UInt64" name="TotalEvents" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="CollectorConfigurationExceptionMessage">
+            <data inType="win:UnicodeString" name="VirtualPath" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMesssage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="CannotActivateBulkCopyPlugintemplate">
+            <data inType="win:UnicodeString" name="PluginType" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="DebugFilteredEventTemplate">
+            <data inType="win:UInt32" name="EventId" outType="xs:unsignedInt" />
+            <data inType="win:UnicodeString" name="RoutingKey" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="DebugBulkWriteCompleteTemplate">
+            <data inType="win:Int32" name="BatchesComplete" outType="xs:int" />
+            <data inType="win:Int32" name="BatchesFailed" outType="xs:int" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="DebugProviderId">
+            <data inType="win:GUID" name="ProviderId" outType="xs:GUID" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="CollectorConfigurationReadFailed">
+            <data inType="win:UnicodeString" name="Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="StagingTableColumnNotFound">
+            <data inType="win:UnicodeString" name="ColumnsName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="DefaultInstanceName">
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="InstanceNameSessionNameTemplate">
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="EventTraceSession" outType="xs:string" />
+          </template>
+          <template tid="DatabaseWriterStatistics">
+            <data inType="win:UnicodeString" name="DatabaseName" outType="xs:string" />
+            <data inType="win:UInt64" name="EventsDropped" outType="xs:unsignedLong" />
+            <data inType="win:UInt64" name="BuffersAllocated" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+        </templates>
+      </provider>
+      <provider guid="{EA93AD01-35C0-4E48-BAE8-4313F95B81CB}" helpLink="http://www.microsoft.com/NET/Dublin.aspx" message="$(string.Microsoft-Windows-Application Server Power Shell.message)" messageFileName="Microsoft.ApplicationServer.EventDefinitions.dll" name="Microsoft-Windows-Application Server-System Services Power Shell" resourceFileName="Microsoft.ApplicationServer.EventDefinitions.dll" symbol="PowerShellEtwProvider">
+        <events>
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Power Shell.event.20500.message)" symbol="Debug" template="DebugTemplate" value="20500" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Power Shell.event.20501.message)" symbol="NonTerminatingError" template="NonTerminatingErrorTemplate" value="20501" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Error" message="$(string.Microsoft-Windows-Application Server Power Shell.event.20502.message)" symbol="TerminatingError" template="NonTerminatingErrorTemplate" value="20502" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Power Shell.event.20503.message)" symbol="Verbose" template="VerboseTemplate" value="20503" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Power Shell.event.20504.message)" symbol="Warning" template="WarningTemplate" value="20504" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server Power Shell.event.25001.message)" symbol="UnhandledException" template="ExceptionTemplate" value="25001" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server Power Shell.event.25002.message)" symbol="ThrowingException" template="ExceptionMessageTemplate" value="25002" version="0" />
+        </events>
+        <channels>
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Admin" name="Microsoft-Windows-Application Server-System Services/Admin" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Operational" name="Microsoft-Windows-Application Server-System Services/Operational" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Debug" name="Microsoft-Windows-Application Server-System Services/Debug" />
+        </channels>
+        <templates>
+          <template tid="DebugTemplate">
+            <data inType="win:UnicodeString" name="Class Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Debug Message" outType="xs:string" />
+          </template>
+          <template tid="NonTerminatingErrorTemplate">
+            <data inType="win:UnicodeString" name="Class Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Error Id" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="VerboseTemplate">
+            <data inType="win:UnicodeString" name="Class Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Verbose Message" outType="xs:string" />
+          </template>
+          <template tid="WarningTemplate">
+            <data inType="win:UnicodeString" name="Class Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Warning Message" outType="xs:string" />
+          </template>
+          <template tid="ExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="ExceptionTemplate">
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+        </templates>
+      </provider>
+      <provider guid="{7A5CCA90-98C9-4E5E-A429-E31C9A2F013F}" helpLink="http://www.microsoft.com/NET/Dublin.aspx" message="$(string.Microsoft-Windows-Application Server IIS Manager.message)" messageFileName="Microsoft.ApplicationServer.EventDefinitions.dll" name="Microsoft-Windows-Application Server-System Services IIS Manager" resourceFileName="Microsoft.ApplicationServer.EventDefinitions.dll" symbol="IISManagerEtwProvider">
+        <events>
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server IIS Manager.event.4000.message)" symbol="ErrorMessage" template="ErrorMessageTemplate" value="20001" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server IIS Manager.event.25001.message)" symbol="UnhandledException" template="ExceptionTemplate" value="25001" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server IIS Manager.event.25002.message)" symbol="ThrowingException" template="ExceptionMessageTemplate" value="25002" version="0" />
+        </events>
+        <channels>
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Admin" name="Microsoft-Windows-Application Server-System Services/Admin" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Operational" name="Microsoft-Windows-Application Server-System Services/Operational" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Debug" name="Microsoft-Windows-Application Server-System Services/Debug" />
+        </channels>
+        <templates>
+          <template tid="ErrorMessageTemplate">
+            <data inType="win:UnicodeString" name="Error Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="ExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+          <template tid="ExceptionTemplate">
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+          </template>
+        </templates>
+      </provider>
+      <provider guid="{C821412B-1624-4abe-A845-50B2C98C2405}" helpLink="http://www.microsoft.com/NET/Dublin.aspx" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.message)" messageFileName="Microsoft.ApplicationServer.EventDefinitions.dll" name="Microsoft-Windows-Application Server-Workflow Management Service" resourceFileName="Microsoft.ApplicationServer.EventDefinitions.dll" symbol="WorkflowManagementServiceEtwProvider">
+        <events>
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.25001.message)" symbol="UnhandledException" template="WmsExceptionTemplate" value="25001" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.25002.message)" symbol="ThrowingException" template="WmsExceptionMessageTemplate" value="25002" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.25003.message)" symbol="HandlingException" template="WmsThrottledExceptionMessageTemplate" value="25003" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50900.message)" symbol="WorkflowManagementServiceOpened" template="WmsWorkflowManagementServiceNameTemplate" value="50900" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50902.message)" symbol="ConfigurationError" template="WmsWorkflowManagementServiceConfigurationExceptionMessage" value="50902" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50903.message)" symbol="WorkflowManagementServiceDebugTrace" template="WmsClassMethodMessageTemplateInstanceName" value="50903" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50904.message)" symbol="WorkflowManagementServiceDebugTraceEntry" template="WmsClassMethodTemplateInstanceName" value="50904" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50905.message)" symbol="WorkflowManagementServiceDebugTraceExit" template="WmsClassMethodTemplateInstanceName" value="50905" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50907.message)" symbol="StoreControlProviderRemoved" template="WmsStoreControlProviderMessage" value="50907" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50908.message)" symbol="StoreControlProviderActivationFailed" template="WmsControlCommandRemoveFailedMessage" value="50908" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50909.message)" symbol="ControlCommandExecutionSucceeded" template="WmsControlCommandExecutionSucceededMessage" value="50909" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50910.message)" symbol="ControlCommandExecutionFailed" template="WmsControlCommandExecutionFailedMessage" value="50910" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50911.message)" symbol="ControlCommandRemoveFailed" template="WmsControlCommandRemoveFailedMessage" value="50911" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50912.message)" symbol="StoreControlProviderUndefined" template="WmsStoreProviderLocationMessage" value="50912" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Warning" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50913.message)" symbol="StoreProviderUndefined" template="WmsThrottledStoreProviderLocationMessage" value="50913" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Informational" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50914.message)" symbol="StoreInstantiationSucceeded" template="WmsThrottledStoreControlProviderMessage" value="50914" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50915.message)" symbol="StoreInstantiationFailed" template="WmsControlCommandRemoveFailedMessage" value="50915" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50916.message)" symbol="ControlProviderInstantiationSucceeded" template="WmsThrottledStoreControlProviderMessage" value="50916" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50918.message)" symbol="EnabledPollingForControlProvider" template="WmsStoreNameLocationTimespan" value="50918" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50919.message)" symbol="NoNetPipeAtSite" template="WmsThrottledNoNetPipeAtSiteStringTemplate" value="50919" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50920.message)" symbol="ServiceActivationSucceeded" template="WmsStringTemplate" value="50920" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50923.message)" symbol="ServiceActivationFailed" template="WmsStringStringTemplate" value="50923" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50903.message)" symbol="DebugTrace" template="WmsClassMethodMessageTemplate" value="50924" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50904.message)" symbol="DebugTraceEntry" template="WmsClassMethodTemplate" value="50925" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50905.message)" symbol="DebugTraceExit" template="WmsClassMethodTemplate" value="50926" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50927.message)" symbol="ConfigurationApplied" template="WmsConfigurationAppliedTemplate" value="50927" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50928.message)" symbol="ServiceManagementServiceNotAvailable" template="WmsServiceManagementServiceNotAvailable" value="50928" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50929.message)" symbol="ProviderNotFound" template="WmsStoreProviderDefinitionNotFound" value="50929" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Warning" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50930.message)" symbol="InstanceOwnerException" template="WmsInstanceOwnerExceptionMessage" value="50930" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Warning" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50931.message)" symbol="InstancePersistenceCommandException" template="WmsInstanceOwnerExceptionMessage" value="50931" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Warning" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50932.message)" symbol="OperationCanceledException" template="WmsInstanceOwnerExceptionMessage" value="50932" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50933.message)" symbol="RecycleStoreOwner" template="WmsStoreControlProviderMessage" value="50933" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50934.message)" symbol="NoHostsCouldBeActivated" template="WmsThrottledStoreControlProviderMessage" value="50934" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50935.message)" symbol="ActivatableWorkflowsQueryResult" template="WmsActivatableWorkflowsQueryResultMessage" value="50935" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50936.message)" symbol="ConfigurationNotFoundForWMS" template="WmsThrottledInstanceMessage" value="50936" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50937.message)" symbol="ConfigurationNotFound" value="50937" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50938.message)" symbol="InvalidBasePrefixFilter" template="WmsInvalidBasePrefixFilterMessage" value="50938" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50939.message)" symbol="ControlCommandGetFailed" template="WmsControlCommandRemoveFailedMessage" value="50939" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50940.message)" symbol="WorkflowManagementServiceStarted" template="WmsInstanceMessage" value="50940" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50941.message)" symbol="WorkflowManagementServiceStopped" template="WmsInstanceMessage" value="50941" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50942.message)" symbol="InvalidStoreLocation" template="WmsStoreLocationMessage" value="50942" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50943.message)" symbol="InvalidStoreName" template="WmsStoreControlProviderMessage" value="50943" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Warning" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50944.message)" symbol="NoStoreFound" template="WmsInstanceMessage" value="50944" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server-Workflow Management Service.event.50945.message)" symbol="InstanceStoreProviderNotFound" template="WmsStoreProviderLocationMessage" value="50945" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50946.message)" symbol="UnknownArgumentSupplied" template="WmsBadArguement" value="50946" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Error" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50947.message)" symbol="ArgumentHasNoValue" template="WmsBadArguement" value="50947" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50948.message)" symbol="MsdtcCheckResult" template="WmsMsdtcCheckResultTemplate" value="50948" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50949.message)" symbol="MsdtcCheckComFailure" template="WmsMsdtcCheckFailureTemplate" value="50949" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50950.message)" symbol="MsdtcCheckComException" template="WmsMsdtcCheckExceptionTemplate" value="50950" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Operational" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50951.message)" symbol="MsdtcCheckRegistryException" template="WmsMsdtcCheckExceptionTemplate" value="50951" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Admin" level="win:Informational" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50952.message)" symbol="ConfigurationAppliedWithoutErrors" template="WmsInstanceMessage" value="50952" version="0" />
+          <event channel="Microsoft-Windows-Application Server-System Services/Debug" level="win:Verbose" message="$(string.Microsoft-Windows-Application Server Workflow Management Service.event.50953.message)" symbol="EndControlThrottle" template="WmsThrottledStoreControlProviderMessage" value="50953" version="0" />
+        </events>
+        <channels>
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Admin" name="Microsoft-Windows-Application Server-System Services/Admin" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Operational" name="Microsoft-Windows-Application Server-System Services/Operational" />
+          <importChannel chid="Microsoft-Windows-Application Server-System Services/Debug" name="Microsoft-Windows-Application Server-System Services/Debug" />
+        </channels>
+        <maps>
+          <valueMap name="OccurrenceMap">
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.0.message)" value="0" />
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.1.message)" value="1" />
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.2.message)" value="2" />
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.3.message)" value="3" />
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.4.message)" value="4" />
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.5.message)" value="5" />
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.6.message)" value="6" />
+            <map message="$(string.Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.7.message)" value="7" />
+          </valueMap>
+        </maps>
+        <templates>
+          <template tid="WmsWorkflowManagementServiceNameTemplate">
+            <data inType="win:UnicodeString" name="WorkflowManagementServiceName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsThrottledExceptionMessageTemplate">
+            <data inType="win:UnicodeString" name="Exception Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsServiceVAppSiteException">
+            <data inType="win:UnicodeString" name="Service Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Virtual Application" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Site Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsExceptionTemplate">
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsWorkflowManagementServiceConfigurationExceptionMessage">
+            <data inType="win:UnicodeString" name="ExceptionMesssage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsStoreControlProviderMessage">
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsThrottledStoreControlProviderMessage">
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsStoreControlProviderActivationFailedMessage">
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsControlCommandExecutionSucceededMessage">
+            <data inType="win:UnicodeString" name="ControlAction" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceId" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsControlCommandExecutionFailedMessage">
+            <data inType="win:UnicodeString" name="ControlAction" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceId" outType="xs:string" />
+            <data inType="win:UnicodeString" name="EndpointAddress" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsControlCommandRemoveFailedMessage">
+            <data inType="win:UnicodeString" name="Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Location" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsStoreProviderLocationMessage">
+            <data inType="win:UnicodeString" name="ProviderName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsThrottledStoreProviderLocationMessage">
+            <data inType="win:UnicodeString" name="ProviderName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsStringTemplate">
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsThrottledNoNetPipeAtSiteStringTemplate">
+            <data inType="win:UnicodeString" name="SiteName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ApplicationName" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsBadArguement">
+            <data inType="win:UnicodeString" name="Name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsClassMethodTemplate">
+            <data inType="win:UnicodeString" name="Class" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Method" outType="xs:string" />
+          </template>
+          <template tid="WmsClassMethodMessageTemplate">
+            <data inType="win:UnicodeString" name="Class" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Method" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Message" outType="xs:string" />
+          </template>
+          <template tid="WmsStoreNameLocationTimespan">
+            <data inType="win:UnicodeString" name="name" outType="xs:string" />
+            <data inType="win:UnicodeString" name="location" outType="xs:string" />
+            <data inType="win:UnicodeString" name="timeSpan" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsStringStringTemplate">
+            <data inType="win:UnicodeString" name="string1" outType="xs:string" />
+            <data inType="win:UnicodeString" name="string2" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsClassMethodTemplateInstanceName">
+            <data inType="win:UnicodeString" name="Class" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Method" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsClassMethodMessageTemplateInstanceName">
+            <data inType="win:UnicodeString" name="Class" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Method" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Message" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsConfigurationAppliedTemplate">
+            <data inType="win:UnicodeString" name="Count" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+          </template>
+          <template tid="WmsServiceManagementServiceNotAvailable">
+            <data inType="win:UnicodeString" name="ServiceEndpointUrl" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ServiceVirtualPath" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsStoreProviderDefinitionNotFound">
+            <data inType="win:UnicodeString" name="ProviderName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsInstanceOwnerExceptionMessage">
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InnerException" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsActivatableWorkflowsQueryResultMessage">
+            <data inType="win:UnicodeString" name="StoreName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UnicodeString" name="Count" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsInvalidBasePrefixFilterMessage">
+            <data inType="win:UnicodeString" name="filterString" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ApplicationName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="SiteName" outType="xs:string" />
+            <data inType="win:UnicodeString" name="ExceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsInstanceMessage">
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsThrottledInstanceMessage">
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+            <data inType="win:UInt32" map="OccurrenceMap" name="OccurrenceMap" />
+            <data inType="win:UInt64" name="Occurrences" outType="xs:unsignedLong" />
+          </template>
+          <template tid="WmsStoreLocationMessage">
+            <data inType="win:UnicodeString" name="StoreLocation" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsMsdtcCheckResultTemplate">
+            <data inType="win:UnicodeString" name="commandType" outType="xs:string" />
+            <data inType="win:UnicodeString" name="inboundSetting" outType="xs:string" />
+            <data inType="win:UnicodeString" name="outboundSetting" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsMsdtcCheckFailureTemplate">
+            <data inType="win:UnicodeString" name="hresult" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+          <template tid="WmsMsdtcCheckExceptionTemplate">
+            <data inType="win:UnicodeString" name="exceptionMessage" outType="xs:string" />
+            <data inType="win:UnicodeString" name="exception" outType="xs:string" />
+            <data inType="win:UnicodeString" name="InstanceName" outType="xs:string" />
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="Microsoft-Windows-Application Server.message" value="Microsoft-Windows-Application Server-System Services" />
+        <string id="Microsoft-Windows-Application Server.event.50802.message" value="Throwing an exception. Exception %1." />
+        <string id="Microsoft-Windows-Application Server.event.50801.message" value="An unexpected failure occurred. Applications should not attempt to handle this error. For diagnostic purposes, this English message is associated with the failure: %." />
+        <string id="Microsoft-Windows-Application Server.event.50800.message" value="Handling an exception.%1" />
+        <string id="Microsoft-Windows-Application Server.event.50508.message" value="Unhandled exception was encountered during '%1' stop : %2." />
+        <string id="Microsoft-Windows-Application Server.event.50507.message" value="Unhandled exception was encountered during '%1' start : %2." />
+        <string id="Microsoft-Windows-Application Server.event.50506.message" value="Unhandled exception was encountered : %1." />
+        <string id="Microsoft-Windows-Application Server.event.50405.message" value="Service %1 has stopped." />
+        <string id="Microsoft-Windows-Application Server.event.50404.message" value="Service %1 has started." />
+        <string id="Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Operation.message" value="Operational" />
+        <string id="Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Debug.message" value="Debug" />
+        <string id="Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Admin.message" value="Admin" />
+        <string id="Microsoft-Windows-Application Server.channel.Microsoft_Windows_Application_Server_Analytic.message" value="Analytic" />
+        <string id="Microsoft-Windows-Application Server-System Services.event.50501.message" value="Invalid command line parameter name: '%1',  value: '%2' passed to the service. " />
+        <string id="Microsoft-Windows-Application Server-System Services Event Collector.map.OccurrenceMap.7.message" value=". This event has occurred %7 times." />
+        <string id="Microsoft-Windows-Application Server-System Services Event Collector.map.OccurrenceMap.6.message" value=". This event has occurred %6 times." />
+        <string id="Microsoft-Windows-Application Server-System Services Event Collector.event.165.message" value="Statistics for database writer for Database : '%1'. Dropped %2 events, allocated %3 buffers since service start. " />
+        <string id="Microsoft-Windows-Application Server-System Services Event Collector.event.164.message" value="The service configuration has been updated." />
+        <string id="Microsoft-Windows-Application Server-System Services Event Collector.event.163.message" value="Unable to load the configuration for service with name: '%2'. Received exception while loading the configuration. Detailed information: %1." />
+        <string id="Microsoft-Windows-Application Server-System Services Event Collector.event.162.message" value="No configuration found for the service with name '%1'. Please verify the name is correct and that the configuration is defined." />
+        <string id="Microsoft-Windows-Application Server Power Shell.message" value="Microsoft-Windows-Application Server-System Services Power Shell" />
+        <string id="Microsoft-Windows-Application Server Power Shell.event.25002.message" value="Throwing an exception. Exception %1." />
+        <string id="Microsoft-Windows-Application Server Power Shell.event.25001.message" value="Unhandled exception was encountered : %1." />
+        <string id="Microsoft-Windows-Application Server Power Shell.event.20504.message" value="Warning in %1: %2" />
+        <string id="Microsoft-Windows-Application Server Power Shell.event.20503.message" value="Verbose in %1: %2" />
+        <string id="Microsoft-Windows-Application Server Power Shell.event.20502.message" value="A terminating error was encountered in %1 : %2  ErrorID: %3" />
+        <string id="Microsoft-Windows-Application Server Power Shell.event.20501.message" value="A non-terminating error was encountered in %1 : %2  Error ID: %3" />
+        <string id="Microsoft-Windows-Application Server Power Shell.event.20500.message" value="Debug in %1: %2" />
+        <string id="Microsoft-Windows-Application Server IIS Manager.message" value="Microsoft-Windows-Application Server-System Services IIS Manager" />
+        <string id="Microsoft-Windows-Application Server IIS Manager.event.4000.message" value="%1" />
+        <string id="Microsoft-Windows-Application Server IIS Manager.event.25002.message" value="Throwing an exception. Exception %1." />
+        <string id="Microsoft-Windows-Application Server IIS Manager.event.25001.message" value="Unhandled exception was encountered : %1." />
+        <string id="Microsoft-Windows-Application Server Hosting.message" value="Microsoft-Windows-Application Server-System Services Hosting" />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50507.message" value="Service management endpoint opened successfully and is listening on %1." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50506.message" value="The service %1 in virtualApplication %2 under site %3 failed to activate through the service management endpoint." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50505.message" value="The service %1 in virtualApplication %2 under site %3 was activated through the service management endpoint." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50504.message" value="No services were requested to be auto started in virtual application '%1' under site '%2'. This could be because one of the following conditions. 1) The virtual application is configured to auto start all services in the application but no services are deployed in the application. 2) The virtual application is configured to auto start specific services but no services are configured in the application configuration file. Please verify the related configurations in the sections 'system.applicationHost/sites/&lt;applicationName&gt;' in applicationhost.config and 'microsoft.applicationServer/hosting/serviceAutoStart' in web.config. If you do not want to auto start any services, consider turning off the auto start for this application for better start up latency." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50503.message" value="'Auto start provider' has finished auto starting service(s) in virtual application '%1' under site '%2'.  %3 services successfully auto started and %4 failed." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50502.message" value="Unexpected error occurred in the 'Auto start provider' in the virtual application '%1' under site '%2'." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50501.message" value="The service %1 in virtualApplication %2 under site %3 has auto started." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.50500.message" value="The service %1 in virtualApplication %2 under site %3 has failed to auto start. " />
+        <string id="Microsoft-Windows-Application Server Hosting.event.25002.message" value="Throwing an exception. Exception %1." />
+        <string id="Microsoft-Windows-Application Server Hosting.event.25001.message" value="Unhandled exception was encountered : %1." />
+        <string id="Microsoft-Windows-Application Server Event Collector.message" value="Microsoft-Windows-Application Server-System Services Event Collector" />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.7.message" value=". This event has occurred %7 times." />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.6.message" value=". This event has occurred %6 times." />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.5.message" value=". This event has occurred %5 times." />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.4.message" value=". This event has occurred %4 times." />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.3.message" value=". This event has occurred %3 times." />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.2.message" value=". This event has occurred %2 times." />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.1.message" value=". This event has occurred %1 times." />
+        <string id="Microsoft-Windows-Application Server Event Collector.map.OccurrenceMap.0.message" value="." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.506.message" value="Removed event source provider Id: %1." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.505.message" value="Added event source Provider Id: %1." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.504.message" value="Database initialization Failed." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.502.message" value="Write complete, batches complete: %1, batches failed: %2." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.501.message" value="Ignored Event Id: %1, routing key: %2." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.500.message" value="Filtered Event Id:%1, routing key: %2." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.25002.message" value="Throwing an exception. Exception %1." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.202.message" value="One or more column(s) were not found in the database StagingTable. Columns:" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.201.message" value="An exception was caught when applying configuration. The event collector currently runs as previously configured. Exception %1." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.200.message" value="There was an error reading service configuration. The service is running as previously configured. Name: '%1'. Exception : %2." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.161.message" value="Unable to write events to database '%1' (ADO.NET batch) affecting the following application(s) (%2). Retried %3 times. Number of events lost = %4. Please verify that the database is available and accessable, other errors in this log may indicate the problem%5" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.159.message" value="Service was configured with specific scopes but none of them were valid. The service is running but is not currently collecting events." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.158.message" value="Event Collector ETW Statistics since last restart. %1 buffers processed with %2 records lost. Total events processed since last service restart %3." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.157.message" value="Scope path is invalid and will not be considered. Scope path '%2'. Service name: '%1'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.156.message" value="Could not activate bulk copy plugin '%1'. Exception: %2. ADO.NET Batching insert will be used to insert events.%3" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.155.message" value="Unable to write events to database '%1' affecting the following application(s) (%2). Retried %3 times. Number of events lost = %4. Please verify that the database is available and accessable, other errors in this log may indicate the problem%5" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.154.message" value="The provider Id %2 is used by the following applications (%1). Multiple applications using the same provider can cause performance degredation for all applications that share this Id. Please consider providing a unique Id for this application%3" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.153.message" value="Referenced connection string is missing. The configuration for application with VirtualPath: '%1' in Site: '%2', references a missing connection string named: '%3'. The provider with ID %4 will not be loaded for the application%5" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.152.message" value="Referenced connection string is missing. The configuration for application with VirtualPath: '%1' in Site: '%2', references a missing connection string named: '%3'. The default provider will not be loaded for the application%4" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.150.message" value="Maximum number of available database buffers exceeded affecting the following application(s) (%1). Dropping event with event ID '%2'%3" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.149.message" value="Unable to decode the field '%1' the target column '%2' does not appear to exist in the staging table." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.148.message" value="Field '%1' Contains a value which is to large for the database, extra data is being ignored%2" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.147.message" value="Unable to decode field '%1' value for event Id %2. Exception received during decode: %3%5" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.146.message" value="Unable to unregister the trace provider: %1 for event trace session: '%2'. Error code: %3" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.142.message" value="Unable to connect to the database used by the following application(s) (%1). Dropping event with event ID %2%3" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.141.message" value="Unhandled exception was encountered : %1." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.140.message" value="Unable to decode transfer event, missing related activity id." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.139.message" value="Unable to decode transfer event the ETW extended data is missing. Unable to retrieve the related activity id." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.138.message" value="Unable to decode event with Id: %1, unknown event type from provider: '%2'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.137.message" value="Unable to decode the field '%1' for event Id %2 received ETW error code: %3%4" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.135.message" value="Event Trace process failed for event trace session '%1' listener stopped." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.134.message" value="Unable to open event trace session '%1' " />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.131.message" value="Unable to load the host name for the local machine." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.130.message" value="Unable to load configuration for the application with the VirtualPath: %1 in Site %2. Please see the details to correct the problem. Detailed information: %3%5" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.129.message" value="Event trace listener stopped for event trace session '%1'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.128.message" value="Event trace listener started for event trace session '%1'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.127.message" value="Event trace listener opened for event trace session '%1'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.126.message" value="Unable to open database connection for the following application(s) (%1). Received exception. Message: %2%4" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.125.message" value="Service '%1' has stopped." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.124.message" value="Service '%1' has started." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.122.message" value="Unable to add event source '%1' to event trace session '%2'. To many collectors are configured to reference this provider." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.121.message" value="Unable to add event source '%1' to event trace session '%2'.  Error code: %3" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.120.message" value="Exception encountered while processing event record, discarding event. Exception message:%1." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.115.message" value="The application cannot access the event tracing session functionality, please verify installation of the product and correct version of windows." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.113.message" value="The event trace session '%1' already exists, reacquiring ownership of orphaned session." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.112.message" value="The application does not have sufficient permissions to access the required Event trace methods to manage the collector. Method: '%1', Please run the application with sufficient permissions to access this functionality." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.111.message" value="Debug trace Exit Class: '%1' Method: '%2'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.110.message" value="Debug trace Entry Class: '%1' Method: '%2'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.109.message" value="Debug trace for Class '%1' Method: '%2' Message: '%3'." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.108.message" value="Unable to write events for the following application(s) (%1) to the database, received DbException : %2. Please investigate and correct the issue%4 " />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.107.message" value="The configuration for the application with VirtualPath: '%1' in Site: '%2', references a connection string named: '%3'. This connection string has an empty 'providerName'. This connection string will not be used%4" />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.105.message" value="Event trace session '%1' stopped." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.104.message" value="Event trace session '%1' started." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.103.message" value="Event trace session '%1' opened." />
+        <string id="Microsoft-Windows-Application Server Event Collector.event.101.message" value="Unable to configure and start the event trace session '%1'. Detailed information:%2." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.message" value="Microsoft-Windows-Application Server-System Services Workflow Management Service" />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.25001.message" value="An unhandled exception has occurted: %1." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.25002.message" value="Throwing an exception. Exception %1." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.25003.message" value="A non fatal exception has occurred. Exception %1." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50900.message" value="Workflow Management Service %1 Opened" />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50902.message" value="Configuration error. Please see the details to correct the problem. Detailed information: %1 %2" />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50903.message" value="Debug trace for Class '%1' Method: '%2' Message: '%3'." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50904.message" value="Debug trace Entry Class: '%1' Method: '%2'." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50905.message" value="Debug trace Exit Class: '%1' Method: '%2'." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50907.message" value="Stopped querying store '%1' (%2) for control commands." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50908.message" value="Failed to instantiate control provider for instance store '%1' (%2). Exception: %3." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50909.message" value="Successfully %1 instance %2." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50910.message" value="Failed to %1 instance %2 via control endpoint %3. Exception: %4." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50911.message" value="Failed to remove command from instance store '%1' (%2). Exception: %3." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50912.message" value="No store control provider was specified for instance store provider '%1'. Attribute storeControlProvider is empty or missing. Workflow Management Service will not process any commands for instances stored in instance store '%2' (%3)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50913.message" value="No store provider defined for instance store provider '%1'. Attribute storeProvider is empty or missing. Workflow Management Service will not activate instances stored in instance store '%2' (%3)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50914.message" value="Instantiated instance Store '%1' (%2)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50915.message" value="Failed to instantiate instance store '%1' (%2)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50916.message" value="Instantiated control provider for instance store '%1' (%2)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50917.message" value="Stopped querying instance store '%1' ('%2') for commands." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50918.message" value="Delaying control queries for store '%1' (%2) for up to '%3' seconds." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50919.message" value="Could not find net.pipe base address for site name '%1' application name '%2'. Check that the site and application have net.pipe enabled, and that the application still exists." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50920.message" value="Successfully activated service '%1'" />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50923.message" value="Service management service failed to activate service '%1'. Exception: %2." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50927.message" value="Finished parsing configuration - Started monitoring of %1 instance store(s)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50928.message" value="Failed to invoke service management endpoint at '%1' to activate service '%2'. Exception: '%3'" />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50929.message" value="Provider definition '%1' for instance store '%2' (%3) not found. Ignoring store definition." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50930.message" value="Recycling owner of instance store '%1' (%2) because store returned an error. Exception: %3 (%4)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50931.message" value="Delay polling for persistence events for instance store '%1' (%2) because store failed to process command. Exception: %3 (%4)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50932.message" value="Recycling owner of instance store '%1' (%2) because store cancelled operation. Exception: %3 (%4)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50933.message" value="Recycling owner of instance store '%1' (%2)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50934.message" value="WMS was not able to activate any of the hosts - backing off. Store name '%1' ('%2)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50935.message" value="The instance store returned %3 activatable workflow instances for store name '%1' (%2)." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50936.message" value="Workflow Management Service configuration not found for Workflow Management Service '%1'." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50937.message" value="Workflow Management Service configuration not found." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50938.message" value="There is an invalid base prefix filter %1 for application %2 at site %3 that will be ignored. Exception Message %4." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50939.message" value="Failed to obtain command from instance store '%1' (%2). Exception: %3." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50940.message" value="Workflow Management Service '%1' started." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50941.message" value="Workflow Management Service '%1' stopped." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50942.message" value="Error in configuration section for Workflow Management Service '%2': Could not find location '%1'." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50943.message" value="Error in configuration section for Workflow Management Service '%3': Instance store '%1' is not defined at '%2'." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50944.message" value="Workflow Management Service '%1' did not find any instance stores in web.config files." />
+        <string id="Microsoft-Windows-Application Server-Workflow Management Service.event.50945.message" value="Instance store '%2' '%3' specifies an unknown instance store provider '%1'." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50946.message" value="Unknown argument supplied '%1' (%2)." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50947.message" value="Supplied argument '%1' has no value (%2)." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50948.message" value="After checking MSDTC settings %1 control commands will be used. MSDTC reported inbound connections %2 and outbound connections %3." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50949.message" value="Failure checking MSDTC settings. HRESULT value retuned %1." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50950.message" value="Exception checking MSDTC settings. Exception message: %1" />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50951.message" value="Exception checking MSDTC settings in the registry. Exception message: %1" />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50952.message" value="Successfully parsed configuration." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.event.50953.message" value="Stop throttling command execution for instance store '%1' (%2)" />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.7.message" value=". This event has occurred %7 times." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.6.message" value=". This event has occurred %6 times." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.5.message" value=". This event has occurred %5 times." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.4.message" value=". This event has occurred %4 times." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.3.message" value=". This event has occurred %3 times." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.2.message" value=". This event has occurred %2 times." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.1.message" value=". This event has occurred %1 times." />
+        <string id="Microsoft-Windows-Application Server Workflow Management Service.map.OccurrenceMap.0.message" value="." />
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

@@ -1,0 +1,2348 @@
+﻿<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<instrumentationManifest
+    xmlns="http://schemas.microsoft.com/win/2004/08/events"
+    xmlns:trace="http://schemas.microsoft.com/win/2004/08/events/trace"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.microsoft.com/win/2004/08/events eventman.xsd"
+    >
+  <instrumentation>
+    <events/>
+    <counters
+        xmlns="http://schemas.microsoft.com/win/2005/12/counters"
+        xmlns:auto-ns1="http://schemas.microsoft.com/win/2004/08/events"
+        >
+      <provider
+          applicationIdentity="Microsoft.ApplicationServer.Caching.EventDefinitions.dll"
+          providerGuid="{6B09CE88-F32A-40ed-9AF8-26BB292DFB3F}"
+          providerName="Microsoft.ApplicationServer.Caching.EventDefinitions"
+          providerType="userMode"
+          resourceBase="1000"
+          >
+        <counterSet
+            description="$(string.Cache.Host.description)"
+            guid="{64c8448e-6a84-429a-95e5-6abeccb67f53}"
+            instances="single"
+            name="$(string.Cache.Host.name)"
+            uri="Cache.Host"
+            >
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalDataSize.description)"
+              detailLevel="standard"
+              id="0"
+              name="$(string.Cache.Host.TotalDataSize.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalDataSize"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalObjectCount .description)"
+              detailLevel="standard"
+              id="1"
+              name="$(string.Cache.Host.TotalObjectCount .name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalObjectCount "
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalPrimaryDataSize.description)"
+              detailLevel="standard"
+              id="2"
+              name="$(string.Cache.Host.TotalPrimaryDataSize.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalPrimaryDataSize"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalCacheMisses.description)"
+              detailLevel="standard"
+              id="3"
+              name="$(string.Cache.Host.TotalCacheMisses.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalCacheMisses"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalCacheMissesPersec.description)"
+              detailLevel="standard"
+              id="4"
+              name="$(string.Cache.Host.TotalCacheMissesPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalCacheMissesPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalGetRequests.description)"
+              detailLevel="standard"
+              id="5"
+              name="$(string.Cache.Host.TotalGetRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalGetRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalGetRequestsPersec.description)"
+              detailLevel="standard"
+              id="6"
+              name="$(string.Cache.Host.TotalGetRequestsPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalGetRequestsPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalGetMisses.description)"
+              detailLevel="standard"
+              id="7"
+              name="$(string.Cache.Host.TotalGetMisses.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalGetMisses"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalGetMissesPersec.description)"
+              detailLevel="standard"
+              id="8"
+              name="$(string.Cache.Host.TotalGetMissesPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalGetMissesPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseCacheMissPercentage.description)"
+              detailLevel="standard"
+              id="9"
+              name="$(string.Cache.Host.BaseCacheMissPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_base"
+              uri="Cache.Host.BaseCacheMissPercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="9"
+              defaultScale="0"
+              description="$(string.Cache.Host.CacheMissPercentage.description)"
+              detailLevel="standard"
+              id="10"
+              name="$(string.Cache.Host.CacheMissPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_fraction"
+              uri="Cache.Host.CacheMissPercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalReadRequests.description)"
+              detailLevel="standard"
+              id="11"
+              name="$(string.Cache.Host.TotalReadRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalReadRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalReadRequestsPersec.description)"
+              detailLevel="standard"
+              id="12"
+              name="$(string.Cache.Host.TotalReadRequestsPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalReadRequestsPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalObjectsReturned.description)"
+              detailLevel="standard"
+              id="13"
+              name="$(string.Cache.Host.TotalObjectsReturned.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalObjectsReturned"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalObjectsReturnedPersec.description)"
+              detailLevel="standard"
+              id="14"
+              name="$(string.Cache.Host.TotalObjectsReturnedPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalObjectsReturnedPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalWriteOperations.description)"
+              detailLevel="standard"
+              id="15"
+              name="$(string.Cache.Host.TotalWriteOperations.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalWriteOperations"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalWriteOperationsPersec.description)"
+              detailLevel="standard"
+              id="16"
+              name="$(string.Cache.Host.TotalWriteOperationsPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalWriteOperationsPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalClientRequests.description)"
+              detailLevel="standard"
+              id="17"
+              name="$(string.Cache.Host.TotalClientRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalClientRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalClientRequestsPersec.description)"
+              detailLevel="standard"
+              id="18"
+              name="$(string.Cache.Host.TotalClientRequestsPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalClientRequestsPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalRequestsServed.description)"
+              detailLevel="standard"
+              id="19"
+              name="$(string.Cache.Host.TotalRequestsServed.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalRequestsServed"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalRequestsServedPersec.description)"
+              detailLevel="standard"
+              id="20"
+              name="$(string.Cache.Host.TotalRequestsServedPersec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalRequestsServedPersec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalExpiredObjects.description)"
+              detailLevel="standard"
+              id="21"
+              name="$(string.Cache.Host.TotalExpiredObjects.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalExpiredObjects"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalEvictedObjects.description)"
+              detailLevel="standard"
+              id="22"
+              name="$(string.Cache.Host.TotalEvictedObjects.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalEvictedObjects"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalMemoryEvicted.description)"
+              detailLevel="standard"
+              id="23"
+              name="$(string.Cache.Host.TotalMemoryEvicted.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalMemoryEvicted"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalEvictionRuns.description)"
+              detailLevel="standard"
+              id="24"
+              name="$(string.Cache.Host.TotalEvictionRuns.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalEvictionRuns"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalFailureExceptions.description)"
+              detailLevel="standard"
+              id="25"
+              name="$(string.Cache.Host.TotalFailureExceptions.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalFailureExceptions"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalFailureExceptionssec.description)"
+              detailLevel="standard"
+              id="26"
+              name="$(string.Cache.Host.TotalFailureExceptionssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalFailureExceptionssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalRetryExceptionsec.description)"
+              detailLevel="standard"
+              id="27"
+              name="$(string.Cache.Host.TotalRetryExceptionsec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalRetryExceptionsec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalRetryException.description)"
+              detailLevel="standard"
+              id="28"
+              name="$(string.Cache.Host.TotalRetryException.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalRetryException"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalNotificationPollRequests.description)"
+              detailLevel="standard"
+              id="29"
+              name="$(string.Cache.Host.TotalNotificationPollRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalNotificationPollRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalNotificationPollRequestssec.description)"
+              detailLevel="standard"
+              id="30"
+              name="$(string.Cache.Host.TotalNotificationPollRequestssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalNotificationPollRequestssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalNotificationDelivered.description)"
+              detailLevel="standard"
+              id="31"
+              name="$(string.Cache.Host.TotalNotificationDelivered.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalNotificationDelivered"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalNotificationDeliveredsec.description)"
+              detailLevel="standard"
+              id="32"
+              name="$(string.Cache.Host.TotalNotificationDeliveredsec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalNotificationDeliveredsec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalGetAndLockRequests.description)"
+              detailLevel="standard"
+              id="33"
+              name="$(string.Cache.Host.TotalGetAndLockRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalGetAndLockRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalGetAndLockRequestssec.description)"
+              detailLevel="standard"
+              id="34"
+              name="$(string.Cache.Host.TotalGetAndLockRequestssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalGetAndLockRequestssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalSuccessfulGetAndLockRequests.description)"
+              detailLevel="standard"
+              id="35"
+              name="$(string.Cache.Host.TotalSuccessfulGetAndLockRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalSuccessfulGetAndLockRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalSuccessfulGetAndLockRequestssec.description)"
+              detailLevel="standard"
+              id="36"
+              name="$(string.Cache.Host.TotalSuccessfulGetAndLockRequestssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Host.TotalSuccessfulGetAndLockRequestssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseAverageQuorumResponseTimeoperationMicrosecond.description)"
+              detailLevel="standard"
+              id="37"
+              name="$(string.Cache.Host.BaseAverageQuorumResponseTimeoperationMicrosecond.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_base"
+              uri="Cache.Host.BaseAverageQuorumResponseTimeoperationMicrosecond"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="37"
+              defaultScale="0"
+              description="$(string.Cache.Host.AverageQuorumResponseTimeoperationMicrosecond.description)"
+              detailLevel="standard"
+              id="38"
+              name="$(string.Cache.Host.AverageQuorumResponseTimeoperationMicrosecond.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_bulk"
+              uri="Cache.Host.AverageQuorumResponseTimeoperationMicrosecond"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseAverageSecondaryResponseTimeoperation.description)"
+              detailLevel="standard"
+              id="39"
+              name="$(string.Cache.Host.BaseAverageSecondaryResponseTimeoperation.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_base"
+              uri="Cache.Host.BaseAverageSecondaryResponseTimeoperation"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="39"
+              defaultScale="0"
+              description="$(string.Cache.Host.AverageSecondaryResponseTimeoperationMicrosecond.description)"
+              detailLevel="standard"
+              id="40"
+              name="$(string.Cache.Host.AverageSecondaryResponseTimeoperationMicrosecond.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_bulk"
+              uri="Cache.Host.AverageSecondaryResponseTimeoperationMicrosecond"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalSecondaryDataSize.description)"
+              detailLevel="standard"
+              id="41"
+              name="$(string.Cache.Host.TotalSecondaryDataSize.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalSecondaryDataSize"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalAvailableMemory.description)"
+              detailLevel="standard"
+              id="42"
+              name="$(string.Cache.Host.TotalAvailableMemory.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalAvailableMemory"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseAvailableMemoryPercentage.description)"
+              detailLevel="standard"
+              id="43"
+              name="$(string.Cache.Host.BaseAvailableMemoryPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_base"
+              uri="Cache.Host.BaseAvailableMemoryPercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="43"
+              defaultScale="0"
+              description="$(string.Cache.Host.AvailableMemoryPercentage.description)"
+              detailLevel="standard"
+              id="44"
+              name="$(string.Cache.Host.AvailableMemoryPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_fraction"
+              uri="Cache.Host.AvailableMemoryPercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalAvailableCacheItemCount.description)"
+              detailLevel="standard"
+              id="45"
+              name="$(string.Cache.Host.TotalAvailableCacheItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalAvailableCacheItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalAllocatedCacheItemCount.description)"
+              detailLevel="standard"
+              id="46"
+              name="$(string.Cache.Host.TotalAllocatedCacheItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalAllocatedCacheItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseAvailableCacheItemPercentage.description)"
+              detailLevel="standard"
+              id="47"
+              name="$(string.Cache.Host.BaseAvailableCacheItemPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_base"
+              uri="Cache.Host.BaseAvailableCacheItemPercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="47"
+              defaultScale="0"
+              description="$(string.Cache.Host.AvailableCacheItemPercentage.description)"
+              detailLevel="standard"
+              id="48"
+              name="$(string.Cache.Host.AvailableCacheItemPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_fraction"
+              uri="Cache.Host.AvailableCacheItemPercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalAvailableDirectoryCount.description)"
+              detailLevel="standard"
+              id="49"
+              name="$(string.Cache.Host.TotalAvailableDirectoryCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalAvailableDirectoryCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalAllocatedDirectoryCount.description)"
+              detailLevel="standard"
+              id="50"
+              name="$(string.Cache.Host.TotalAllocatedDirectoryCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalAllocatedDirectoryCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseAvailableDirectoryPercentage.description)"
+              detailLevel="standard"
+              id="51"
+              name="$(string.Cache.Host.BaseAvailableDirectoryPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_base"
+              uri="Cache.Host.BaseAvailableDirectoryPercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="51"
+              defaultScale="0"
+              description="$(string.Cache.Host.AvailableDirectoryPercentage.description)"
+              detailLevel="standard"
+              id="52"
+              name="$(string.Cache.Host.AvailableDirectoryPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_fraction"
+              uri="Cache.Host.AvailableDirectoryPercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.WBFlushedItemCount.description)"
+              detailLevel="standard"
+              id="53"
+              name="$(string.Cache.Host.WBFlushedItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.WBFlushedItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.WBDroppedItemCount.description)"
+              detailLevel="standard"
+              id="54"
+              name="$(string.Cache.Host.WBDroppedItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.WBDroppedItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.WBQueueCount.description)"
+              detailLevel="standard"
+              id="55"
+              name="$(string.Cache.Host.WBQueueCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.WBQueueCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalAvailableWBItemCount.description)"
+              detailLevel="standard"
+              id="56"
+              name="$(string.Cache.Host.TotalAvailableWBItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalAvailableWBItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalAllocatedWBItemCount.description)"
+              detailLevel="standard"
+              id="57"
+              name="$(string.Cache.Host.TotalAllocatedWBItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalAllocatedWBItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseAvailableWBItemPercentage.description)"
+              detailLevel="standard"
+              id="58"
+              name="$(string.Cache.Host.BaseAvailableWBItemPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_base"
+              uri="Cache.Host.BaseAvailableWBItemPercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="58"
+              defaultScale="0"
+              description="$(string.Cache.Host.AvailableWBItemPercentage.description)"
+              detailLevel="standard"
+              id="59"
+              name="$(string.Cache.Host.AvailableWBItemPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_fraction"
+              uri="Cache.Host.AvailableWBItemPercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.RTPendingCount.description)"
+              detailLevel="standard"
+              id="60"
+              name="$(string.Cache.Host.RTPendingCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.RTPendingCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.RTSuccessCount.description)"
+              detailLevel="standard"
+              id="61"
+              name="$(string.Cache.Host.RTSuccessCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.RTSuccessCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.RTMissedCount.description)"
+              detailLevel="standard"
+              id="62"
+              name="$(string.Cache.Host.RTMissedCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.RTMissedCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.RTErrorCount.description)"
+              detailLevel="standard"
+              id="63"
+              name="$(string.Cache.Host.RTErrorCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.RTErrorCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseRouteFailurePercentage.description)"
+              detailLevel="standard"
+              id="64"
+              name="$(string.Cache.Host.BaseRouteFailurePercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_base"
+              uri="Cache.Host.BaseRouteFailurePercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="64"
+              defaultScale="0"
+              description="$(string.Cache.Host.RouteFailurePercentage.description)"
+              detailLevel="standard"
+              id="65"
+              name="$(string.Cache.Host.RouteFailurePercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_bulk"
+              uri="Cache.Host.RouteFailurePercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseGatewayProcessTime.description)"
+              detailLevel="standard"
+              id="66"
+              name="$(string.Cache.Host.BaseGatewayProcessTime.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_base"
+              uri="Cache.Host.BaseGatewayProcessTime"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="66"
+              defaultScale="0"
+              description="$(string.Cache.Host.GatewayProcessTime.description)"
+              detailLevel="standard"
+              id="67"
+              name="$(string.Cache.Host.GatewayProcessTime.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_timer"
+              uri="Cache.Host.GatewayProcessTime"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.BaseRequestProcessingErrorPercentage.description)"
+              detailLevel="standard"
+              id="68"
+              name="$(string.Cache.Host.BaseRequestProcessingErrorPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_base"
+              uri="Cache.Host.BaseRequestProcessingErrorPercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="68"
+              defaultScale="0"
+              description="$(string.Cache.Host.RequestProcessingErrorPercentage.description)"
+              detailLevel="standard"
+              id="69"
+              name="$(string.Cache.Host.RequestProcessingErrorPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_average_bulk"
+              uri="Cache.Host.RequestProcessingErrorPercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TimeSinceGracefulShutdownStarted.description)"
+              detailLevel="standard"
+              id="70"
+              name="$(string.Cache.Host.TimeSinceGracefulShutdownStarted.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TimeSinceGracefulShutdownStarted"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.TotalConnectionsCount.description)"
+              detailLevel="standard"
+              id="71"
+              name="$(string.Cache.Host.TotalConnectionsCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.TotalConnectionsCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Host.ThrottledConnectionsCount.description)"
+              detailLevel="standard"
+              id="72"
+              name="$(string.Cache.Host.ThrottledConnectionsCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Host.ThrottledConnectionsCount"
+              >
+            <counterAttributes/>
+          </counter>
+        </counterSet>
+        <counterSet
+            description="$(string.Cache.Cache.description)"
+            guid="{86bc60eb-5e2f-4002-97a1-dc0f0209ee03}"
+            instances="multiple"
+            name="$(string.Cache.Cache.name)"
+            uri="Cache.Cache"
+            >
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalDataSizeMbytes.description)"
+              detailLevel="standard"
+              id="0"
+              name="$(string.Cache.Cache.TotalDataSizeMbytes.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalDataSizeMbytes"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalObjectCount .description)"
+              detailLevel="standard"
+              id="1"
+              name="$(string.Cache.Cache.TotalObjectCount .name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalObjectCount "
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalPrimaryDataSize.description)"
+              detailLevel="standard"
+              id="2"
+              name="$(string.Cache.Cache.TotalPrimaryDataSize.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalPrimaryDataSize"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalSecondaryDataSize.description)"
+              detailLevel="standard"
+              id="3"
+              name="$(string.Cache.Cache.TotalSecondaryDataSize.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalSecondaryDataSize"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalCacheMisses.description)"
+              detailLevel="standard"
+              id="4"
+              name="$(string.Cache.Cache.TotalCacheMisses.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalCacheMisses"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalCacheMissessec.description)"
+              detailLevel="standard"
+              id="5"
+              name="$(string.Cache.Cache.TotalCacheMissessec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Cache.TotalCacheMissessec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.BaseCacheMissPercentage.description)"
+              detailLevel="standard"
+              id="6"
+              name="$(string.Cache.Cache.BaseCacheMissPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_base"
+              uri="Cache.Cache.BaseCacheMissPercentage"
+              >
+            <counterAttributes>
+              <counterAttribute name="noDisplay"/>
+            </counterAttributes>
+          </counter>
+          <counter
+              baseID="6"
+              defaultScale="0"
+              description="$(string.Cache.Cache.CacheMissPercentage.description)"
+              detailLevel="standard"
+              id="7"
+              name="$(string.Cache.Cache.CacheMissPercentage.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_large_raw_fraction"
+              uri="Cache.Cache.CacheMissPercentage"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalReadRequests.description)"
+              detailLevel="standard"
+              id="8"
+              name="$(string.Cache.Cache.TotalReadRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalReadRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalReadRequestssec.description)"
+              detailLevel="standard"
+              id="9"
+              name="$(string.Cache.Cache.TotalReadRequestssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Cache.TotalReadRequestssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalObjectsReturned.description)"
+              detailLevel="standard"
+              id="10"
+              name="$(string.Cache.Cache.TotalObjectsReturned.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalObjectsReturned"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalObjectsReturnedsec.description)"
+              detailLevel="standard"
+              id="11"
+              name="$(string.Cache.Cache.TotalObjectsReturnedsec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Cache.TotalObjectsReturnedsec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalWriteOperations.description)"
+              detailLevel="standard"
+              id="12"
+              name="$(string.Cache.Cache.TotalWriteOperations.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalWriteOperations"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalWriteOperationssec.description)"
+              detailLevel="standard"
+              id="13"
+              name="$(string.Cache.Cache.TotalWriteOperationssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Cache.TotalWriteOperationssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalClientRequests.description)"
+              detailLevel="standard"
+              id="14"
+              name="$(string.Cache.Cache.TotalClientRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalClientRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalClientRequestssec.description)"
+              detailLevel="standard"
+              id="15"
+              name="$(string.Cache.Cache.TotalClientRequestssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Cache.TotalClientRequestssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.CacheTotalGetAndLockRequests.description)"
+              detailLevel="standard"
+              id="16"
+              name="$(string.Cache.CacheTotalGetAndLockRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.CacheTotalGetAndLockRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalGetAndLockRequestssec.description)"
+              detailLevel="standard"
+              id="17"
+              name="$(string.Cache.Cache.TotalGetAndLockRequestssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Cache.TotalGetAndLockRequestssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalSuccessfulGetAndLockRequests.description)"
+              detailLevel="standard"
+              id="18"
+              name="$(string.Cache.Cache.TotalSuccessfulGetAndLockRequests.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalSuccessfulGetAndLockRequests"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalSuccessfulGetAndLockRequestssec.description)"
+              detailLevel="standard"
+              id="19"
+              name="$(string.Cache.Cache.TotalSuccessfulGetAndLockRequestssec.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_bulk_count"
+              uri="Cache.Cache.TotalSuccessfulGetAndLockRequestssec"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.WBFlushedItemCount.description)"
+              detailLevel="standard"
+              id="20"
+              name="$(string.Cache.Cache.WBFlushedItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.WBFlushedItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.WBDroppedItemCount.description)"
+              detailLevel="standard"
+              id="21"
+              name="$(string.Cache.Cache.WBDroppedItemCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.WBDroppedItemCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.WBQueueCount.description)"
+              detailLevel="standard"
+              id="22"
+              name="$(string.Cache.Cache.WBQueueCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.WBQueueCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.RTPendingCount.description)"
+              detailLevel="standard"
+              id="23"
+              name="$(string.Cache.Cache.RTPendingCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.RTPendingCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.RTSuccessCount.description)"
+              detailLevel="standard"
+              id="24"
+              name="$(string.Cache.Cache.RTSuccessCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.RTSuccessCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.RTMissedCount.description)"
+              detailLevel="standard"
+              id="25"
+              name="$(string.Cache.Cache.RTMissedCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.RTMissedCount"
+              >
+            <counterAttributes/>
+          </counter>
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.RTErrorCount.description)"
+              detailLevel="standard"
+              id="26"
+              name="$(string.Cache.Cache.RTErrorCount.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.RTErrorCount"
+              >
+          <counterAttributes/>
+          </counter>
+	  <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.Cache.TotalEvictionRuns.description)"
+              detailLevel="standard"
+              id="27"
+              name="$(string.Cache.Cache.TotalEvictionRuns.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.Cache.TotalEvictionRuns"
+              >
+            <counterAttributes/>
+          </counter>
+        </counterSet>
+        <counterSet
+            description="$(string.Cache.SecondaryHost.description)"
+            guid="{d2c8bc17-4226-4886-a39c-6eb9459b52b8}"
+            instances="multiple"
+            name="$(string.Cache.SecondaryHost.name)"
+            uri="Cache.SecondaryHost"
+            >
+          <counter
+              baseID="0"
+              defaultScale="0"
+              description="$(string.Cache.SecondaryHost.TotalReplicationRetries.description)"
+              detailLevel="standard"
+              id="0"
+              name="$(string.Cache.SecondaryHost.TotalReplicationRetries.name)"
+              perfFreqID="0"
+              perfTimeID="0"
+              type="perf_counter_large_rawcount"
+              uri="Cache.SecondaryHost.TotalReplicationRetries"
+              >
+            <counterAttributes/>
+          </counter>
+        </counterSet>
+      </provider>
+    </counters>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string
+            id="Cache.Host.name"
+            value="Windows Azure Caching:Host"
+            />
+        <string
+            id="Cache.Host.description"
+            value="A category for single-instance performance counters pertaining to a single cache host."
+            />
+        <string
+            id="Cache.Host.TotalDataSize.name"
+            value="Total Data Size Bytes"
+            />
+        <string
+            id="Cache.Host.TotalDataSize.description"
+            value="Represents the total size of cached data in the cache, not including cache overhead. Indicates the current data memory usage of the server."
+            />
+        <string
+            id="Cache.Host.TotalObjectCount .name"
+            value="Total Object Count"
+            />
+        <string
+            id="Cache.Host.TotalObjectCount .description"
+            value="Represents the total number of object stored in host."
+            />
+        <string
+            id="Cache.Host.TotalPrimaryDataSize.name"
+            value="Total Primary Data Size Bytes"
+            />
+        <string
+            id="Cache.Host.TotalPrimaryDataSize.description"
+            value="Represents the total size of primary cached data in the cache, not including cache overhead. Indicates the current primary memory data usage of the server."
+            />
+        <string
+            id="Cache.Host.TotalCacheMisses.name"
+            value="Total Cache Misses"
+            />
+        <string
+            id="Cache.Host.TotalCacheMisses.description"
+            value="The total number of unsuccessful cache requests since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalCacheMissesPersec.name"
+            value="Total Cache Misses /sec"
+            />
+        <string
+            id="Cache.Host.TotalCacheMissesPersec.description"
+            value="The total number of unsuccessful cache requests per second since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalGetRequests.name"
+            value="Total Get Requests"
+            />
+        <string
+            id="Cache.Host.TotalGetRequests.description"
+            value="The number of Get requests received from all clients since service has started."
+            />
+        <string
+            id="Cache.Host.TotalGetRequestsPersec.name"
+            value="Total Get Requests /sec"
+            />
+        <string
+            id="Cache.Host.TotalGetRequestsPersec.description"
+            value="The number of Get requests per second received from all clients since service has started."
+            />
+        <string
+            id="Cache.Host.TotalGetMisses.name"
+            value="Total Get Misses"
+            />
+        <string
+            id="Cache.Host.TotalGetMisses.description"
+            value="The number of Get misses from all clients since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalGetMissesPersec.name"
+            value="Total Get Misses /sec"
+            />
+        <string
+            id="Cache.Host.TotalGetMissesPersec.description"
+            value="The number of Get misses per second from all clients since start of cache service."
+            />
+        <string
+            id="Cache.Host.BaseCacheMissPercentage.name"
+            value="Base Cache Miss Percentage"
+            />
+        <string
+            id="Cache.Host.BaseCacheMissPercentage.description"
+            value="Base counter for Cache Miss Percentage"
+            />
+        <string
+            id="Cache.Host.CacheMissPercentage.name"
+            value="Cache Miss Percentage"
+            />
+        <string
+            id="Cache.Host.CacheMissPercentage.description"
+            value="The percentage of unsuccessful cache requests to the total number of request since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalReadRequests.name"
+            value="Total Read Requests"
+            />
+        <string
+            id="Cache.Host.TotalReadRequests.description"
+            value="The number of read requests (Bulk Get, Get, GetAndLock and Enumeration) received from all clients since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalReadRequestsPersec.name"
+            value="Total Read Requests /sec"
+            />
+        <string
+            id="Cache.Host.TotalReadRequestsPersec.description"
+            value="The number of read requests (Bulk Get, Get, GetAndLock and Enumeration) received per second from all clients since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalObjectsReturned.name"
+            value="Total Objects Returned"
+            />
+        <string
+            id="Cache.Host.TotalObjectsReturned.description"
+            value="The number of objects returned by client read requests. This counter along with total read requests counter indicates the success of read operations."
+            />
+        <string
+            id="Cache.Host.TotalObjectsReturnedPersec.name"
+            value="Total Objects Returned /sec"
+            />
+        <string
+            id="Cache.Host.TotalObjectsReturnedPersec.description"
+            value="The number of objects returned by client read requests per second."
+            />
+        <string
+            id="Cache.Host.TotalWriteOperations.name"
+            value="Total Write Operations"
+            />
+        <string
+            id="Cache.Host.TotalWriteOperations.description"
+            value="The number of write requests since start of cache service. Put, Add and Lock methods are included with write operations."
+            />
+        <string
+            id="Cache.Host.TotalWriteOperationsPersec.name"
+            value="Total Write Operations /sec"
+            />
+        <string
+            id="Cache.Host.TotalWriteOperationsPersec.description"
+            value="The number of write requests per second since start of cache service. Put, Add and Lock methods are included with write operations."
+            />
+        <string
+            id="Cache.Host.TotalClientRequests.name"
+            value="Total Client Requests"
+            />
+        <string
+            id="Cache.Host.TotalClientRequests.description"
+            value="The total number of client requests, including all API calls."
+            />
+        <string
+            id="Cache.Host.TotalClientRequestsPersec.name"
+            value="Total Client Requests /sec"
+            />
+        <string
+            id="Cache.Host.TotalClientRequestsPersec.description"
+            value="The total number of client requests per second, including all API calls."
+            />
+        <string
+            id="Cache.Host.TotalRequestsServed.name"
+            value="Total Requests Served"
+            />
+        <string
+            id="Cache.Host.TotalRequestsServed.description"
+            value="The number of request served and responses sent by the server since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalRequestsServedPersec.name"
+            value="Total Requests Served /sec"
+            />
+        <string
+            id="Cache.Host.TotalRequestsServedPersec.description"
+            value="The number of request served and responses sent by the server per second since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalExpiredObjects.name"
+            value="Total Expired Objects"
+            />
+        <string
+            id="Cache.Host.TotalExpiredObjects.description"
+            value="The total number of expired objects since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalEvictedObjects.name"
+            value="Total Evicted Objects"
+            />
+        <string
+            id="Cache.Host.TotalEvictedObjects.description"
+            value="The number of evicted object since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalMemoryEvicted.name"
+            value="Total Memory Evicted"
+            />
+        <string
+            id="Cache.Host.TotalMemoryEvicted.description"
+            value="The amount of memory freed from cache since start of cache service. This counter also includes expired object memory."
+            />
+        <string
+            id="Cache.Host.TotalEvictionRuns.name"
+            value="Total Eviction Runs"
+            />
+        <string
+            id="Cache.Host.TotalEvictionRuns.description"
+            value="The number of eviction runs since the start of the service has started."
+            />
+        <string
+            id="Cache.Host.TotalFailureExceptions.name"
+            value="Total Failure Exceptions"
+            />
+        <string
+            id="Cache.Host.TotalFailureExceptions.description"
+            value="The number of exceptions that are being thrown by the server since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalFailureExceptionssec.name"
+            value="Total Failure Exceptions /sec"
+            />
+        <string
+            id="Cache.Host.TotalFailureExceptionssec.description"
+            value="The number of exceptions per second that are being thrown by the server since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalRetryExceptionsec.name"
+            value="Total Retry Exception /sec"
+            />
+        <string
+            id="Cache.Host.TotalRetryExceptionsec.description"
+            value="The total number of retry operation exceptions per second since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalRetryException.name"
+            value="Total Retry Exception"
+            />
+        <string
+            id="Cache.Host.TotalRetryException.description"
+            value="The total number of retry operation exceptions since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalNotificationPollRequests.name"
+            value="Total Notification Poll Requests"
+            />
+        <string
+            id="Cache.Host.TotalNotificationPollRequests.description"
+            value="The total number of poll request from client since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalNotificationPollRequestssec.name"
+            value="Total Notification Poll Requests /sec"
+            />
+        <string
+            id="Cache.Host.TotalNotificationPollRequestssec.description"
+            value="The total number of poll request per second from client since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalNotificationDelivered.name"
+            value="Total Notification Delivered"
+            />
+        <string
+            id="Cache.Host.TotalNotificationDelivered.description"
+            value="The number of notifications delivered to clients."
+            />
+        <string
+            id="Cache.Host.TotalNotificationDeliveredsec.name"
+            value="Total Notification Delivered /sec"
+            />
+        <string
+            id="Cache.Host.TotalNotificationDeliveredsec.description"
+            value="The number of notifications per second delivered to clients."
+            />
+        <string
+            id="Cache.Host.TotalGetAndLockRequests.name"
+            value="Total GetAndLock Requests"
+            />
+        <string
+            id="Cache.Host.TotalGetAndLockRequests.description"
+            value="The total number of GetAndLock requests since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalGetAndLockRequestssec.name"
+            value="Total GetAndLock Requests /sec"
+            />
+        <string
+            id="Cache.Host.TotalGetAndLockRequestssec.description"
+            value="The total number of GetAndLock requests per second since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalSuccessfulGetAndLockRequests.name"
+            value="Total Successful GetAndLock Requests"
+            />
+        <string
+            id="Cache.Host.TotalSuccessfulGetAndLockRequests.description"
+            value="The number of GetAndLock requests succeeded since start of cache service."
+            />
+        <string
+            id="Cache.Host.TotalSuccessfulGetAndLockRequestssec.name"
+            value="Total Successful GetAndLock Requests /sec"
+            />
+        <string
+            id="Cache.Host.TotalSuccessfulGetAndLockRequestssec.description"
+            value="The number of GetAndLock requests succeeded per second since start of cache service."
+            />
+        <string
+            id="Cache.Host.BaseAverageQuorumResponseTimeoperationMicrosecond.name"
+            value="Base Average Quorum Response Time / operation Microsecond"
+            />
+        <string
+            id="Cache.Host.BaseAverageQuorumResponseTimeoperationMicrosecond.description"
+            value="Base counter for Average Quorum Response Time / operation"
+            />
+        <string
+            id="Cache.Host.AverageQuorumResponseTimeoperationMicrosecond.name"
+            value="Average Quorum Response Time / operation Microsecond"
+            />
+        <string
+            id="Cache.Host.AverageQuorumResponseTimeoperationMicrosecond.description"
+            value="The average time spent in quorum response. It indicates amount of time spent by write operations in replication."
+            />
+        <string
+            id="Cache.Host.BaseAverageSecondaryResponseTimeoperation.name"
+            value="Base Average Secondary Response Time / operation"
+            />
+        <string
+            id="Cache.Host.BaseAverageSecondaryResponseTimeoperation.description"
+            value="Base counter for Average Secondary Response Time / operation"
+            />
+        <string
+            id="Cache.Host.AverageSecondaryResponseTimeoperationMicrosecond.name"
+            value="Average Secondary Response Time / operation Microsecond"
+            />
+        <string
+            id="Cache.Host.AverageSecondaryResponseTimeoperationMicrosecond.description"
+            value="The average time spent to get response from all the secondary servers."
+            />
+        <string
+            id="Cache.Host.TotalSecondaryDataSize.name"
+            value="Total Secondary Data Size Bytes"
+            />
+        <string
+            id="Cache.Host.TotalSecondaryDataSize.description"
+            value="Represents the total size of secondary cached data in the cache, not including cache overhead. Indicates the current secondary memory data usage of the server."
+            />
+        <string
+            id="Cache.Host.TotalAvailableMemory.name"
+            value="Total Available Memory Bytes"
+            />
+        <string
+            id="Cache.Host.TotalAvailableMemory.description"
+            value="Total available memory in the memory manager."
+            />
+        <string
+            id="Cache.Host.BaseAvailableMemoryPercentage.name"
+            value="Base Available Memory Percentage"
+            />
+        <string
+            id="Cache.Host.BaseAvailableMemoryPercentage.description"
+            value="Base available memory percentage."
+            />
+        <string
+            id="Cache.Host.AvailableMemoryPercentage.name"
+            value="Available Memory Percentage"
+            />
+        <string
+            id="Cache.Host.AvailableMemoryPercentage.description"
+            value="The percentage of available memory in the memory manager."
+            />
+        <string
+            id="Cache.Host.TotalAvailableCacheItemCount.name"
+            value="Total Available Cache Item Count"
+            />
+        <string
+            id="Cache.Host.TotalAvailableCacheItemCount.description"
+            value="The number of available cache item objects in the cache item pool."
+            />
+        <string
+            id="Cache.Host.TotalAllocatedCacheItemCount.name"
+            value="Total Allocated Cache Item Count"
+            />
+        <string
+            id="Cache.Host.TotalAllocatedCacheItemCount.description"
+            value="The number of allocated cache item objects in the cache item pool."
+            />
+        <string
+            id="Cache.Host.BaseAvailableCacheItemPercentage.name"
+            value="Base Available Cache Item Percentage"
+            />
+        <string
+            id="Cache.Host.BaseAvailableCacheItemPercentage.description"
+            value="Base available cache item percentage."
+            />
+        <string
+            id="Cache.Host.AvailableCacheItemPercentage.name"
+            value="Available Cache Item Percentage"
+            />
+        <string
+            id="Cache.Host.AvailableCacheItemPercentage.description"
+            value="The percentage of available cache item objects in the cache item pool."
+            />
+        <string
+            id="Cache.Host.TotalAvailableDirectoryCount.name"
+            value="Total Available Directory Count"
+            />
+        <string
+            id="Cache.Host.TotalAvailableDirectoryCount.description"
+            value="The number of available directory nodes in the directory pool."
+            />
+        <string
+            id="Cache.Host.TotalAllocatedDirectoryCount.name"
+            value="Total Allocated Directory Count"
+            />
+        <string
+            id="Cache.Host.TotalAllocatedDirectoryCount.description"
+            value="The number of allocated directory node count in directory pool."
+            />
+        <string
+            id="Cache.Host.BaseAvailableDirectoryPercentage.name"
+            value="Base Available Directory Percentage"
+            />
+        <string
+            id="Cache.Host.BaseAvailableDirectoryPercentage.description"
+            value="Base available directory percentage."
+            />
+        <string
+            id="Cache.Host.AvailableDirectoryPercentage.name"
+            value="Available Directory Percentage"
+            />
+        <string
+            id="Cache.Host.AvailableDirectoryPercentage.description"
+            value="The percentage of available directory nodes in the directory pool."
+            />
+        <string
+            id="Cache.Host.WBFlushedItemCount.name"
+            value="Total Write-Behind Items Written"
+            />
+        <string
+            id="Cache.Host.WBFlushedItemCount.description"
+            value="Number of items persisted to the write-behind store."
+            />
+        <string
+            id="Cache.Host.WBDroppedItemCount.name"
+            value="Total Write-Behind Items Dropped"
+            />
+        <string
+            id="Cache.Host.WBDroppedItemCount.description"
+            value="Number of items dropped from the write-behind queue."
+            />
+        <string
+            id="Cache.Host.WBQueueCount.name"
+            value="Write-Behind Queue Length"
+            />
+        <string
+            id="Cache.Host.WBQueueCount.description"
+            value="Number of items in the write-behind queue."
+            />
+        <string
+            id="Cache.Host.TotalAvailableWBItemCount.name"
+            value="Total Available Write-Behind Item Count"
+            />
+        <string
+            id="Cache.Host.TotalAvailableWBItemCount.description"
+            value="The number of available write-behind item objects in the write-behind pool."
+            />
+        <string
+            id="Cache.Host.TotalAllocatedWBItemCount.name"
+            value="Total Allocated Write-Behind Item Count"
+            />
+        <string
+            id="Cache.Host.TotalAllocatedWBItemCount.description"
+            value="The number of allocated write-behind item objects in the write-behind pool."
+            />
+        <string
+            id="Cache.Host.BaseAvailableWBItemPercentage.name"
+            value="Base Available Write-Behind Percentage"
+            />
+        <string
+            id="Cache.Host.BaseAvailableWBItemPercentage.description"
+            value="Base available write-behind item percentage."
+            />
+        <string
+            id="Cache.Host.AvailableWBItemPercentage.name"
+            value="Available Write-Behind Item Percentage"
+            />
+        <string
+            id="Cache.Host.AvailableWBItemPercentage.description"
+            value="The percentage of available write-behind item objects in the write-behind pool."
+            />
+        <string
+            id="Cache.Host.RTPendingCount.name"
+            value="Read-Through Queue Length"
+            />
+        <string
+            id="Cache.Host.RTPendingCount.description"
+            value="Number of items waiting to be read."
+            />
+        <string
+            id="Cache.Host.RTMissedCount.name"
+            value="Total Read-Through Misses"
+            />
+        <string
+            id="Cache.Host.RTMissedCount.description"
+            value="Number of items which could not be found in the backend store."
+            />
+        <string
+            id="Cache.Host.RTErrorCount.name"
+            value="Total Read-Through Errors"
+            />
+        <string
+            id="Cache.Host.RTErrorCount.description"
+            value="Number of errors while reading from the backend store."
+            />
+        <string
+            id="Cache.Host.RTSuccessCount.name"
+            value="Total Read-Through Items"
+            />
+        <string
+            id="Cache.Host.RTSuccessCount.description"
+            value="Number of items successfully read from the backend store."
+            />
+        <string
+            id="Cache.Host.RouteFailurePercentage.name"
+            value="Gateway Failure Percentage"
+            />
+        <string
+            id="Cache.Host.RouteFailurePercentage.description"
+            value="The percentage of requests that could not be routed by the gateway excluding quota enforcement."
+            />
+        <string
+            id="Cache.Host.BaseRouteFailurePercentage.name"
+            value="Base Gateway Failure Percentage"
+            />
+        <string
+            id="Cache.Host.BaseRouteFailurePercentage.description"
+            value="Base counter for Gateway Failure Percentage."
+            />
+        <string
+            id="Cache.Host.GatewayProcessTime.name"
+            value="Gateway Process Time"
+            />
+        <string
+            id="Cache.Host.GatewayProcessTime.description"
+            value="Time taken by a gateway to process a request."
+            />
+        <string
+            id="Cache.Host.BaseGatewayProcessTime.name"
+            value="Base Gateway Process Time"
+            />
+        <string
+            id="Cache.Host.BaseGatewayProcessTime.description"
+            value="Base counter for Gateway Process Time."
+            />
+        <string
+            id="Cache.Host.BaseRequestProcessingErrorPercentage.name"
+            value="Base Request Processing Error Percentage"
+            />
+        <string
+            id="Cache.Host.BaseRequestProcessingErrorPercentage.description"
+            value="Base counter for Request Processing Error Percentage."
+            />
+        <string
+            id="Cache.Host.RequestProcessingErrorPercentage.name"
+            value="Request Processing Error Percentage"
+            />
+        <string
+            id="Cache.Host.RequestProcessingErrorPercentage.description"
+            value="Percentage of retryable errors per request"
+            />
+        <string
+            id="Cache.Host.TimeSinceGracefulShutdownStarted.name"
+            value="Time since Graceful Shutdown Started"
+            />
+        <string
+            id="Cache.Host.TimeSinceGracefulShutdownStarted.description"
+            value="Seconds elapsed since graceful shutdown was initiated on the machine."
+            />
+        <string
+            id="Cache.Host.TotalConnectionsCount.name"
+            value="Total Connections Count"
+            />
+        <string
+            id="Cache.Host.TotalConnectionsCount.description"
+            value="The number of established client connections on the server."
+            />
+        <string
+            id="Cache.Host.ThrottledConnectionsCount.name"
+            value="Throttled Connections Count"
+            />
+        <string
+            id="Cache.Host.ThrottledConnectionsCount.description"
+            value="The cumulative number of connections that have been closed due to throttling since the service started."
+            />
+          
+        <string
+            id="Cache.Cache.name"
+            value="Windows Azure Caching:Cache"
+            />
+        <string
+            id="Cache.Cache.description"
+            value="A category for multiple-instance performance counters pertaining to all caches in host."
+            />
+        <string
+            id="Cache.Cache.TotalDataSizeMbytes.name"
+            value="Total Data Size Bytes"
+            />
+        <string
+            id="Cache.Cache.TotalDataSizeMbytes.description"
+            value="Represents the total size of cached data in the cache, not including cache overhead. Indicates the current data memory usage of the server."
+            />
+        <string
+            id="Cache.Cache.TotalObjectCount .name"
+            value="Total Object Count"
+            />
+        <string
+            id="Cache.Cache.TotalObjectCount .description"
+            value="Represents the total number of object stored in cache."
+            />
+        <string
+            id="Cache.Cache.TotalPrimaryDataSize.name"
+            value="Total Primary Data Size Bytes"
+            />
+        <string
+            id="Cache.Cache.TotalPrimaryDataSize.description"
+            value="Represents the total size of primary cached data in the cache, not including cache overhead. Indicates the current primary memory data usage of the cache."
+            />
+        <string
+            id="Cache.Cache.TotalSecondaryDataSize.name"
+            value="Total Secondary Data Size Bytes"
+            />
+        <string
+            id="Cache.Cache.TotalSecondaryDataSize.description"
+            value="Represents the total size of secondary cached data in the cache, not including cache overhead. Indicates the current secondary memory data usage of the cache."
+            />
+        <string
+            id="Cache.Cache.TotalCacheMisses.name"
+            value="Total Cache Misses"
+            />
+        <string
+            id="Cache.Cache.TotalCacheMisses.description"
+            value="The total number of unsuccessful cache requests since start of cache service."
+            />
+        <string
+            id="Cache.Cache.TotalCacheMissessec.name"
+            value="Total Cache Misses /sec"
+            />
+        <string
+            id="Cache.Cache.TotalCacheMissessec.description"
+            value="The total number of unsuccessful cache requests per second since start of cache service."
+            />
+        <string
+            id="Cache.Cache.BaseCacheMissPercentage.name"
+            value="Base Cache Miss Percentage"
+            />
+        <string
+            id="Cache.Cache.BaseCacheMissPercentage.description"
+            value="Base counter for Cache Miss Percentage"
+            />
+        <string
+            id="Cache.Cache.CacheMissPercentage.name"
+            value="Cache Miss Percentage"
+            />
+        <string
+            id="Cache.Cache.CacheMissPercentage.description"
+            value="The percentage of unsuccessful cache requests to the total number of request since start of cache service."
+            />
+        <string
+            id="Cache.Cache.TotalReadRequests.name"
+            value="Total Read Requests"
+            />
+        <string
+            id="Cache.Cache.TotalReadRequests.description"
+            value="The number of read requests (Bulk Get, Get, GetAndLock and Enumeration) received from all clients since start of cache service."
+            />
+        <string
+            id="Cache.Cache.TotalReadRequestssec.name"
+            value="Total Read Requests /sec"
+            />
+        <string
+            id="Cache.Cache.TotalReadRequestssec.description"
+            value="The number of read requests (Bulk Get, Get, GetAndLock and Enumeration) received per second from all clients since start of cache service."
+            />
+        <string
+            id="Cache.Cache.TotalObjectsReturned.name"
+            value="Total Objects Returned"
+            />
+        <string
+            id="Cache.Cache.TotalObjectsReturned.description"
+            value="The number of objects returned by client read requests. This counter along with total read requests counter indicates the success of read operations."
+            />
+        <string
+            id="Cache.Cache.TotalObjectsReturnedsec.name"
+            value="Total Objects Returned /sec"
+            />
+        <string
+            id="Cache.Cache.TotalObjectsReturnedsec.description"
+            value="The number of objects returned by client read requests per second."
+            />
+        <string
+            id="Cache.Cache.TotalWriteOperations.name"
+            value="Total Write Operations"
+            />
+        <string
+            id="Cache.Cache.TotalWriteOperations.description"
+            value="The number of write requests since start of cache service. Put, Add and Lock methods are included with write operations."
+            />
+        <string
+            id="Cache.Cache.TotalWriteOperationssec.name"
+            value="Total Write Operations /sec"
+            />
+        <string
+            id="Cache.Cache.TotalWriteOperationssec.description"
+            value="The number of write requests per second since start of cache service. Put, Add and Lock methods are included with write operations."
+            />
+        <string
+            id="Cache.Cache.TotalClientRequests.name"
+            value="Total Client Requests"
+            />
+        <string
+            id="Cache.Cache.TotalClientRequests.description"
+            value="The total number of client requests, including all API calls."
+            />
+        <string
+            id="Cache.Cache.TotalClientRequestssec.name"
+            value="Total Client Requests /sec"
+            />
+        <string
+            id="Cache.Cache.TotalClientRequestssec.description"
+            value="The total number of client requests per second, including all API calls."
+            />
+        <string
+            id="Cache.CacheTotalGetAndLockRequests.name"
+            value="Total GetAndLock Requests"
+            />
+        <string
+            id="Cache.CacheTotalGetAndLockRequests.description"
+            value="The total number of GetAndLock requests since start of cache service."
+            />
+        <string
+            id="Cache.Cache.TotalGetAndLockRequestssec.name"
+            value="Total GetAndLock Requests /sec"
+            />
+        <string
+            id="Cache.Cache.TotalGetAndLockRequestssec.description"
+            value="The total number of GetAndLock requests per second since start of cache service."
+            />
+        <string
+            id="Cache.Cache.TotalSuccessfulGetAndLockRequests.name"
+            value="Total Successful GetAndLock Requests"
+            />
+        <string
+            id="Cache.Cache.TotalSuccessfulGetAndLockRequests.description"
+            value="The number of GetAndLock requests succeeded since start of cache service."
+            />
+        <string
+            id="Cache.Cache.TotalSuccessfulGetAndLockRequestssec.name"
+            value="Total Successful GetAndLock Requests /sec"
+            />
+        <string
+            id="Cache.Cache.TotalSuccessfulGetAndLockRequestssec.description"
+            value="The number of GetAndLock requests succeeded per second since start of cache service."
+            />
+        <string
+            id="Cache.Cache.WBFlushedItemCount.name"
+            value="Total Write-Behind Items Written"
+            />
+        <string
+            id="Cache.Cache.WBFlushedItemCount.description"
+            value="Number of items persisted to the write-behind store."
+            />
+        <string
+            id="Cache.Cache.WBDroppedItemCount.name"
+            value="Total Write-Behind Items Dropped"
+            />
+        <string
+            id="Cache.Cache.WBDroppedItemCount.description"
+            value="Number of items dropped from the write-behind queue."
+            />
+        <string
+            id="Cache.Cache.WBQueueCount.name"
+            value="Write-Behind Queue Length"
+            />
+        <string
+            id="Cache.Cache.WBQueueCount.description"
+            value="Number of items in the write-behind queue."
+            />
+        <string
+            id="Cache.Cache.RTPendingCount.name"
+            value="Read-Through Queue Length"
+            />
+        <string
+            id="Cache.Cache.RTPendingCount.description"
+            value="Number of items waiting to be read."
+            />
+        <string
+            id="Cache.Cache.RTMissedCount.name"
+            value="Total Read-Through Misses"
+            />
+        <string
+            id="Cache.Cache.RTMissedCount.description"
+            value="Number of items which could not be found in the backend store."
+            />
+        <string
+            id="Cache.Cache.RTErrorCount.name"
+            value="Total Read-Through Errors"
+            />
+        <string
+            id="Cache.Cache.RTErrorCount.description"
+            value="Number of errors while reading from the backend store."
+            />
+        <string
+            id="Cache.Cache.RTSuccessCount.name"
+            value="Total Read-Through Items"
+            />
+        <string
+            id="Cache.Cache.RTSuccessCount.description"
+            value="Number of items successfully read from the backend store."
+            />
+	<string
+            id="Cache.Cache.TotalEvictionRuns.name"
+            value="Total Eviction Runs"
+            />
+        <string
+            id="Cache.Cache.TotalEvictionRuns.description"
+            value="The number of eviction runs since the start of the service has started."
+            />
+
+        <string
+            id="Cache.SecondaryHost.name"
+            value="Windows Azure Caching:Secondary Host"
+            />
+        <string
+            id="Cache.SecondaryHost.description"
+            value="This counter will be of multiple instance type and each instance will represent a secondary server."
+            />
+        <string
+            id="Cache.SecondaryHost.TotalReplicationRetries.name"
+            value="Total Replication Retries"
+            />
+        <string
+            id="Cache.SecondaryHost.TotalReplicationRetries.description"
+            value="The total number of retry replication operations for each secondary server."
+            />
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>
