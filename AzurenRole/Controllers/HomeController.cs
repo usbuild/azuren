@@ -23,6 +23,12 @@ namespace AzurenRole.Controllers
             return PartialView();
         }
 
+        public ActionResult App()
+        {
+            var x = GlobalData.user.Apps.Select(m=>new{id=m.Id,name=m.Name, url=m.Url, icon=m.Icon, height=m.Height, width=m.Width});
+            return Json(new {code=0, data=x}, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase upfile, string pictitle, string filename)
         {

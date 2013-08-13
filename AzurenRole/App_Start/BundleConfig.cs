@@ -30,14 +30,10 @@ namespace AzurenRole
                         "~/Scripts/ueditor/ueditor.config.js",
                         "~/Scripts/ueditor/ueditor.all.*"
                 ));
+
             bundles.Add(new ScriptBundle("~/bundles/jsdesk").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-ui-{version}.js",
-                "~/Scripts/jsdesk/js/ultbuttons-{version}.js",
                 "~/Scripts/jsdesk/js/jquery.scrollTo-*",
-                "~/Scripts/jsdesk/js/jquery.ui.selectmenu*",
-                "~/Scripts/jsdesk/js/jdesktop.js",
-                "~/Scripts/jsdesk/js/jdesktop.widgets.js"
+                "~/Scripts/jsdesk/js/jdesktop.js"
                 ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

@@ -308,9 +308,12 @@
       <DependentUpon>AzureModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ConsoleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\TODOController.cs" />
     <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -329,12 +332,16 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AzureModel.edmx.sql" />
     <Content Include="Content\app\chat.js" />
+    <Content Include="Content\app\store.js" />
+    <Content Include="Content\app\todo\icon.png" />
     <Content Include="Content\app\weather\bg.jpg" />
     <Content Include="Content\app\weather\jquery.zweatherfeed.js" />
     <Content Include="Content\app\weather\navigator.png" />
     <Content Include="Content\desk.js" />
     <Content Include="Content\app\clock\cface.png" />
+    <Content Include="Content\sdk\azuren-sdk.js" />
     <Content Include="Images\loading.gif" />
     <Content Include="Content\themes\base\bootstrap.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -378,17 +385,13 @@
     <Content Include="Content\themes\fonts\glyphiconshalflings-regular.otf" />
     <Content Include="Content\themes\fonts\glyphiconshalflings-regular.ttf" />
     <Content Include="Content\themes\fonts\glyphiconshalflings-regular.woff" />
-    <None Include="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Microsoft.WindowsAzure.Caching\PerformanceCounters.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="Images\bg_main.jpg" />
     <Content Include="Images\icons\chat.png" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\gridster\jquery.gridster.min.css" />
+    <Content Include="Scripts\gridster\jquery.gridster.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
@@ -403,41 +406,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\animated-overlay.gif" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_glass_95_fef1f1_1x400.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_highlight-hard_75_adf_1x100.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_highlight-soft_65_69f_1x100.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_highlight-soft_75_adf_1x100.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-bg_highlight-soft_75_fff_1x100.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-icons_222222_256x240.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-icons_333_256x240.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\jquery-ui-1.10.1.custom.css" />
-    <Content Include="Scripts\jsdesk\css\jdesktop-theme\jquery-ui-1.10.1.custom.min.css" />
     <Content Include="Scripts\jsdesk\css\jdesktop.css" />
     <Content Include="Scripts\jsdesk\css\jdesktop.ie.all.css" />
     <Content Include="Scripts\jsdesk\css\jdesktop.ie.css" />
-    <Content Include="Scripts\jsdesk\images\dropdown.png" />
-    <Content Include="Scripts\jsdesk\images\left_innershadow.png" />
-    <Content Include="Scripts\jsdesk\images\menubg.png" />
-    <Content Include="Scripts\jsdesk\images\mnitembg.png" />
     <Content Include="Scripts\jsdesk\images\resizegrip.png" />
     <Content Include="Scripts\jsdesk\images\showdesktop.png" />
-    <Content Include="Scripts\jsdesk\images\titlebar-icons.png" />
-    <Content Include="Scripts\jsdesk\images\titlebtn.png" />
-    <Content Include="Scripts\jsdesk\images\titlebtn_hvr.png" />
-    <Content Include="Scripts\jsdesk\images\winbg.png" />
     <Content Include="Scripts\jsdesk\js\jdesktop.js" />
-    <Content Include="Scripts\jsdesk\js\jdesktop.widgets.js" />
-    <Content Include="Scripts\jsdesk\js\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jsdesk\js\jquery-ui-1.10.1.custom.min.js" />
     <Content Include="Scripts\jsdesk\js\jquery.scrollTo-min.js" />
-    <Content Include="Scripts\jsdesk\js\jquery.ui.selectmenu.js" />
-    <Content Include="Scripts\jsdesk\js\ultbuttons-1.1.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
@@ -947,17 +922,20 @@
     <Content Include="Views\Widget\Index.cshtml" />
     <Content Include="Views\Widget\Clock.cshtml" />
     <Content Include="Views\Widget\Weather.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Store\View.cshtml" />
+    <Content Include="Views\TODO\Index.cshtml" />
+    <Content Include="Views\App\Index.cshtml" />
+    <Content Include="Views\App\Details.cshtml" />
+    <Content Include="Views\App\Create.cshtml" />
+    <Content Include="Views\App\Edit.cshtml" />
+    <Content Include="Views\App\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

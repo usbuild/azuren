@@ -10,6 +10,7 @@ namespace AzurenRole.Utils
 {
     public class GlobalData
     {
+        public static AzurenEntities dbContext = new AzurenEntities();
         static ConcurrentDictionary<string, User> dict = new ConcurrentDictionary<string, User>();  
         //static DataCache cache = new DataCache("default");;
         public static User getUser(string name)
@@ -19,8 +20,7 @@ namespace AzurenRole.Utils
                 //user = (User)cache.Get(name);
              
                 if (user != null) return user;
-                AzurenEntities context = new AzurenEntities();
-                ObjectQuery<User> query = context.Users.Where("it.username = @username", new ObjectParameter("username", name));
+                ObjectQuery<User> query = dbContext.Users.Where("it.username = @username", new ObjectParameter("username", name));
                 string sql = query.ToString();
                 user = query.First();
 

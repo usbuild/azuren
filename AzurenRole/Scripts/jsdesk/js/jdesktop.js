@@ -1,5 +1,6 @@
 /* Virtual Desktop system*/
 var nJDSK = (function(wnd,d,$){
+    var fake = true;
     return{
     /*These settings can be changed*/
     taskbarHeight: 30,
@@ -8,10 +9,6 @@ var nJDSK = (function(wnd,d,$){
     iconMaxHeight:128,
     iconMargin:10,
     iconBorderWeight:2,
-    nextIconPos:{
-        left:0,
-        top:0
-    },
     desktopHeight: 0,
     desktopWidth: 0,
 
@@ -60,7 +57,7 @@ var nJDSK = (function(wnd,d,$){
      * @param bool fullGlass // the content area has no border and is transparent (aka windows 7 windows with translucent client area, such as media player)
      * @param function createCallback //a function to call after window creation
      */
-    Window:function(width,height,title,toolbar,content,id,dialog,modal,fullGlass,createCallback){
+    Window:function(width,height,title,content,id, callback){
                var self = this;
                var desktop = nJDSK.desktop;
                var taskbar = $("#taskbarbuttons");
@@ -79,7 +76,6 @@ var nJDSK = (function(wnd,d,$){
                /*
                 * Provide basic cascading on window creation
                 */
-               this.modal = modal;
                this.id = id;
 
                    if ((nJDSK.WindowList.left + 25 + parseInt(width)) > $(wnd).width()) {
@@ -113,7 +109,10 @@ var nJDSK = (function(wnd,d,$){
                    $('.taskbarbutton').removeClass('activetsk');
                    obj.$taskbarBtn.addClass('activetsk');
                    obj.$base.css({ 'z-index': nJDSK.WindowList.lastZIndex }).show();
-                   nJDSK.WindowList.lastZIndex+=1;
+                   nJDSK.WindowList.lastZIndex += 1;
+                   if (typeof callback == 'function') {
+                       callback(obj);
+                   }
                    return obj;
                } else {
                    this['isNew'] = true;
@@ -154,7 +153,7 @@ var nJDSK = (function(wnd,d,$){
                 * */
                this.$base.addClass('window').attr('id','win_'+id);
 
-               /*title bar*/
+        /*title bar*/
                this.$titlebar = $("<div/>");
                this.$base.append(this.$titlebar);
                this.$titlebar.addClass('titlebar').css({'cursor':'default'});
@@ -167,7 +166,7 @@ var nJDSK = (function(wnd,d,$){
                /*title buttons container*/
                this.$titleButtons = $("<div/>");
                this.$titlebar.append(this.$titleButtons);
-               this.$titleButtons.addClass('titlebuttons')
+             this.$titleButtons.addClass('titlebuttons');
 
                        /*minimize button*/
                        this.$minimizeBtn = $("<a />");
@@ -241,15 +240,24 @@ var nJDSK = (function(wnd,d,$){
 
 
 
-               /*make the window resizable, and draggable and add resize handle+drag behaviors*/
+        /*make the window resizable, and draggable and add resize handle+drag behaviors*/
+        /*
                $(wnd).resize(function(){
                    self.$base.draggable({handle:self.$titlebar}).resizable();
                });
-
+               */
 
                /*make the window draggable all around the screen*/
-               this.$base.draggable({handle:self.$titlebar});
-               this.$base.resizable({ containment: "parent" });
+               this.$base.draggable({
+                   handle: self.$titlebar
+                   ,start: function () { $(".ui-mask-layer").show(); }
+                   ,stop: function() { $(".ui-mask-layer").hide(); }
+               });
+               this.$base.resizable({
+                   containment: "parent"
+                   ,start: function () { $(".ui-mask-layer").show(); }
+                   ,stop: function() { $(".ui-mask-layer").hide(); }
+               });
 
                /*show the base div*/
                this.$base.fadeIn();
@@ -311,8 +319,7 @@ var nJDSK = (function(wnd,d,$){
                });
 
                // add content area this will hold all the stuff
-               this.contentArea = document.createElement('div');
-               this.$content = $(this.contentArea);
+               this.$content = $("<div>");
                this.$base.append(this.$content);
                // set up contentarea look and feel
                this.$content.addClass('contentarea');
@@ -359,16 +366,16 @@ var nJDSK = (function(wnd,d,$){
                this.index = nJDSK.WindowList.add_item(id, this);	
 
                // run callback upon window creation
-               if (typeof createCallback == 'function')
+               if (typeof callback == 'function')
                {
-                   createCallback('win_'+id);
+                   callback(this);
                }
+                return this;
+    },
 
-           },
-
-    frameDialog: function (title, id, src, args) {
+    frameWindow: function (id, title, src, width, height, callback, args) {
                      var html = '<iframe src="' + src + '" class="win-frame"></iframe>';
-                     var win = new nJDSK.Window(600, 480, title, '', html, id);
+                     var win = new nJDSK.Window(width + 10, height + 35, title, html, id, callback);
                      return win;
                  },
 
@@ -392,27 +399,19 @@ var nJDSK = (function(wnd,d,$){
                      */
                     addIcon: function(iconId,iconTitle,iconImage,callback){
 
-                                 nJDSK.icons.append('<a class="icon" id="'+iconId+'" style="display:none"><img src="'+iconImage+'" /><span>'+iconTitle+'</span></a>');
-                                 if (nJDSK.nextIconPos.top+nJDSK.iconMaxHeight+(nJDSK.iconMargin*2)+(nJDSK.iconBorderWeight*2) < nJDSK.desktopHeight)
-                                 {
-                                     $('#'+iconId).css({'left':nJDSK.nextIconPos.left+'px','top':nJDSK.nextIconPos.top+'px'});
-                                 }
-                                 else
-                                 {
-                                     nJDSK.nextIconPos.top = 0;
-                                     nJDSK.nextIconPos.left = nJDSK.nextIconPos.left+nJDSK.iconWidth+(nJDSK.iconMargin*2)+(nJDSK.iconBorderWeight*2);
-                                     $('#'+iconId).css({'left':nJDSK.nextIconPos.left+'px','top':nJDSK.nextIconPos.top+'px'});
-                                 }
+                                 nJDSK.gridster.add_widget('<li><a class="icon" id="'+iconId+'" ><img src="'+iconImage+'" /><span>'+iconTitle+'</span></a></li>');
 
                                  if (typeof(callback) == 'function')
                                  {
-                                     $('#' + iconId).click(function (e) { return callback(e) });
+                                     $('#' + iconId).click(
+                                         function (e) { 
+                                             if(fake) {
+                                                return callback(e); 
+                                             }
+                                         });
                                  }
 
-                                 nJDSK.nextIconPos.top=nJDSK.nextIconPos.top+nJDSK.iconMaxHeight+nJDSK.iconMargin*2+nJDSK.iconBorderWeight*2;
-
                                  var icn = $('#'+iconId);
-                                 icn.show();
                                  icn.mousedown(function(e){
                                      nJDSK.clearActive();
                                      icn.addClass('activeIcon');
@@ -421,7 +420,6 @@ var nJDSK = (function(wnd,d,$){
                                  icn.click(function(e){
                                      e.stopPropagation();
                                  });
-                                 icn.draggable({containment: "parent"});
                              },
 
                     /**
@@ -430,32 +428,8 @@ var nJDSK = (function(wnd,d,$){
                      */
                     removeIcon: function(iconId)
                     {
-                        $('#'+iconId).remove();
-                    },
-
-                    /**
-                     * Rearranges icons - currently used by the resize function
-                     */
-                    reArrangeIcons: function(){
-                                        nJDSK.nextIconPos.left = 0;
-                                        nJDSK.nextIconPos.top = 0;
-                                        nJDSK.icons.each(function(){
-
-                                            if (nJDSK.nextIconPos.top+nJDSK.iconMaxHeight+(nJDSK.iconMargin*2)+(nJDSK.iconBorderWeight*2) < nJDSK.desktopHeight)
-                                        {
-                                            $(this).css({'left':nJDSK.nextIconPos.left+'px','top':nJDSK.nextIconPos.top+'px'});
-                                        }
-                                            else
-                                        {
-                                            nJDSK.nextIconPos.top = 0;
-                                            nJDSK.nextIconPos.left = nJDSK.nextIconPos.left+nJDSK.iconWidth+(nJDSK.iconMargin*2)+(nJDSK.iconBorderWeight*2);
-                                            $(this).css({'left':nJDSK.nextIconPos.left+'px','top':nJDSK.nextIconPos.top+'px'});
-                                        }
-
-                                        nJDSK.nextIconPos.top=nJDSK.nextIconPos.top+nJDSK.iconMaxHeight+nJDSK.iconMargin*2+nJDSK.iconBorderWeight*2;
-
-                                        });
-                                    }
+                        nJDSK.gridster.remove_widget($('#'+iconId));
+                    }
                 },
 
     /**
@@ -484,6 +458,7 @@ var nJDSK = (function(wnd,d,$){
     widgets: $("#widgets"),
     taskbar: $("#taskbarbuttons"),
     icons : $("#desktop_iconarea"),
+    gridster : null,
     init:function(){
              $(wnd).resize(function()
                  {
@@ -491,7 +466,6 @@ var nJDSK = (function(wnd,d,$){
                      nJDSK.desktopHeight = $(wnd).height()-nJDSK.taskbarHeight;
                      nJDSK.desktop.css({"height":(nJDSK.desktopHeight)+'px',"width":nJDSK.desktopWidth+'px', "top":'0'});
                      nJDSK.widgets.css({"height":$('#desktop').height()+'px','top':'0'});
-                     nJDSK.iconHelper.reArrangeIcons();
                  });	
 
              nJDSK.taskbar.css({"height":nJDSK.taskbarHeight+'px'});
@@ -525,7 +499,52 @@ var nJDSK = (function(wnd,d,$){
                  }
              });
 
+        nJDSK.gridster = nJDSK.icons.gridster({
+            widget_margins:[nJDSK.iconMargin, nJDSK.iconMargin], 
+            widget_base_dimensions:[100, 120],
+            autogenerate_stylesheet: true,
+            draggable: {
+                stop: function () { setTimeout(function() { fake = true; }, 10);
+                    $(".ui-mask-layer").hide();
+                },
+                start: function(){fake = false;
+                    $(".ui-mask-layer").show();
+                } }
+        }).data("gridster");
          }
     }
 
 })(window, document, jQuery);
+
+(function (wnd, d, $) {
+    $.extend(nJDSK.widgets, {
+		/**
+		 * Adds a new widget
+		 * @param string wdgId 			widget id
+		 * @param string wdgTitle 		widget title
+		 * @param string wdgContent		widget content
+		 * @param function wdgFunction	widget init function (can implement widget behavior)
+		 */
+	    addItem: function (wdgId, url, width, height) {
+	        var item = $('<div id="' + wdgId + '" class="widget"><div class="widget-title">' +
+	            '<span class="glyphicon glyphicon-remove wdg-close"></span>' +
+	            '<span class="glyphicon glyphicon-th wdg-move"></span>' +
+	            '</div><div class="widget-content"><iframe frameborder="0" src="' + url + '" style="width:' + width + 'px;height:' + height + 'px"></iframe></div></div>').addClass("ui-draggable");
+	        $('#widgets').append(item);
+	        item.draggable({
+	            handle: ".widget-title .wdg-move"
+                   ,start: function () { $(".ui-mask-layer").show(); }
+                   ,stop: function() { $(".ui-mask-layer").hide(); }
+	        });
+	        item.find(".wdg-close").click(function (e) {
+	            item.remove();
+	        });
+	        item.hover(function(parameters) {
+	            item.find(".widget-title").css("visibility", "visible");
+	        }, function () {
+	            item.find(".widget-title").css("visibility", "hidden");
+	        });
+            
+	    }
+	} );
+})(window,document,jQuery);

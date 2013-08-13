@@ -24,7 +24,7 @@ namespace AzurenRole.Filters
         {
             public MembershipInitializer()
             {
-                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "user", "id", "username", autoCreateTables:false);
+                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Users", "id", "username", autoCreateTables:false);
             }
         }
 
