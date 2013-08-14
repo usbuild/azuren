@@ -1,0 +1,28 @@
+﻿@model AzurenRole.App
+@{
+    Layout = null;
+}
+
+    <div class="store-header clearfix">
+        <button class="btn btn-small btn-primary store-home glyphicon glyphicon-home"></button>
+        @if ((bool)ViewData["installed"])
+        {
+            <button class="btn btn-small btn-primary va-installed" data-id="@Model.Id" disabled="disabled">installed</button>
+        }
+        else
+        {
+            <button class="btn btn-small btn-primary va-setup" data-id="@Model.Id">install</button>
+        }
+    </div>
+<div class="va-container">
+    <h2>@Model.Name</h2>
+    <img src="@Model.Icon"/>
+    <div class="va-desc">@Model.Desc</div>
+    <div class="va-star">Stars: @Model.Star</div>
+    <br />
+    <div class="va-comment">
+        <ul>
+            <li>usbuild: Good Application</li>
+        </ul>
+    </div>
+</div>

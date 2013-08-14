@@ -28,43 +28,43 @@ namespace AzurenRole.Models
     {
         [Required]
         [Display(Name = "User Name")]
-        [MinLength(4)]
+        [StringLength(4)]
         public string UserName { set; get; }
 
         [Required]
         [Display(Name = "Display Name")]
-        [MinLength(4)]
+        [StringLength(4)]
         public string DisplayName { set; get; }
 
         [Required]
         [Display(Name = "Password")]
-        [MinLength(4)]
+        [StringLength(4)]
         public string Password { set; get; }
 
         [Required]
         [Display(Name = "Confirm Password")]
-        [MinLength(4)]
-        [Compare("Password")]
+        [StringLength(4)]
+        [System.Web.Mvc.Compare("Password")]
         public string ConfirmPassword { set; get; }
     }
 
     public class SettingForm
     {
         [Display(Name = "Display Name")]
-        [MinLength(4)]
+        [StringLength(4)]
         public string DisplayName { set; get; }
 
         [Display(Name = "Old Password")]
-        [MinLength(4)]
+        [StringLength(4)]
         public string OldPassword { set; get; }
 
         [Display(Name = "New Password")]
-        [MinLength(4)]
+        [StringLength(4)]
         public string NewPassword { set; get; }
 
         [Display(Name = "Confirm Password")]
-        [MinLength(4)]
-        [Compare("NewPassword")]
+        [StringLength(4)]
+        [System.Web.Mvc.Compare("NewPassword")]
         public string ConfirmPassword { set; get; }
     }
 

@@ -1,126 +1,185 @@
-#wrapper{width:100%; height:100%; position:absolute; left:0;top:0; bottom:0;right: 0;overflow: hidden;}
-
-#nJDSKBG{width:100%; height:100%;}
-
-#widgets{background-color:rgba(0, 0, 0, 0); position:absolute; right:0; z-index:2;margin-right: 20px;}
-
-#desktop{position:absolute;left:0; z-index: 1;}
-
-#taskbar{background-color:#eeeedd; position:absolute;left:0; bottom:0; width:100%; background-color:rgba(0,0,0,0); color:#CCC; position:fixed; z-index: 9999999;  box-shadow:0 0 5px #000000
+#wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
 }
 
-#desktop_iconarea{width:100%; height:100%; position:absolute; z-index:2;}
+#nJDSKBG {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
 
-#showdesktop{
-    background-image:url(../images/showdesktop.png);
-    background-repeat:no-repeat; 
-    background-position:center center;
+#widgets {
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    right: 0;
+    z-index: 2;
+    margin-right: 20px;
+}
+
+#desktop {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+#taskbar {
+    background-color: #eeeedd;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    color: #CCC;
+    position: fixed;
+    z-index: 9999999;
+    box-shadow: 0 0 5px #000000;
+}
+
+#desktop_iconarea {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+}
+
+#showdesktop {
+    background-image: url(../images/showdesktop.png);
+    background-repeat: no-repeat;
+    background-position: center center;
     border-radius: 2px;
-    color:#fff;
-    border:1px solid transparent;
-    height:26px;
-    width:26px;
-    margin:1px;
-    color:#fff;
-    font-weight:normal;
-    float:left;
-    text-decoration:none;
-    outline:none;
-    text-indent:-999999px;
-  }
-
-  #showdesktop:hover{
-      background-color: rgba(255, 255, 255, 0.3);
-      border-color: rgba(255, 255, 255, 0.6);
-  }
-
-
-
-  .separator{
-      height:26px;
-      width: 5px;
-      margin-left:5px;
-      margin-top:2px;
-      border-left:2px solid #4e4e4e;
-      float:left;
-  }
-
-  .taskbarbuttons{
-      float:left;
-      height:30px;
-      overflow-y:auto;
-  }
-
-  .icon{
-      width:96px;
-      padding: 5px;
-      max-height:128px;
-      margin:15px;
-      float:left;
-      text-decoration: none;
-      border:2px solid transparent;
-      -moz-border-radius:5px;
-      -webkit-border-radius:5px;
-      border-radius:5px;
-      position:absolute;
-      z-index:1;
+    color: #fff;
+    border: 1px solid transparent;
+    height: 26px;
+    width: 26px;
+    margin: 1px;
+    color: #fff;
+    font-weight: normal;
+    float: left;
+    text-decoration: none;
+    outline: none;
+    text-indent: -999999px;
 }
 
-.icon span{cursor: default;}
+    #showdesktop:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.6);
+    }
 
-.icon:hover, .activeIcon{
-    border:2px solid #fff;
-    cursor: pointer;
-    background-color: transparent;
-    background-image:-moz-linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
-    background-image:-webkit-linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
-    background-image:-o-linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
-    background-image:linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
 
-  }
 
-  .icon img{
-      max-width:64px;
-      max-height:64px;
-      margin-left:auto;
-      margin-right:auto;
-      display:block;
-      clear:both;
-      border:0px;
-  }
+.separator {
+    height: 26px;
+    width: 5px;
+    margin-left: 5px;
+    margin-top: 2px;
+    border-left: 2px solid #4e4e4e;
+    float: left;
+}
 
-  .icon span{
-      display:block;
-      color:#fff;
-      text-decoration:none;
-      text-align:center;
-      margin-top: 1em;
-      text-shadow: 2px 2px 3px #000;
-  }
+.taskbarbuttons {
+    float: left;
+    height: 30px;
+    overflow-y: auto;
+}
 
-  .icon:hover span, .icon.activeIcon span{color:#333; text-shadow: 2px 2px 3px rgba(64,64,64,0.5)}
+.widget, .window .contentarea {
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
 
-  .transitioner{
+#wrapper {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
-  }
+.icon {
+    width: 96px;
+    padding: 5px;
+    max-height: 128px;
+    margin: 15px;
+    float: left;
+    text-decoration: none;
+    border: 2px solid transparent;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+}
 
-  .window{
-      border:0px transparent #000;
-      padding:5px;
-      display:none;
-      min-width: 175px;
-      min-height:100px;
-      left:10px;
-      top:10px;
-      -moz-box-shadow: 0px 0px 5px #000;
-      -webkit-box-shadow: 0px 0px 5px #000;
-      box-shadow: 0px 0px 5px #000;
-      -moz-border-radius: 3px;
-      -webkit-border-radius: 3px;
-      border-radius: 3px;
-  }
+    .icon span {
+        cursor: default;
+    }
 
-.ui-mask-layer{
+    .icon:hover, .activeIcon {
+        border: 2px solid #fff;
+        cursor: pointer;
+        background-color: transparent;
+        background-image: -moz-linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
+        background-image: -webkit-linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
+        background-image: -o-linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
+        background-image: linear-gradient(rgba(255,255,255,0.2) 0,rgba(255,255,255,0.8) 30px,rgba(255,255,255,0.6) 100%);
+    }
+
+    .icon img {
+        max-width: 64px;
+        max-height: 64px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        clear: both;
+        border: 0px;
+    }
+
+    .icon span {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        text-align: center;
+        margin-top: 1em;
+        text-shadow: 2px 2px 3px #000;
+    }
+
+    .icon:hover span, .icon.activeIcon span {
+        color: #333;
+        text-shadow: 2px 2px 3px rgba(64,64,64,0.5);
+    }
+
+.transitioner {
+}
+
+.window {
+    border: 0px transparent #000;
+    padding: 5px;
+    display: none;
+    min-width: 175px;
+    min-height: 100px;
+    left: 10px;
+    top: 10px;
+    -moz-box-shadow: 0px 0px 5px #000;
+    -webkit-box-shadow: 0px 0px 5px #000;
+    box-shadow: 0px 0px 5px #000;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ui-mask-layer {
     cursor: default;
     display: none;
     position: absolute;
@@ -134,164 +193,222 @@
     opacity: 0;
 }
 
-  .titlebar{
-      height: 23px;
-      line-height:18px;
-      background-color:transparent;
-      color:#000;
-      text-shadow: 0px 0px 3px #fff;
-  }
-
-  .titlebuttons{
-      height:23px;
-      line-height:23px;
-      min-width: 23px;
-      position: absolute;
-      right:8px;
-      top:0px;
-  }
-
-
-  .taskbarbutton{
-      line-height:26px;
-      height:26px;
-      padding-left:10px;
-      padding-right:10px;
-      margin:1px;
-      font-size:12px;
-      display:block;
-      float:left;
-      cursor:pointer;
-      border-color:rgba(255,255,255,0.2);
-      border-width: 1px;
-      border-style: solid;
-      -moz-border-radius:3px;
-      -webkit-border-radius:3px;
-      -khtml-border-radius:3px;
-      border-radius:3px;      }
-
-  .taskbarbutton:hover{
-      background-color:rgba(255,255,255,0.3);
-  }
-
-  .activetsk{
-      background-color:#ccc;
-      color:#000;
-      background-color:rgba(255,255,255,0.5);
-      border-color:#666;
-      border-color:rgba(255,255,255,0.6);
-  }
-
-  .ui-icon-gripsmall-diagonal-se{
-      width: 15px;
-      height:15px;
-      background-color:transparent;
-      position:absolute;
-      right:0px;
-      bottom:0px;
-      cursor: se-resize;
-      background-image:url(../images/resizegrip.png);
-  }
-
-  .ui-resizable-e{
-      top:0; right:0; width:5px; height:100%; position:absolute; cursor: e-resize;
-  }
-  .ui-resizable-s{
-      bottom:0; left:0; height:5px; width:100%; position:absolute; cursor: s-resize;      }
-
-  .contentarea{
-      border-left:1px solid #666;
-      border-top:1px solid #666;
-      border-right:1px solid #999;
-      border-bottom:1px solid #999;
-      background-color:#fff;
-      overflow:auto;
-      position:relative;
-  }
-
-
-  .win-frame {
-      width: 100%;
-      height: 100%;
-      border: none;
+.iframe-window-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: #fff;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: default;
 }
 
-.minimizebtn, .maximizebtn, .closebtn{
-    font-weight:bold;
-    display:block;
-    float:left;
-    color:#fff;
+.iframe-window-start {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    right: 0;
+    bottom: 0;
+    _width: 100%;
+    _height: 100%;
+    background: #006bb9 url(/Images/loading.gif) center center no-repeat;
+    overflow: hidden;
+}
+
+.frame-window-error {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -130px 0 0 -123px;
+    z-index: 999;
+    width: 260px;
+    height: 256px;
+    background: white;
+    overflow: hidden;
+}
+
+.titlebar {
+    height: 23px;
+    line-height: 18px;
+    background-color: transparent;
+    color: #000;
+    text-shadow: 0px 0px 3px #fff;
+}
+
+.titlebuttons {
+    height: 23px;
+    line-height: 23px;
+    min-width: 23px;
+    position: absolute;
+    right: 8px;
+    top: 0px;
+}
+
+
+.taskbarbutton {
+    line-height: 26px;
+    height: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 1px;
+    font-size: 12px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    border-color: rgba(255,255,255,0.2);
+    border-width: 1px;
+    border-style: solid;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 0px;
+}
+
+    .taskbarbutton:hover {
+        background-color: rgba(255,255,255,0.3);
+    }
+    .taskbarbutton:active {
+padding-top: 2px;
+}
+
+.activetsk {
+    background-color: #ccc;
+    color: #000;
+    background-color: rgba(255,255,255,0.5);
+    border-color: #666;
+    border-color: rgba(255,255,255,0.6);
+}
+
+.ui-icon-gripsmall-diagonal-se {
+    width: 15px;
+    height: 15px;
+    background-color: transparent;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    cursor: se-resize;
+    background-image: url(../images/resizegrip.png);
+}
+
+.ui-resizable-e {
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    cursor: e-resize;
+}
+
+.ui-resizable-s {
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    cursor: s-resize;
+}
+
+.contentarea {
+    border-left: 1px solid #666;
+    border-top: 1px solid #666;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    background-color: #fff;
+    overflow: auto;
+    position: relative;
+}
+
+
+.win-frame {
+    width: 100%;
+    height: 100%;
+    margin-bottom: -5px;
+    border: none;
+}
+
+.minimizebtn, .maximizebtn, .closebtn {
+    font-weight: bold;
+    display: block;
+    float: left;
+    color: #fff;
     height: 18px;
-    line-height:18px;
-    font-size:12px;
-    text-decoration:none;
-    background-color:#0099CC;
-    color:#fff;
-    font-weight:normal;
+    line-height: 18px;
+    font-size: 12px;
+    text-decoration: none;
+    background-color: #0099CC;
+    color: #fff;
+    font-weight: normal;
+    .taskbarbutton;
+
+{
+    line-height: 26px;
+    height: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 1px;
+    font-size: 12px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    border-color: rgba(255,255,255,0.2);
+    border-width: 1px;
+    border-style: solid;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.taskbarbutton:hover {
+    background-color: rgba(255,255,255,0.3);
+}
+
+.activetsk {
+    background-color: #ccc;
+    color: #000;
+    background-color: rgba(255,255,255,0.5);
+    border-color: #666;
+    border-color: rgba(255,255,255,0.6);
+}
+
+.ui-icon-gripsmall-diagonal-se {
+    width: 15px;
+    height: 15px;
+    background-color: transparent;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    cursor: se-resize;
+    background-image: url(../images/resizegrip.png);
+}
+
+.ui-resizable-e {
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    cursor: e-resize;
+}
+
+.ui-resizable-s {
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    cursor: s-resize;
+}
 
 
-    .taskbarbutton{
-        line-height:26px;
-        height:26px;
-        padding-left:10px;
-        padding-right:10px;
-        margin:1px;
-        font-size:12px;
-        display:block;
-        float:left;
-        cursor:pointer;
-        border-color:rgba(255,255,255,0.2);
-        border-width: 1px;
-        border-style: solid;
-        -moz-border-radius:3px;
-        -webkit-border-radius:3px;
-        -khtml-border-radius:3px;
-        border-radius:3px;
-  }
 
-  .taskbarbutton:hover{
-      background-color:rgba(255,255,255,0.3);
-  }
-
-  .activetsk{
-      background-color:#ccc;
-      color:#000;
-      background-color:rgba(255,255,255,0.5);
-      border-color:#666;
-      border-color:rgba(255,255,255,0.6);
-  }
-
-  .ui-icon-gripsmall-diagonal-se{
-      width: 15px;
-      height:15px;
-      background-color:transparent;
-      position:absolute;
-      right:0px;
-      bottom:0px;
-      cursor: se-resize;
-      background-image:url(../images/resizegrip.png);
-  }
-
-  .ui-resizable-e{
-      top:0; right:0; width:5px; height:100%; position:absolute; cursor: e-resize;
-  }
-
-  .ui-resizable-s{
-      bottom:0; left:0; height:5px; width:100%; position:absolute; cursor: s-resize;      }
-
-  .contentarea{
-      border-left:1px solid #666;
-      border-top:1px solid #666;
-      border-right:1px solid #999;
-      border-bottom:1px solid #999;
-      background-color:#fff;
-      overflow:auto;
-      position:relative;
-  }
-
-
-    .win-frame {
-      width: 100%;
-      height: 100%;
-      border: none;
+.win-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
 }

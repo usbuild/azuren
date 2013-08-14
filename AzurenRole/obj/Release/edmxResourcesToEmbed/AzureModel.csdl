@@ -2,6 +2,11 @@
 <Schema Namespace="AzurenModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="AzurenEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="AzurenModel.User" />
+    <EntitySet Name="Apps" EntityType="AzurenModel.App" />
+    <AssociationSet Name="UserApp" Association="AzurenModel.UserApp">
+      <End Role="User" EntitySet="Users" />
+      <End Role="App" EntitySet="Apps" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -11,5 +16,26 @@
     <Property Name="username" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="displayname" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="password" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Apps" Relationship="AzurenModel.UserApp" FromRole="User" ToRole="App" />
   </EntityType>
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Unicode="true" FixedLength="false" MaxLength="20" />
+    <Property Type="String" Name="Url" Unicode="true" FixedLength="false" MaxLength="255" />
+    <Property Type="String" Name="Icon" Unicode="true" FixedLength="false" MaxLength="255" />
+    <Property Type="String" Name="Secret" Unicode="true" FixedLength="false" MaxLength="40" />
+    <Property Type="String" Name="Status" Unicode="true" FixedLength="false" MaxLength="10" DefaultValue="dev" />
+    <Property Type="String" Name="Desc" Nullable="true" MaxLength="Max" Unicode="false" FixedLength="false" DefaultValue="&quot;&quot;" />
+    <NavigationProperty Name="Users" Relationship="AzurenModel.UserApp" FromRole="App" ToRole="User" />
+    <Property Type="Int32" Name="Width" DefaultValue="600" />
+    <Property Type="Int32" Name="Height" DefaultValue="480" />
+    <Property Type="Int32" Name="Star" DefaultValue="5" />
+  </EntityType>
+  <Association Name="UserApp">
+    <End Type="AzurenModel.User" Role="User" Multiplicity="*" />
+    <End Type="AzurenModel.App" Role="App" Multiplicity="*" />
+  </Association>
 </Schema>

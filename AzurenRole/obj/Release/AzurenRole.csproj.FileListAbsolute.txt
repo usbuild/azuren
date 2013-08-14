@@ -234,9 +234,6 @@ D:\workspace\azuren\AzurenRole\bin\zh-Hant\System.Spatial.resources.dll
 D:\workspace\azuren\AzurenRole\obj\Release\AzurenRole.csprojResolveAssemblyReference.cache
 D:\workspace\azuren\AzurenRole\obj\Release\AzurenRole.dll
 D:\workspace\azuren\AzurenRole\obj\Release\AzurenRole.pdb
-F:\Workspace\azuren\AzurenRole\bin\Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe
-F:\Workspace\azuren\AzurenRole\bin\Microsoft.WindowsAzure.Caching\PerformanceCounters.xml
-F:\Workspace\azuren\AzurenRole\bin\Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe.config
 F:\Workspace\azuren\AzurenRole\bin\AzurenRole.dll
 F:\Workspace\azuren\AzurenRole\bin\AzurenRole.pdb
 F:\Workspace\azuren\AzurenRole\bin\Antlr3.Runtime.dll

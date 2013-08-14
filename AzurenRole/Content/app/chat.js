@@ -115,8 +115,9 @@ $(document).on("click", ".chat-box-user-toggle", function (e) {
 Azuren.app.install("0001", "IM", "/Images/icons/chat.png", function (e) {
     e.preventDefault();
 
-    win = Azuren.showWindow(280, 600, "0001", "Chat", "");
-
+    Azuren.showWindow(280, 600, "0001", "Chat", "", function (w) {
+        win = w;
+        
     if (win.isNew) {
         win.$content.html('<img src="/Images/loading.gif" style="width: 220px;height:20px; margin:60% auto 0 auto";display:block; />');
         $.get("/Chat/Index", {}, function (e) {
@@ -205,5 +206,7 @@ Azuren.app.install("0001", "IM", "/Images/icons/chat.png", function (e) {
             return false;
         });
     }
+    });
+
     return false;
 });

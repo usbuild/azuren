@@ -37,7 +37,7 @@ namespace SinalRChat
         {
             lock (users)
             {
-                users.GetOrAdd(Context.ConnectionId, _ => GlobalData.getUser(Context.User.Identity.Name));
+                users.GetOrAdd(Context.ConnectionId, _ => GlobalData.getUser(Context));
             }
             return base.OnConnected();
         }
@@ -46,7 +46,7 @@ namespace SinalRChat
             User u;
             users.TryGetValue(Context.ConnectionId, out u);
 
-            User c = GlobalData.getUser(Context.User.Identity.Name);
+            User c = GlobalData.getUser(Context);
             if (u == null) users.TryAdd(Context.ConnectionId, c);
             else if (u.id != c.id) users.TryUpdate(Context.ConnectionId, c, u);
             return base.OnReconnected();
@@ -83,7 +83,7 @@ namespace SinalRChat
                 users.TryGetValue(Context.ConnectionId, out u);
                 GroupMap.Add(new UserGroupPair { connectionId = Context.ConnectionId, user = u, groupId = groupId });
             }
-            u = GlobalData.getUser(Context.User.Identity.Name);
+            u = GlobalData.getUser(Context);
             var v = GroupMap.Where(_ => _.groupId == groupId && _.user.id == u.id);
             if (v.Count() == 1) Clients.Group(groupId, new string[] { Context.ConnectionId }).UserOnline(groupId, u);
 
@@ -120,7 +120,7 @@ namespace SinalRChat
             {
                 GroupMap.RemoveWhere(_ => _.groupId == groupId && _.connectionId == Context.ConnectionId);
             }
-            User u = GlobalData.getUser(Context.User.Identity.Name);
+            User u = GlobalData.getUser(Context);
             var v = GroupMap.Where(_ => _.groupId == groupId && _.user.id == u.id);
             if (v.Count() == 0) Clients.Group(groupId).UserOffline(groupId, u);
         }

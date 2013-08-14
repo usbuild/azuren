@@ -154,7 +154,7 @@ namespace AzurenRole
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -173,7 +173,7 @@ namespace AzurenRole
                 {
                     OnIdChanging(value);
                     ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
+                    _Id = StructuralObject.SetValidValue(value, "Id");
                     ReportPropertyChanged("Id");
                     OnIdChanged();
                 }
@@ -198,7 +198,7 @@ namespace AzurenRole
             {
                 OnNameChanging(value);
                 ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, true);
+                _Name = StructuralObject.SetValidValue(value, true, "Name");
                 ReportPropertyChanged("Name");
                 OnNameChanged();
             }
@@ -222,7 +222,7 @@ namespace AzurenRole
             {
                 OnUrlChanging(value);
                 ReportPropertyChanging("Url");
-                _Url = StructuralObject.SetValidValue(value, true);
+                _Url = StructuralObject.SetValidValue(value, true, "Url");
                 ReportPropertyChanged("Url");
                 OnUrlChanged();
             }
@@ -246,7 +246,7 @@ namespace AzurenRole
             {
                 OnIconChanging(value);
                 ReportPropertyChanging("Icon");
-                _Icon = StructuralObject.SetValidValue(value, true);
+                _Icon = StructuralObject.SetValidValue(value, true, "Icon");
                 ReportPropertyChanged("Icon");
                 OnIconChanged();
             }
@@ -270,7 +270,7 @@ namespace AzurenRole
             {
                 OnSecretChanging(value);
                 ReportPropertyChanging("Secret");
-                _Secret = StructuralObject.SetValidValue(value, true);
+                _Secret = StructuralObject.SetValidValue(value, true, "Secret");
                 ReportPropertyChanged("Secret");
                 OnSecretChanged();
             }
@@ -294,7 +294,7 @@ namespace AzurenRole
             {
                 OnStatusChanging(value);
                 ReportPropertyChanging("Status");
-                _Status = StructuralObject.SetValidValue(value, true);
+                _Status = StructuralObject.SetValidValue(value, true, "Status");
                 ReportPropertyChanged("Status");
                 OnStatusChanged();
             }
@@ -318,7 +318,7 @@ namespace AzurenRole
             {
                 OnDescChanging(value);
                 ReportPropertyChanging("Desc");
-                _Desc = StructuralObject.SetValidValue(value, true);
+                _Desc = StructuralObject.SetValidValue(value, true, "Desc");
                 ReportPropertyChanged("Desc");
                 OnDescChanged();
             }
@@ -342,7 +342,7 @@ namespace AzurenRole
             {
                 OnWidthChanging(value);
                 ReportPropertyChanging("Width");
-                _Width = StructuralObject.SetValidValue(value);
+                _Width = StructuralObject.SetValidValue(value, "Width");
                 ReportPropertyChanged("Width");
                 OnWidthChanged();
             }
@@ -366,7 +366,7 @@ namespace AzurenRole
             {
                 OnHeightChanging(value);
                 ReportPropertyChanging("Height");
-                _Height = StructuralObject.SetValidValue(value);
+                _Height = StructuralObject.SetValidValue(value, "Height");
                 ReportPropertyChanged("Height");
                 OnHeightChanged();
             }
@@ -390,7 +390,7 @@ namespace AzurenRole
             {
                 OnStarChanging(value);
                 ReportPropertyChanging("Star");
-                _Star = StructuralObject.SetValidValue(value);
+                _Star = StructuralObject.SetValidValue(value, "Star");
                 ReportPropertyChanged("Star");
                 OnStarChanged();
             }
@@ -398,10 +398,33 @@ namespace AzurenRole
         private Nullable<global::System.Int32> _Star = 5;
         partial void OnStarChanging(Nullable<global::System.Int32> value);
         partial void OnStarChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Callback
+        {
+            get
+            {
+                return _Callback;
+            }
+            set
+            {
+                OnCallbackChanging(value);
+                ReportPropertyChanging("Callback");
+                _Callback = StructuralObject.SetValidValue(value, true, "Callback");
+                ReportPropertyChanged("Callback");
+                OnCallbackChanged();
+            }
+        }
+        private global::System.String _Callback;
+        partial void OnCallbackChanging(global::System.String value);
+        partial void OnCallbackChanged();
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -459,7 +482,7 @@ namespace AzurenRole
 
         #endregion
 
-        #region Primitive Properties
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -478,7 +501,7 @@ namespace AzurenRole
                 {
                     OnidChanging(value);
                     ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value);
+                    _id = StructuralObject.SetValidValue(value, "id");
                     ReportPropertyChanged("id");
                     OnidChanged();
                 }
@@ -503,7 +526,7 @@ namespace AzurenRole
             {
                 OnusernameChanging(value);
                 ReportPropertyChanging("username");
-                _username = StructuralObject.SetValidValue(value, false);
+                _username = StructuralObject.SetValidValue(value, false, "username");
                 ReportPropertyChanged("username");
                 OnusernameChanged();
             }
@@ -527,7 +550,7 @@ namespace AzurenRole
             {
                 OndisplaynameChanging(value);
                 ReportPropertyChanging("displayname");
-                _displayname = StructuralObject.SetValidValue(value, false);
+                _displayname = StructuralObject.SetValidValue(value, false, "displayname");
                 ReportPropertyChanged("displayname");
                 OndisplaynameChanged();
             }
@@ -551,7 +574,7 @@ namespace AzurenRole
             {
                 OnpasswordChanging(value);
                 ReportPropertyChanging("password");
-                _password = StructuralObject.SetValidValue(value, false);
+                _password = StructuralObject.SetValidValue(value, false, "password");
                 ReportPropertyChanged("password");
                 OnpasswordChanged();
             }
@@ -562,7 +585,6 @@ namespace AzurenRole
 
         #endregion
 
-    
         #region Navigation Properties
     
         /// <summary>
@@ -593,5 +615,4 @@ namespace AzurenRole
 
     #endregion
 
-    
 }

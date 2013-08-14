@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AzurenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="AzurenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="AzurenModelStoreContainer">
-          <EntitySet Name="Apps" EntityType="AzurenModel.Store.Apps" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserApp" EntityType="AzurenModel.Store.UserApp" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Users" EntityType="AzurenModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Apps" EntityType="AzurenModel.Store.Apps" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserApp" EntityType="AzurenModel.Store.UserApp" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Users" EntityType="AzurenModel.Store.Users" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="FK_UserApp_App" Association="AzurenModel.Store.FK_UserApp_App">
             <End Role="Apps" EntitySet="Apps" />
             <End Role="UserApp" EntitySet="UserApp" />
@@ -32,6 +32,7 @@
           <Property Name="Width" Type="int" />
           <Property Name="Height" Type="int" />
           <Property Name="Star" Type="int" />
+          <Property Name="Callback" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="UserApp">
           <Key>
@@ -77,8 +78,8 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AzurenModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="AzurenEntities" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="AzurenModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AzurenEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="Users" EntityType="AzurenModel.User" />
           <EntitySet Name="Apps" EntityType="AzurenModel.App" />
           <AssociationSet Name="UserApp" Association="AzurenModel.UserApp">
@@ -90,7 +91,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="username" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="displayname" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
@@ -100,7 +101,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="Name" Unicode="true" FixedLength="false" MaxLength="20" />
           <Property Type="String" Name="Url" Unicode="true" FixedLength="false" MaxLength="255" />
           <Property Type="String" Name="Icon" Unicode="true" FixedLength="false" MaxLength="255" />
@@ -111,6 +112,7 @@
           <Property Type="Int32" Name="Width" DefaultValue="600" />
           <Property Type="Int32" Name="Height" DefaultValue="480" />
           <Property Type="Int32" Name="Star" DefaultValue="5" />
+          <Property Type="String" Name="Callback" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="UserApp">
           <End Type="AzurenModel.User" Role="User" Multiplicity="*" />
@@ -120,7 +122,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="AzurenModelStoreContainer" CdmEntityContainer="AzurenEntities">
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="IsTypeOf(AzurenModel.User)">
@@ -135,7 +137,8 @@
     <EntitySetMapping Name="Apps">
       <EntityTypeMapping TypeName="IsTypeOf(AzurenModel.App)">
         <MappingFragment StoreEntitySet="Apps">
-          <ScalarProperty Name="Star" ColumnName="Star" />
+          <ScalarProperty Name="Callback" ColumnName="Callback" />
+                <ScalarProperty Name="Star" ColumnName="Star" />
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -160,7 +163,7 @@
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
