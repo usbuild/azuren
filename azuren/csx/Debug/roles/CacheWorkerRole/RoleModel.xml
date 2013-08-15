@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RoleModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CacheWorkerRole" version="2.1.6493.1" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <Startup>
+    <Task commandLine="DiagnosticsAgent.exe" taskType="background" relativePath="plugins\Diagnostics">
+      <Environment>
+        <Variable name="RdModuleName" value="Diagnostics" />
+        <Variable name="WaRoleType" value="WorkerRole" />
+      </Environment>
+    </Task>
+    <Task commandLine="DiagnosticsAgent.exe /blockStartup" relativePath="plugins\Diagnostics">
+      <Environment>
+        <Variable name="RdModuleName" value="Diagnostics" />
+        <Variable name="WaRoleType" value="WorkerRole" />
+      </Environment>
+    </Task>
+    <Task commandLine="DotNetUpdate.cmd" executionContext="elevated" relativePath="plugins\Caching">
+      <Environment>
+        <Variable name="IsEmulated">
+          <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+        </Variable>
+        <Variable name="CachingLocalStorePath">
+          <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/LocalResources/LocalResource[@name='DiagnosticStore']/@path" />
+        </Variable>
+        <Variable name="RdModuleName" value="Caching" />
+        <Variable name="WaRoleType" value="WorkerRole" />
+      </Environment>
+    </Task>
+    <Task commandLine="CacheInstaller.exe" executionContext="elevated" relativePath="plugins\Caching">
+      <Environment>
+        <Variable name="RdModuleName" value="Caching" />
+        <Variable name="WaRoleType" value="WorkerRole" />
+      </Environment>
+    </Task>
+  </Startup>
+  <Runtime>
+    <EntryPoint>
+      <NetFxEntryPoint assemblyName="CacheWorkerRole.dll" targetFrameworkVersion="v4.0" />
+    </EntryPoint>
+  </Runtime>
+  <ConfigurationSettings>
+    <Setting name="ConnectionString" nameSpace="Microsoft.WindowsAzure.Plugins.Diagnostics" />
+    <Setting name="NamedCaches" nameSpace="Microsoft.WindowsAzure.Plugins.Caching" />
+    <Setting name="DiagnosticLevel" nameSpace="Microsoft.WindowsAzure.Plugins.Caching" />
+    <Setting name="CacheSizePercentage" nameSpace="Microsoft.WindowsAzure.Plugins.Caching" />
+    <Setting name="ConfigStoreConnectionString" nameSpace="Microsoft.WindowsAzure.Plugins.Caching" />
+  </ConfigurationSettings>
+  <Properties>
+    <Property name="TargetFrameworkVersion" value="v4.0" />
+    <Property name="RoleType" value="Worker" />
+    <Property name="RoleName" value="CacheWorkerRole" />
+    <Property name="ProjectName" value="CacheWorkerRole" />
+    <Property name="Configuration" value="Debug" />
+    <Property name="Platform" value="AnyCPU" />
+    <Property name="RoleTargetFramework" value="v4.0" />
+    <Property name="OutputDir" value="F:\Workspace\azuren\azuren\obj\Debug\CacheWorkerRole\" />
+    <Property name="EntryPoint" value="CacheWorkerRole.dll" />
+    <Property name="SourceDir" value="" />
+    <Property name="SitePhysicalPath" value="" />
+    <Property name="TargetRuntimeVersion" value="v4.0" />
+  </Properties>
+</RoleModel>

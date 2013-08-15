@@ -381,7 +381,7 @@ var nJDSK = (function (wnd, d, $) {
 
         frameWindow: function (id, title, src, width, height, callback, args) {
             var html = '<div class="iframe-window-start" ><div class="iframe-window-error" /></div><iframe data-id="'+id+'"src="' + src + '" class="win-frame"></iframe><div class="iframe-window-mask" />';
-            var win = new nJDSK.Window(width + 10, height + 35, title, html, id, function (e) {
+            var win = new nJDSK.Window(width + 12, height + 35, title, html, id, function (e) {
                 if (e.isNew) {
                     callback(e);
                 }

@@ -8,15 +8,105 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <link href="/Content/app/todo/main.css" rel="stylesheet" type="text/css"/>
+
     <script type="text/javascript" src="/Scripts/azuren/azuren.api.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.2.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <!-- Latest Glyphicons minified CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" type="text/css" media="screen"
+        href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/css/bootstrap-datetimepicker.min.css">
+    <link href="/Content/app/todo/main.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript"
+        src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/js/bootstrap-datetimepicker.min.js
+">
+    </script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
     <script type="text/javascript" src="/Content/app/todo/main.js"></script>
 </head>
 <body>
-    <div>
-        <h1>This is first Application!!!!!</h1>
-        <h1>Hello, @User.Identity.Name, My Friend from outer window!</h1>
-        <button id="btn">test</button>
+    <div id="top">
+        <h2>ToDoList</h2>
+    </div>
+    <div id="content">
+        <div id="list-holder">
+            <div id="list">
+                <ul class="items" id="agenda">
+                    <li>
+                        <div id="agenda-box">
+                            <form class="form">
+                                <input class="input-q form-control" type="text" placeholder="Filter tasks...">
+                                <a href="#" class="action" id="today-link">today</a>
+                                <a href="#" class="action">7 days</a>
+                                <a href="#" class="action more icon">more</a>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+                <ul id="project-list" class="items clearfix">
+                </ul>
+
+                <div class="edit-project-form" style="display: none;">
+                    <input type="text" name="name" class="form-control" id="edit-project-name" />
+                    <a href="#" class="btn btn-default action" id="edit-project-btn">Save</a>
+                    <a href="#" class="btn btn-default action" id="edit-project-cancel">Cancel</a>
+                </div>
+
+                <div id="project-list-man">
+                    <div class="project-man actions">
+                        <a href="#" class="action" id="add-project">Add project</a>
+                    </div>
+                    <div class="add-project-form">
+                        <input type="text" name="name" class="form-control" id="project-name" />
+                        <a href="#" class="btn btn-default action" id="add-project-btn">Add project</a>
+                        <a href="#" class="btn btn-default action" id="add-project-cancel">Cancel</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div id="editor">
+        <div class="task-info">
+            <div class="project-title"></div>
+            <a class="add-task-link action" href="javascript:;">Add Task</a>
+            <input type="hidden" id="add-task-id" />
+            <div class="add-task">
+                <input class="add-task-text form-control" value="" type="text" placeholder="Content" />
+                <a href="javascript:;" class="btn btn-default action" id="add-task-btn">Add Task</a>
+                <a href="javascript:;" class="btn btn-default action" id="add-task-cancel">Cancel</a>
+                <div class="datetimepicker add-task-due input-append">
+                    <input data-format="yyyy-MM-dd hh:mm:ss" type="text" id="add-task-due-text"></input>
+                    <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <ul class="task-list">
+        </ul>
+        <ul class="task-list-complete"></ul>
+
+    </div>
+    <div class="edit-task" style="display: none;">
+        <input type="hidden" class="task-id" />
+        <input class="edit-task-text form-control" value="" type="text" placeholder="Content" />
+        <a href="javascript:;" class="btn btn-default action" id="edit-task-btn">Save</a>
+        <a href="javascript:;" class="btn btn-default action" id="edit-task-cancel">Cancel</a>
+        <div class="datetimepicker edit-task-due input-append">
+            <input data-format="yyyy-MM-dd hh:mm:ss" type="text" id="edit-task-due-text"></input>
+            <span class="add-on">
+                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+            </span>
+        </div>
+    </div>
     </div>
 </body>
 </html>

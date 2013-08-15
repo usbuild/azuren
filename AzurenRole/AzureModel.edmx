@@ -4,11 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AzurenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AzurenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="AzurenModelStoreContainer">
-          <EntitySet Name="Apps" EntityType="AzurenModel.Store.Apps" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="UserApp" EntityType="AzurenModel.Store.UserApp" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Users" EntityType="AzurenModel.Store.Users" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Apps" EntityType="AzurenModel.Store.Apps" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ToDoProjects" EntityType="AzurenModel.Store.ToDoProjects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ToDoTasks" EntityType="AzurenModel.Store.ToDoTasks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserApp" EntityType="AzurenModel.Store.UserApp" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="AzurenModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ToDoProjectToDoTask" Association="AzurenModel.Store.FK_ToDoProjectToDoTask">
+            <End Role="ToDoProjects" EntitySet="ToDoProjects" />
+            <End Role="ToDoTasks" EntitySet="ToDoTasks" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserApp_App" Association="AzurenModel.Store.FK_UserApp_App">
             <End Role="Apps" EntitySet="Apps" />
             <End Role="UserApp" EntitySet="UserApp" />
@@ -34,6 +40,28 @@
           <Property Name="Star" Type="int" />
           <Property Name="Callback" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="ToDoProjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Color" Type="tinyint" Nullable="false" />
+          <Property Name="Email" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToDoTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Due" Type="datetimeoffset" Nullable="false" />
+          <Property Name="Color" Type="tinyint" Nullable="false" />
+          <Property Name="Email" Type="bit" Nullable="false" />
+          <Property Name="ToDoProjectId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserApp">
           <Key>
             <PropertyRef Name="Users_id" />
@@ -51,6 +79,18 @@
           <Property Name="displayname" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="password" Type="varchar" Nullable="false" MaxLength="40" />
         </EntityType>
+        <Association Name="FK_ToDoProjectToDoTask">
+          <End Role="ToDoProjects" Type="AzurenModel.Store.ToDoProjects" Multiplicity="1" />
+          <End Role="ToDoTasks" Type="AzurenModel.Store.ToDoTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToDoProjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ToDoTasks">
+              <PropertyRef Name="ToDoProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserApp_App">
           <End Role="Apps" Type="AzurenModel.Store.Apps" Multiplicity="1" />
           <End Role="UserApp" Type="AzurenModel.Store.UserApp" Multiplicity="*" />
@@ -86,6 +126,12 @@
             <End Role="User" EntitySet="Users" />
             <End Role="App" EntitySet="Apps" />
           </AssociationSet>
+          <EntitySet Name="ToDoProjects" EntityType="AzurenModel.ToDoProject" />
+          <EntitySet Name="ToDoTasks" EntityType="AzurenModel.ToDoTask" />
+          <AssociationSet Name="FK_ToDoProjectToDoTask" Association="AzurenModel.FK_ToDoProjectToDoTask">
+            <End Role="ToDoProject" EntitySet="ToDoProjects" />
+            <End Role="ToDoTask" EntitySet="ToDoTasks" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -117,6 +163,42 @@
         <Association Name="UserApp">
           <End Type="AzurenModel.User" Role="User" Multiplicity="*" />
           <End Type="AzurenModel.App" Role="App" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ToDoProject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Byte" Name="Color" Nullable="false" />
+          <Property Type="Boolean" Name="Email" Nullable="false" />
+          <NavigationProperty Name="ToDoTasks" Relationship="AzurenModel.FK_ToDoProjectToDoTask" FromRole="ToDoProject" ToRole="ToDoTask" />
+        </EntityType>
+        <EntityType Name="ToDoTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="ProjectId" Nullable="false" />
+          <Property Type="String" Name="Content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTimeOffset" Name="Due" Nullable="false" Precision="7" />
+          <Property Type="Byte" Name="Color" Nullable="false" />
+          <Property Type="Boolean" Name="Email" Nullable="false" />
+          <Property Type="Int32" Name="ToDoProjectId" Nullable="false" />
+          <NavigationProperty Name="ToDoProject" Relationship="AzurenModel.FK_ToDoProjectToDoTask" FromRole="ToDoTask" ToRole="ToDoProject" />
+        </EntityType>
+        <Association Name="FK_ToDoProjectToDoTask">
+          <End Type="AzurenModel.ToDoProject" Role="ToDoProject" Multiplicity="1" />
+          <End Type="AzurenModel.ToDoTask" Role="ToDoTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToDoProject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ToDoTask">
+              <PropertyRef Name="ToDoProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -159,7 +241,31 @@
         <ScalarProperty Name="Id" ColumnName="Apps_Id" />
       </EndProperty>
     </AssociationSetMapping>
-  </EntityContainerMapping>
+          <EntitySetMapping Name="ToDoProjects">
+            <EntityTypeMapping TypeName="AzurenModel.ToDoProject">
+              <MappingFragment StoreEntitySet="ToDoProjects">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToDoTasks">
+            <EntityTypeMapping TypeName="AzurenModel.ToDoTask">
+              <MappingFragment StoreEntitySet="ToDoTasks">
+                <ScalarProperty Name="ToDoProjectId" ColumnName="ToDoProjectId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Due" ColumnName="Due" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
@@ -180,8 +286,11 @@
     <Diagrams>
       <Diagram Name="AzureModel">
         <EntityTypeShape EntityType="AzurenModel.User" Width="1.5" PointX="0.875" PointY="0.75" Height="1.787985026041667" IsExpanded="true" />
-        <EntityTypeShape EntityType="AzurenModel.App" Width="1.5" PointX="3.375" PointY="1.125" />
+        <EntityTypeShape EntityType="AzurenModel.App" Width="1.5" PointX="3.375" PointY="0.875" />
         <AssociationConnector Association="AzurenModel.UserApp" />
+        <EntityTypeShape EntityType="AzurenModel.ToDoProject" Width="1.5" PointX="7.375" PointY="1.5" />
+        <EntityTypeShape EntityType="AzurenModel.ToDoTask" Width="1.5" PointX="5.375" PointY="1.375" />
+        <AssociationConnector Association="AzurenModel.FK_ToDoProjectToDoTask" />
       </Diagram>
     </Diagrams>
   </Designer>

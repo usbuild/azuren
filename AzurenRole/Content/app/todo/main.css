@@ -1,2 +1,134 @@
 ﻿body {
+    width: 880px;
+    padding: 0px;
+    margin: -10px auto;
+}
+
+#top {
+    width: 880px;
+    height: 60px;
+    background-color: #eee;
+}
+
+#list-holder {
+    width: 225px;
+    float: left;
+    background-color: #ccc;
+}
+
+#editor {
+    width: 619px;
+    float: left;
+    background-color: #ddd;
+}
+
+ul, ol {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#list-holder {
+    padding: 5px 8px;
+}
+
+#agenda-box a {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+}
+
+.proj-color {
+    width: 18px;
+    height: 18px;
+    float: left;
+    border-radius: 9px;
+    margin-right: 10px;
+}
+
+
+.color-green {
+    background-color: green;
+}
+
+#project-list .name {
+    float: left;
+    width: 169px;
+}
+
+#project-list .menu {
+    float: right;
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+#project-list li {
+    padding: 5px 3px;
+    height: 25px;
+    line-height: 25px;
+}
+
+    #project-list li:hover {
+        background-color: grey;
+        cursor: pointer;
+    }
+
+.project-man .action {
+    color: indianred;
+}
+
+.add-project-form {
+    display: none;
+}
+
+.add-task {
+    display: none;
+}
+
+.add-task-due,.edit-task-due {
+    float: right;
+}
+.add-task-text, .edit-task-text {
+    width: 90%;
+    display: block;
+}
+.task-info {
+    display: none;
+}
+
+#editor {
+    padding: 10px;
+}
+.task-item {
+    padding: 12px 0;
+}
+.task-item:hover {
+    background-color: #eee;
+}
+.task-item .task-color {
+    width: 18px;
+    height: 18px;
+}
+.task-item div{
+    float: left;
+    margin-left: 20px;
+}
+.task-item .menu,.task-item .task-due {
+    float: right;
+    margin-right: 10px;
+}
+.project-title {
+    font-size: 20px;
+border-bottom: solid 1px #ccc;
+margin-bottom: 10px;
+padding-bottom: 10px;
+}
+.active-project {
+    background-color: #eee;
+}
+.active-project .name {
+    font-weight: bold;
+}
+.menu {
+    cursor: pointer;'
 }

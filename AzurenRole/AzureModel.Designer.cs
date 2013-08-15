@@ -20,6 +20,7 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("AzurenModel", "UserApp", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AzurenRole.User), "App", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AzurenRole.App))]
+[assembly: EdmRelationshipAttribute("AzurenModel", "FK_ToDoProjectToDoTask", "ToDoProject", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AzurenRole.ToDoProject), "ToDoTask", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AzurenRole.ToDoTask), true)]
 
 #endregion
 
@@ -102,6 +103,38 @@ namespace AzurenRole
             }
         }
         private ObjectSet<App> _Apps;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ToDoProject> ToDoProjects
+        {
+            get
+            {
+                if ((_ToDoProjects == null))
+                {
+                    _ToDoProjects = base.CreateObjectSet<ToDoProject>("ToDoProjects");
+                }
+                return _ToDoProjects;
+            }
+        }
+        private ObjectSet<ToDoProject> _ToDoProjects;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ToDoTask> ToDoTasks
+        {
+            get
+            {
+                if ((_ToDoTasks == null))
+                {
+                    _ToDoTasks = base.CreateObjectSet<ToDoTask>("ToDoTasks");
+                }
+                return _ToDoTasks;
+            }
+        }
+        private ObjectSet<ToDoTask> _ToDoTasks;
 
         #endregion
 
@@ -121,6 +154,22 @@ namespace AzurenRole
         public void AddToApps(App app)
         {
             base.AddObject("Apps", app);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ToDoProjects EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToToDoProjects(ToDoProject toDoProject)
+        {
+            base.AddObject("ToDoProjects", toDoProject);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ToDoTasks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToToDoTasks(ToDoTask toDoTask)
+        {
+            base.AddObject("ToDoTasks", toDoTask);
         }
 
         #endregion
@@ -445,6 +494,446 @@ namespace AzurenRole
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("AzurenModel.UserApp", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="ToDoProject")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ToDoProject : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ToDoProject object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        /// <param name="color">Initial value of the Color property.</param>
+        /// <param name="email">Initial value of the Email property.</param>
+        public static ToDoProject CreateToDoProject(global::System.Int32 id, global::System.String name, global::System.String userName, global::System.Byte color, global::System.Boolean email)
+        {
+            ToDoProject toDoProject = new ToDoProject();
+            toDoProject.Id = id;
+            toDoProject.Name = name;
+            toDoProject.UserName = userName;
+            toDoProject.Color = color;
+            toDoProject.Email = email;
+            return toDoProject;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, false, "UserName");
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte Color
+        {
+            get
+            {
+                return _Color;
+            }
+            set
+            {
+                OnColorChanging(value);
+                ReportPropertyChanging("Color");
+                _Color = StructuralObject.SetValidValue(value, "Color");
+                ReportPropertyChanged("Color");
+                OnColorChanged();
+            }
+        }
+        private global::System.Byte _Color;
+        partial void OnColorChanging(global::System.Byte value);
+        partial void OnColorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, "Email");
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.Boolean _Email;
+        partial void OnEmailChanging(global::System.Boolean value);
+        partial void OnEmailChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_ToDoProjectToDoTask", "ToDoTask")]
+        public EntityCollection<ToDoTask> ToDoTasks
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ToDoTask>("AzurenModel.FK_ToDoProjectToDoTask", "ToDoTask");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ToDoTask>("AzurenModel.FK_ToDoProjectToDoTask", "ToDoTask", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="ToDoTask")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ToDoTask : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ToDoTask object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="projectId">Initial value of the ProjectId property.</param>
+        /// <param name="content">Initial value of the Content property.</param>
+        /// <param name="due">Initial value of the Due property.</param>
+        /// <param name="color">Initial value of the Color property.</param>
+        /// <param name="email">Initial value of the Email property.</param>
+        /// <param name="toDoProjectId">Initial value of the ToDoProjectId property.</param>
+        public static ToDoTask CreateToDoTask(global::System.Int32 id, global::System.Int32 projectId, global::System.String content, global::System.DateTimeOffset due, global::System.Byte color, global::System.Boolean email, global::System.Int32 toDoProjectId)
+        {
+            ToDoTask toDoTask = new ToDoTask();
+            toDoTask.Id = id;
+            toDoTask.ProjectId = projectId;
+            toDoTask.Content = content;
+            toDoTask.Due = due;
+            toDoTask.Color = color;
+            toDoTask.Email = email;
+            toDoTask.ToDoProjectId = toDoProjectId;
+            return toDoTask;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectId
+        {
+            get
+            {
+                return _ProjectId;
+            }
+            set
+            {
+                OnProjectIdChanging(value);
+                ReportPropertyChanging("ProjectId");
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
+                ReportPropertyChanged("ProjectId");
+                OnProjectIdChanged();
+            }
+        }
+        private global::System.Int32 _ProjectId;
+        partial void OnProjectIdChanging(global::System.Int32 value);
+        partial void OnProjectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Content
+        {
+            get
+            {
+                return _Content;
+            }
+            set
+            {
+                OnContentChanging(value);
+                ReportPropertyChanging("Content");
+                _Content = StructuralObject.SetValidValue(value, false, "Content");
+                ReportPropertyChanged("Content");
+                OnContentChanged();
+            }
+        }
+        private global::System.String _Content;
+        partial void OnContentChanging(global::System.String value);
+        partial void OnContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTimeOffset Due
+        {
+            get
+            {
+                return _Due;
+            }
+            set
+            {
+                OnDueChanging(value);
+                ReportPropertyChanging("Due");
+                _Due = StructuralObject.SetValidValue(value, "Due");
+                ReportPropertyChanged("Due");
+                OnDueChanged();
+            }
+        }
+        private global::System.DateTimeOffset _Due;
+        partial void OnDueChanging(global::System.DateTimeOffset value);
+        partial void OnDueChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte Color
+        {
+            get
+            {
+                return _Color;
+            }
+            set
+            {
+                OnColorChanging(value);
+                ReportPropertyChanging("Color");
+                _Color = StructuralObject.SetValidValue(value, "Color");
+                ReportPropertyChanged("Color");
+                OnColorChanged();
+            }
+        }
+        private global::System.Byte _Color;
+        partial void OnColorChanging(global::System.Byte value);
+        partial void OnColorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, "Email");
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.Boolean _Email;
+        partial void OnEmailChanging(global::System.Boolean value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ToDoProjectId
+        {
+            get
+            {
+                return _ToDoProjectId;
+            }
+            set
+            {
+                OnToDoProjectIdChanging(value);
+                ReportPropertyChanging("ToDoProjectId");
+                _ToDoProjectId = StructuralObject.SetValidValue(value, "ToDoProjectId");
+                ReportPropertyChanged("ToDoProjectId");
+                OnToDoProjectIdChanged();
+            }
+        }
+        private global::System.Int32 _ToDoProjectId;
+        partial void OnToDoProjectIdChanging(global::System.Int32 value);
+        partial void OnToDoProjectIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_ToDoProjectToDoTask", "ToDoProject")]
+        public ToDoProject ToDoProject
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ToDoProject>("AzurenModel.FK_ToDoProjectToDoTask", "ToDoProject").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ToDoProject>("AzurenModel.FK_ToDoProjectToDoTask", "ToDoProject").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ToDoProject> ToDoProjectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ToDoProject>("AzurenModel.FK_ToDoProjectToDoTask", "ToDoProject");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ToDoProject>("AzurenModel.FK_ToDoProjectToDoTask", "ToDoProject", value);
                 }
             }
         }

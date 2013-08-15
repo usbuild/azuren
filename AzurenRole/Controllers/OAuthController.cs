@@ -24,6 +24,7 @@ namespace AzurenRole.Controllers
             return Content("");
         }
 
+        [Authorize]
         public ActionResult Check(int appId)
         {
             App app = GlobalData.user.Apps.SingleOrDefault(a => a.Id == appId);
