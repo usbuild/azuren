@@ -39,6 +39,8 @@
           <Property Name="Height" Type="int" />
           <Property Name="Star" Type="int" />
           <Property Name="Callback" Type="varchar" MaxLength="255" />
+          <Property Name="Install" Type="varchar" MaxLength="1" />
+          <Property Name="Uninstall" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="ToDoProjects">
           <Key>
@@ -159,6 +161,8 @@
           <Property Type="Int32" Name="Height" DefaultValue="480" />
           <Property Type="Int32" Name="Star" DefaultValue="5" />
           <Property Type="String" Name="Callback" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Uninstall" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Install" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="UserApp">
           <End Type="AzurenModel.User" Role="User" Multiplicity="*" />
@@ -219,7 +223,9 @@
     <EntitySetMapping Name="Apps">
       <EntityTypeMapping TypeName="IsTypeOf(AzurenModel.App)">
         <MappingFragment StoreEntitySet="Apps">
-          <ScalarProperty Name="Callback" ColumnName="Callback" />
+          <ScalarProperty Name="Install" ColumnName="Install" />
+                <ScalarProperty Name="Uninstall" ColumnName="Uninstall" />
+                <ScalarProperty Name="Callback" ColumnName="Callback" />
                 <ScalarProperty Name="Star" ColumnName="Star" />
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="Width" ColumnName="Width" />

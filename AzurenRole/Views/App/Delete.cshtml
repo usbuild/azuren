@@ -72,6 +72,25 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Star)
     </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Callback)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Callback)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Install)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Install)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Uninstall)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Uninstall)
+    </div>
 </fieldset>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

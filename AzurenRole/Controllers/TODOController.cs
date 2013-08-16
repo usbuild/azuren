@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -36,7 +37,7 @@ namespace AzurenRole.Controllers
             var Project = entities.ToDoProjects.SingleOrDefault(m => m.UserName == User.Identity.Name && m.Id == projectId);
             if (Project != null)
             {
-                return Json(new { code = 0, data = Project.ToDoTasks.Select(m=>new {Id=m.Id, Content=m.Content, Color=m.Color, ProjectId=m.ProjectId, Due=m.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss")}) }, JsonRequestBehavior.AllowGet);
+                return Json(new { code = 0, data = Project.ToDoTasks.Select(m=>new {Id=m.Id, Content=m.Content, Color=m.Color, ProjectId=m.ProjectId, Due=m.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss")}).Reverse() }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
         }
@@ -130,6 +131,18 @@ namespace AzurenRole.Controllers
                 proj.Name = name;
                 entities.SaveChanges();
                 return Json(new { code = 0, data = name }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult EditProjectColor(int Id, byte Color)
+        {
+            if (!User.Identity.IsAuthenticated) return Redirect(OAuthServer + "/Check?appid=" + AppId);
+            ToDoProject proj = entities.ToDoProjects.SingleOrDefault(m => m.Id == Id && m.UserName == User.Identity.Name);
+            if (proj != null)
+            {
+                proj.Color = Color;
+                entities.SaveChanges();
+                return Json(new { code = 0, data = Color }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
         }

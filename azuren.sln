@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "azuren", "azuren\azuren.ccproj", "{26237FE9-C470-4F27-A494-113F7506F8BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzurenRole", "AzurenRole\AzurenRole.csproj", "{C645FE82-4185-48B5-B838-81E98CD9499F}"
@@ -9,19 +9,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheWorkerRole", "CacheWor
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://vstfcodebox:8080/tfs/theta
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = azuren\\azuren.ccproj
-		SccProjectName1 = azuren
-		SccLocalPath1 = azuren
-		SccProjectUniqueName2 = MvcWebRole1\\AzurenRole.csproj
-		SccProjectName2 = MvcWebRole1
-		SccLocalPath2 = MvcWebRole1
-		SccProjectUniqueName3 = CacheWorkerRole\\CacheWorkerRole.csproj
-		SccProjectName3 = CacheWorkerRole
-		SccLocalPath3 = CacheWorkerRole
+		SccProjectUniqueName0 = AzurenRole\\AzurenRole.csproj
+		SccProjectName0 = AzurenRole
+		SccAuxPath0 = http://vstfcodebox:8080/tfs/theta
+		SccLocalPath0 = AzurenRole
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = CacheWorkerRole\\CacheWorkerRole.csproj
+		SccProjectName1 = CacheWorkerRole
+		SccAuxPath1 = http://vstfcodebox:8080/tfs/theta
+		SccLocalPath1 = CacheWorkerRole
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = azuren\\azuren.ccproj
+		SccProjectName2 = azuren
+		SccAuxPath2 = http://vstfcodebox:8080/tfs/theta
+		SccLocalPath2 = azuren
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

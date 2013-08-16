@@ -85,6 +85,29 @@
             @Html.ValidationMessageFor(model => model.Star)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Callback)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Callback)
+            @Html.ValidationMessageFor(model => model.Callback)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Install)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Install)
+            @Html.ValidationMessageFor(model => model.Install)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Uninstall)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Uninstall)
+            @Html.ValidationMessageFor(model => model.Uninstall)
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>

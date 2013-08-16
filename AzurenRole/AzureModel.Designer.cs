@@ -471,6 +471,54 @@ namespace AzurenRole
         private global::System.String _Callback;
         partial void OnCallbackChanging(global::System.String value);
         partial void OnCallbackChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Uninstall
+        {
+            get
+            {
+                return _Uninstall;
+            }
+            set
+            {
+                OnUninstallChanging(value);
+                ReportPropertyChanging("Uninstall");
+                _Uninstall = StructuralObject.SetValidValue(value, true, "Uninstall");
+                ReportPropertyChanged("Uninstall");
+                OnUninstallChanged();
+            }
+        }
+        private global::System.String _Uninstall;
+        partial void OnUninstallChanging(global::System.String value);
+        partial void OnUninstallChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Install
+        {
+            get
+            {
+                return _Install;
+            }
+            set
+            {
+                OnInstallChanging(value);
+                ReportPropertyChanging("Install");
+                _Install = StructuralObject.SetValidValue(value, true, "Install");
+                ReportPropertyChanged("Install");
+                OnInstallChanged();
+            }
+        }
+        private global::System.String _Install;
+        partial void OnInstallChanging(global::System.String value);
+        partial void OnInstallChanged();
 
         #endregion
 

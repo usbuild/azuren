@@ -44,12 +44,30 @@ ul, ol {
     float: left;
     border-radius: 9px;
     margin-right: 10px;
+    margin-top: 3px;
 }
 
 
-.color-green {
+.color-0 {
     background-color: green;
 }
+
+.color-1 {
+    background-color: red;
+}
+
+.color-2 {
+    background-color: yellow;
+}
+
+.color-3 {
+    background-color: purple;
+}
+
+.color-101 {
+    background-color: gray;
+}
+
 
 #project-list .name {
     float: left;
@@ -69,7 +87,7 @@ ul, ol {
 }
 
     #project-list li:hover {
-        background-color: grey;
+        background-color: #eee;
         cursor: pointer;
     }
 
@@ -85,13 +103,15 @@ ul, ol {
     display: none;
 }
 
-.add-task-due,.edit-task-due {
+.add-task-due, .edit-task-due {
     float: right;
 }
+
 .add-task-text, .edit-task-text {
     width: 90%;
     display: block;
 }
+
 .task-info {
     display: none;
 }
@@ -99,36 +119,81 @@ ul, ol {
 #editor {
     padding: 10px;
 }
+
 .task-item {
     padding: 12px 0;
 }
-.task-item:hover {
-    background-color: #eee;
-}
-.task-item .task-color {
-    width: 18px;
-    height: 18px;
-}
-.task-item div{
-    float: left;
-    margin-left: 20px;
-}
-.task-item .menu,.task-item .task-due {
-    float: right;
-    margin-right: 10px;
-}
+
+    .task-item:hover {
+        background-color: #eee;
+    }
+
+    .task-item .task-color {
+        width: 18px;
+        height: 18px;
+    }
+
+    .task-item div {
+        float: left;
+        margin-left: 20px;
+    }
+
+    .task-item .menu, .task-item .task-due {
+        float: right;
+        margin-right: 10px;
+    }
+
 .project-title {
     font-size: 20px;
-border-bottom: solid 1px #ccc;
-margin-bottom: 10px;
-padding-bottom: 10px;
+    border-bottom: solid 1px #ccc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
+
 .active-project {
     background-color: #eee;
 }
-.active-project .name {
-    font-weight: bold;
-}
+
+    .active-project .name {
+        font-weight: bold;
+    }
+
 .menu {
-    cursor: pointer;'
+    cursor: pointer;
 }
+
+.context-menu {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: solid 1px #ccc;
+    background-color: white;
+    display: none;
+}
+
+.menu-list > li:hover {
+    background-color: #cccccc;
+}
+
+.menu-list > li {
+    padding: 7px 20px;
+    cursor: pointer;
+}
+
+.set-priority li {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    float: left;
+    margin: 5px;
+}
+
+.set-priority {
+    height: 34px;
+}
+
+    .set-priority li:hover {
+        border: solid 2px white;
+height: 16px;
+width: 16px;
+    }

@@ -71,6 +71,19 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Star)
     </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Callback)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Callback)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Install)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Uninstall)
+    </div>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |

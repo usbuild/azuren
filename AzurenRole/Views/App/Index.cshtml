@@ -38,6 +38,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Star)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Callback)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Install)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uninstall)
+        </th>
         <th></th>
     </tr>
 
@@ -69,6 +78,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Star)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Callback)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
