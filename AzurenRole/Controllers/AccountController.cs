@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Configuration;
 using AzurenRole.Models;
-using System.Data;
-using System.Data.Objects;
-using WebMatrix.WebData;
 using AzurenRole.Filters;
 using System.Web.Security;
 using AzurenRole.Utils;
@@ -22,6 +15,7 @@ namespace AzurenRole.Controllers
         //
         // GET: /Account/
 
+        private AzurenEntities context = GlobalData.dbContext;
         public ActionResult Index()
         {
             return View();
@@ -57,9 +51,8 @@ namespace AzurenRole.Controllers
             {
                 return PartialView(form);
             }
-            AzurenEntities context = new AzurenEntities();
-            ObjectQuery<User> query = context.Users.Where("it.username = @username", new ObjectParameter("username", form.UserName)).Where("it.password = @password", new ObjectParameter("password", form.Password));
-            if (query.LongCount() == 0)
+            User u = context.Users.SingleOrDefault(m => m.password == form.Password && m.username == form.UserName);
+            if (u == null)
             {
                 ModelState.AddModelError("", "User Name or password is not correct");
                 return PartialView(form);
@@ -94,10 +87,8 @@ namespace AzurenRole.Controllers
                 return PartialView(form);
             }
 
-            AzurenEntities context = new AzurenEntities();
-
-            ObjectQuery<User> query = context.Users.Where("it.username = @username", new ObjectParameter("username", form.UserName));
-            if (query.LongCount() != 0)
+            User u = context.Users.SingleOrDefault(m => m.username == form.UserName);
+            if (u == null)
             {
                 ModelState.AddModelError("UserName", "The user name has already taken");
                 return PartialView(form);
@@ -136,7 +127,6 @@ namespace AzurenRole.Controllers
                 }
             }
                 (new DataCache("default")).Put(user.username, user);
-                AzurenEntities context = new AzurenEntities();
                 User ent = context.Users.Where(_ => _.id == user.id).Single();
                 ent.displayname = user.displayname;
                 ent.password = user.password;

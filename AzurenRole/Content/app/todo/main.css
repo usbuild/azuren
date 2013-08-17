@@ -145,10 +145,17 @@ ul, ol {
 
 .project-title {
     font-size: 20px;
-    border-bottom: solid 1px #ccc;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    float: left;
 }
+.task-header {
+    border-bottom: solid 1px #ccc;
+}
+.sort-by {
+    float: right;
+}
+
 
 .active-project {
     background-color: #eee;

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AzurenRole.Helpers;
 using AzurenRole.Utils;
-using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace AzurenRole.Controllers
@@ -38,11 +36,7 @@ namespace AzurenRole.Controllers
 
         private CloudTable GetTable()
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-            CloudTable table = tableClient.GetTableReference("rooms");
-            table.CreateIfNotExists();
-            return table;
+            return AzureServiceHelper.GetTable("rooms");
         }
         public ActionResult AddGroup(string name)
         {

@@ -18,6 +18,35 @@ $(function () {
             }
         });
     };
+
+    var diffDate = function(laterDate, earlierDate) {
+       var nTotalDiff = laterDate.getTime() - earlierDate.getTime();
+       var oDiff = new Object();
+       oDiff.days = Math.floor(nTotalDiff/1000/60/60/24);
+       nTotalDiff -= oDiff.days*1000*60*60*24;
+       oDiff.hours = Math.floor(nTotalDiff/1000/60/60);
+       nTotalDiff -= oDiff.hours*1000*60*60;
+       oDiff.minutes = Math.floor(nTotalDiff/1000/60);
+       nTotalDiff -= oDiff.minutes*1000*60;
+       oDiff.seconds = Math.floor(nTotalDiff/1000);
+       return oDiff;
+    };
+
+    var timeToDue = function(date) {
+        var now = new Date();
+        var oDiff;
+        var timeStr = "";
+        if(now.isAfter(date)) {
+            oDiff = diffDate(now, date);
+            timeStr += '<span class="time-overdue">Overdue: ';
+        } else {
+            oDiff = diffDate(date, now);
+            timeStr += '<span class="time-todue">Time to: ';
+        }
+        timeStr += oDiff.days + 'd ' +oDiff.hours + 'h' + oDiff.minutes +'m</span>';
+        return timeStr;
+    };
+
     reloadProjects();
 
     $("#add-project-cancel").click(function (e) {
@@ -50,8 +79,9 @@ $(function () {
 
 
     var buildTask = function (e) {
-        var html = '<li class="task-item clearfix" data-id="' + e.Id + '"> <div class="task-color color-' + e.Color + '" /> <div class="name">' + e.Content +
-            '</div><div class="menu  glyphicon glyphicon-cog"></div><div class="task-due">' + e.Due + '</div><div class="menu"> </div></li>';
+        var html = $('<li class="task-item clearfix" data-id="' + e.Id + '"> <div class="task-color color-' + e.Color + '" /> <div class="name">' + e.Content +
+            '</div><div class="menu  glyphicon glyphicon-cog"></div><div class="task-due" data-date="'+e.Due+'">' + timeToDue(new Date(e.Due)) + '</div><div class="menu"> </div></li>');
+        html.find(".task-due").tooltip({title: e.Due});
         return html;
     };
     $(".add-task-link").click(function (e) {
@@ -112,7 +142,7 @@ $(function () {
         taskItem.hide().after($(".edit-task").show());
         $(".edit-task .edit-task-text").val(taskItem.find(".name").html());
         $(".edit-task .task-id").val(taskItem.data("id"));
-        $(".edit-task .datetimepicker").data('datetimepicker').setLocalDate(new Date(taskItem.find(".task-due").html()));
+        $(".edit-task .datetimepicker").data('datetimepicker').setLocalDate(new Date(taskItem.find(".task-due").data("date")));
     });
 
     $(document).on("dblclick", ".project-item .name", function (e) {
@@ -140,8 +170,7 @@ $(function () {
         var due = $("#edit-task-due-text").val();
         $.post("/TODO/EditTask", { Id: id, Content: content, Due: due }, function (e) {
             if (e.code == 0) {
-                taskItem.find(".name").html(e.data.Content);
-                taskItem.find(".task-due").html(e.data.Due);
+                taskItem.replaceWith(buildTask(e.data));
                 $(".edit-task").hide().prev().show();
             } else {
                 alert("update failed");

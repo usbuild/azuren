@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AzurenRole.Helpers;
 using AzurenRole.Utils;
-using Microsoft.WindowsAzure.Storage;
-using System.Configuration;
-using Microsoft.WindowsAzure.Storage.Table;
-using AzurenRole.Models;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 
@@ -32,11 +28,7 @@ namespace AzurenRole.Controllers
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase upfile, string pictitle, string filename)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
-            CloudBlobClient client = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = client.GetContainerReference("image");
-            container.CreateIfNotExists();
-
+            CloudBlobContainer container = AzureServiceHelper.GetBlobContainer("image");
             string key = DateTime.Now.ToString("yyyyMMddHHmmssffff");
             CloudBlockBlob blob = container.GetBlockBlobReference(key);
             blob.Properties.ContentType = upfile.ContentType;
@@ -47,10 +39,7 @@ namespace AzurenRole.Controllers
 
         public ActionResult Load(String key)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
-            CloudBlobClient client = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = client.GetContainerReference("image");
-            container.CreateIfNotExists();
+            CloudBlobContainer container = AzureServiceHelper.GetBlobContainer("image");
             CloudBlockBlob blob = container.GetBlockBlobReference(key);
             if (!blob.Exists())
             {

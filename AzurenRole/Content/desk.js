@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
 	Azuren.init();
-	Azuren.setBackground('http://www.bing.com/az/hprichbg/rb/HawaiiPineapple_ROW12962179372_1366x768.jpg');
+	Azuren.setBackground('http://s.cn.bing.net/az/hprichbg/rb/ZabriskiePoint_ZH-CN8612415719_1366x768.jpg');
     Azuren.terminal("#terminal", "/Console");
     Azuren.widget.install('wdgClock', '/Widget/Clock', 200, 160);
     Azuren.widget.install('wdgWeather', '/Widget/Weather', 250, 150);

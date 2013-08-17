@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Data.Objects;
+using System.Web.Http;
 using Microsoft.ApplicationServer.Caching;
 using Microsoft.AspNet.SignalR.Hubs;
 
@@ -11,6 +15,24 @@ namespace AzurenRole.Utils
 {
     public class GlobalData
     {
+        public static void SentMail(string target, string subject, string body)
+        {
+            SmtpClient client = new SmtpClient(ConfigurationManager.AppSettings["SmtpServer"],
+                Int32.Parse(ConfigurationManager.AppSettings["SmtpPort"]))
+            {
+                UseDefaultCredentials = false,
+                Credentials =
+                    new NetworkCredential(ConfigurationManager.AppSettings["MailAccount"],
+                       ConfigurationManager.AppSettings["MailPassword"]),
+                EnableSsl = true
+            };
+
+            MailAddress fromAddr = new MailAddress(ConfigurationManager.AppSettings["MailAccount"], "Azuren OS");
+            MailAddress toAddr = new MailAddress(target);
+            MailMessage message = new MailMessage(fromAddr, toAddr) {Body = body, Subject = subject};
+            client.Send(message);
+        }
+
         private static string ObjectContextKey = "AzurenContext";
 
         public static AzurenEntities dbContext

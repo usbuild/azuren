@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using AzurenRole.App_Start;
 
 namespace AzurenRole.Controllers
 {
+
+
     public class TODOController : Controller
     {
+
+
         private static string OAuthServer = "http://127.0.0.1:81/OAuth";
         private static string AppId = "1";
         private static string AppSecret = "111111";
@@ -89,6 +89,7 @@ namespace AzurenRole.Controllers
                 task.ProjectId = projectId;
                 project.ToDoTasks.Add(task);
                 entities.SaveChanges();
+                ToDoTaskQueue.AddToQueue(task);
                 return Json(new { code = 0, data = new { Id = task.Id, Content = task.Content, Color = task.Color, ProjectId = task.ProjectId, Due = task.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss") } }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
@@ -102,6 +103,7 @@ namespace AzurenRole.Controllers
             {
                 entities.DeleteObject(task);
                 entities.SaveChanges();
+                ToDoTaskQueue.DeleteQueue(task);
                 return Json(new { code = 0, data = new { Id = task.Id, Content = task.Content, Color = task.Color, ProjectId = task.ProjectId, Due = task.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss") } }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
@@ -117,6 +119,7 @@ namespace AzurenRole.Controllers
                 if (Request.Params["Color"] != null) t.Color = task.Color;
                 if (Request.Params["Due"] != null) t.Due = task.Due;
                 entities.SaveChanges();
+                ToDoTaskQueue.UpdateQueue(t);
                 return Json(new { code = 0, data = new { Id = t.Id, Content = t.Content, Color = t.Color, ProjectId = t.ProjectId, Due = t.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss") } }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
