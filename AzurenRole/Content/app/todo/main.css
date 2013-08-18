@@ -6,20 +6,44 @@
 
 #top {
     width: 880px;
-    height: 60px;
-    background-color: #eee;
+    height: 30px;
+    border-bottom: 2px solid lightblue;
+}
+
+    #top .logo {
+        font-family: "Consolas";
+        font-style: italic;
+        font-size: 38px;
+        color: lightskyblue;
+        display: block;
+        margin-top: 38px;
+    }
+
+    #top .logo2 {
+        font-family: serif;
+        font-style: normal;
+        color: indianred;
+    }
+
+
+.project-list-header {
+    font-family: Comic Sans Ms;
+color: black;
+font-size: 15px;
+}
+
+.project-man {
+    margin-top: 10px;
 }
 
 #list-holder {
     width: 225px;
     float: left;
-    background-color: #ccc;
 }
 
 #editor {
     width: 619px;
     float: left;
-    background-color: #ddd;
 }
 
 ul, ol {
@@ -120,28 +144,28 @@ ul, ol {
     padding: 10px;
 }
 
-.task-item {
+.task-item, .task-item-done {
     padding: 12px 0;
 }
 
-    .task-item:hover {
+    .task-item:hover, .task-item-done:hover {
         background-color: #eee;
     }
 
-    .task-item .task-color {
-        width: 18px;
-        height: 18px;
-    }
+.task-color {
+    width: 18px;
+    height: 18px;
+}
 
-    .task-item div {
-        float: left;
-        margin-left: 20px;
-    }
+.task-item div, .task-item-done div {
+    float: left;
+    margin-left: 20px;
+}
 
-    .task-item .menu, .task-item .task-due {
-        float: right;
-        margin-right: 10px;
-    }
+.task-item .menu, .task-item .task-due, .task-item-done .task-due, .task-item-done .menu, .task-item-done .task-due {
+    float: right;
+    margin-right: 10px;
+}
 
 .project-title {
     font-size: 20px;
@@ -149,9 +173,11 @@ ul, ol {
     padding-bottom: 10px;
     float: left;
 }
+
 .task-header {
     border-bottom: solid 1px #ccc;
 }
+
 .sort-by {
     float: right;
 }
@@ -193,6 +219,8 @@ ul, ol {
     padding: 0;
     float: left;
     margin: 5px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .set-priority {
@@ -201,6 +229,14 @@ ul, ol {
 
     .set-priority li:hover {
         border: solid 2px white;
-height: 16px;
-width: 16px;
+        height: 16px;
+        width: 16px;
     }
+.task-list-complete {
+    background-color: #eee;
+    color: #777;
+    opacity: 0.5;
+}
+
+.task-list-complete .alert {
+}

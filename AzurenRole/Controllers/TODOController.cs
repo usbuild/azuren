@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -27,18 +28,37 @@ namespace AzurenRole.Controllers
         public ActionResult Projects()
         {
             if (!User.Identity.IsAuthenticated) return Redirect(OAuthServer + "/Check?appid=" + AppId);
-            var Projects = entities.ToDoProjects.Where(a => a.UserName == User.Identity.Name).Select(a => new { Name=a.Name, Id=a.Id, Color=a.Color, Email = a.Email});
+            var Projects = entities.ToDoProjects.Where(a => a.UserName == User.Identity.Name).Select(a => new { Name = a.Name, Id = a.Id, Color = a.Color, Email = a.Email });
             return Json(new { code = 0, data = Projects.ToList() }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Tasks(int projectId)
+        public ActionResult Tasks(int projectId, string condition)
         {
             if (!User.Identity.IsAuthenticated) return Redirect(OAuthServer + "/Check?appid=" + AppId);
-            var Project = entities.ToDoProjects.SingleOrDefault(m => m.UserName == User.Identity.Name && m.Id == projectId);
-            if (Project != null)
+            var project = entities.ToDoProjects.SingleOrDefault(m => m.UserName == User.Identity.Name && m.Id == projectId);
+
+            if (project != null)
             {
-                return Json(new { code = 0, data = Project.ToDoTasks.Select(m=>new {Id=m.Id, Content=m.Content, Color=m.Color, ProjectId=m.ProjectId, Due=m.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss")}).Reverse() }, JsonRequestBehavior.AllowGet);
+                IEnumerable<ToDoTask> result = project.ToDoTasks;
+                if (condition != null)
+                {
+                    var conditions = from x in condition.Split(',')
+                                     select x.Trim();
+                    foreach (var cond in conditions)
+                    {
+                        if (cond.Equals("complete"))
+                        {
+                            result = result.Where(m => m.Color >= 100);
+                        }
+                        else if (cond.Equals("pending"))
+                        {
+                            result = result.Where(m => m.Color < 100);
+                        }
+                    }
+                }
+                return Json(new { code = 0, data = result.Select(m => new { Id = m.Id, Content = m.Content, Color = m.Color, ProjectId = m.ProjectId, Due = m.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss") }).Reverse() }, JsonRequestBehavior.AllowGet);
             }
+
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
         }
 
@@ -119,7 +139,14 @@ namespace AzurenRole.Controllers
                 if (Request.Params["Color"] != null) t.Color = task.Color;
                 if (Request.Params["Due"] != null) t.Due = task.Due;
                 entities.SaveChanges();
-                ToDoTaskQueue.UpdateQueue(t);
+                if (task.Color < 100)
+                {
+                    ToDoTaskQueue.UpdateQueue(t);
+                }
+                else
+                {
+                    ToDoTaskQueue.DeleteQueue(t);
+                }
                 return Json(new { code = 0, data = new { Id = t.Id, Content = t.Content, Color = t.Color, ProjectId = t.ProjectId, Due = t.Due.DateTime.ToString("yyyy-MM-dd HH:mm:ss") } }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);

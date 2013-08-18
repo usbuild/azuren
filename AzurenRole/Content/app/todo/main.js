@@ -19,31 +19,36 @@ $(function () {
         });
     };
 
-    var diffDate = function(laterDate, earlierDate) {
-       var nTotalDiff = laterDate.getTime() - earlierDate.getTime();
-       var oDiff = new Object();
-       oDiff.days = Math.floor(nTotalDiff/1000/60/60/24);
-       nTotalDiff -= oDiff.days*1000*60*60*24;
-       oDiff.hours = Math.floor(nTotalDiff/1000/60/60);
-       nTotalDiff -= oDiff.hours*1000*60*60;
-       oDiff.minutes = Math.floor(nTotalDiff/1000/60);
-       nTotalDiff -= oDiff.minutes*1000*60;
-       oDiff.seconds = Math.floor(nTotalDiff/1000);
-       return oDiff;
+    var diffDate = function (laterDate, earlierDate) {
+        var nTotalDiff = laterDate.getTime() - earlierDate.getTime();
+        var oDiff = new Object();
+        oDiff.days = Math.floor(nTotalDiff / 1000 / 60 / 60 / 24);
+        nTotalDiff -= oDiff.days * 1000 * 60 * 60 * 24;
+        oDiff.hours = Math.floor(nTotalDiff / 1000 / 60 / 60);
+        nTotalDiff -= oDiff.hours * 1000 * 60 * 60;
+        oDiff.minutes = Math.floor(nTotalDiff / 1000 / 60);
+        nTotalDiff -= oDiff.minutes * 1000 * 60;
+        oDiff.seconds = Math.floor(nTotalDiff / 1000);
+        return oDiff;
     };
 
-    var timeToDue = function(date) {
+    var timeToDue = function (date) {
         var now = new Date();
         var oDiff;
         var timeStr = "";
-        if(now.isAfter(date)) {
+        if (now.isAfter(date)) {
             oDiff = diffDate(now, date);
-            timeStr += '<span class="time-overdue">Overdue: ';
+            timeStr += '<span class="time-overdue alert alert-error">overdue: ';
+            timeStr += oDiff.days + 'd ' + oDiff.hours + 'h ' + oDiff.minutes + 'm</span>';
         } else {
             oDiff = diffDate(date, now);
-            timeStr += '<span class="time-todue">Time to: ';
+            if(oDiff.days > 0)
+                timeStr += '<span class="time-todue alert alert-info">';
+            else
+                timeStr += '<span class="time-todue alert alert-warn">';
+            timeStr += oDiff.days + 'd ' + oDiff.hours + 'h ' + oDiff.minutes + 'm left</span>';
         }
-        timeStr += oDiff.days + 'd ' +oDiff.hours + 'h' + oDiff.minutes +'m</span>';
+
         return timeStr;
     };
 
@@ -80,8 +85,14 @@ $(function () {
 
     var buildTask = function (e) {
         var html = $('<li class="task-item clearfix" data-id="' + e.Id + '"> <div class="task-color color-' + e.Color + '" /> <div class="name">' + e.Content +
-            '</div><div class="menu  glyphicon glyphicon-cog"></div><div class="task-due" data-date="'+e.Due+'">' + timeToDue(new Date(e.Due)) + '</div><div class="menu"> </div></li>');
-        html.find(".task-due").tooltip({title: e.Due});
+            '</div><div class="menu  glyphicon glyphicon-cog"></div><div class="task-due" data-date="' + e.Due + '">' + timeToDue(new Date(e.Due)) + '</div><div class="menu"> </div></li>');
+        html.find(".task-due").tooltip({ title: e.Due });
+        return html;
+    };
+    var buildTaskDone = function (e) {
+        var html = $('<li class="task-item-done clearfix" data-id="' + e.Id + '"> <div class="task-color color-' + e.Color + '" /> <div class="name">' + e.Content +
+            '</div></div><div class="menu glyphicon glyphicon-remove task-done-remove"></div><div class="task-due" data-date="' + e.Due + '">' + timeToDue(new Date(e.Due)) + '</div></li>');
+        html.find(".task-due").tooltip({ title: e.Due });
         return html;
     };
     $(".add-task-link").click(function (e) {
@@ -120,7 +131,7 @@ $(function () {
 
         $(".project-item").removeClass("active-project");
         $(this).parents(".project-item").addClass("active-project");
-        $.post("/TODO/Tasks", { projectId: id }, function (e) {
+        $.post("/TODO/Tasks", { projectId: id, condition: "pending" }, function (e) {
             $("#add-task-id").val(id);
             $(".project-title").html(name);
             if (e.code == 0) {
@@ -237,8 +248,8 @@ $(function () {
         var id = $("#task-context-menu").data("id");
         $.post("/TODO/EditTask", { Id: $("#task-context-menu").data("id"), Color: 101 }, function (e) {
             if (e.code == 0) {
-                $(".task-item[data-id=" + id + "]").find(".task-color").removeClass("color-0").removeClass("color-1").removeClass("color-2").removeClass("color-3")
-        .addClass("color-" + e.data.Color);
+                $(".task-item[data-id=" + id + "]").remove();
+                $('.task-list-complete').append(buildTaskDone(e.data));
             } else {
                 alert("update failed");
             }
@@ -261,15 +272,46 @@ $(function () {
         }, "json");
     });
 
-    $("#task-context-menu").on("click", ".set-priority li", function(e) {
+    $("#task-context-menu").on("click", ".set-priority li", function (e) {
         var color = $(this).data("id");
         var id = $("#task-context-menu").data("id");
-        $.post("/TODO/EditTask", { Id: $("#task-context-menu").data("id") , Color: color}, function(e) {
+        $.post("/TODO/EditTask", { Id: $("#task-context-menu").data("id"), Color: color }, function (e) {
             if (e.code == 0) {
                 $(".task-item[data-id=" + id + "]").find(".task-color").removeClass("color-0").removeClass("color-1").removeClass("color-2").removeClass("color-3")
         .addClass("color-" + e.data.Color);
             } else {
                 alert("update failed");
+            }
+        }, "json");
+    });
+
+    $(document).on("click", ".show-all", function () {
+        var listComplete = $(".task-list-complete");
+        if (!listComplete.hasClass("task-done-loaded")) {
+            $.post("/TODO/Tasks", { projectId: $("#add-task-id").val(), condition: "complete" }, function (e) {
+                if (e.code == 0) {
+                    $(".edit-task").hide();
+                    for (x in e.data) {
+                        $(".task-list-complete").append(buildTaskDone(e.data[x]));
+                    }
+                    listComplete.addClass("task-done-loaded");
+                    listComplete.toggle();
+                } else {
+                    alert("Load tasks error!");
+                }
+            });
+        } else {
+            listComplete.toggle();
+        }
+    });
+
+    $(document).on("click", ".task-done-remove", function () {
+        var id = $(this).parents(".task-item-done").data("id");
+        $.post("/TODO/RemoveTask", { taskId: id }, function (e) {
+            if (e.code == 0) {
+                $(".task-item-done[data-id=" + id + "]").remove();
+            } else {
+                alert("Remove task failed");
             }
         }, "json");
     });

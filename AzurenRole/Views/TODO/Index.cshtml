@@ -35,20 +35,23 @@
 </head>
 <body>
     <div id="top">
-        <h2>ToDoList</h2>
+        <span class="logo">List<span class="logo2">&lt;ToDo&gt;</span>
     </div>
     <div id="content">
         <div id="list-holder">
             <div id="list">
+                <!--<div class="project-list-header">Projects</div>-->
                 <ul class="items" id="agenda">
                     <li>
                         <div id="agenda-box">
-                            <form class="form">
-                                <input class="input-q form-control" type="text" placeholder="Filter tasks...">
-                                <a href="#" class="action" id="today-link">today</a>
-                                <a href="#" class="action">7 days</a>
-                                <a href="#" class="action more icon">more</a>
-                            </form>
+                            <!--
+                                <form class="form">
+                                    <input class="input-q form-control" type="text" placeholder="Filter tasks...">
+                                    <a href="#" class="action" id="today-link">today</a>
+                                    <a href="#" class="action">7 days</a>
+                                    <a href="#" class="action more icon">more</a>
+                                </form>
+                                -->
                         </div>
                     </li>
                 </ul>
@@ -78,10 +81,12 @@
                 <div class="task-header clearfix">
                 <div class="project-title"></div>
                     <div class="sort-by btn-group">
-                        <a class="btn btn-default priority-btn">Priority</a>
-                        <a class="btn btn-default duetime-btn">Due Time</a>
-                        <a class="btn btn-default createtime-btn">Creat Time</a>
-                        <a class="btn btn-default show-all">Show Complete</a>
+<!--
+    <a class="btn btn-default priority-btn">Priority</a>
+    <a class="btn btn-default duetime-btn">Due Time</a>
+    <a class="btn btn-default createtime-btn">Creat Time</a>
+    -->
+                        <a class="btn btn-default show-all">Toggle Done Tasks</a>
                     </div>
                     </div>
                 <a class="add-task-link action" href="javascript:;">Add Task</a>
@@ -100,7 +105,7 @@
             </div>
             <ul class="task-list">
             </ul>
-            <ul class="task-list-complete"></ul>
+            <ul class="task-list-complete" style="display: none;" ></ul>
 
         </div>
         <div class="edit-task" style="display: none;">
@@ -138,10 +143,10 @@
             <li class="edit-taskitem">Edit</li>
             <li class="set-priority">
                     <ul>
-                        <li class="color-0" data-id="0"></li>
-                        <li class="color-1" data-id="1"></li>
-                        <li class="color-2" data-id="2"></li>
-                        <li class="color-3" data-id="3"></li>
+                        <li class="color-0" data-id="0">0</li>
+                        <li class="color-1" data-id="1">1</li>
+                        <li class="color-2" data-id="2">2</li>
+                        <li class="color-3" data-id="3">3</li>
                     </ul>
             </li>
         </ul>
