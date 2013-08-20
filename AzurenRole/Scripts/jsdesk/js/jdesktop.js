@@ -445,8 +445,17 @@ var nJDSK = (function (wnd, d, $) {
          * @param string bgimage //the background image we wish to use
          */
         setBackground: function (bgimage) {
-            $('#nJDSKBG').remove();
-            $('body').prepend('<img id="nJDSKBG" src="' + bgimage + '" />');
+            if ($('#nJDSKBG').length == 0) {
+                $('body').prepend('<img id="nJDSKBG" src="' + bgimage + '" />');
+            } else {
+                var img = $("#nJDSKBG");
+                if (img.attr("src") != bgimage) {
+                    img.fadeTo("slow", 0.3,function () {
+                        img.attr("src", bgimage).fadeTo("normal", 1);
+                    });
+                }
+
+            }
         },
 
         /**

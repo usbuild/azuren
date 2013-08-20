@@ -316,6 +316,7 @@
       <DependentUpon>AzureModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\AppController.cs" />
@@ -348,6 +349,10 @@
   <ItemGroup>
     <Content Include="AzureModel.edmx.sql" />
     <Content Include="Content\app\chat.js" />
+    <Content Include="Content\app\clock\clockface.png" />
+    <Content Include="Content\app\clock\hourhand.png" />
+    <Content Include="Content\app\clock\minhand.png" />
+    <Content Include="Content\app\clock\sechand.png" />
     <Content Include="Content\app\minesweeper\audio\click.mp3" />
     <Content Include="Content\app\minesweeper\audio\explode.mp3" />
     <Content Include="Content\app\minesweeper\audio\flag.mp3" />
@@ -385,7 +390,6 @@
     <Content Include="Scripts\azuren\azuren.api.js" />
     <Content Include="Scripts\azuren\azuren.core.js" />
     <Content Include="Content\desk.js" />
-    <Content Include="Content\app\clock\cface.png" />
     <Content Include="Images\icons\store.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Content\themes\base\bootstrap.css" />

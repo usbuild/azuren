@@ -2,10 +2,23 @@
 
 
 $(document).ready(function () {
-	Azuren.init();
-	Azuren.setBackground('http://s.cn.bing.net/az/hprichbg/rb/ZabriskiePoint_ZH-CN8612415719_1366x768.jpg');
+    Azuren.init();
+
+
+    var backgrounds = ['http://s.cn.bing.net/az/hprichbg/rb/ZabriskiePoint_ZH-CN8612415719_1366x768.jpg',
+        'http://www.bing.com/az/hprichbg/rb/DenaliSquirrel_ROW8950751143_1366x768.jpg',
+        'http://www.bing.com/az/hprichbg/rb/HawaiiPineapple_ROW12962179372_1366x768.jpg',
+        'http://www.bing.com/az/hprichbg/rb/AustRifleBird_ROW12055241844_1366x768.jpg'
+    ];
+
+    var setBack = function () {
+        Azuren.setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)]);
+        setTimeout(setBack, 60000);
+    };
+    setBack();
+    
     Azuren.terminal("#terminal", "/Console");
-    Azuren.widget.install('wdgClock', '/Widget/Clock', 200, 160);
+    Azuren.widget.install('wdgClock', '/Widget/Clock', 180, 180);
     Azuren.widget.install('wdgWeather', '/Widget/Weather', 250, 150);
     $.getScript("/Content/app/store.js", function() {
     });

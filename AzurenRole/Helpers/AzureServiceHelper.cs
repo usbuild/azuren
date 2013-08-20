@@ -19,6 +19,11 @@ namespace AzurenRole.Helpers
 
         private static string _serviceBusConnectionString = ConfigurationManager.ConnectionStrings["ServiceBus.ConnectionString"].ConnectionString;
         private static NamespaceManager _nsManager = NamespaceManager.CreateFromConnectionString(_serviceBusConnectionString);
+
+        public static CloudStorageAccount GetStorageAccount()
+        {
+            return _account;
+        }
         public static CloudBlobContainer GetBlobContainer(string name)
         {
             CloudBlobContainer container = _account.CreateCloudBlobClient().GetContainerReference(name);
@@ -47,6 +52,11 @@ namespace AzurenRole.Helpers
                 _nsManager.CreateQueue(path);
             }
             return QueueClient.CreateFromConnectionString(_serviceBusConnectionString, path, ReceiveMode.ReceiveAndDelete);
+        }
+
+        public static CloudBlobContainer GetUserContainer(string username)
+        {
+            return GetBlobContainer("user_" + username);
         }
 
     }

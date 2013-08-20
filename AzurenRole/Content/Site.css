@@ -464,8 +464,8 @@ ul.member-list {
     box-shadow: 0 0 5px black;
 }
 .store-search-content {
-    height: 24px;
-    line-height: 24px;
+    height: 30px;
+    line-height: 30px;
     width: 80px;
     float: right;
     transition: width 0.3s;

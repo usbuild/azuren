@@ -1,125 +1,102 @@
 ﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Clock</title>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.2.min.js"></script>
     <style type="text/css">
-        .clocks {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-        }
-
-        body {
+        * {
             margin: 0;
             padding: 0;
-            width: 200px;
+        }
+
+        #clock {
+            position: relative;
+            width: 540px;
+            height: 540px;
+            margin: 0;
+            background: url(/Content/app/clock/clockface.png);
+            list-style: none;
+            zoom: 0.3;
+        }
+
+        #sec, #min, #hour {
+            position: absolute;
+            width: 30px;
+            height: 600px;
+            top: -25px;
+            left: 250px;
+        }
+
+        #sec {
+            background: url(/Content/app/clock/sechand.png);
+            z-index: 3;
+        }
+
+        #min {
+            background: url(/Content/app/clock/minhand.png);
+            z-index: 2;
+        }
+
+        #hour {
+            background: url(/Content/app/clock/hourhand.png);
+            z-index: 1;
+        }
+
+        p {
+            text-align: center;
+            padding: 10px 0 0 0;
         }
     </style>
-    @Scripts.Render("~/bundles/jquery")
+
     <script type="text/javascript">
-        // inner variables
-        var canvas, ctx;
-        var clockRadius = 75;
-        var clockImage;
 
-        // draw functions :
-        function clear() { // clear canvas function
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        }
+        $(document).ready(function () {
 
-        function drawScene() { // main drawScene function
-            clear(); // clear canvas
+            setInterval(function () {
+                var seconds = new Date().getSeconds();
+                var sdegree = seconds * 6;
+                var srotate = "rotate(" + sdegree + "deg)";
 
-            // get current time
-            var date = new Date();
-            var hours = date.getHours();
-            var minutes = date.getMinutes();
-            var seconds = date.getSeconds();
-            hours = hours > 12 ? hours - 12 : hours;
-            var hour = hours + minutes / 60;
-            var minute = minutes + seconds / 60;
+                $("#sec").css({ "-moz-transform": srotate, "-webkit-transform": srotate, "transform":srotate });
 
-            // save current context
-            ctx.save();
+            }, 1000);
 
-            // draw clock image (as background)
-            ctx.drawImage(clockImage, 0, 0, 150, 150);
 
-            ctx.translate(canvas.width / 2, canvas.height / 2);
-            ctx.beginPath();
+            setInterval(function () {
+                var hours = new Date().getHours();
+                var mins = new Date().getMinutes();
+                var hdegree = hours * 30 + (mins / 2);
+                var hrotate = "rotate(" + hdegree + "deg)";
 
-            // draw numbers
-            ctx.font = '16px Arial';
-            ctx.fillStyle = '#444';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            for (var n = 1; n <= 12; n++) {
-                var theta = (n - 3) * (Math.PI * 2) / 12;
-                var x = clockRadius * 0.7 * Math.cos(theta);
-                var y = clockRadius * 0.7 * Math.sin(theta);
-                ctx.fillText(n, x, y);
-            }
+                $("#hour").css({ "-moz-transform": hrotate, "-webkit-transform": hrotate, "transform": hrotate });
 
-            // draw hour
-            ctx.save();
-            var theta = (hour - 3) * 2 * Math.PI / 12;
-            ctx.rotate(theta);
-            ctx.beginPath();
-            ctx.moveTo(-15, -5);
-            ctx.lineTo(-15, 5);
-            ctx.lineTo(clockRadius * 0.5, 1);
-            ctx.lineTo(clockRadius * 0.5, -1);
-            ctx.fill();
-            ctx.restore();
+            }, 1000);
 
-            // draw minute
-            ctx.save();
-            var theta = (minute - 15) * 2 * Math.PI / 60;
-            ctx.rotate(theta);
-            ctx.beginPath();
-            ctx.moveTo(-15, -4);
-            ctx.lineTo(-15, 4);
-            ctx.lineTo(clockRadius * 0.8, 1);
-            ctx.lineTo(clockRadius * 0.8, -1);
-            ctx.fill();
-            ctx.restore();
 
-            // draw second
-            ctx.save();
-            var theta = (seconds - 15) * 2 * Math.PI / 60;
-            ctx.rotate(theta);
-            ctx.beginPath();
-            ctx.moveTo(-15, -3);
-            ctx.lineTo(-15, 3);
-            ctx.lineTo(clockRadius * 0.9, 1);
-            ctx.lineTo(clockRadius * 0.9, -1);
-            ctx.fillStyle = '#ccc';
-            ctx.fill();
-            ctx.restore();
+            setInterval(function () {
+                var mins = new Date().getMinutes();
+                var mdegree = mins * 6;
+                var mrotate = "rotate(" + mdegree + "deg)";
 
-            ctx.restore();
-        }
+                $("#min").css({ "-moz-transform": mrotate, "-webkit-transform": mrotate, "transform": mrotate });
 
-        // initialization
-        $(function () {
-            canvas = document.getElementById('canvas');
-            ctx = canvas.getContext('2d');
+            }, 1000);
 
-            clockImage = new Image();
-            clockImage.src = '/Content/app/clock/cface.png';
-
-            setInterval(drawScene, 1000); // loop drawScene
         });
 
     </script>
-</head>
-<body>
-    <div class="clocks">
-        <canvas id="canvas" width="150" height="150"></canvas>
-    </div>
-</body>
+    </head>
+
+    <body>
+        <ul id="clock">
+            <li id="sec"></li>
+            <li id="hour"></li>
+            <li id="min"></li>
+        </ul>
+
+    </body>
 </html>
