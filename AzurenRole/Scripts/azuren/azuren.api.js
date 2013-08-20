@@ -25,13 +25,37 @@
             azuren.bind(name, callback);
         };
     };
+
+    var callbackWrapper = function(callback) {
+        var varName = "AzurenCallback" + new Date().getTime();
+        messageMapping[varName] = function (e) {
+            delete messageMapping[varName];
+            callback(e);
+        };
+        return varName;
+    };
+
     azuren.ready = eventCurry("ready");
 
-    azuren.invoke = function (method, data) {
-        window.parent.postMessage({method:method, data:data}, "*");
+    azuren.invoke = function (method, data, callback) {
+        callback ?
+            window.parent.postMessage({ method: method, data: data, 'callback': callbackWrapper(callback) }, "*") :
+            window.parent.postMessage({ method: method, data: data}, "*");
+    };
+    azuren.isInsite = function () {
+        return !(window.parent == window);
     };
 
     window.addEventListener("message", function (e) {
         messageMapping[e.data.type] && messageMapping[e.data.type](e.data.data);
     }, false);
+
+    azuren.postMessage = function (content, callback) {
+        azuren.invoke("postMessage", {}, callback);
+    };
+
+    azuren.notify = function(title, text) {
+        azuren.invoke("notify", {title: title, text: text});
+    };
+
 })(Azuren);

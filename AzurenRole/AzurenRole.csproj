@@ -316,6 +316,8 @@
       <DependentUpon>AzureModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ConsoleController.cs" />
@@ -329,6 +331,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AzureServiceHelper.cs" />
+    <Compile Include="Hubs\AzurenHub.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\TableEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -338,12 +341,40 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="SDK\AzurenClient.cs" />
     <Compile Include="Utils\GlobalData.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AzureModel.edmx.sql" />
     <Content Include="Content\app\chat.js" />
+    <Content Include="Content\app\minesweeper\audio\click.mp3" />
+    <Content Include="Content\app\minesweeper\audio\explode.mp3" />
+    <Content Include="Content\app\minesweeper\audio\flag.mp3" />
+    <Content Include="Content\app\minesweeper\audio\lose.mp3" />
+    <Content Include="Content\app\minesweeper\audio\opening.mp3" />
+    <Content Include="Content\app\minesweeper\audio\win.mp3" />
+    <Content Include="Content\app\minesweeper\css\Demo.css" />
+    <Content Include="Content\app\minesweeper\img\1.png" />
+    <Content Include="Content\app\minesweeper\img\2.png" />
+    <Content Include="Content\app\minesweeper\img\3.png" />
+    <Content Include="Content\app\minesweeper\img\4.png" />
+    <Content Include="Content\app\minesweeper\img\5.png" />
+    <Content Include="Content\app\minesweeper\img\6.png" />
+    <Content Include="Content\app\minesweeper\img\7.png" />
+    <Content Include="Content\app\minesweeper\img\8.png" />
+    <Content Include="Content\app\minesweeper\img\background.png" />
+    <Content Include="Content\app\minesweeper\img\BlankSquare.png" />
+    <Content Include="Content\app\minesweeper\img\BlueSquare.png" />
+    <Content Include="Content\app\minesweeper\img\icon.png" />
+    <Content Include="Content\app\minesweeper\img\MineBlack.png" />
+    <Content Include="Content\app\minesweeper\img\MineRed.png" />
+    <Content Include="Content\app\minesweeper\img\NewFlag.png" />
+    <Content Include="Content\app\minesweeper\img\pointer.png" />
+    <Content Include="Content\app\minesweeper\js\Board.js" />
+    <Content Include="Content\app\minesweeper\js\Demo.js" />
+    <Content Include="Content\app\minesweeper\js\FeatureDetection.js" />
+    <Content Include="Content\app\minesweeper\js\Square.js" />
     <Content Include="Content\app\store.js" />
     <Content Include="Content\app\todo\icon.png" />
     <Content Include="Content\app\todo\main.css" />
@@ -430,6 +461,10 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\pnotify\jquery.pnotify.default.css" />
+    <Content Include="Scripts\pnotify\jquery.pnotify.js" />
+    <Content Include="Scripts\pnotify\jquery.pnotify.min.js" />
+    <Content Include="Scripts\pnotify\use for pines style icons\jquery.pnotify.default.icons.css" />
     <Content Include="Scripts\terminal\jquery.mousewheel-min.js" />
     <Content Include="Scripts\terminal\jquery.terminal-min.js" />
     <Content Include="Scripts\terminal\jquery.terminal.css" />
@@ -925,6 +960,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Signup.cshtml" />
+    <Content Include="Content\app\minesweeper\font\pulp.woff" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -944,6 +980,7 @@
     <Content Include="Views\App\Create.cshtml" />
     <Content Include="Views\App\Edit.cshtml" />
     <Content Include="Views\App\Delete.cshtml" />
+    <Content Include="Views\Game\MineSweeper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

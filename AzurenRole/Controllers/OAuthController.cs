@@ -39,7 +39,7 @@ namespace AzurenRole.Controllers
             }
         }
 
-        public ActionResult getToken(string key, string secret)
+        public ActionResult GetToken(string key, string secret)
         {
             MemoryCache cache = MemoryCache.Default;
             if (cache.Contains(key))

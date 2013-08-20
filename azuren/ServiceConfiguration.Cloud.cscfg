@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ServiceConfiguration serviceName="azuren" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="2" osVersion="*" schemaVersion="2013-03.2.0">
+<ServiceConfiguration serviceName="azuren" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-03.2.0">
   <Role name="CacheWorkerRole">
     <Instances count="1" />
     <ConfigurationSettings>

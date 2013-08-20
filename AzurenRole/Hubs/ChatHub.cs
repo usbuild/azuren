@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using Microsoft.AspNet.SignalR;
-using DotNetOpenAuth.AspNet;
-using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Configuration;
@@ -15,9 +12,7 @@ using System.Collections;
 using AzurenRole;
 using System.Data.Objects;
 using System.Collections.Concurrent;
-using Microsoft.ApplicationServer.Caching;
 using System.Text.RegularExpressions;
-using AzurenRole.Utils;
 
 namespace SinalRChat
 {

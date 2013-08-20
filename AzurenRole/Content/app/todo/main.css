@@ -73,19 +73,19 @@ ul, ol {
 
 
 .color-0 {
-    background-color: green;
+    background-color: #15992A;
 }
 
 .color-1 {
-    background-color: red;
+    background-color: #FF2E12;
 }
 
 .color-2 {
-    background-color: yellow;
+    background-color: #FF981D;
 }
 
 .color-3 {
-    background-color: purple;
+    background-color: #AA4344;
 }
 
 .color-101 {
@@ -239,4 +239,10 @@ ul, ol {
 }
 
 .task-list-complete .alert {
+}
+#project-context-color .menu-list {
+    width: 150px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
 }

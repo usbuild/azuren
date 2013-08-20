@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.WindowsAzure.Storage;
@@ -91,8 +92,6 @@ namespace AzurenRole.Controllers
                                     res.Append("</tr>");
                                     used = false;
                                 }
-                                else
-                                {
                                     res.Append("<tr><td>");
                                     res.Append(o.PartitionKey);
                                     res.Append("</td><td>");
@@ -133,7 +132,6 @@ namespace AzurenRole.Controllers
                                         res.Append("</td>");
                                     }
                                     res.Append("</tr>");
-                                }
                             }
                             if (!used) res.Append("</table>");
                             else res.Append(Error("Empty table"));

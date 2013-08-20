@@ -39,14 +39,14 @@ $(function () {
         if (now.isAfter(date)) {
             oDiff = diffDate(now, date);
             timeStr += '<span class="time-overdue alert alert-error">overdue: ';
-            timeStr += oDiff.days + 'd ' + oDiff.hours + 'h ' + oDiff.minutes + 'm</span>';
+            timeStr +=  (oDiff.days == 0 ? "" : (oDiff.days + 'd ')) + (oDiff.hours == 0?"":(oDiff.hours + 'h '))+ oDiff.minutes + 'm</span>';
         } else {
             oDiff = diffDate(date, now);
-            if(oDiff.days > 0)
+            if (oDiff.days > 0)
                 timeStr += '<span class="time-todue alert alert-info">';
             else
                 timeStr += '<span class="time-todue alert alert-warn">';
-            timeStr += oDiff.days + 'd ' + oDiff.hours + 'h ' + oDiff.minutes + 'm left</span>';
+            timeStr += (oDiff.days == 0 ? "" : (oDiff.days + 'd ')) + (oDiff.hours == 0?"":(oDiff.hours + 'h ')) + oDiff.minutes + 'm left</span>';
         }
 
         return timeStr;
@@ -82,17 +82,21 @@ $(function () {
         $(".add-project-form").show();
     });
 
+    var formatDate = function(date) {
+        return (new Date(date)).toString("yyyy-MM-dd HH:mm:ss");
+    };
+
 
     var buildTask = function (e) {
         var html = $('<li class="task-item clearfix" data-id="' + e.Id + '"> <div class="task-color color-' + e.Color + '" /> <div class="name">' + e.Content +
-            '</div><div class="menu  glyphicon glyphicon-cog"></div><div class="task-due" data-date="' + e.Due + '">' + timeToDue(new Date(e.Due)) + '</div><div class="menu"> </div></li>');
-        html.find(".task-due").tooltip({ title: e.Due });
+            '</div><div class="menu  glyphicon glyphicon-cog"></div><div class="task-due" data-date="' + formatDate(e.Due)+ '">' + timeToDue(new Date(e.Due)) + '</div><div class="menu"> </div></li>');
+        html.find(".task-due").tooltip({ title: formatDate(e.Due) });
         return html;
     };
     var buildTaskDone = function (e) {
         var html = $('<li class="task-item-done clearfix" data-id="' + e.Id + '"> <div class="task-color color-' + e.Color + '" /> <div class="name">' + e.Content +
-            '</div></div><div class="menu glyphicon glyphicon-remove task-done-remove"></div><div class="task-due" data-date="' + e.Due + '">' + timeToDue(new Date(e.Due)) + '</div></li>');
-        html.find(".task-due").tooltip({ title: e.Due });
+            '</div></div><div class="menu glyphicon glyphicon-remove task-done-remove"></div><div class="task-due" data-date="' + formatDate(e.Due)+ '">' + timeToDue(new Date(e.Due)) + '</div></li>');
+        html.find(".task-due").tooltip({ title: formatDate(e.Due) });
         return html;
     };
     $(".add-task-link").click(function (e) {
@@ -102,7 +106,7 @@ $(function () {
     });
     $("#add-task-btn").click(function (e) {
         e.preventDefault();
-        $.post("/TODO/AddTask", { projectId: $("#add-task-id").val(), content: $(".add-task-text").val(), due: $("#add-task-due-text").val() }, function (e) {
+        $.post("/TODO/AddTask", { projectId: $("#add-task-id").val(), content: $(".add-task-text").val(), due: $("#add-task-due-text").val()+" +0800" }, function (e) {
             $(".add-task").hide().find(".add-task-text").val("");
             $(".add-task-link").show();
             $(".task-list").prepend(buildTask(e.data));
@@ -178,7 +182,7 @@ $(function () {
         var taskItem = editTask.prev();
         var content = $(".edit-task .edit-task-text").val();
         var id = $(".edit-task .task-id").val();
-        var due = $("#edit-task-due-text").val();
+        var due = $("#edit-task-due-text").val() + " +0800";
         $.post("/TODO/EditTask", { Id: id, Content: content, Due: due }, function (e) {
             if (e.code == 0) {
                 taskItem.replaceWith(buildTask(e.data));

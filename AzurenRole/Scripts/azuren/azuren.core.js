@@ -50,7 +50,9 @@
     Azuren.app.install = function (id, name, icon, callback) {
         desk.iconHelper.addIcon(id, name, icon, callback);
     };
+    var appList = {};
     Azuren.app.installEx = function (id, name, icon, url, width, height) {
+        appList[id] = {name: name, url: url, icon: icon};
         desk.iconHelper.addIcon(id, name, icon, function () {
             desk.frameWindow(id, name, url, width, height, function (e) {
                 e.$content.bind("ready", function () {
@@ -81,11 +83,40 @@
         }
     };
 
+    var serverEvents = {
+        "app_msg": function (data) {
+            if (data.data['content']) {
+                Azuren.notify(appList[data.appId].name, data.data["content"]);
+            } else {
+                Azuren.notify(appList[data.appId].name, "");
+            }
+        }
+};
+    //==Azuren Hub Connection
+    Azuren.hub = $.connection.azurenHub;
+    $.connection.hub.start().done(function() {
+    });
+    
+    Azuren.hub.client.HandleMessage = function (type, content) {
+        if (serverEvents[type]) serverEvents[type](content);
+    };
+
     Azuren.events = {};
+    Azuren.notify = function (title, text) {
+        $.pnotify({ title: title, text: text, hide: true, history: false, delay: 2000, animation: { effect_in: "show", effect_out: "fade" } });
+    };
 
     Azuren.events['alert'] = function(id, data) {
         console.dir(data);
     };
+
+    Azuren.events["postMessage"] = function(id, data, callback) {
+    };
+
+    Azuren.events["notify"] = function(id, data) {
+        Azuren.notify(data.title, data.text);
+    };
+
 
     window.addEventListener("message", function (e) {
         var iframe = null;
@@ -96,8 +127,14 @@
             }
         });
         if (iframe) {
-              if (Azuren.events[e.data.method]) {
+            if (Azuren.events[e.data.method]) {
+                if(e.data.callback)
+                  Azuren.events[e.data.method]($(iframe).data("id"), e.data.data, function (data) {
+                      Azuren.app.sendMessage($(iframe).data("id"), e.data.callback, data);
+                  });
+                else 
                   Azuren.events[e.data.method]($(iframe).data("id"), e.data.data);
+                    
               }        
         }
     }, false);

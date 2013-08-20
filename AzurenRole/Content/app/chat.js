@@ -98,9 +98,11 @@ Chat.chatHub.client.userOnline = function (groupId, user) {
     addUserToList(groupId, user);
 };
 
+/*
 $.connection.hub.start().done(function () {
 
 });
+*/
 
 $(document).on("click", ".chat-box-post button", function (e, t) {
     var content = $(this).parents(".contentarea");
