@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.ServiceModel.Channels;
-using System.Web;
+﻿using System.Configuration;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure.Storage;
@@ -15,51 +10,49 @@ namespace AzurenRole.Helpers
 {
     public class AzureServiceHelper
     {
-        private static CloudStorageAccount _account = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
+        private static readonly CloudStorageAccount Account = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
 
-        private static string _serviceBusConnectionString = ConfigurationManager.ConnectionStrings["ServiceBus.ConnectionString"].ConnectionString;
-        private static NamespaceManager _nsManager = NamespaceManager.CreateFromConnectionString(_serviceBusConnectionString);
+        private static readonly string ServiceBusConnectionString = ConfigurationManager.ConnectionStrings["ServiceBus.ConnectionString"].ConnectionString;
+        private static readonly NamespaceManager NsManager = NamespaceManager.CreateFromConnectionString(ServiceBusConnectionString);
 
         public static CloudStorageAccount GetStorageAccount()
         {
-            return _account;
+            return Account;
         }
         public static CloudBlobContainer GetBlobContainer(string name)
         {
-            CloudBlobContainer container = _account.CreateCloudBlobClient().GetContainerReference(name);
+            CloudBlobContainer container = Account.CreateCloudBlobClient().GetContainerReference(name);
             container.CreateIfNotExists();
             return container;
         }
 
         public static CloudQueue GetCloudQueue(string name)
         {
-            CloudQueue queue = _account.CreateCloudQueueClient().GetQueueReference(name);
+            CloudQueue queue = Account.CreateCloudQueueClient().GetQueueReference(name);
             queue.CreateIfNotExists();
             return queue;
         }
 
         public static CloudTable GetTable(string name)
         {
-            CloudTable table = _account.CreateCloudTableClient().GetTableReference(name);
+            CloudTable table = Account.CreateCloudTableClient().GetTableReference(name);
             table.CreateIfNotExists();
             return table;
         }
 
         public static QueueClient GetQueueClient(string path)
         {
-            if (!_nsManager.QueueExists(path))
+            if (!NsManager.QueueExists(path))
             {
-                _nsManager.CreateQueue(path);
+                NsManager.CreateQueue(path);
             }
-            return QueueClient.CreateFromConnectionString(_serviceBusConnectionString, path, ReceiveMode.ReceiveAndDelete);
+            return QueueClient.CreateFromConnectionString(ServiceBusConnectionString, path, ReceiveMode.ReceiveAndDelete);
         }
 
         public static CloudBlobContainer GetUserContainer(string username)
         {
-            return GetBlobContainer("user_" + username);
+            return GetBlobContainer("user" + username);
         }
 
     }
-
-   
 }

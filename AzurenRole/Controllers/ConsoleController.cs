@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 using AzurenRole.Helpers;
+using AzurenRole.Utils;
 using Microsoft.SqlServer.Server;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -42,7 +46,7 @@ namespace AzurenRole.Controllers
         }
 
 
-        public ActionResult Table(string[] args)
+        public ActionResult Table(Dictionary<string, string> env, string[] args)
         {
             string usage = "Usage: /table [list | show] [tableName]";
             if (args.Length > 0)
@@ -135,8 +139,8 @@ namespace AzurenRole.Controllers
                                 res.Append("</tr>");
                             }
                             if (!used) res.Append("</table>");
-                            else 
-                            return Error("Empty table");
+                            else
+                                return Error("Empty table");
 
                             return SuccessWrapper(res.ToString());
                         }
@@ -157,32 +161,118 @@ namespace AzurenRole.Controllers
         }
 
         [Authorize]
-        public ActionResult Ls(string[] args)
+        public ActionResult Ls(Dictionary<string, string> env, string[] args)
         {
-            CloudBlobContainer container = AzureServiceHelper.GetBlobContainer(User.Identity.Name);
-            var sb = new StringBuilder();
-            foreach (IListBlobItem item in container.ListBlobs(null, false))
+            return Dir(env, args);
+        }
+
+        [Authorize]
+        public ActionResult Touch(Dictionary<string, string> env, string[] args)
+        {
+            CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+            var file = new BlobFile(container, env["path"] + args[0]);
+            if (!file.Exists())
             {
-                var blob = item as CloudBlockBlob;
-                if (blob != null)
+                file.Create();
+                return SuccessWrapper(String.Format("File \"{0}\" Created", args[0]));
+            }
+            return SuccessWrapper(String.Format("File \"{0}\" Updated", args[0]));
+        }
+
+        [Authorize]
+        public JsonResult Cd(Dictionary<string, string> env, string[] args)
+        {
+            if (args.Length > 0)
+            {
+                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+                var file = new BlobFile(container, env["path"] + args[0]);
+                if (file.IsDirectory())
                 {
-                    sb.Append(String.Format("{0} : {1}", blob.Uri, blob.Properties.Length));
+                    return SuccessWrapper(env["path"] + args[0] + "/");
                 }
+                else
+                {
+                    return Error("Directory \"" + args[0] + "\" doesn't exist.");
+                }
+            }
+            return Error("Usage: cd [directory]");
+        }
+
+        [Authorize]
+        public JsonResult Mkdir(Dictionary<string, string> env, string[] args)
+        {
+            if (args.Length > 0)
+            {
+                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+                var file = new BlobFile(container, env["path"] + args[0]);
+                if (file.Exists())
+                {
+                    return Error("Directory \"" + args[0] + "\" already exists.");
+                }
+                else
+                {
+                    file.CreateDirecotry();
+                    return SuccessWrapper(String.Format("Directory \"{0}\" Created", args[0]));
+                }
+            }
+            return Error("Usage: mkdir [directory]");
+        }
+
+        [Authorize]
+        public JsonResult Rm(Dictionary<string, string> env, string[] args)
+        {
+            if (args.Length > 0)
+            {
+                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+                var file = new BlobFile(container, env["path"] + args[0]);
+                if (file.Exists())
+                {
+                    return SuccessWrapper(String.Format("{0} files deleted", file.Delete()));
+                }
+                return Error("File Not Exist");
+            }
+            return Error("Usage: rm [file]");
+        }
+
+        [Authorize]
+        public JsonResult Dir(Dictionary<string, string> env, string[] args)
+        {
+            CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+            var file = new BlobFile(container, env["path"]);
+            var sb = new StringBuilder();
+            foreach (var s in file.ListFiles())
+            {
+                sb.Append(String.Format("{0}     {1}      {2}     {3}<br />", s.Name(), s.IsDirectory() ? "D" : "F", s.Properties().Length, s.Properties().LastModified));
             }
             return SuccessWrapper(sb.ToString());
         }
 
+        [HttpPost]
         [Authorize]
-        public ActionResult Touch(string[] args)
+        public ActionResult Upload(HttpPostedFileBase file, string path, string[] args)
         {
-            CloudBlobContainer container = AzureServiceHelper.GetBlobContainer(User.Identity.Name);
-            CloudBlockBlob blob = container.GetBlockBlobReference(args[0]);
-            if (!blob.Exists())
+            if (args.Length > 0)
             {
-                blob.UploadFromStream(new MemoryStream());
-                return SuccessWrapper(String.Format("File \"{0}\" Created", args[0]));
+                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+                try
+                {
+                    new BlobFile(container, path + args[0]).UploadFile(file);
+                    return SuccessWrapper("Upload successfully");
+                }
+                catch (Exception ex)
+                {
+                    return Error("Upload file failed");
+                }
             }
-            return SuccessWrapper(String.Format("File \"{0}\" Updated", args[0]));
+            return Error("Usage: upload [filename]");
+        }
+
+        [Authorize]
+        public ActionResult Download(string name, string path)
+        {
+            CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+            var file = new BlobFile(container, path + name);
+            return file.DonwloadFile(Response, name);
         }
     }
 }

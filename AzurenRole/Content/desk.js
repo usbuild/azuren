@@ -5,11 +5,9 @@ $(document).ready(function () {
     Azuren.init();
 
 
-    var backgrounds = ['http://s.cn.bing.net/az/hprichbg/rb/ZabriskiePoint_ZH-CN8612415719_1366x768.jpg',
-        'http://www.bing.com/az/hprichbg/rb/DenaliSquirrel_ROW8950751143_1366x768.jpg',
-        'http://www.bing.com/az/hprichbg/rb/HawaiiPineapple_ROW12962179372_1366x768.jpg',
-        'http://www.bing.com/az/hprichbg/rb/AustRifleBird_ROW12055241844_1366x768.jpg'
-    ];
+    var backgrounds = $.map(new Array(24), function(a, i) {
+        return "http://1.su.bdimg.com/all_skin/" + (i + 1) + ".jpg";
+    });
 
     var setBack = function () {
         Azuren.setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)]);

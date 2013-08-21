@@ -2044,15 +2044,17 @@
     // JSON-RPC CALL
     // -----------------------------------------------------------------------
     var id = 0;
-    $.jrpc = function (url, method, params, success, error) {
-        
+    $.jrpc = function (url, method, params, env, success, error) {
         return $.ajax({
             url: url + "/" + method,
-            data: $.json_stringify({ args: params }),
+            data: $.json_stringify($.extend({}, env, { args: params })),//{env: $.json_stringify(env), args: $.json_stringify(params)},
+            //$.json_stringify($.extend({},others, {args: params })),
             success: success,
             error: error,
             contentType: 'application/json',
+            accept: 'application/json',
             dataType: 'json',
+            //processData: false,
             async: true,
             cache: false,
             //timeout: 1,
@@ -2172,9 +2174,17 @@
             if (typeof settings.processArguments === 'function') {
                 return processCommand(command, settings.processArguments);
             } else if (settings.processArguments) {
-                return $.terminal.parseCommand(command);
+                var obj = $.terminal.parseCommand(command);
+                if (settings.processCmd && typeof settings.processCmd === 'function') {
+                    obj.args = settings.processCmd(obj.args, self);
+                }
+                return obj;
             } else {
-                return $.terminal.splitCommand(command);
+                var obj = $.terminal.splitCommand(command);
+                if (settings.processCmd && typeof settings.processCmd === 'function') {
+                    obj.args = settings.processCmd(obj.args, self);
+                }
+                return obj;
             }
         }
         // -----------------------------------------------------------------------
@@ -2199,11 +2209,14 @@
         function make_basic_json_rpc_interpreter(url) {
             var service = function (method, params) {
                 self.pause();
-                $.jrpc(url, method, params, function (json) {
-                    if (!json.code) {
-                        display_object(json.data);
+                $.jrpc(url, method, params, {env: self.env}, function (json) {
+                    if (settings.afterCmd && typeof settings.afterCmd == 'object' && settings.afterCmd[method] && settings.afterCmd[method](params, self, json)) {
                     } else {
-                        self.error('&#91;Azuren&#93; ' + json.data);
+                        if (!json.code) {
+                            display_object(json.data);
+                        } else {
+                            self.error('&#91;Azuren&#93; ' + json.data);
+                        }
                     }
                     self.resume();
                 }, function (xhr, status, error) {
@@ -2221,6 +2234,9 @@
                     return;
                 }
                 command = get_processed_command(command);
+                if (settings.beforeCmd && typeof settings.beforeCmd === 'object' && settings.beforeCmd[command.name] && settings.beforeCmd[command.name](self, command.args)) {
+                    return;
+                }
                 if (!settings.login || command.name === 'help') {
                     // allow to call help without token
                     service(command.name, command.args);
@@ -3490,6 +3506,8 @@
             });
             output = $('<div>').addClass('terminal-output').appendTo(self);
             self.addClass('terminal');
+            //usbuild: ADD Here
+            self.env = settings.env || {};
             // keep focus in clipboard textarea in mobile
             if (('ontouchstart' in window) || window.DocumentTouch &&
                 document instanceof DocumentTouch) {
