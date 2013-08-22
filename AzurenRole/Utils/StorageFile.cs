@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -37,6 +39,7 @@ namespace AzurenRole.Utils
             this._blob = blob;
             this._container = blob.Container;
             this._path = blob.Name;
+            if (Exists()) this._blob.FetchAttributes();
         }
 
         public Boolean Exists()
@@ -60,6 +63,7 @@ namespace AzurenRole.Utils
         {
             if (_blob.Exists()) return false;
             _blob.UploadFromStream(new MemoryStream());
+            _blob.Properties.ContentType = MimeMapping.GetMimeMapping(Name());
             _blob.Metadata.Add("type", "f");
             _blob.SetMetadata();
             return true;
@@ -101,6 +105,11 @@ namespace AzurenRole.Utils
 
         public string Name()
         {
+            return _blob.Name.Substring(_blob.Name.LastIndexOf('/') + 1);
+        }
+
+        public string Path()
+        {
             return _blob.Name;
         }
 
@@ -118,7 +127,9 @@ namespace AzurenRole.Utils
             {
                 if (listBlobItem is CloudBlockBlob)
                 {
-                    list.Add(new BlobFile((CloudBlockBlob)listBlobItem));
+                    var blockBlobItem = new BlobFile((CloudBlockBlob)listBlobItem);
+                    if (blockBlobItem.Name() == "") continue;
+                    list.Add(blockBlobItem);
                 }
             }
             return list;
@@ -128,24 +139,72 @@ namespace AzurenRole.Utils
         {
             _blob.Properties.ContentType = file.ContentType;
             _blob.UploadFromStream(file.InputStream);
+            _blob.Metadata.Add("type", "f");
+            _blob.SetMetadata();
             return true;
         }
 
-        public ActionResult DonwloadFile(HttpResponseBase response, string filename)
+        public ActionResult ImageThumb(HttpRequestBase request, HttpResponseBase response)
         {
             if (Exists() && !IsDirectory())
             {
+                DateTime dt;
+                if (DateTime.TryParse(request.Headers["If-Modified-Since"], out dt) && (_blob.Properties.LastModified.Value - DateTime.SpecifyKind(dt.ToUniversalTime(), DateTimeKind.Utc)).TotalSeconds < 1.0)
+                {
+                    response.StatusCode = 304;
+                    return new EmptyResult();
+                }
+                response.Cache.SetCacheability(HttpCacheability.Public);
+                response.Cache.SetValidUntilExpires(true);
+                response.Cache.SetMaxAge(TimeSpan.FromSeconds(300));
+                response.Expires = 300;
                 response.ContentType = _blob.Properties.ContentType;
-                response.AppendHeader("Content-Disposition", "attachment; filename=" + filename);
-                _blob.DownloadToStream(response.OutputStream);
-                return new EmptyResult();
+
+                Stream stream = _blob.OpenRead();
+                Image image = Image.FromStream(stream);
+                Image thumb = image.GetThumbnailImage(90, 90, () => false, IntPtr.Zero);
+                thumb.Save(response.OutputStream, ImageFormat.Jpeg);
             }
             else
             {
                 response.StatusCode = 404;
-                return new EmptyResult();
             }
-            
+            return new EmptyResult();
+        }
+        
+
+        public ActionResult DownloadFile(HttpRequestBase request, HttpResponseBase response, string filename = "", bool attach = false)
+        {
+            if (Exists() && !IsDirectory())
+            {
+                
+                if (attach)
+                {
+                    response.ContentType = _blob.Properties.ContentType;
+                    response.AppendHeader("Content-Disposition", "attachment; filename=" + filename);
+                    _blob.DownloadToStream(response.OutputStream);
+                }
+                else
+                {
+                    DateTime dt;
+                    if (DateTime.TryParse(request.Headers["If-Modified-Since"], out dt) && (_blob.Properties.LastModified.Value - DateTime.SpecifyKind(dt.ToUniversalTime(), DateTimeKind.Utc)).TotalSeconds < 1.0)
+                    {
+                        response.StatusCode = 304;
+                        return new EmptyResult();
+                    }
+                    response.Cache.SetCacheability(HttpCacheability.Public);
+                    response.Cache.SetValidUntilExpires(true);
+                    response.Cache.SetMaxAge(TimeSpan.FromSeconds(300));
+                    response.Expires = 300;
+                    response.ContentType = _blob.Properties.ContentType;
+                    _blob.DownloadToStream(response.OutputStream);
+                }
+            }
+            else
+            {
+                response.StatusCode = 404;
+            }
+            return new EmptyResult();
         }
     }
 }

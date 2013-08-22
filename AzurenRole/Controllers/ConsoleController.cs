@@ -242,7 +242,7 @@ namespace AzurenRole.Controllers
             var sb = new StringBuilder();
             foreach (var s in file.ListFiles())
             {
-                sb.Append(String.Format("{0}     {1}      {2}     {3}<br />", s.Name(), s.IsDirectory() ? "D" : "F", s.Properties().Length, s.Properties().LastModified));
+                sb.Append(String.Format("{0}     {1}      {2}     {3}\n", s.Name(), s.IsDirectory() ? "D" : "F", s.Properties().Length, s.Properties().LastModified));
             }
             return SuccessWrapper(sb.ToString());
         }
@@ -272,7 +272,7 @@ namespace AzurenRole.Controllers
         {
             CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
             var file = new BlobFile(container, path + name);
-            return file.DonwloadFile(Response, name);
+            return file.DownloadFile(Request, Response, name, true);
         }
     }
 }

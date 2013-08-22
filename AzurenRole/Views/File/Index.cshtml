@@ -1,0 +1,55 @@
+﻿@using AzurenRole.Utils
+@{
+    Layout = null;
+    var paths = (List<String>)ViewData["paths"];
+    
+}
+<ol class="breadcrumb files-nav">
+    @if (!paths.Any()) {
+            <li class="active">Home</li>
+    }else {
+            <li data-path="/"><a href="javascript:;">Home</a></li>
+
+    for (int i = 0; i < paths.Count; ++i)
+    {
+        
+        <li class="@(i == paths.Count() - 1 ? "active" : "")" data-path="@String.Join("", paths.GetRange(0, i + 1).Select(m => "/" + m))">
+            @if (i == paths.Count() - 1)
+            {
+                @(paths[i] == "" ? "Home" : paths[i])
+            }
+            else
+            {
+                <a href="javascript:;">@(paths[i] == "" ? "Home" : paths[i])</a>
+            }
+        </li>
+    }
+    }
+    <div class="file-operations">
+        <a href="javascript:void(0);" class="btn-small btn-default glyphicon glyphicon-arrow-up file-up-btn"></a>
+    </div>
+</ol>
+<div class="files-list">
+    @foreach (var i in (IEnumerable<BlobFile>)ViewData["files"])
+    {
+        <div class="file-item @(i.IsDirectory() ? "item-folder" : "")" data-path="@i.Path()" data-name="@i.Name()" data-type="@i.Properties().ContentType">
+            @if (i.IsDirectory())
+            {
+                <img src="/Images/icons/filetypes/folder.png" class="file-icon" />
+            }
+            else
+            {
+                if (i.Properties().ContentType.StartsWith("image"))
+                {
+                <img src="/File/Thumb?path=@i.Path()" class="file-icon"/>
+                }
+                else
+                {
+                <img src="/Images/icons/filetypes/image-jpeg.png" class="file-icon" />
+                }
+            }
+            <div class="file-name">@i.Name()</div>
+
+        </div>
+    }
+</div>

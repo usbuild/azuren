@@ -354,6 +354,7 @@
     <Content Include="Content\app\clock\hourhand.png" />
     <Content Include="Content\app\clock\minhand.png" />
     <Content Include="Content\app\clock\sechand.png" />
+    <Content Include="Content\app\file.js" />
     <Content Include="Content\app\minesweeper\audio\click.mp3" />
     <Content Include="Content\app\minesweeper\audio\explode.mp3" />
     <Content Include="Content\app\minesweeper\audio\flag.mp3" />
@@ -388,6 +389,9 @@
     <Content Include="Content\app\weather\bg.jpg" />
     <Content Include="Content\app\weather\jquery.zweatherfeed.js" />
     <Content Include="Content\app\weather\navigator.png" />
+    <Content Include="Images\icons\file.png" />
+    <Content Include="Images\icons\filetypes\folder.png" />
+    <Content Include="Images\icons\filetypes\image-jpeg.png" />
     <Content Include="Scripts\azuren\azuren.api.js" />
     <Content Include="Scripts\azuren\azuren.core.js" />
     <Content Include="Content\desk.js" />
@@ -471,6 +475,21 @@
     <Content Include="Scripts\pnotify\jquery.pnotify.js" />
     <Content Include="Scripts\pnotify\jquery.pnotify.min.js" />
     <Content Include="Scripts\pnotify\use for pines style icons\jquery.pnotify.default.icons.css" />
+    <Content Include="Scripts\fancybox\blank.gif" />
+    <Content Include="Scripts\fancybox\fancybox_loading%402x.gif" />
+    <Content Include="Scripts\fancybox\fancybox_loading.gif" />
+    <Content Include="Scripts\fancybox\fancybox_overlay.png" />
+    <Content Include="Scripts\fancybox\fancybox_sprite%402x.png" />
+    <Content Include="Scripts\fancybox\fancybox_sprite.png" />
+    <Content Include="Scripts\fancybox\helpers\fancybox_buttons.png" />
+    <Content Include="Scripts\fancybox\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="Scripts\fancybox\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Scripts\fancybox\helpers\jquery.fancybox-media.js" />
+    <Content Include="Scripts\fancybox\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="Scripts\fancybox\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="Scripts\fancybox\jquery.fancybox.css" />
+    <Content Include="Scripts\fancybox\jquery.fancybox.js" />
+    <Content Include="Scripts\fancybox\jquery.fancybox.pack.js" />
     <Content Include="Scripts\terminal\jquery.mousewheel-min.js" />
     <Content Include="Scripts\terminal\jquery.terminal-min.js" />
     <Content Include="Scripts\terminal\jquery.terminal.css" />
@@ -987,6 +1006,7 @@
     <Content Include="Views\App\Edit.cshtml" />
     <Content Include="Views\App\Delete.cshtml" />
     <Content Include="Views\Game\MineSweeper.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

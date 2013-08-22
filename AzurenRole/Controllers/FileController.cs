@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AzurenRole.Helpers;
+using AzurenRole.Utils;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace AzurenRole.Controllers
@@ -13,21 +14,47 @@ namespace AzurenRole.Controllers
         //
         // GET: /File/
 
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult Index(string path = "/")
         {
+            var file = new BlobFile(AzureServiceHelper.GetUserContainer(User.Identity.Name), path);
+            ViewData["files"] = file.ListFiles();
+            var paths = path.Split('/').ToList();
+            if (paths[paths.Count() - 1] == "")
+            {
+                paths.RemoveAt(paths.Count() - 1);
+            }
+            paths.RemoveAt(0);
+            ViewData["paths"] = paths;
             return View();
         }
-        [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase upfile, string pictitle, string filename)
+
+        [Authorize]
+        public ActionResult Detail(string path)
         {
-            CloudBlobContainer container = AzureServiceHelper.GetBlobContainer("image");
-            string key = DateTime.UtcNow.ToString("yyyyMMddHHmmssffff");
-            CloudBlockBlob blob = container.GetBlockBlobReference(key);
-            blob.Properties.ContentType = upfile.ContentType;
-            blob.UploadFromStream(upfile.InputStream);
-            ViewData["key"] = key;
-            return Content("{'url':'" + Url.Action("Load", "Home", new { @key=key}) + "','title':'" + pictitle + "','original':'" +  filename+ "','state':'SUCCESS'}");
+            return new BlobFile(AzureServiceHelper.GetUserContainer(User.Identity.Name), path).DownloadFile(Request, Response);
         }
 
+        [Authorize]
+        public ActionResult Thumb(string path)
+        {
+            return new BlobFile(AzureServiceHelper.GetUserContainer(User.Identity.Name), path).ImageThumb(Request, Response);
+        }
+
+        [Authorize]
+        public ActionResult Upload(HttpPostedFileBase file, string name, string path)
+        {
+            CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+            try
+            {
+                if (!path.EndsWith("/")) path += "/";
+                new BlobFile(container, path + name).UploadFile(file);
+                return Json(new { code = 0 });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 1 });
+            }
+        }
     }
 }

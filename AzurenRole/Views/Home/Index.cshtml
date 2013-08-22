@@ -15,11 +15,12 @@
         @Styles.Render("~/Scripts/pnotify/jquery.pnotify.default.css")
         @Styles.Render("~/Scripts/gridster/jquery.gridster.min.css")
         @Styles.Render("~/Scripts/terminal/jquery.terminal.css")
+        @Styles.Render("~/Scripts/fancybox/jquery.fancybox.css")
         @Styles.Render("~/Content/Site.css")
         
     </head>
 
-<body style="background-color: #ccc">
+<body style="background-color: #ccc;overflow: hidden;">
     <div id="terminal"></div>
     <div id="wrapper">
 		<div id="desktop">
@@ -51,10 +52,11 @@
     @Scripts.Render("~/Scripts/terminal/jquery.terminal-min.js")
     @Scripts.Render("~/Scripts/pnotify/jquery.pnotify.min.js")
 
+    @Scripts.Render("~/Scripts/fancybox/jquery.fancybox.js")
+
     @Scripts.Render("~/bundles/jsdesk")
     @Scripts.Render("~/Scripts/azuren/azuren.core.js")
     
-
     @Scripts.Render("~/Content/desk.js")
 
 </body>

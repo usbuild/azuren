@@ -2192,7 +2192,10 @@
         // -----------------------------------------------------------------------
         function display_object(object) {
             if (typeof object === 'string') {
-                self.echo(object, {raw:true});
+                if (object.charAt(0) == '<')
+                    self.echo(object, { raw: true });
+                else
+                    self.echo(object);
             } else if (object instanceof Array) {
                 self.echo($.map(object, function (object) {
                     return $.json_stringify(object);

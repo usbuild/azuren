@@ -458,11 +458,13 @@ ul.member-list {
     font-size: 12px;
     color: white;
 }
+
 .store-header {
     padding: 3px;
     background-color: #ccc;
     box-shadow: 0 0 5px black;
 }
+
 .store-search-content {
     height: 30px;
     line-height: 30px;
@@ -472,29 +474,96 @@ ul.member-list {
     -webkit-transition: width 0.3s; /* Safari */
     padding: 1px 12px;
 }
-.store-search-content:focus {
-    width: 200px;
-}
+
+    .store-search-content:focus {
+        width: 200px;
+    }
+
 .store-search {
-    
 }
+
 .store-search-form {
     padding: 0;
-    margin: 0;    
+    margin: 0;
 }
+
 .store-search-btn {
     float: right;
 }
+
 .va-setup {
     float: right;
 }
+
 .va-installed {
     float: right;
 }
+
 .va-container {
     text-align: center;
 }
 
 .store-home {
     height: 30px;
+}
+
+
+/*File app defined css*/
+.files-nav {
+    margin: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.files-list {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    padding: 35px 10px 0 10px;
+    overflow: auto;
+}
+
+.file-item {
+    float: left;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+    .file-item:hover {
+        background-color: rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+
+.file-icon {
+}
+
+.file-name {
+    text-align: center;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.files-nav li.active > a {
+}
+
+[data-type^=image] img {
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px #ccc;
+    display: block;
+    margin: 5.4px;
+    width: 85px;
+}
+
+.fancybox-lock .fancybox-overlay {
+    overflow: hidden;
+}
+
+.file-operations {
+    display: inline-block;
+    float: right;
+}
+
+p {
+    margin: 0;
 }
