@@ -26,6 +26,13 @@
                         term.set_prompt("Azuren " + term.env.path + " >");
                         return true;
                     }
+                },
+                download: function (args, term, result) {
+                    if (result.code == 0) {
+                        console.dir(result);
+                        $.fileDownload("/File/Download?name=" + args[0] + "&path=" + term.env.path);
+                        return true;
+                    } 
                 }
             },
             beforeCmd: {
@@ -42,8 +49,6 @@
                         term.error("Usage: donwload filename");
                         return true;
                     }
-                    $.fileDownload("/Console/Download?name=" + args[0] + "&path=" + term.env.path);
-                    return true;
                 },
                 upload: function (term, args) {
                     if (args.length < 1) {
@@ -184,6 +189,80 @@
     Azuren.events["notify"] = function (id, data) {
         Azuren.notify(data.title, data.text);
     };
+
+    Azuren.prompt = function(title, value, callback) {
+        var confirmDialog = $(['<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">',
+            '<div class="modal-dialog">',
+            ' <div class="modal-content">',
+            '  <div class="modal-header">',
+            '   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>',
+            '  <h4 class="modal-title">'+title+'</h4>',
+            '</div>',
+            '<div class="modal-body">',
+            '<input type="text" class="prompt-content form-control" value="'+value+'"/>',
+            '</div>',
+            '<div class="modal-footer">',
+            ' <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>',
+            ' <button type="button" class="btn btn-primary modal-ok-btn">Ok</button>',
+            '</div>',
+            '</div>',
+            '</div>',
+            '</div>'].join(""));
+        $("body").append(confirmDialog);
+        confirmDialog.modal("show");
+        confirmDialog.find(".modal-ok-btn").click(function () {
+            callback(confirmDialog.find(".prompt-content").val());
+            confirmDialog.modal("hide");
+        });
+    };
+    Azuren.alert = function(title, content, callback) {
+        var alertDialog = $(['<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">',
+            '<div class="modal-dialog">',
+            ' <div class="modal-content">',
+            '  <div class="modal-header">',
+            '   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>',
+            '  <h4 class="modal-title">'+title+'</h4>',
+            '</div>',
+            '<div class="modal-body">',
+            content,
+            '</div>',
+            '<div class="modal-footer">',
+            ' <button type="button" class="btn btn-primary modal-ok-btn">Ok</button>',
+            '</div>',
+            '</div>',
+            '</div>',
+            '</div>'].join(""));
+        $("body").append(alertDialog);
+        alertDialog.modal("show");
+        alertDialog.find(".modal-ok-btn").click(function () {
+            alertDialog.modal("hide");
+            callback && callback();
+        });
+    };
+    var notifyDialog = function(content, time, type, callback) {
+        var infoDialog = $("#info-box-dialog");
+        if (infoDialog.length == 0) {
+            infoDialog = $('<div id="info-box-dialog" class="info-dialog modal-dialog"><div class="modal-content" style="padding-bottom:0;"><div class="modal-body"></div></div></div>');
+            $("body").append(infoDialog);
+        }
+        time = time || 2000;
+        type && infoDialog.find(".modal-content").addClass("alert-"+type);
+        infoDialog.css("visibility", "hidden").find(".modal-body").html(content);
+        infoDialog.css("top", "-" + (infoDialog.height() + 1) + "px").css("visibility", "visible");
+        infoDialog.animate({ top: "-5px" }, 100, function () {
+            setTimeout(function () {
+                infoDialog.animate({ "top": "-" + (infoDialog.height() + 1) + "px" }, 100, function () {
+                    type && infoDialog.find(".modal-content").removeClass("alert-"+type);
+                    callback && callback();
+                });
+            }, time);
+        });
+    };
+    Azuren.alert = {};
+    Azuren.alert.success = function (content, time, callback) { notifyDialog(content, time, "success", callback); };
+    Azuren.alert.info = function (content, time, callback) { notifyDialog(content, time, "info", callback); };
+    Azuren.alert.warn = function (content, time, callback) { notifyDialog(content, time, "warning", callback); };
+    Azuren.alert.error = function (content, time, callback) { notifyDialog(content, time, "danger", callback); };
 
 
     window.addEventListener("message", function (e) {

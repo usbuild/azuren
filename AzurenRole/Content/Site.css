@@ -567,3 +567,17 @@ ul.member-list {
 p {
     margin: 0;
 }
+
+.modal {
+    overflow: hidden;
+}
+
+.info-dialog {
+    z-index: 3000;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    width: 400px;
+    margin-left: -200px;
+    padding: 0;
+}

@@ -21,6 +21,8 @@
             background: url(/Content/app/clock/clockface.png);
             list-style: none;
             zoom: 0.3;
+            -moz-transform: scale(0.3);
+            -moz-transform-origin: 0 0;
         }
 
         #sec, #min, #hour {
@@ -61,7 +63,7 @@
                 var sdegree = seconds * 6;
                 var srotate = "rotate(" + sdegree + "deg)";
 
-                $("#sec").css({ "-moz-transform": srotate, "-webkit-transform": srotate, "transform":srotate });
+                $("#sec").css({ "-moz-transform": srotate, "-webkit-transform": srotate, "transform": srotate });
 
             }, 1000);
 
@@ -89,14 +91,14 @@
         });
 
     </script>
-    </head>
+</head>
 
-    <body>
-        <ul id="clock">
-            <li id="sec"></li>
-            <li id="hour"></li>
-            <li id="min"></li>
-        </ul>
+<body style="overflow: hidden">
+    <ul id="clock">
+        <li id="sec"></li>
+        <li id="hour"></li>
+        <li id="min"></li>
+    </ul>
 
-    </body>
+</body>
 </html>

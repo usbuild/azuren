@@ -343,8 +343,10 @@
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="SDK\AzurenClient.cs" />
+    <Compile Include="Utils\BlobFile2.cs" />
+    <Compile Include="Utils\FilePath.cs" />
     <Compile Include="Utils\GlobalData.cs" />
-    <Compile Include="Utils\StorageFile.cs" />
+    <Compile Include="Utils\TypeIcon.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -390,8 +392,12 @@
     <Content Include="Content\app\weather\jquery.zweatherfeed.js" />
     <Content Include="Content\app\weather\navigator.png" />
     <Content Include="Images\icons\file.png" />
+    <Content Include="Images\icons\filetypes\audio-x-generic.png" />
+    <Content Include="Images\icons\filetypes\empty.png" />
     <Content Include="Images\icons\filetypes\folder.png" />
-    <Content Include="Images\icons\filetypes\image-jpeg.png" />
+    <Content Include="Images\icons\filetypes\image-x-generic.png" />
+    <Content Include="Images\icons\filetypes\text-plain.png" />
+    <Content Include="Images\icons\filetypes\video-x-generic.png" />
     <Content Include="Scripts\azuren\azuren.api.js" />
     <Content Include="Scripts\azuren\azuren.core.js" />
     <Content Include="Content\desk.js" />
@@ -444,12 +450,14 @@
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\contextMenu\jquery.contextMenu.css" />
     <Content Include="Scripts\gridster\jquery.gridster.min.css" />
     <Content Include="Scripts\gridster\jquery.gridster.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\contextMenu\jquery.contextMenu.js" />
     <Content Include="Scripts\jquery.fileDownload.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.signalR-1.1.2.js" />

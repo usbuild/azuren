@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Management;
 using System.Web.Mvc;
 using AzurenRole.Helpers;
@@ -169,11 +170,10 @@ namespace AzurenRole.Controllers
         [Authorize]
         public ActionResult Touch(Dictionary<string, string> env, string[] args)
         {
-            CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
-            var file = new BlobFile(container, env["path"] + args[0]);
+            var file = new BlobFile2(User.Identity.Name, env["path"] + args[0]);
             if (!file.Exists())
             {
-                file.Create();
+                file.CreateEmptyFile();
                 return SuccessWrapper(String.Format("File \"{0}\" Created", args[0]));
             }
             return SuccessWrapper(String.Format("File \"{0}\" Updated", args[0]));
@@ -184,8 +184,7 @@ namespace AzurenRole.Controllers
         {
             if (args.Length > 0)
             {
-                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
-                var file = new BlobFile(container, env["path"] + args[0]);
+                var file = new BlobFile2(User.Identity.Name, env["path"] + args[0]);
                 if (file.IsDirectory())
                 {
                     return SuccessWrapper(env["path"] + args[0] + "/");
@@ -203,15 +202,14 @@ namespace AzurenRole.Controllers
         {
             if (args.Length > 0)
             {
-                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
-                var file = new BlobFile(container, env["path"] + args[0]);
+                var file = new BlobFile2(User.Identity.Name, env["path"] + args[0]);
                 if (file.Exists())
                 {
                     return Error("Directory \"" + args[0] + "\" already exists.");
                 }
                 else
                 {
-                    file.CreateDirecotry();
+                    file.CreateDirectory();
                     return SuccessWrapper(String.Format("Directory \"{0}\" Created", args[0]));
                 }
             }
@@ -223,11 +221,10 @@ namespace AzurenRole.Controllers
         {
             if (args.Length > 0)
             {
-                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
-                var file = new BlobFile(container, env["path"] + args[0]);
+                var file = new BlobFile2(User.Identity.Name, env["path"] + args[0]);
                 if (file.Exists())
                 {
-                    return SuccessWrapper(String.Format("{0} files deleted", file.Delete()));
+                    return SuccessWrapper(String.Format("{0} file(s) deleted.", file.Delete()));
                 }
                 return Error("File Not Exist");
             }
@@ -235,14 +232,58 @@ namespace AzurenRole.Controllers
         }
 
         [Authorize]
+        public JsonResult Mv(Dictionary<string, string> env, string[] args)
+        {
+            if (args.Length > 1)
+            {
+                var file = new BlobFile2(User.Identity.Name, env["path"] + args[0]);
+                if (file.Exists())
+                {
+                    try
+                    {
+                        return SuccessWrapper(String.Format("{0} file(s) moved.", file.Move(env["path"] + args[1])));
+                    }
+                    catch (FileExistsException ex)
+                    {
+                        return Error(args[1] + " Already Exists");
+                    }
+                }
+                return Error(args[0] + " Not Exists");
+            }
+            return Error("Usage: mv [file1] [file2]");
+        }
+
+        [Authorize]
+        public JsonResult Cp(Dictionary<string, string> env, string[] args)
+        {
+            if (args.Length > 1)
+            {
+                var file = new BlobFile2(User.Identity.Name, env["path"] + args[0]);
+                if (file.Exists())
+                {
+                    try
+                    {
+                        return SuccessWrapper(String.Format("{0} file(s) copied.", file.Copy(env["path"] + args[1])));
+                    }
+                    catch (FileExistsException ex)
+                    {
+                        return Error(args[1] + " Already Exists");
+                    }
+                }
+                return Error(args[0] + " Not Exists");
+            }
+            return Error("Usage: mv [file1] [file2]");
+            
+        }
+
+        [Authorize]
         public JsonResult Dir(Dictionary<string, string> env, string[] args)
         {
-            CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
-            var file = new BlobFile(container, env["path"]);
+            var blobFile = new BlobFile2(User.Identity.Name, env["path"]);
             var sb = new StringBuilder();
-            foreach (var s in file.ListFiles())
+            foreach (var s in blobFile.ListFiles())
             {
-                sb.Append(String.Format("{0}     {1}      {2}     {3}\n", s.Name(), s.IsDirectory() ? "D" : "F", s.Properties().Length, s.Properties().LastModified));
+                sb.Append(String.Format("{0}\t{1}\t{2}\t{3}\n", s.Path().Name(), s.IsDirectory() ? "D" : "-", s.Length(), s.LastModified()));
             }
             return SuccessWrapper(sb.ToString());
         }
@@ -253,10 +294,11 @@ namespace AzurenRole.Controllers
         {
             if (args.Length > 0)
             {
-                CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
+                var blob = new BlobFile2(User.Identity.Name, path + args[0]);
+                if (blob.Exists()) return Error("File \"" + args[0] + "\" already exists.");
                 try
                 {
-                    new BlobFile(container, path + args[0]).UploadFile(file);
+                    blob.CreateFile(file.InputStream);
                     return SuccessWrapper("Upload successfully");
                 }
                 catch (Exception ex)
@@ -268,11 +310,17 @@ namespace AzurenRole.Controllers
         }
 
         [Authorize]
-        public ActionResult Download(string name, string path)
+        public ActionResult Download(Dictionary<string, string> env, string[] args)
         {
-            CloudBlobContainer container = AzureServiceHelper.GetUserContainer(User.Identity.Name);
-            var file = new BlobFile(container, path + name);
-            return file.DownloadFile(Request, Response, name, true);
+            var file = new BlobFile2(User.Identity.Name, env["path"] + args[0]);
+            if (file.Exists())
+            {
+                return SuccessWrapper("");
+            }
+            else
+            {
+                return Error("File Not Exist");
+            }
         }
     }
 }
