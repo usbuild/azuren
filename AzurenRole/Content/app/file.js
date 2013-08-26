@@ -80,6 +80,8 @@
 
                         $("body").append(p);
                         $(".fancybox").fancybox().eq(location).trigger("click");
+                    } else{
+                        Azuren.alert.warn("File type not supported");
                     }
                 }
             });

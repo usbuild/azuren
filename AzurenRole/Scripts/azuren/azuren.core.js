@@ -246,16 +246,22 @@
             $("body").append(infoDialog);
         }
         time = time || 2000;
-        type && infoDialog.find(".modal-content").addClass("alert-"+type);
+        type && infoDialog.find(".modal-content").addClass("alert-"+type).addClass("alert");
         infoDialog.css("visibility", "hidden").find(".modal-body").html(content);
         infoDialog.css("top", "-" + (infoDialog.height() + 1) + "px").css("visibility", "visible");
         infoDialog.animate({ top: "-5px" }, 100, function () {
             setTimeout(function () {
                 infoDialog.animate({ "top": "-" + (infoDialog.height() + 1) + "px" }, 100, function () {
-                    type && infoDialog.find(".modal-content").removeClass("alert-"+type);
+                    type && infoDialog.find(".modal-content").removeClass("alert-"+type).removeClass("alert");
                     callback && callback();
                 });
             }, time);
+        });
+        infoDialog.click(function() {
+                infoDialog.animate({ "top": "-" + (infoDialog.height() + 1) + "px" }, 100, function () {
+                    type && infoDialog.find(".modal-content").removeClass("alert-"+type).removeClass("alert");
+                    callback && callback();
+                });
         });
     };
     Azuren.alert = {};
