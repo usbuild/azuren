@@ -38,7 +38,7 @@
     background-color: rgba(0,0,0,0);
     color: #CCC;
     position: fixed;
-    z-index: 9999999;
+    z-index: 9999;
     box-shadow: 0 0 5px #000000;
 }
 
@@ -359,10 +359,6 @@ padding-top: 2px;
     border-color: rgba(255,255,255,0.2);
     border-width: 1px;
     border-style: solid;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    border-radius: 3px;
 }
 
 .taskbarbutton:hover {

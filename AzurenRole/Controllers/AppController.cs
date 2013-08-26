@@ -110,6 +110,11 @@ namespace AzurenRole.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

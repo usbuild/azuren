@@ -217,10 +217,12 @@ var // currently active contextMenu trigger
             e.stopImmediatePropagation();
             
             // abort native-triggered events unless we're triggering on right click
-            if (e.data.trigger != 'right' && e.originalEvent) {
+            if (e.data.trigger != 'right' && e.originalEvent ) {
                 return;
             }
-            
+            if (e.data.origin && e.originalEvent && e.originalEvent.target != $(e.data.selector).get(0)) {
+                return;
+            }
             // abort event if menu is visible for this trigger
             if ($this.hasClass('context-menu-active')) {
                 return;

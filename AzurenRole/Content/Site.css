@@ -301,7 +301,6 @@ ul.member-list {
 }
 
 .win-active {
-    background: rgb(66, 148, 222);
     opacity: 1;
     -moz-box-shadow: 0px 0px 5px #000;
     -webkit-box-shadow: 0px 0px 5px #000;
@@ -580,4 +579,29 @@ p {
     width: 400px;
     margin-left: -200px;
     padding: 0;
+}
+
+.lock-screen {
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    position: absolute;
+}
+
+.lock-screen-img {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.lock-screen-widget {
+    position: absolute;
+    font-size: 50px;
+    color: white;
+    bottom: 40px;
+    left: 40px;
+    font-family: "Segoe UI Semilight"
 }

@@ -5,23 +5,51 @@ $(document).ready(function () {
     Azuren.init();
 
 
-    var backgrounds = $.map(new Array(24), function(a, i) {
+    var backgrounds = $.map(new Array(24), function (a, i) {
         return "http://1.su.bdimg.com/all_skin/" + (i + 1) + ".jpg";
     });
 
     var setBack = function () {
-        Azuren.setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)]);
+        Azuren.desktop.setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)]);
         setTimeout(setBack, 60000);
     };
     setBack();
-    
+
     Azuren.terminal("#terminal", "/Console");
     Azuren.widget.install('wdgClock', '/Widget/Clock', 180, 180);
     Azuren.widget.install('wdgWeather', '/Widget/Weather', 250, 150);
-    $.getScript("/Content/app/store.js", function() {
+    $.contextMenu({
+        selector: "#desktop",
+        origin: true,
+        callback: function (key, options) {
+            switch (key) {
+                case "lock":
+                    {
+                        Azuren.desktop.lock();
+                    } break;
+                case "logout":
+                    {
+                        Azuren.system.logout();
+                    }
+                    break;
+                case "theme":
+                    {
+                        Azuren.desktop.setTheme("pink");
+                    } break;
+            }
+        },
+        items: {
+            "background": { name: "Change Background" },
+            "theme": { name: "Change Theme" },
+            "lock": { name: "Lock Screen" },
+            "settings": { name: "Settings" },
+            "logout": { name: "Log out" }
+        }
     });
-    $.getScript("/Content/app/file.js", function() {
-        
+    $.getScript("/Content/app/store.js", function () {
+    });
+    $.getScript("/Content/app/file.js", function () {
+
     });
     $.getScript("/Content/app/chat.js", function () {
         $.getJSON("/Home/App", {}, function (e) {
@@ -30,5 +58,5 @@ $(document).ready(function () {
             }
         });
     });
-
+    Azuren.desktop.setlock("/Images/Lock-Screen.png");
 });

@@ -114,6 +114,7 @@ var nJDSK = (function (wnd, d, $) {
             if (obj) {
                 obj['isNew'] = false;
                 obj.$base.css({ 'z-index': nJDSK.WindowList.lastZIndex }).show();
+                self = obj;
                 this.setActive();
                 nJDSK.WindowList.lastZIndex += 1;
                 if (typeof callback == 'function') {
@@ -408,10 +409,10 @@ var nJDSK = (function (wnd, d, $) {
              */
             addIcon: function (iconId, iconTitle, iconImage, callback) {
 
-                nJDSK.gridster.add_widget('<li><a class="icon" id="' + iconId + '" ><img src="' + iconImage + '" /><span>' + iconTitle + '</span></a></li>');
+                nJDSK.gridster.add_widget('<li><a class="icon app-icon" data-id="'+iconId+'" id="app-icon-' + iconId + '" ><img src="' + iconImage + '" /><span>' + iconTitle + '</span></a></li>');
 
                 if (typeof (callback) == 'function') {
-                    $('#' + iconId).click(
+                    $('#app-icon-' + iconId).click(
                         function (e) {
                             if (fake) {
                                 return callback(e);
@@ -419,7 +420,7 @@ var nJDSK = (function (wnd, d, $) {
                         });
                 }
 
-                var icn = $('#' + iconId);
+                var icn = $('#app-icon-' + iconId);
                 icn.mousedown(function (e) {
                     nJDSK.clearActive();
                     icn.addClass('activeIcon');
@@ -428,6 +429,7 @@ var nJDSK = (function (wnd, d, $) {
                 icn.click(function (e) {
                     e.stopPropagation();
                 });
+                return icn;
             },
 
             /**
@@ -435,7 +437,7 @@ var nJDSK = (function (wnd, d, $) {
              * @param string iconId	The icon ID
              */
             removeIcon: function (iconId) {
-                nJDSK.gridster.remove_widget($('#' + iconId));
+                nJDSK.gridster.remove_widget($('#app-icon-' + iconId).parents("li"));
             }
         },
 
@@ -492,12 +494,12 @@ var nJDSK = (function (wnd, d, $) {
             // taken from JQuery Desktop http://desktop.sonspring.com/
             $(d).on('click', 'a', function (e) {
                 var url = $(this).attr('href');
-                if (url.match(/^#/)) {
+                if (url && url.match(/^#/)) {
                     e.preventDefault();
                     e.stopPropagation();
                 }
                 else {
-                    $(this).attr('target', '_blank');
+                    //$(this).attr('target', '_blank');
                 }
 
             });

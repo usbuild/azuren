@@ -391,6 +391,8 @@
     <Content Include="Content\app\weather\bg.jpg" />
     <Content Include="Content\app\weather\jquery.zweatherfeed.js" />
     <Content Include="Content\app\weather\navigator.png" />
+    <Content Include="Content\themes\default.css" />
+    <Content Include="Content\themes\pink.css" />
     <Content Include="Images\icons\file.png" />
     <Content Include="Images\icons\filetypes\audio-x-generic.png" />
     <Content Include="Images\icons\filetypes\empty.png" />
@@ -398,6 +400,7 @@
     <Content Include="Images\icons\filetypes\image-x-generic.png" />
     <Content Include="Images\icons\filetypes\text-plain.png" />
     <Content Include="Images\icons\filetypes\video-x-generic.png" />
+    <Content Include="Images\Lock-Screen.png" />
     <Content Include="Scripts\azuren\azuren.api.js" />
     <Content Include="Scripts\azuren\azuren.core.js" />
     <Content Include="Content\desk.js" />
@@ -462,6 +465,7 @@
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.signalR-1.1.2.js" />
     <Content Include="Scripts\jquery.signalR-1.1.2.min.js" />
+    <Content Include="Scripts\jquery.touchSwipe.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1015,6 +1019,7 @@
     <Content Include="Views\App\Delete.cshtml" />
     <Content Include="Views\Game\MineSweeper.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\App\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
