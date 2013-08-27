@@ -4,7 +4,7 @@
 $(document).ready(function () {
     Azuren.init();
 
-
+    /*
     var backgrounds = $.map(new Array(24), function (a, i) {
         return "http://1.su.bdimg.com/all_skin/" + (i + 1) + ".jpg";
     });
@@ -13,7 +13,10 @@ $(document).ready(function () {
         Azuren.desktop.setBackground(backgrounds[Math.floor(Math.random() * backgrounds.length)]);
         setTimeout(setBack, 60000);
     };
+
     setBack();
+    */
+    Azuren.desktop.setBackground("http://www.bing.com/az/hprichbg/rb/RecentlyShavenAlpacas_ZH-CN10336266938_1366x768.jpg");
 
     Azuren.terminal("#terminal", "/Console");
     Azuren.widget.install('wdgClock', '/Widget/Clock', 180, 180);
@@ -23,6 +26,10 @@ $(document).ready(function () {
         origin: true,
         callback: function (key, options) {
             switch (key) {
+                case "refresh":
+                    {
+                        Azuren.desktop.refresh();
+                    } break;
                 case "lock":
                     {
                         Azuren.desktop.lock();
@@ -39,6 +46,7 @@ $(document).ready(function () {
             }
         },
         items: {
+            "refresh": { name: "Refresh" },
             "background": { name: "Change Background" },
             "theme": { name: "Change Theme" },
             "lock": { name: "Lock Screen" },
@@ -49,6 +57,9 @@ $(document).ready(function () {
     $.getScript("/Content/app/store.js", function () {
     });
     $.getScript("/Content/app/file.js", function () {
+
+    });
+    $.getScript("/Content/app/browser.js", function () {
 
     });
     $.getScript("/Content/app/chat.js", function () {

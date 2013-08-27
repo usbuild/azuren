@@ -316,6 +316,7 @@
       <DependentUpon>AzureModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrowserController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
@@ -351,6 +352,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AzureModel.edmx.sql" />
+    <Content Include="Content\app\browser.js" />
     <Content Include="Content\app\chat.js" />
     <Content Include="Content\app\clock\clockface.png" />
     <Content Include="Content\app\clock\hourhand.png" />
@@ -400,11 +402,13 @@
     <Content Include="Images\icons\filetypes\image-x-generic.png" />
     <Content Include="Images\icons\filetypes\text-plain.png" />
     <Content Include="Images\icons\filetypes\video-x-generic.png" />
+    <Content Include="Images\icons\im.png" />
+    <Content Include="Images\icons\browser.png" />
+    <Content Include="Images\icons\store.png" />
     <Content Include="Images\Lock-Screen.png" />
     <Content Include="Scripts\azuren\azuren.api.js" />
     <Content Include="Scripts\azuren\azuren.core.js" />
     <Content Include="Content\desk.js" />
-    <Content Include="Images\icons\store.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Content\themes\base\bootstrap.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -449,7 +453,6 @@
     <Content Include="Content\themes\fonts\glyphiconshalflings-regular.ttf" />
     <Content Include="Content\themes\fonts\glyphiconshalflings-regular.woff" />
     <Content Include="Images\bg_main.jpg" />
-    <Content Include="Images\icons\chat.png" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1020,6 +1023,7 @@
     <Content Include="Views\Game\MineSweeper.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\App\Test.cshtml" />
+    <Content Include="Views\Browser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -209,7 +209,10 @@ var // currently active contextMenu trigger
         },
         
         // contextmenu show dispatcher
-        contextmenu: function(e) {
+        contextmenu: function (e) {
+            if (e.data.origin && e.originalEvent && e.originalEvent.target != $(e.data.selector).get(0)) {
+                return;
+            }
             var $this = $(this);
             
             // disable actual context-menu
@@ -220,9 +223,7 @@ var // currently active contextMenu trigger
             if (e.data.trigger != 'right' && e.originalEvent ) {
                 return;
             }
-            if (e.data.origin && e.originalEvent && e.originalEvent.target != $(e.data.selector).get(0)) {
-                return;
-            }
+            
             // abort event if menu is visible for this trigger
             if ($this.hasClass('context-menu-active')) {
                 return;

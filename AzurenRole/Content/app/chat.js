@@ -114,7 +114,7 @@ $(document).on("click", ".chat-box-user-toggle", function (e) {
 });
 
 
-Azuren.app.install("0001", "IM", "/Images/icons/chat.png", function (e) {
+Azuren.app.install("0001", "IM", "/Images/icons/im.png", function (e) {
     e.preventDefault();
 
     Azuren.showWindow(280, 600, "0001", "Chat", "", function (w) {

@@ -603,5 +603,91 @@ p {
     color: white;
     bottom: 40px;
     left: 40px;
-    font-family: "Segoe UI Semilight"
+    font-family: "Segoe UI Semilight";
+}
+/*--browser style*/
+.browser-nav {
+    float: left;
+    width: 32px;
+    height: 30px;
+    margin-left: 5px;
+    line-height: 22px;
+}
+
+    .browser-nav:hover {
+        cursor: pointer;
+    }
+
+.browser-addr {
+    margin-left: 200px;
+    margin-right: 40px;
+}
+
+.browser-addr-input {
+    width: auto;
+    display: block;
+}
+
+.browser-addr-go {
+    float: right;
+}
+
+.browser-go {
+    float: right;
+}
+
+.browser-addr-input {
+    width: 100%;
+    height: 30px;
+}
+
+.browser-main {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 70px;
+    margin: 0;
+}
+
+.browser-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.browser-header {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+}
+
+.browser-container {
+    padding-top: 5px;
+}
+
+.browser-tabs {
+    margin-top: 5px;
+    margin-left: 3px;
+}
+
+    .browser-tabs > li > a {
+        height: 25px;
+        line-height: 20px;
+        padding: 0 20px;
+    }
+
+.browser-add-tab {
+    float: right !important;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.browser-add-tab:hover {
+        cursor: pointer;
+}
+.browser-main .tab-pane {
+    width: 100%;
+    height: 100%;
 }

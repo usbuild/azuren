@@ -112,5 +112,16 @@
     azuren.desktop.clear= function() {
         azuren.invoke("desktop.clear", {});
     };
+    azuren.desktop.refresh = function() {
+        azuren.invoke("desktop.refresh", {});
+    };
+    
+    azuren.browser = {};
+    azuren.browser.open = function(url) {
+        azuren.invoke("browser.open", {url:url});
+    };
+    azuren.app.start = function() {
+        azuren.invoke("app.start", {});
+    };
 
 })(Azuren);

@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="browser-container">
+    <div class="browser-header">
+        <div class="browser-bar">
+            <div class="btn-small btn-default browser-nav glyphicon  glyphicon-chevron-left browser-back"></div>
+            <div class="btn-small btn-default browser-nav glyphicon  glyphicon-chevron-right browser-forward" enabled="disabled"></div>
+            <div class="btn-small btn-default browser-nav glyphicon  glyphicon-repeat browser-refresh"></div>
+            <div class="btn-small btn-default browser-nav glyphicon  glyphicon-home browser-home"></div>
+            <div class="btn-small btn-default browser-nav  glyphicon glyphicon-star browser-star"></div>
+            <a class="btn btn-small btn-primary glyphicon glyphicon-arrow-right browser-go"></a>
+            <div class="browser-addr">
+                <input type="text" class="form-control browser-addr-input" />
+            </div>
+
+        </div>
+        <ul class="nav nav-tabs browser-tabs">
+            <li class="glyphicon glyphicon-plus browser-add-tab"></li>
+            <li class="active"><a href="#browser-0" data-id="0">Home</a></li>
+        </ul>
+    </div>
+    <div class="browser-main tab-content">
+        <div class="tab-pane active" id="browser-0" data-id="0">
+            <iframe class="browser-frame" scrolling="auto"></iframe>
+        </div>
+    </div>
+</div>

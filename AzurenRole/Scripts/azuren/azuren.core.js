@@ -74,6 +74,9 @@
                                 term.resume();
                             }, "json");
                             return true;
+                        } else if (args[0] == "start") {
+                            Azuren.app.start(args[1]);
+                            return true;
                         }
                     }
                     term.error("Usage: app [install | uninstall] app_id");
@@ -250,6 +253,9 @@
             win.$content.css("height", size + "px");
         }
     };
+    Azuren.app.start = function(appId) {
+        $("#app-icon-" + appId).trigger("click");
+    };
 
     var scrollDiv = function (div, distance, duration) {
         div.css("-webkit-transition-duration", (duration / 1000).toFixed(1) + "s");
@@ -330,6 +336,16 @@
     Azuren.desktop.clear = function () {
         $("#showdesktop").trigger("click");
     };
+    Azuren.desktop.refresh = function () {
+        for (var x in appList) {
+            Azuren.app.uninstall(x);
+        }
+        $.getJSON("/Home/App", {}, function (e) {
+            for (x in e.data) {
+                Azuren.app.installEx(e.data[x].id, e.data[x].name, e.data[x].icon, e.data[x].url, e.data[x].width, e.data[x].height);
+            }
+        });
+    };
 
     Azuren.showWindow = function (height, width, id, title, content, callback) {
         return new desk.Window(height, width, title, content, id, callback);
@@ -350,6 +366,9 @@
             }
         }
     };
+
+    Azuren.browser = {};
+    
 
     var serverEvents = {
         "app_msg": function (data) {
@@ -421,6 +440,9 @@
     Azuren.events["desktop.setlock"] = function (id, data) {
         Azuren.desktop.setlock(data.url);
     };
+    Azuren.events["desktop.refresh"] = function (id, data) {
+        Azuren.desktop.refresh();
+    };
     Azuren.events["app.setWidth"] = function (id, data) {
         Azuren.app.setWidth(id, data.size);
     };
@@ -433,7 +455,13 @@
     Azuren.events["store.uninstall"] = function (id, data) {
         Azuren.store.uninstall(data.id);
     };
-
+    Azuren.events["browser.open"] = function(id, data) {
+        Azuren.browser.open(data.url);
+    };
+    Azuren.events["app.start"] = function(id, data) {
+        Azuren.app.start(data.id);
+    };
+     
     Azuren.prompt = function (title, value, callback) {
         var confirmDialog = $(['<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">',
             '<div class="modal-dialog">',
