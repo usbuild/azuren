@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     setBack();
     */
-    Azuren.desktop.setBackground("http://www.bing.com/az/hprichbg/rb/RecentlyShavenAlpacas_ZH-CN10336266938_1366x768.jpg");
+    Azuren.desktop.setBackground("/Images/background.jpg");
 
     Azuren.terminal("#terminal", "/Console");
     Azuren.widget.install('wdgClock', '/Widget/Clock', 180, 180);

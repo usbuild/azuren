@@ -1,5 +1,5 @@
 ﻿var Store = {};
-Azuren.app.install("0002", "Store", "/Images/icons/store.png", function (e) {
+Azuren.app.install("0002", "Store", "/Images/icons/metro/store.png", function (e) {
     Azuren.showWindow(600, 480, "0002", "Azuren Store", "", function (win) {
         if (win.isNew) {
             $.get("/Store/Index", {}, function(e) {

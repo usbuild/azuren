@@ -30,16 +30,14 @@
 }
 
 #taskbar {
-    background-color: #eeeedd;
+    height: 42px;
+    background-color: rgba(112,157,198, 0.9);
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgba(0,0,0,0);
     color: #CCC;
-    position: fixed;
     z-index: 9999;
-    box-shadow: 0 0 5px #000000;
 }
 
 #desktop_iconarea {
@@ -50,21 +48,12 @@
 }
 
 #showdesktop {
-    background-image: url(../images/showdesktop.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    border-radius: 2px;
-    color: #fff;
-    border: 1px solid transparent;
-    height: 26px;
-    width: 26px;
-    margin: 1px;
-    color: #fff;
-    font-weight: normal;
-    float: left;
-    text-decoration: none;
+    height: 42px;
+    width: 24px;
     outline: none;
     text-indent: -999999px;
+    float: right;
+    border-left: solid 1px rgba(0,0,0,0.3);
 }
 
     #showdesktop:hover {
@@ -72,6 +61,25 @@
         border-color: rgba(255, 255, 255, 0.6);
     }
 
+#start-menu {
+    height: 42px;
+    width: 45px;
+    display: block;
+    float: left;
+    background: url("/Images/icons/start.png");
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: inset 0 0 30px 15px rgba(255, 255, 255, 0.27);
+
+    -webkit-transition: 200ms linear 0s;
+    -moz-transition: 200ms linear 0s;
+    -o-transition: 200ms linear 0s;
+    transition: 200ms linear 0s;
+}
+#start-menu:hover {
+    box-shadow: inset 0 0 30px 15px rgba(255, 255, 255, 0.5);
+}
 
 
 .separator {
@@ -85,8 +93,9 @@
 
 .taskbarbuttons {
     float: left;
-    height: 30px;
+    height: 42px;
     overflow-y: auto;
+    padding-left: 15px;
 }
 
 .widget, .window .contentarea {
@@ -105,6 +114,23 @@
     -moz-user-select: moz-none;
     -ms-user-select: none;
     user-select: none;
+    transition: transform 0.5s ease-out;
+    -webkit-transition: -webkit-transform 0.5s ease-out;
+    transform: perspective(2000) rotateY(0deg);
+    -webkit-transform: perspective(2000) rotateY(0deg);
+    -webkit-transform-origin-x: 0;
+    transform-origin-x: 0;
+}
+
+#start-screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: lightskyblue;
+    z-index: 10;
 }
 
 .icon {
@@ -250,31 +276,13 @@
 }
 
 
-.taskbarbutton {
-    line-height: 26px;
-    height: 26px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 1px;
-    font-size: 12px;
-    display: block;
-    float: left;
-    cursor: pointer;
-    border-color: rgba(255,255,255,0.2);
-    border-width: 1px;
-    border-style: solid;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -khtml-border-radius: 3px;
-    border-radius: 0px;
-}
-
     .taskbarbutton:hover {
         background-color: rgba(255,255,255,0.3);
     }
+
     .taskbarbutton:active {
-padding-top: 2px;
-}
+        padding-top: 2px;
+    }
 
 .activetsk {
     background-color: #ccc;
@@ -344,11 +352,14 @@ padding-top: 2px;
     color: #fff;
     font-weight: normal;
 }
-    .taskbarbutton
 
-{
-    line-height: 26px;
-    height: 26px;
+.taskbarbutton {
+    line-height: 40px;
+    height: 40px;
+    width: 56px;
+    background-size: 26px 26px;
+    background-position: center center;
+    background-repeat: no-repeat;
     padding-left: 10px;
     padding-right: 10px;
     margin: 1px;
@@ -359,11 +370,12 @@ padding-top: 2px;
     border-color: rgba(255,255,255,0.2);
     border-width: 1px;
     border-style: solid;
+    margin-right: 5px;
 }
 
-.taskbarbutton:hover {
-    background-color: rgba(255,255,255,0.3);
-}
+    .taskbarbutton:hover {
+        background-color: rgba(255,255,255,0.3);
+    }
 
 .activetsk {
     background-color: #ccc;

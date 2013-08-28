@@ -1,49 +1,70 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Azuren OS</title>
-        @Styles.Render("~/Content/themes/base/css")
-        @Styles.Render("~/Scripts/jsdesk/css/jdesktop.css")
-        @Styles.Render("~/Content/themes/base/jquery-ui.css")
-        
-        <!--[if IE]>
+<head>
+    <title>Azuren OS</title>
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Scripts/jsdesk/css/jdesktop.css")
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+
+    <!--[if IE]>
         <link href="~/Scripts/jsdesk/css/jdesktop.ie.all.css" rel="stylesheet" type="text/css" />  
         <![endif]-->
-        <!--[if lte IE 8]>
+    <!--[if lte IE 8]>
         <link href="~/Scripts/jsdesk/css/jdesktop.ie.css" rel="stylesheet" type="text/css" />  
         <![endif]-->
-        @Styles.Render("~/Scripts/pnotify/jquery.pnotify.default.css")
-        @Styles.Render("~/Scripts/gridster/jquery.gridster.min.css")
-        @Styles.Render("~/Scripts/terminal/jquery.terminal.css")
-        @Styles.Render("~/Scripts/fancybox/jquery.fancybox.css")
-        @Styles.Render("~/Scripts/contextMenu/jquery.contextMenu.css")
-        @Styles.Render("~/Content/Site.css")
-        <link href="/Content/themes/default.css" id="theme-css" rel="stylesheet"/>
-        
-    </head>
+    @Styles.Render("~/Scripts/pnotify/jquery.pnotify.default.css")
+    @Styles.Render("~/Scripts/gridster/jquery.gridster.min.css")
+    @Styles.Render("~/Scripts/terminal/jquery.terminal.css")
+    @Styles.Render("~/Scripts/fancybox/jquery.fancybox.css")
+    @Styles.Render("~/Scripts/contextMenu/jquery.contextMenu.css")
+    @Styles.Render("~/Scripts/metroNotification/metro-notification.css")
 
-<body style="background-color: #ccc;overflow: hidden;">
+    @Styles.Render("~/Scripts/metro/metro.css")
+    <link rel="stylesheet" type="text/css" href="/Scripts/metro/metro_mobile.css" media="screen and (max-height: 500px), screen and (orientation:portrait)" />
+
+    @Styles.Render("~/Content/Site.css")
+    <link href="/Content/themes/default.css" id="theme-css" rel="stylesheet" />
+
+</head>
+
+<body style="background-color: #ccc; overflow: hidden;">
     <div id="terminal"></div>
     <div id="wrapper">
-		<div id="desktop">
-			<ul id="desktop_iconarea" class="gridster"></ul>
-		    <div id="widgets"></div>
-		</div>
+        <div id="desktop">
+            <ul id="desktop_iconarea" class="gridster" style="visibility: hidden;"></ul>
+            <div id="widgets"></div>
+        </div>
         <div id="taskbar">
+            <a id="start-menu" href="#"></a>
             <a id="showdesktop" href="#" title="Show desktop">Menu</a>
-            <div class="separator"></div>
             <div class="taskbarbuttons" id="taskbarbuttons"></div>
         </div>
         <div class="ui-mask-layer"></div>
-        
-	</div>
-    
-    
+    </div>
+    <div id="start-screen" class="metro-container">
+        <div id="widget_scroll_container">
+            <ul class="widget_container full gridster" data-num="0">
+                
+                <li class="widget widget4x2 widget_darkgreen desktop" data-theme="darkgreen" data-name="admin7" data-sizex="2" data-sizey="1" data-col="1" data-row="1">
+                    <div class="widget_content">
+                        <div class="main">
+                            <span>Desktop</span>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
-    
+    @Scripts.Render("~/Scripts/sizzle.js")
+
     @Scripts.Render("~/Scripts/gridster/jquery.gridster.min.js")
-    
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/backbone")
     @Scripts.Render("~/bundles/jquerysignalr")
@@ -58,10 +79,13 @@
     @Scripts.Render("~/Scripts/fancybox/jquery.fancybox.js")
     @Scripts.Render("~/Scripts/contextMenu/jquery.contextMenu.js")
     @Scripts.Render("~/Scripts/jquery.touchSwipe.js")
+    
+    @Scripts.Render("~/Scripts/metroNotification/metro-notification.js")
+    @Scripts.Render("~/Scripts/metro/metro.js")
 
     @Scripts.Render("~/bundles/jsdesk")
     @Scripts.Render("~/Scripts/azuren/azuren.core.js")
-    
+
     @Scripts.Render("~/Content/desk.js")
 
 </body>

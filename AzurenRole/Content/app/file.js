@@ -1,4 +1,4 @@
-﻿Azuren.app.install("0005", "Files", "/Images/icons/file.png", function (e) {
+﻿Azuren.app.install("0005", "Files", "/Images/icons/metro/file.png", function (e) {
 
 
     Azuren.showWindow(600, 480, "0005", "Files", "", function (win) {

@@ -3,7 +3,7 @@ var nJDSK = (function (wnd, d, $) {
     var fake = true;
     return {
         /*These settings can be changed*/
-        taskbarHeight: 30,
+        taskbarHeight: 42,
         widgetWidth: 200,
         iconWidth: 96,
         iconMaxHeight: 128,
@@ -79,7 +79,6 @@ var nJDSK = (function (wnd, d, $) {
             };
 
 
-
             /*
              * Provide basic cascading on window creation
              */
@@ -143,13 +142,15 @@ var nJDSK = (function (wnd, d, $) {
                 'z-index': nJDSK.WindowList.lastZIndex
             });
 
-            this.onClose = function () { };
+            this.onClose = function () {
+            };
 
             this.isActive = function () {
                 return self.$base.hasClass("win-active");
             };
 
-            this.unnotify = function () { };
+            this.unnotify = function () {
+            };
 
             /*
              * Increase last Z index
@@ -183,8 +184,10 @@ var nJDSK = (function (wnd, d, $) {
                 .attr('href', '#')
                 .html('').addClass('minimizebtn')
                 .click(function () {
-                    self.$base.hide();
-                    setTopActive();
+                    self.$base.effect("transfer", {to:"#tskbrbtn_"+id, className:"ui-effects-transfer"}, 300, function() {
+                        self.$base.hide().removeClass("win-active");
+                        setTopActive();
+                    });
                 });
 
             /*maximize button*/
@@ -194,7 +197,7 @@ var nJDSK = (function (wnd, d, $) {
                 .click(function () {
                     self.$base.addClass('transitioner');
                     if (self.$base.outerWidth() == desktop.width() && self.$base.outerHeight() == desktop.height()) {
-                        self.$base.animate({ 'width': w, 'height': h, 'left': l, 'top': t }, 0, function () {
+                        self.$base.animate({ 'width': w, 'height': h, 'left': l, 'top': t }, 100, function () {
                             self.$base.removeClass('transitioner');
                             self.$content.css({
                                 'height': self.$base.height() - self.$titlebar.height() - 2
@@ -206,7 +209,7 @@ var nJDSK = (function (wnd, d, $) {
                         h = self.$base.css('height');
                         l = self.$base.css('left');
                         t = self.$base.css('top');
-                        self.$base.animate({ 'width': desktop.width(), 'height': desktop.height(), 'left': 0, 'top': 0 }, 0, function () {
+                        self.$base.animate({ 'width': desktop.width(), 'height': desktop.height(), 'left': 0, 'top': 0 }, 100, function () {
                             self.$base.removeClass('transitioner');
                             self.$content.css({
                                 'height': self.$base.height() - self.$titlebar.height() - 2
@@ -242,7 +245,6 @@ var nJDSK = (function (wnd, d, $) {
                 });
 
 
-
             /*make the window resizable, and draggable and add resize handle+drag behaviors*/
             /*
                    $(wnd).resize(function(){
@@ -252,14 +254,14 @@ var nJDSK = (function (wnd, d, $) {
 
             /*make the window draggable all around the screen*/
             this.$base.draggable({
-                handle: self.$titlebar
-                , start: function () { $(".ui-mask-layer").show(); }
-                , stop: function () { $(".ui-mask-layer").hide(); }
+                handle: self.$titlebar,
+                start: function () { $(".ui-mask-layer").show(); },
+                stop: function () { $(".ui-mask-layer").hide(); }
             });
             this.$base.resizable({
-                containment: "parent"
-                , start: function () { $(".ui-mask-layer").show(); }
-                , stop: function () { $(".ui-mask-layer").hide(); }
+                containment: "parent",
+                start: function () { $(".ui-mask-layer").show(); },
+                stop: function () { $(".ui-mask-layer").hide(); }
             });
 
             /*show the base div*/
@@ -280,16 +282,24 @@ var nJDSK = (function (wnd, d, $) {
 
             // create the taskbar button
             this.$taskbarBtn = $("<div />");
+            
             this.$taskbarBtn.attr('id', 'tskbrbtn_' + id)
-                .html(title)
+                
                 .addClass('taskbarbutton');
+            
+            if (nJDSK.iconList[id]) {
+                this.$taskbarBtn.
+                css("background-image", 'url("' + nJDSK.iconList[id] + '")');
+            }
             taskbar.append(this.$taskbarBtn);
 
             // add taskbar button behavior
             this.$taskbarBtn.click(function () {
                 if (self.$taskbarBtn.hasClass('activetsk') && self.$base.is(':visible')) {
-                    self.$base.hide().removeClass("win-active");
-                    setTopActive();
+                    self.$base.effect("transfer", { to: "#tskbrbtn_" + id, className: "ui-effects-transfer" }, 300, function () {
+                        self.$base.hide().removeClass("win-active");
+                        setTopActive();
+                    });
                 } else {
                     self.$base.css({ 'z-index': nJDSK.WindowList.lastZIndex });
                     nJDSK.WindowList.lastZIndex += 1;
@@ -337,7 +347,6 @@ var nJDSK = (function (wnd, d, $) {
             }
 
 
-
             /*facility to change title from outside*/
             this.setTitle = function (ititle) {
                 this.$taskbarBtn.html(ititle);
@@ -359,7 +368,7 @@ var nJDSK = (function (wnd, d, $) {
             self.setActive();
             if (self.$base.find("iframe").length > 0) {
                 var iframe = self.$base.find("iframe").get(0);
-                
+
                 if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
                     iframe.onreadystatechange = function () {
                         if (iframe.readyState == "complete") {
@@ -381,7 +390,7 @@ var nJDSK = (function (wnd, d, $) {
         },
 
         frameWindow: function (id, title, src, width, height, callback, args) {
-            var html = '<div class="iframe-window-start" ><div class="iframe-window-error" /></div><iframe data-id="'+id+'"src="' + src + '" class="win-frame"></iframe><div class="iframe-window-mask" />';
+            var html = '<div class="iframe-window-start" ><div class="iframe-window-error" /></div><iframe data-id="' + id + '"src="' + src + '" class="win-frame"></iframe><div class="iframe-window-mask" />';
             var win = new nJDSK.Window(width + 12, height + 35, title, html, id, function (e) {
                 if (e.isNew) {
                     callback(e);
@@ -397,7 +406,7 @@ var nJDSK = (function (wnd, d, $) {
             var newDate = new Date;
             return newDate.getTime();
         },
-
+        iconList: {},
 
         iconHelper: {
             /**
@@ -409,8 +418,29 @@ var nJDSK = (function (wnd, d, $) {
              */
             addIcon: function (iconId, iconTitle, iconImage, callback) {
 
-                nJDSK.gridster.add_widget('<li><a class="icon app-icon" data-id="'+iconId+'" id="app-icon-' + iconId + '" ><img src="' + iconImage + '" /><span>' + iconTitle + '</span></a></li>');
+                nJDSK.iconList[iconId + ""] = iconImage;
+                
+                var x = 1, y = 1;
+                x = Math.floor(Math.random() * 3);
+                var themes = ["darkgreen", "blue", "orange", "red", "darkred", "green"];
+                var metroIcon = $(['<li class="widget widget', x, 'x', y, ' widget_',themes[Math.floor(Math.random() * themes.length)],'" data-name="Metro_UI">',
+                    '<div class="widget_content">',
+                    '<div class="main" style="background-image:url(\'', iconImage, '\');">',
+                    '<span>', iconTitle, '</span>',
+                    '</div></li>'].join(""));
 
+
+                metroIcon.mousedown(function (e) {
+                    $(this).addClass("widget-press");
+                }).mouseup(function (e) {
+                    $(this).removeClass("widget-press");
+                });
+
+                nJDSK.metroster.add_widget(metroIcon, x, y);
+
+                /*
+                nJDSK.gridster.add_widget('<li><a class="icon app-icon" data-id="' + iconId + '" id="app-icon-' + iconId + '" ><img src="' + iconImage + '" /><span>' + iconTitle + '</span></a></li>');
+                */
                 if (typeof (callback) == 'function') {
                     $('#app-icon-' + iconId).click(
                         function (e) {
@@ -418,6 +448,12 @@ var nJDSK = (function (wnd, d, $) {
                                 return callback(e);
                             }
                         });
+                    metroIcon.click(function(e) {
+                        if (fake) {
+                            nJDSK.showDesktop();
+                            return callback(e);
+                        }
+                    });
                 }
 
                 var icn = $('#app-icon-' + iconId);
@@ -437,7 +473,7 @@ var nJDSK = (function (wnd, d, $) {
              * @param string iconId	The icon ID
              */
             removeIcon: function (iconId) {
-                nJDSK.gridster.remove_widget($('#app-icon-' + iconId).parents("li"));
+                //nJDSK.gridster.remove_widget($('#app-icon-' + iconId).parents("li"));
             }
         },
 
@@ -448,11 +484,11 @@ var nJDSK = (function (wnd, d, $) {
          */
         setBackground: function (bgimage) {
             if ($('#nJDSKBG').length == 0) {
-                $('body').prepend('<img id="nJDSKBG" src="' + bgimage + '" />');
+                $('#wrapper').prepend('<img id="nJDSKBG" src="' + bgimage + '" />');
             } else {
                 var img = $("#nJDSKBG");
                 if (img.attr("src") != bgimage) {
-                    img.fadeTo("slow", 0.3,function () {
+                    img.fadeTo("slow", 0.3, function () {
                         img.attr("src", bgimage).fadeTo("normal", 1);
                     });
                 }
@@ -467,6 +503,17 @@ var nJDSK = (function (wnd, d, $) {
         clearActive: function () {
             $('.activeIcon').removeClass('activeIcon');
         },
+        showDesktop : function () {
+            $("#start-screen").animate({ "left": $("#start-screen").width() + 10 + "px" }, 200, "easeOutQuad", function () {
+
+                $(this).hide();
+            });
+            setTimeout(function () {
+                $("#wrapper")
+                .css("transform", "perspective(10000px) rotateY(0deg)")
+                .css("-webkit-transform", "perspective(10000) rotateY(0deg)");
+            }, 150);
+        },
 
         /**
          * Put desktop system together
@@ -476,6 +523,7 @@ var nJDSK = (function (wnd, d, $) {
         taskbar: $("#taskbarbuttons"),
         icons: $("#desktop_iconarea"),
         gridster: null,
+        metroster: null,
         init: function () {
             $(wnd).resize(function () {
                 nJDSK.desktopWidth = $(wnd).width();
@@ -497,8 +545,7 @@ var nJDSK = (function (wnd, d, $) {
                 if (url && url.match(/^#/)) {
                     e.preventDefault();
                     e.stopPropagation();
-                }
-                else {
+                } else {
                     //$(this).attr('target', '_blank');
                 }
 
@@ -513,11 +560,56 @@ var nJDSK = (function (wnd, d, $) {
                     $('.window').show();
                 }
             });
+            $("#start-menu").click(function () {
+                $("#wrapper")
+                    .css("transform", "perspective(10000px) rotateY(10deg)")
+                    .css("-webkit-transform", "perspective(10000) rotateY(10deg)");
+                setTimeout(function () {
+                    $("#start-screen")
+                        .css("visibility", "hidden")
+                        .css("left", $("#start-screen").width() + 10 + "px")
+                        .css("visibility", "visible")
+                        .show()
+                        .animate({ "left": 0 }, 200, "easeOutQuad");
+                }, 150);
+            });
+            
+
+            $("li.widget.desktop").mousedown(function (e) {
+                $(this).addClass("widget-press");
+            }).mouseup(function (e) {
+                $(this).removeClass("widget-press");
+            }).click(function (e) {
+                if (fake) {
+                    nJDSK.showDesktop();
+                }
+            });
+
+
+            nJDSK.metroster = $(".widget_container").gridster({
+                widget_margins: [5, 5],
+                widget_base_dimensions: [140, 140],
+                autogenerate_stylesheet: true,
+                namespace: ".widget_container",
+                max_cols: 5,
+                draggable: {
+                    stop: function () {
+                        setTimeout(function () { fake = true; }, 100);
+                        $(".ui-mask-layer").hide();
+                    },
+                    start: function () {
+                        fake = false;
+                        $(".ui-mask-layer").show();
+                    }
+                }
+            }).data("gridster");
 
             nJDSK.gridster = nJDSK.icons.gridster({
                 widget_margins: [nJDSK.iconMargin, nJDSK.iconMargin],
                 widget_base_dimensions: [100, 120],
                 autogenerate_stylesheet: true,
+                namespace: "#desktop_iconarea",
+                max_cols: 7,
                 draggable: {
                     stop: function () {
                         setTimeout(function () { fake = true; }, 10);
@@ -530,7 +622,7 @@ var nJDSK = (function (wnd, d, $) {
                 }
             }).data("gridster");
         }
-    }
+    };
 
 })(window, document, jQuery);
 
@@ -550,8 +642,10 @@ var nJDSK = (function (wnd, d, $) {
 	            '</div><div class="widget-content"><iframe frameborder="0" src="' + url + '" style="width:' + width + 'px;height:' + height + 'px"></iframe></div></div>').addClass("ui-draggable");
             $('#widgets').append(item);
             item.draggable({
-                handle: ".widget-title .wdg-move"
+                handle: ".widget-title .wdg-move", start: function () { $(".ui-mask-layer").show(); }
+                , stop: function () { $(".ui-mask-layer").hide(); }
             });
+
             item.find(".wdg-close").click(function (e) {
                 item.remove();
             });
