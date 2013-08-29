@@ -395,6 +395,8 @@
     <Content Include="Content\app\weather\navigator.png" />
     <Content Include="Content\themes\default.css" />
     <Content Include="Content\themes\pink.css" />
+    <Content Include="Images\icons\apitest.png" />
+    <Content Include="Images\icons\douban.png" />
     <Content Include="Images\icons\file.png" />
     <Content Include="Images\icons\filetypes\audio-x-generic.png" />
     <Content Include="Images\icons\filetypes\empty.png" />
@@ -404,7 +406,9 @@
     <Content Include="Images\icons\filetypes\video-x-generic.png" />
     <Content Include="Images\icons\im.png" />
     <Content Include="Images\icons\browser.png" />
+    <Content Include="Images\icons\metro\apitest.png" />
     <Content Include="Images\icons\metro\browser.png" />
+    <Content Include="Images\icons\metro\douban.png" />
     <Content Include="Images\icons\metro\file.png" />
     <Content Include="Images\icons\metro\im.png" />
     <Content Include="Images\icons\metro\store.png" />
@@ -412,6 +416,7 @@
     <Content Include="Images\icons\store.png" />
     <Content Include="Images\Lock-Screen.png" />
     <Content Include="Images\background.jpg" />
+    <Content Include="Images\start_screen.png" />
     <Content Include="Scripts\azuren\azuren.api.js" />
     <Content Include="Scripts\azuren\azuren.core.js" />
     <Content Include="Content\desk.js" />
@@ -490,6 +495,13 @@
     <Content Include="Scripts\jsdesk\js\jquery.scrollTo-min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\MetroJs\images\1pixel.gif" />
+    <Content Include="Scripts\MetroJs\images\metroIcons.jpg" />
+    <Content Include="Scripts\MetroJs\images\metroIcons_light.jpg" />
+    <Content Include="Scripts\MetroJs\MetroJs.css" />
+    <Content Include="Scripts\MetroJs\MetroJs.js" />
+    <Content Include="Scripts\MetroJs\MetroJs.min.css" />
+    <Content Include="Scripts\MetroJs\MetroJs.min.js" />
     <Content Include="Scripts\metroNotification\metro-notification.css" />
     <Content Include="Scripts\metroNotification\metro-notification.js" />
     <Content Include="Scripts\metro\img\2.jpg" />

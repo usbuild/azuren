@@ -1,6 +1,9 @@
 ﻿li {
     list-style: none;
 }
+.btn {
+    border-radius: 0;
+}
 
 /* login
 ----------------------------------------------------------*/
@@ -473,9 +476,8 @@ ul.member-list {
 }
 
 .store-header {
-    padding: 3px;
-    background-color: #ccc;
-    box-shadow: 0 0 5px black;
+    padding: 3px 20px;
+    background-color: black;
 }
 
 .store-search-content {
@@ -484,8 +486,12 @@ ul.member-list {
     width: 80px;
     float: right;
     transition: width 0.3s;
-    -webkit-transition: width 0.3s; /* Safari */
+    -webkit-transition: width 0.3s;
     padding: 1px 12px;
+    border: solid 3px #ccc;
+    border-radius: 0;
+    color: white;
+    background-color: #111;
 }
 
     .store-search-content:focus {
@@ -502,6 +508,10 @@ ul.member-list {
 
 .store-search-btn {
     float: right;
+    border: solid 2px white;
+    border-radius: 0;
+    height: 30px;
+    background-color: black;
 }
 
 .va-setup {
@@ -705,46 +715,4 @@ p {
 .browser-main .tab-pane {
     width: 100%;
     height: 100%;
-}
-/* metro */
-.widget_content .main {
-    background-size: 120px 120px;
-}
-
-#widget_scroll_container {
-    width: 760px;
-}
-
-.widget_container {
-    width: 1200px;
-}
-
-    .widget_container.half {
-        width: 400px;
-    }
-
-@media screen and (max-height: 680px) {
-    #widget_scroll_container {
-        width: 800px;
-    }
-
-    .widget_container {
-        width: 900px;
-    }
-
-        div.widget_container.half {
-            width: 300px;
-        }
-}
-.widget.desktop .main{
-    background-image: url('/Images/background.jpg');
-    background-size: 290px 140px;
-}
-.widget-press {
-    -webkit-transform: scale(0.98) !important;
-    transform: scale(0.98) !important;
-}
-.ui-effects-transfer { border: 2px dotted gray; }
-.SmallBox {
-    padding: 20px 15px;
 }

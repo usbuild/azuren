@@ -88,9 +88,9 @@ namespace AzurenRole.Controllers
             }
 
             User u = context.Users.SingleOrDefault(m => m.username == form.UserName);
-            if (u == null)
+            if (u != null)
             {
-                ModelState.AddModelError("UserName", "The user name has already taken");
+                ModelState.AddModelError("UserName", "The user name has already been taken");
                 return PartialView(form);
             }
 

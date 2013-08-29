@@ -23,6 +23,14 @@ html {
 ::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.7);
 }
+::-ms-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+}
+::-ms-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.7);
+}
 img {
     border: none;
 }
@@ -233,6 +241,9 @@ div.page_content {
             transition: opacity 0.3s, transform 0.3s;
 }
 .widget:hover {
+    -ms-opacity: 0.85;
+    opacity: 0.85;
+    /*
     z-index: 10;
     border: 3px solid rgba(255, 255, 255, 0.4);
     -webkit-transform: scale(1.05);
@@ -240,8 +251,9 @@ div.page_content {
         -ms-transform: scale(1.05);
          -o-transform: scale(1.05);
             transform: scale(1.05);
-    
+    */
 }
+
 .widget_link {
     cursor: pointer;
 }

@@ -25,16 +25,7 @@ var PrevTop = 0;
         v = b.extend({ title: "", content: "", NormalButton: undefined, ActiveButton: undefined, buttons: undefined, input: undefined, placeholder: "", options: undefined }, v);
         var n = 0;
         n = 1;
-        if (isIE8orlower() == 0) {
-            var i = document.createElement("audio");
-            i.setAttribute("src", "static/sound/messagebox.mp3");
-            b.get();
-            i.addEventListener("load", function () {
-                i.play()
-            }, true);
-            i.pause();
-            i.play()
-        }
+
         MetroMSGboxCount = MetroMSGboxCount + 1;
         if (ExistMsg == 0) {
             ExistMsg = 1;
@@ -285,16 +276,7 @@ var BigBoxes = 0;
     b.bigBox = function (a, h) {
         var k, l;
         a = b.extend({ title: "", content: "", img: undefined, number: undefined, color: undefined, timeout: undefined }, a);
-        if (isIE8orlower() == 0) {
-            var i = document.createElement("audio");
-            i.setAttribute("src", "static/sound/bigbox.mp3");
-            b.get();
-            i.addEventListener("load", function () {
-                i.play()
-            }, true);
-            i.pause();
-            i.play()
-        }
+
         BigBoxes = BigBoxes + 1;
         k = "<div id='bigBox" + BigBoxes + "' class='bigBox animated fadeIn fast'><div id='bigBoxColor" + BigBoxes + "'><img class='botClose' id='botClose" + BigBoxes + "' src='static/img/close.png'>";
         k += "<span>" + a.title + "</span>";
@@ -377,16 +359,7 @@ var SmallBoxesAnchos = 0;
     b.smallBox = function (o, j) {
         var m, n;
         o = b.extend({ title: "", content: "", img: undefined, icon: undefined, color: undefined, timeout: undefined }, o);
-        if (isIE8orlower() == 0) {
-            var k = document.createElement("audio");
-            k.setAttribute("src", "static/sound/smallbox.mp3");
-            b.get();
-            k.addEventListener("load", function () {
-                k.play()
-            }, true);
-            k.pause();
-            k.play()
-        }
+       
         SmallBoxes = SmallBoxes + 1;
         m = "";
         var p = "";

@@ -131,6 +131,15 @@
     position: absolute;
     background-color: lightskyblue;
     z-index: 10;
+    transition: transform .5s ease-out;
+    -webkit-transition: -webkit-transform .5s ease-out;
+    overflow-x: auto;
+}
+#start-screen::-webkit-scrollbar {
+    height: 12px;
+}
+#start-screen::-ms-scrollbar {
+    height: 12px;
 }
 
 .icon {
@@ -420,4 +429,205 @@
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* metro */
+.widget_content .main {
+    background-size: 120px 120px;
+}
+
+#widget_scroll_container {
+    width: 800px;
+}
+
+.widget_container {
+    width: 1200px;
+}
+
+    .widget_container.half {
+        width: 400px;
+    }
+
+@media screen and (max-height: 680px) {
+    #widget_scroll_container {
+        width: 800px;
+    }
+
+    .widget_container {
+        width: 900px;
+    }
+
+    div.widget_container.half {
+        width: 300px;
+    }
+}
+
+.widget.desktop .main {
+    background-image: url('/Images/background.jpg');
+    background-size: 290px 140px;
+}
+
+.widget-press {
+    -webkit-transform: scale(0.98) !important;
+    transform: scale(0.98) !important;
+}
+
+.ui-effects-transfer {
+    border: 2px dotted gray;
+}
+
+.SmallBox {
+    padding: 20px 15px;
+}
+
+.metro-icon-transform {
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 0;
+    z-index: 14;
+    width: 100%;
+    height: 100%;
+}
+
+    .metro-icon-transform .main {
+        width: 100%;
+        height: 100%;
+        background-size: 256px 256px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+#metro-desktop {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    display: none;
+    z-index: 15;
+}
+
+#metro-taskbar {
+    width: 15px;
+    height: 100%;
+    overflow-y: auto;
+    transition: width .5s;
+    -webkit-transition: all .5s;
+    background-color: #16499A;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1001;
+    overflow-x: hidden;
+    overflow-y: auto; 
+}
+
+    #metro-taskbar:hover {
+        width: 120px;
+        opacity: 1;
+    }
+
+.metro-task {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+}
+
+    .metro-task:hover {
+        cursor: pointer;
+        opacity: 0.85;
+        filter: alpha(opacity=85);
+    }
+
+    .metro-task .main {
+        width: 100%;
+        height: 100%;
+        background-size: 80px 80px;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+#metro-winmain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    background: transparent;
+}
+
+.metro-win {
+    /*background-color: black*/;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.metro-sidebar {
+    width: 20px;
+    background-color: black;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    z-index: 12;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+    .metro-sidebar:hover {
+        width: 80px;
+        opacity: 1;
+    }
+
+.metro-content {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+#metro-desktop .back {
+    background: white;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1002;
+}
+
+    #metro-desktop .back:hover {
+        opacity: 1;
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+    }
+
+    #metro-desktop .back .back-main {
+        background-image: url('/Images/start_screen.png');
+        width: 100%;
+        height: 100%;
+        background-size: 80px 80px;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+.tile-textview {
+    font-size: 20px;
+    text-align: center;
+    padding: 15px;
+    font-family: "Segoe UI Light";
+        
 }

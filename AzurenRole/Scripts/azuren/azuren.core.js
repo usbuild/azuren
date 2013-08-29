@@ -154,8 +154,9 @@
     Azuren.desktop = {};
     Azuren.desktop.setBackground = nJDSK.setBackground;
     Azuren.isIE = navigator.userAgent.indexOf("MSIE") > -1 ? true : false;
-    Azuren.app.install = function (id, name, icon, callback) {
-        var icon = desk.iconHelper.addIcon(id, name, icon, callback);
+
+    Azuren.app.install = function (id, name, icon, callback, callback2) {
+        var icon = desk.iconHelper.addIcon(id, name, icon, callback, callback2);
         $.contextMenu({
             selector: icon.selector,
             callback: function (key, options) {
@@ -170,6 +171,7 @@
             }
         });
     };
+    
     var appList = {};
     Azuren.app.uninstall = function (id) {
         delete appList[id];
@@ -352,6 +354,12 @@
     Azuren.showWindow = function (height, width, id, title, content, callback) {
         return new desk.Window(height, width, title, content, id, callback);
     };
+
+    Azuren.metroWindow = function (id, title, icon, callback) {
+        return new desk.MetroWindow(id, title, icon, callback);
+    };
+
+
     Azuren.widget.install = function (id, url, width, height) {
         desk.widgets.addItem(id, url, width, height);
     };

@@ -43,6 +43,85 @@ var nJDSK = (function (wnd, d, $) {
             }
         },
 
+        metroList: {
+            items: {},
+            lastZIndex: 1000,
+
+            get_top: function () {
+                var b = null;
+                for (var i in this.items) {
+                    var obj = this.items[i];
+                    if (obj.$base.is(":visible") && (b == null || obj.$base.css("z-index") > b.$base.css("z-index"))) {
+                        b = obj;
+                    }
+                }
+                return b;
+            },
+            add_item: function (id, win_object) {
+                this.items[id] = win_object;
+            },
+            delete_item: function (id) {
+                this.get_window(id).onClose();
+                delete this.items[id];
+            },
+            get_window: function (id) {
+                return this.items[id];
+            }
+        },
+
+        MetroWindow: function (id, title, icon, callback) {
+            var identifier = "metro-win-" + id;
+            var selector = "#" + identifier;
+            var self = this;
+            self.$base = $(selector);
+            
+
+            var themes = ["darkgreen", "blue", "orange", "red", "darkred", "green", "purple", "yellow", "grey"];
+            var theme = themes[Math.floor(Math.random() * themes.length)];
+
+            var showMetroDesktop = function () {
+                var md = $("#metro-desktop");
+                md.css("visibility", "hidden")
+                        .css("top", "-" + (md.height() + 50) + "px")
+                        .css("visibility", "visible")
+                        .show()
+                        .animate({ "top": 0 }, 300, "easeOutQuad", function () {
+                            $(".metro-icon-transform").remove();
+                        });
+
+            };
+
+            if (self.$base.length > 0) {
+                self = nJDSK.metroList.get_window(id);
+                self.isNew = false;
+                showMetroDesktop();
+                callback(self);
+                return self;
+            }
+
+            
+            self.$sidebar = $("<div>").addClass("metro-sidebar");
+            self.$base = $("<div/>").addClass("metro-win").css("z-index", nJDSK.metroList.lastZIndex).attr("id", identifier).addClass("widget_"+theme);
+            self.$content = $("<div>").addClass("metro-content");
+            self.$base.append(self.$sidebar).append(self.$content);
+            nJDSK.metroList.lastZIndex++;
+            self.isNew = true;
+            if (!$("#metro-desktop").is(":visible")) {
+                showMetroDesktop();
+            }
+            
+            self.$task = $("<div/>")
+                .append($("<div>").addClass("main").css("background-image", 'url("' + icon + '")'))
+                .addClass("metro-task")
+                .addClass("widget_" + theme)
+                .attr("data-id", id)
+                .appendTo($("#metro-taskbar"));
+            var winmain = $("#metro-winmain");
+            winmain.append(self.$base);
+            nJDSK.metroList.add_item(id, self);
+            callback(self);
+        },
+
         /**
          * The heart of the system: the Window class
          * @param int width // window width
@@ -184,7 +263,7 @@ var nJDSK = (function (wnd, d, $) {
                 .attr('href', '#')
                 .html('').addClass('minimizebtn')
                 .click(function () {
-                    self.$base.effect("transfer", {to:"#tskbrbtn_"+id, className:"ui-effects-transfer"}, 300, function() {
+                    self.$base.effect("transfer", { to: "#tskbrbtn_" + id, className: "ui-effects-transfer" }, 300, function () {
                         self.$base.hide().removeClass("win-active");
                         setTopActive();
                     });
@@ -282,11 +361,11 @@ var nJDSK = (function (wnd, d, $) {
 
             // create the taskbar button
             this.$taskbarBtn = $("<div />");
-            
+
             this.$taskbarBtn.attr('id', 'tskbrbtn_' + id)
-                
+
                 .addClass('taskbarbutton');
-            
+
             if (nJDSK.iconList[id]) {
                 this.$taskbarBtn.
                 css("background-image", 'url("' + nJDSK.iconList[id] + '")');
@@ -416,26 +495,39 @@ var nJDSK = (function (wnd, d, $) {
              * @param string iconImage	url for icon image
              * @param function callback	click function
              */
-            addIcon: function (iconId, iconTitle, iconImage, callback) {
+            addIcon: function (iconId, iconTitle, iconImage, callback, callback2) {
 
                 nJDSK.iconList[iconId + ""] = iconImage;
-                
+
                 var x = 1, y = 1;
                 x = Math.floor(Math.random() * 3);
-                var themes = ["darkgreen", "blue", "orange", "red", "darkred", "green"];
-                var metroIcon = $(['<li class="widget widget', x, 'x', y, ' widget_',themes[Math.floor(Math.random() * themes.length)],'" data-name="Metro_UI">',
+                
+                var themes = ["darkgreen", "blue", "orange", "red", "darkred", "green", "purple", "yellow", "grey"];
+                var theme = themes[Math.floor(Math.random() * themes.length)];
+                
+                /*
+                var metroIcon = $(['<li class="widget widget', x, 'x', y, ' widget_', theme, '" data-id=', iconId, '>',
                     '<div class="widget_content">',
                     '<div class="main" style="background-image:url(\'', iconImage, '\');">',
                     '<span>', iconTitle, '</span>',
                     '</div></li>'].join(""));
-
+                */ 
+                
+                
+                var metroIcon = $(['<li class="live-tile widget widget', x, 'x', y, ' widget_', theme, '" data-id=', iconId, '>',
+                    '<span class="tile-title">', iconTitle, '</span>',
+                    '<div><img class="full" src="', iconImage, '" width="110" height="110" style="margin-top: 10px"/></div>',
+                    '</li>'].join(""));
+                    
 
                 metroIcon.mousedown(function (e) {
                     $(this).addClass("widget-press");
                 }).mouseup(function (e) {
                     $(this).removeClass("widget-press");
                 });
-
+                var app = {};
+                app.tile = metroIcon;
+                
                 nJDSK.metroster.add_widget(metroIcon, x, y);
 
                 /*
@@ -445,13 +537,41 @@ var nJDSK = (function (wnd, d, $) {
                     $('#app-icon-' + iconId).click(
                         function (e) {
                             if (fake) {
-                                return callback(e);
+                                return callback(app);
                             }
                         });
-                    metroIcon.click(function(e) {
+
+                    metroIcon.
+                        click(function (e) {
                         if (fake) {
-                            nJDSK.showDesktop();
-                            return callback(e);
+                            if (iconId != "0002") { // TODO: Remove this!
+                                nJDSK.showDesktop();
+                                return callback(e);
+                            } else {
+                                if (nJDSK.metroList.get_window(iconId)) {
+                                    callback(app);
+                                } else {
+                                    var m = $("<div>")
+                                        .append($('<div class="main">').css("background-image", 'url("' + iconImage + '")'))
+                                        .addClass("widget_" + theme)
+                                        .appendTo("body")
+                                        .css("-webkit-transform", "rotateY(180deg)")
+                                        .css('-webkit-transition', 'all .5s')
+                                        .css("transform", "rotateY(180deg)")
+                                        .css('transition', 'all .5s');
+
+                                    setTimeout(function() {
+                                        m.addClass("metro-icon-transform")
+                                            .css("-webkit-transform", "rotateY(0deg)")
+                                            .css("transform", "rotateY(0deg)");
+                                        setTimeout(function() {
+                                            callback(app);
+                                        }, 1000);
+
+                                    }, 50);
+                                }
+
+                            }
                         }
                     });
                 }
@@ -465,6 +585,7 @@ var nJDSK = (function (wnd, d, $) {
                 icn.click(function (e) {
                     e.stopPropagation();
                 });
+                callback2 && callback2(app);
                 return icn;
             },
 
@@ -503,7 +624,7 @@ var nJDSK = (function (wnd, d, $) {
         clearActive: function () {
             $('.activeIcon').removeClass('activeIcon');
         },
-        showDesktop : function () {
+        showDesktop: function () {
             $("#start-screen").animate({ "left": $("#start-screen").width() + 10 + "px" }, 200, "easeOutQuad", function () {
 
                 $(this).hide();
@@ -570,10 +691,10 @@ var nJDSK = (function (wnd, d, $) {
                         .css("left", $("#start-screen").width() + 10 + "px")
                         .css("visibility", "visible")
                         .show()
-                        .animate({ "left": 0 }, 200, "easeOutQuad");
-                }, 150);
+                        .animate({ "left": 0 }, 300, "easeOutQuad");
+                }, 90);
             });
-            
+
 
             $("li.widget.desktop").mousedown(function (e) {
                 $(this).addClass("widget-press");
@@ -583,6 +704,27 @@ var nJDSK = (function (wnd, d, $) {
                 if (fake) {
                     nJDSK.showDesktop();
                 }
+            });
+
+            $("#metro-desktop .back").click(function (e) {
+                $("#metro-desktop").animate({ "top": "-" + ($("#metro-desktop").height() + 10) + "px" }, 200, "easeOutQuad", function () {
+                    $(this).hide();
+                });
+
+                $("#start-screen")
+                    .css("transform", "perspective(10000px) rotateX(15deg)")
+                    .css("-webkit-transform", "perspective(10000) rotateX(15deg)")
+                .css("transition", 'transform .0s ease-out')
+                .css("-webkit-transition", '-webkit-transform .0s ease-out')
+                ;
+
+                setTimeout(function () {
+                    $("#start-screen")
+                    .css("transition", 'transform .3s ease-out')
+                .css("-webkit-transition", '-webkit-transform .3s ease-out')
+                    .css("transform", "perspective(10000px) rotateX(0deg)")
+                    .css("-webkit-transform", "perspective(10000) rotateX(0deg)");
+                }, 150);
             });
 
 
