@@ -16,7 +16,8 @@
 
 };
 var win = null;
-Azuren.app.install("0006", "Browser", "/Images/icons/metro/browser.png", function (e) {
+Azuren.app.install("0006", "Browser", "/Images/icons/metro/browser.png", 1,1,0, function() {
+},function (e) {
     win = Azuren.showWindow(600, 480, "0006", "Browser", "", function (win) {
         if (win.isNew) {
             $.get("/Browser/Index", {}, function (e) {

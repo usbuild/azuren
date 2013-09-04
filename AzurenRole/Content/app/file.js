@@ -1,7 +1,6 @@
-﻿Azuren.app.install("0005", "Files", "/Images/icons/metro/file.png", function (e) {
-
-
-    Azuren.showWindow(600, 480, "0005", "Files", "", function (win) {
+﻿Azuren.app.install("0005", "Files", "/Images/icons/metro/file.png", 2, 1, 0, function () {
+}, function (e) {
+    Azuren.showWindow(600, 480, "0005", "Files", "", 1, 1, 0, function (win) {
         if (win.isNew) {
 
             var pasteCmd = null;
@@ -80,7 +79,7 @@
 
                         $("body").append(p);
                         $(".fancybox").fancybox().eq(location).trigger("click");
-                    } else{
+                    } else {
                         Azuren.alert.warn("File type not supported");
                     }
                 }

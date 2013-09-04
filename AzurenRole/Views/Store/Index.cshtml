@@ -2,6 +2,32 @@
 @{
     Layout = null;
 }
+
+
+<div class="metro-layout horizontal">
+    <div class="header" style="color: white;">
+        <h1>Azuren App Store</h1>
+        <div class="controls">
+            <span class="next" title="Scroll left"></span>
+            <span class="prev" title="Scroll right"></span>
+        </div>
+    </div>
+    <div class="content clearfix">
+        <div class="items">
+            @foreach (var item in Model)
+            {
+                <a class="box store-app b-blue" href="#" data-id="@item.Id">
+                    <span>@item.Name</span>
+                    <img class="icon" src="@item.Icon" alt="" style="width: 100px;height: 100px;margin-top: -50px;margin-left: -20px;" />
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<!--
 <div class="store-header clearfix">
     <div class="store-search">
         <form class="store-search-form">
@@ -22,3 +48,4 @@
     }
     
 </div>
+    -->

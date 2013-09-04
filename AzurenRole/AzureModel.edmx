@@ -39,8 +39,12 @@
           <Property Name="Height" Type="int" />
           <Property Name="Star" Type="int" />
           <Property Name="Callback" Type="varchar" MaxLength="255" />
-          <Property Name="Install" Type="varchar" MaxLength="1" />
-          <Property Name="Uninstall" Type="varchar" MaxLength="1" />
+          <Property Name="Install" Type="varchar" MaxLength="255" />
+          <Property Name="Uninstall" Type="varchar" MaxLength="255" />
+          <Property Name="Type" Type="int" />
+          <Property Name="IWidth" Type="int" />
+          <Property Name="IHeight" Type="int" />
+          <Property Name="Tile" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ToDoProjects">
           <Key>
@@ -82,7 +86,9 @@
           <Property Name="password" Type="varchar" Nullable="false" MaxLength="40" />
         </EntityType>
         <Association Name="FK_ToDoProjectToDoTask">
-          <End Role="ToDoProjects" Type="AzurenModel.Store.ToDoProjects" Multiplicity="1" />
+          <End Role="ToDoProjects" Type="AzurenModel.Store.ToDoProjects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ToDoTasks" Type="AzurenModel.Store.ToDoTasks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ToDoProjects">
@@ -94,7 +100,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserApp_App">
-          <End Role="Apps" Type="AzurenModel.Store.Apps" Multiplicity="1" />
+          <End Role="Apps" Type="AzurenModel.Store.Apps" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="UserApp" Type="AzurenModel.Store.UserApp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Apps">
@@ -106,7 +114,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserApp_User">
-          <End Role="Users" Type="AzurenModel.Store.Users" Multiplicity="1" />
+          <End Role="Users" Type="AzurenModel.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="UserApp" Type="AzurenModel.Store.UserApp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -161,8 +171,12 @@
           <Property Type="Int32" Name="Height" DefaultValue="480" />
           <Property Type="Int32" Name="Star" DefaultValue="5" />
           <Property Type="String" Name="Callback" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Uninstall" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Install" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Uninstall" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Install" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Type" />
+          <Property Type="Int32" Name="IWidth" />
+          <Property Type="Int32" Name="IHeight" />
+          <Property Type="String" Name="Tile" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="UserApp">
           <End Type="AzurenModel.User" Role="User" Multiplicity="*" />
@@ -223,7 +237,11 @@
     <EntitySetMapping Name="Apps">
       <EntityTypeMapping TypeName="IsTypeOf(AzurenModel.App)">
         <MappingFragment StoreEntitySet="Apps">
-          <ScalarProperty Name="Install" ColumnName="Install" />
+          <ScalarProperty Name="Tile" ColumnName="Tile" />
+                <ScalarProperty Name="IHeight" ColumnName="IHeight" />
+                <ScalarProperty Name="IWidth" ColumnName="IWidth" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Install" ColumnName="Install" />
                 <ScalarProperty Name="Uninstall" ColumnName="Uninstall" />
                 <ScalarProperty Name="Callback" ColumnName="Callback" />
                 <ScalarProperty Name="Star" ColumnName="Star" />

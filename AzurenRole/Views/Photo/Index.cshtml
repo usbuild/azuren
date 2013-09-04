@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+
+<img class="gallery-back" src="/Images/photo-back.jpg"></img>
+<div class="photo-header">Photos</div>
+<ul id="gallery">
+    @foreach (string item in (IEnumerable<String>)ViewData["images"])
+    {
+        <li>
+            <a href="/File/Detail?path=@item">
+                <img src="/Photo/Thumb?path=@item"></img>
+            </a>
+        </li>
+    }
+</ul>
+<script>
+    // applying photobox on a `gallery` element which has lots of thumbnails links. Passing options object as well:
+    //-----------------------------------------------
+    $('#gallery').photobox('a', { thumbs:true });
+    $("img").load(function() {
+        $(this).parents("li").addClass("loaded");
+    });
+
+</script>

@@ -1,10 +1,12 @@
-﻿@using System.Web.UI.WebControls
+﻿@using AzurenRole.Helpers
+@using AzurenRole.Utils
 <!DOCTYPE html>
 <html>
 <head>
     <title>Azuren OS</title>
     @Styles.Render("~/Content/themes/base/css")
-    @Styles.Render("~/Scripts/jsdesk/css/jdesktop.css")
+
+    
     @Styles.Render("~/Content/themes/base/jquery-ui.css")
 
     <!--[if IE]>
@@ -18,12 +20,14 @@
     @Styles.Render("~/Scripts/terminal/jquery.terminal.css")
     @Styles.Render("~/Scripts/fancybox/jquery.fancybox.css")
     @Styles.Render("~/Scripts/contextMenu/jquery.contextMenu.css")
+    @Styles.Render("~/Scripts/metroLayout/jquery.metroLayout.css")
     
     @Styles.Render("~/Scripts/metroNotification/metro-notification.css")
+    
 
-    @Styles.Render("~/Scripts/metro/metro.css")
     @Styles.Render("~/Scripts/MetroJs/MetroJs.css")
-
+    @Styles.Render("~/Scripts/photobox/photobox/photobox.css")
+    @Styles.Render("~/Scripts/jsdesk/css/jdesktop.css")
     @Styles.Render("~/Content/Site.css")
     <link href="/Content/themes/default.css" id="theme-css" rel="stylesheet" />
 
@@ -38,16 +42,30 @@
         </div>
         <div id="taskbar">
             <a id="start-menu" href="#"></a>
-            <a id="showdesktop" href="#" title="Show desktop">Menu</a>
+            <a id="showdesktop" href="#" title="Show desktop" class="show-desktop">Menu</a>
             <div class="taskbarbuttons" id="taskbarbuttons"></div>
         </div>
         <div class="ui-mask-layer"></div>
     </div>
     <div id="start-screen" class="metro-container">
+        <div id="left-metrodesk" class="show-metrodesk"></div>
+        <div id="left-showdesktop" class="show-desktop"></div>
+        <div class="start-header">
+            <div class="start-logo">Start</div>
+            <div class="start-profile">
+                <div class="profile-name">
+                    @GlobalData.user.username
+                </div>
+                <img class="profile-image" src="https://identicons.github.com/@{ @StringHelper.Md5Hash(GlobalData.user.username); }.png"></img>
+            </div>
+            
+        </div>
+        <div class="profile-setting">
+            <a class="metro-btn close-profile">Close</a>
+        </div>
         <div id="widget_scroll_container">
             <ul class="widget_container full tile-group gridster" data-num="0">
-
-                <li class="widget widget4x2 widget_darkgreen desktop" data-theme="darkgreen" data-name="admin7" data-sizex="2" data-sizey="1" data-col="1" data-row="1">
+                <li class="live-tile widget desktop" data-theme="darkgreen" data-name="admin7" data-sizex="2" data-sizey="1" data-col="1" data-row="1">
                     <div class="widget_content">
                         <div class="main">
                             <span>Desktop</span>
@@ -91,8 +109,10 @@
     @Scripts.Render("~/Scripts/jquery.touchSwipe.js")
 
     @Scripts.Render("~/Scripts/metroNotification/metro-notification.js")
-    @Scripts.Render("~/Scripts/metro/metro.js")
     @Scripts.Render("~/Scripts/MetroJs/MetroJs.js")
+    @Scripts.Render("~/Scripts/metroLayout/jquery.metronav.min.js")
+
+    @Scripts.Render("~/Scripts/photobox/photobox/photobox.js")
 
     @Scripts.Render("~/bundles/jsdesk")
     @Scripts.Render("~/Scripts/azuren/azuren.core.js")

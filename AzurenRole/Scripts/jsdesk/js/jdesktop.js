@@ -1,3 +1,73 @@
+(function ($) {
+    $.fn.flip = function (options) {
+        var defaults = {
+            method: "show",
+            time: 300,
+            direction: "left",
+            callback: function () {
+            }
+        };
+        var settings = $.extend({}, defaults, options);
+
+        var ele = this;
+        var origin, start, end;
+        if (settings.direction === "left") {
+            origin = "left center";
+            start = "rotateY(0deg)";
+            end = "rotateY(90deg)";
+        } else if (settings.direction === "right") {
+            origin = "right center";
+            start = "rotateY(0deg)";
+            end = "rotateY(90deg)";
+        } else if (settings.direction === "top") {
+            origin = "center top";
+            start = "rotateX(0deg)";
+            end = "rotateX(90deg)";
+        } else {
+            origin = "center bottom";
+            start = "rotateX(0deg)";
+            end = "rotateX(90deg)";
+        }
+
+        if (settings.method == "show") {
+            this.css("-webkit-transform-origin", origin)
+                .css("transform-origin", origin)
+                .css("transition", 'all 0')
+                .css("-webkit-transition", 'all 0')
+                .css("-webkit-transform", end)
+                .css("transform", end)
+                .show(0)
+                .css("transition", 'transform ' + settings.time + 'ms')
+                .css("-webkit-transition", '-webkit-transform ' + settings.time + 'ms');
+
+            setTimeout(function () {
+                ele.css("-webkit-transform", "perspective(10000) " + start)
+                    .css("transform", "perspective(10000px) " + start);
+                ele.show(0);
+
+            }, 0);
+
+            setTimeout(function () {
+                settings.callback(ele);
+            }, settings.time);
+        } else {
+            this.css("-webkit-transform-origin", origin)
+            .css("transform-origin", origin)
+                .css("transition", 'transform ' + settings.time + 'ms')
+                .css("-webkit-transition", '-webkit-transform ' + settings.time + 'ms');
+            setTimeout(function () {
+                ele.css("-webkit-transform", "perspective(10000) " + end)
+                    .css("transform", "perspective(10000px) " + end);
+            }, 0);
+            setTimeout(function () {
+                settings.callback(ele);
+            }, settings.time);
+        }
+
+
+    };
+})(jQuery);
+
 /* Virtual Desktop system*/
 var nJDSK = (function (wnd, d, $) {
     var fake = true;
@@ -69,72 +139,158 @@ var nJDSK = (function (wnd, d, $) {
             }
         },
 
-        MetroWindow: function (id, title, icon, callback) {
+        MetroWindow: function (id, title, icon, content, callback) {
             var identifier = "metro-win-" + id;
             var selector = "#" + identifier;
             var self = this;
             self.$base = $(selector);
-            
+
 
             var themes = ["darkgreen", "blue", "orange", "red", "darkred", "green", "purple", "yellow", "grey"];
             var theme = themes[Math.floor(Math.random() * themes.length)];
 
             var showMetroDesktop = function () {
-                var md = $("#metro-desktop");
-                md.css("visibility", "hidden")
-                        .css("top", "-" + (md.height() + 50) + "px")
-                        .css("visibility", "visible")
-                        .show()
-                        .animate({ "top": 0 }, 300, "easeOutQuad", function () {
-                            $(".metro-icon-transform").remove();
-                        });
+                $("#metro-desktop").flip({
+                    method: "show",
+                    direction: "top"
+                });
+            };
+            self.show = function () {
+                self.$base.css("z-index", nJDSK.metroList.lastZIndex);
+                nJDSK.metroList.lastZIndex++;
+                self.$base.flip({
+                    method: "show",
+                    direction: "top"
+                });
+            };
 
+            self.hide = function (quick) {
+                if (quick) {
+                    self.$base.hide(0);
+                } else {
+                    self.$base.css("z-index", nJDSK.metroList.lastZIndex);
+                    nJDSK.metroList.lastZIndex++;
+                    self.$base.flip({
+                        method: "hide",
+                        direction: "top"
+                    });
+                }
             };
 
             if (self.$base.length > 0) {
                 self = nJDSK.metroList.get_window(id);
                 self.isNew = false;
                 showMetroDesktop();
+                self.show();
                 callback(self);
                 return self;
             }
 
-            
-            self.$sidebar = $("<div>").addClass("metro-sidebar");
-            self.$base = $("<div/>").addClass("metro-win").css("z-index", nJDSK.metroList.lastZIndex).attr("id", identifier).addClass("widget_"+theme);
+
+            self.$base = $("<div/>").addClass("metro-win").css("z-index", nJDSK.metroList.lastZIndex).attr("id", identifier).addClass("widget_" + theme);
+            self.$base.attr("data-id", id);
             self.$content = $("<div>").addClass("metro-content");
-            self.$base.append(self.$sidebar).append(self.$content);
+            self.$content.html(content);
+            self.$base.append(self.$content);
+            self.onAppBar = function () {
+            };
+            self.$base.bind("appbar", function (e, data) {
+                self.onAppBar(data);
+            });
+
             nJDSK.metroList.lastZIndex++;
             self.isNew = true;
             if (!$("#metro-desktop").is(":visible")) {
                 showMetroDesktop();
             }
-            
+            self.close = function() {
+                self.$appbar.remove();
+                self.$task.hide(function() { self.$task.remove();});
+                self.$base.remove();
+                nJDSK.metroList.delete_item(id);
+            };
+
             self.$task = $("<div/>")
                 .append($("<div>").addClass("main").css("background-image", 'url("' + icon + '")'))
                 .addClass("metro-task")
                 .addClass("widget_" + theme)
                 .attr("data-id", id)
                 .appendTo($("#metro-taskbar"));
+            self.$task.append($('<div class="metro-close glyphicon glyphicon-remove-circle"></div>'));
+            self.$task.find(".metro-close").click(function(evt) {
+                evt.stopPropagation();
+                evt.preventDefault();
+                if ($(".metro-win").length == 1) {
+                    $("#metro-desktop").flip({
+                        method: "hide",
+                        direction: "top",
+                        callback: function(e) {
+                            e.hide();
+                            self.close();
+                        }
+                    });
+
+                    $("#start-screen").flip({
+                        method: "show",
+                        direction: "bottom",
+                        callback: function(e) {
+                            $("#start-screen .widget").each(function(a, b) {
+                                $(b).css("transform", "scale(0.9)");
+                                setTimeout(function() { $(b).fadeIn("fast"), $(b).css("transform", "scale(1)") }, $(b).data("col") * 60 + $(b).data("row") * 30);
+                            });
+                        }
+                    });
+                } else {
+                    self.$base.flip({
+                        method: "hide",
+                        direction: "bottom",
+                        callback: function () {
+                            
+                            self.close();
+                        }
+                    });
+                }
+                
+            });
+
+            self.$task.click(function () {
+                if (self.$base.css("z-index") == nJDSK.metroList.lastZIndex - 1 && self.$base.is(":visible")) {
+                } else {
+                    self.show();
+                }
+
+            });
+            self.$appbar = $("<footer>").addClass("appbar");
+            self.$appbar.appendTo(self.$base);
             var winmain = $("#metro-winmain");
             winmain.append(self.$base);
             nJDSK.metroList.add_item(id, self);
-            callback(self);
+
+
+            if (self.$base.find("iframe.metro-frame").length > 0) {
+                var iframe = self.$base.find("iframe.metro-frame").get(0);
+                
+                if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
+                    iframe.onreadystatechange = function () {
+                        if (iframe.readyState == "complete") {
+                            self.$content.trigger("ready");
+                        }
+                    };
+                } else {
+                    iframe.onload = function () {
+                        
+                        self.$content.trigger("ready");
+                    };
+                }
+                iframe.onerror = function () {
+                    self.$base.find(".iframe-window-error").show();
+                };
+            }
+
+
+            callback && callback(self);
         },
 
-        /**
-         * The heart of the system: the Window class
-         * @param int width // window width
-         * @param int height // window height
-         * @param string title // window title, can contain HTML string
-         * @param string toolbar // window toolbar, should contain HTML string, or empty
-         * @param string content // window content, HTML
-         * @param string id // window id
-         * @param bool dialog // creates dialog style window (not resizable)
-         * @param bool modal // creates a modal window (no access to other desktop elements)
-         * @param bool fullGlass // the content area has no border and is transparent (aka windows 7 windows with translucent client area, such as media player)
-         * @param function createCallback //a function to call after window creation
-         */
         Window: function (width, height, title, content, id, callback) {
             var self = this;
             var desktop = nJDSK.desktop;
@@ -445,8 +601,8 @@ var nJDSK = (function (wnd, d, $) {
                 callback(this);
             }
             self.setActive();
-            if (self.$base.find("iframe").length > 0) {
-                var iframe = self.$base.find("iframe").get(0);
+            if (self.$base.find("iframe.win-frame").length > 0) {
+                var iframe = self.$base.find("iframe.win-frame").get(0);
 
                 if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
                     iframe.onreadystatechange = function () {
@@ -477,6 +633,15 @@ var nJDSK = (function (wnd, d, $) {
             });
             return win;
         },
+        
+        metroFrameWindow: function (id,title, src, icon, callback) {
+            var html = '<div class="iframe-window-error" /><iframe data-id="' + id + '" src="' + src + '" class="metro-frame"></iframe>';
+            var win = new nJDSK.MetroWindow(id, title, icon, html,function (win) {
+                if (win.isNew) {
+                    callback && callback(win);
+                }
+            });
+        },
 
         /**
          * Generate a unique id for windows
@@ -495,30 +660,22 @@ var nJDSK = (function (wnd, d, $) {
              * @param string iconImage	url for icon image
              * @param function callback	click function
              */
-            addIcon: function (iconId, iconTitle, iconImage, callback, callback2) {
+            addIcon: function (iconId, iconTitle, iconImage, iconWidth, iconHeight, type, tile,callback) {
 
                 nJDSK.iconList[iconId + ""] = iconImage;
 
-                var x = 1, y = 1;
-                x = Math.floor(Math.random() * 3);
-                
-                var themes = ["darkgreen", "blue", "orange", "red", "darkred", "green", "purple", "yellow", "grey"];
+                var themes = ["amber", 'blue', 'brown', 'cobalt', 'crimson', 'cyan', 'emerald', 'green', 'indigo', 'lime', 'magenta', 'mango', 'mauve', 'olive', 'orange', 'pink', 'purple', 'violet', 'red',
+                'sienna', 'steel', 'teal', 'yellow'];
                 var theme = themes[Math.floor(Math.random() * themes.length)];
-                
-                /*
-                var metroIcon = $(['<li class="widget widget', x, 'x', y, ' widget_', theme, '" data-id=', iconId, '>',
-                    '<div class="widget_content">',
-                    '<div class="main" style="background-image:url(\'', iconImage, '\');">',
-                    '<span>', iconTitle, '</span>',
-                    '</div></li>'].join(""));
-                */ 
-                
-                
-                var metroIcon = $(['<li class="live-tile widget widget', x, 'x', y, ' widget_', theme, '" data-id=', iconId, '>',
+
+                var x = iconWidth,
+                    y = iconHeight;
+                var metroIcon = $(['<li class="live-tile widget ', theme, '" data-id=', iconId, ' id="metro-icon-', iconId, '" data-sizex="', x, '" data-sizey="', y, '">',
                     '<span class="tile-title">', iconTitle, '</span>',
-                    '<div><img class="full" src="', iconImage, '" width="110" height="110" style="margin-top: 10px"/></div>',
+                    '<div><img class="full" src="', iconImage, '" width="110" height="110"/></div>',
                     '</li>'].join(""));
-                    
+                metroIcon.find("img").css("margin-top", 10 + 90 * (y - 1) + "px");
+
 
                 metroIcon.mousedown(function (e) {
                     $(this).addClass("widget-press");
@@ -527,7 +684,7 @@ var nJDSK = (function (wnd, d, $) {
                 });
                 var app = {};
                 app.tile = metroIcon;
-                
+
                 nJDSK.metroster.add_widget(metroIcon, x, y);
 
                 /*
@@ -543,37 +700,44 @@ var nJDSK = (function (wnd, d, $) {
 
                     metroIcon.
                         click(function (e) {
-                        if (fake) {
-                            if (iconId != "0002") { // TODO: Remove this!
-                                nJDSK.showDesktop();
-                                return callback(e);
-                            } else {
-                                if (nJDSK.metroList.get_window(iconId)) {
-                                    callback(app);
+                            if (fake) {
+                                if (type == 0) {
+                                    nJDSK.showDesktop();
+                                    return callback(e);
                                 } else {
-                                    var m = $("<div>")
-                                        .append($('<div class="main">').css("background-image", 'url("' + iconImage + '")'))
-                                        .addClass("widget_" + theme)
-                                        .appendTo("body")
-                                        .css("-webkit-transform", "rotateY(180deg)")
-                                        .css('-webkit-transition', 'all .5s')
-                                        .css("transform", "rotateY(180deg)")
-                                        .css('transition', 'all .5s');
+                                    $("#start-screen").flip({
+                                        method: "hide",
+                                        direction: "bottom"
+                                    });
 
-                                    setTimeout(function() {
-                                        m.addClass("metro-icon-transform")
-                                            .css("-webkit-transform", "rotateY(0deg)")
-                                            .css("transform", "rotateY(0deg)");
-                                        setTimeout(function() {
-                                            callback(app);
-                                        }, 1000);
+                                    if (nJDSK.metroList.get_window(iconId)) {
+                                        callback(app);
+                                    } else {
+                                        var m = $('<div class="metro-icon-transform">')
+                                            .append($('<div class="main">').css("background-image", 'url("' + iconImage + '")'))
+                                            .addClass("b-" + theme)
+                                            .appendTo("body");
 
-                                    }, 50);
+                                        m.flip({
+                                            method: "show",
+                                            callback: function (m) {
+                                                app.ready = function () {
+                                                    m.flip({
+                                                        method: "hide",
+                                                        direction: "right",
+                                                        callback: function (m) {
+                                                            m.remove();
+                                                        }
+                                                    });
+                                                }
+                                                callback(app);
+                                            }
+                                        });
+                                    }
+
                                 }
-
                             }
-                        }
-                    });
+                        });
                 }
 
                 var icn = $('#app-icon-' + iconId);
@@ -585,7 +749,16 @@ var nJDSK = (function (wnd, d, $) {
                 icn.click(function (e) {
                     e.stopPropagation();
                 });
-                callback2 && callback2(app);
+
+                if (typeof tile === 'function') {
+                    tile(app);
+                } else if (typeof tile === 'string') {
+                    var url = tile.trim();
+                    if (url.length > 0) {
+                        $.getScript(url);
+                    }
+
+                }
                 return icn;
             },
 
@@ -595,6 +768,7 @@ var nJDSK = (function (wnd, d, $) {
              */
             removeIcon: function (iconId) {
                 //nJDSK.gridster.remove_widget($('#app-icon-' + iconId).parents("li"));
+                nJDSK.metroster.remove_widget($("#metro-icon-" + iconId));
             }
         },
 
@@ -625,15 +799,16 @@ var nJDSK = (function (wnd, d, $) {
             $('.activeIcon').removeClass('activeIcon');
         },
         showDesktop: function () {
-            $("#start-screen").animate({ "left": $("#start-screen").width() + 10 + "px" }, 200, "easeOutQuad", function () {
-
-                $(this).hide();
+            $("#wrapper").flip({
+                method: "show",
+                direction: "left"
             });
-            setTimeout(function () {
-                $("#wrapper")
-                .css("transform", "perspective(10000px) rotateY(0deg)")
-                .css("-webkit-transform", "perspective(10000) rotateY(0deg)");
-            }, 150);
+            $("#start-screen").flip({
+                method: "hide",
+                direction: "right",
+                callback: function () {
+                }
+            });
         },
 
         /**
@@ -682,17 +857,21 @@ var nJDSK = (function (wnd, d, $) {
                 }
             });
             $("#start-menu").click(function () {
-                $("#wrapper")
-                    .css("transform", "perspective(10000px) rotateY(10deg)")
-                    .css("-webkit-transform", "perspective(10000) rotateY(10deg)");
-                setTimeout(function () {
-                    $("#start-screen")
-                        .css("visibility", "hidden")
-                        .css("left", $("#start-screen").width() + 10 + "px")
-                        .css("visibility", "visible")
-                        .show()
-                        .animate({ "left": 0 }, 300, "easeOutQuad");
-                }, 90);
+                $("#start-screen .widget").hide(0, function () {
+                    $("#start-screen").flip({
+                        method: "show",
+                        direction: "right",
+                        callback: function (e) {
+                            $("#wrapper").flip({
+                                method: "hide"
+                            });
+                            $("#start-screen .widget").each(function (a, b) {
+                                $(b).css("transform", "scale(0.8)");
+                                setTimeout(function () { $(b).fadeIn("fast"), $(b).css("transform", "scale(1)") }, $(b).data("col") * 80 + $(b).data("row") * 40);
+                            });
+                        }
+                    });
+                });
             });
 
 
@@ -705,26 +884,62 @@ var nJDSK = (function (wnd, d, $) {
                     nJDSK.showDesktop();
                 }
             });
+            $("#left-showdesktop").click(function (e) {
+                nJDSK.showDesktop();
+            });
+            $("#left-metrodesk").click(function(e) {
+                $("#start-screen").flip({
+                    method: "hide",
+                    direction: "bottom",
+                });
+                $("#metro-desktop").flip({
+                    method: "show",
+                    direction:"top"
+                });
+            }).hover(function () {
+                if ($(".metro-win").length > 0) {
+                    $(this).addClass("show-metrodesk-hover");
+                }
+            }, function () {
+                $(this).removeClass("show-metrodesk-hover");
+            });
+
+            $(".start-profile").click(function (e) {
+                $(".profile-setting").show(0).animate({ right: 0 }, 200, "easeInOutQuad", function() {
+                });
+            });
+            $(".profile-setting .close-profile").click(function (e) {
+                $(".profile-setting").animate({ right: "-400px" }, 200, "easeInOutQuad", function () {
+                    $(this).hide(0);
+                });
+            });
+
+            $("#metro-taskbar").hover(function (e) {
+            }, function (e) {
+
+            });
 
             $("#metro-desktop .back").click(function (e) {
-                $("#metro-desktop").animate({ "top": "-" + ($("#metro-desktop").height() + 10) + "px" }, 200, "easeOutQuad", function () {
-                    $(this).hide();
+                $("#start-screen .widget").hide(0);
+                $("#metro-desktop").flip({
+                    method: "hide",
+                    direction: "top",
+                    callback: function (e) {
+                        e.hide();
+                    }
                 });
 
-                $("#start-screen")
-                    .css("transform", "perspective(10000px) rotateX(15deg)")
-                    .css("-webkit-transform", "perspective(10000) rotateX(15deg)")
-                .css("transition", 'transform .0s ease-out')
-                .css("-webkit-transition", '-webkit-transform .0s ease-out')
-                ;
+                $("#start-screen").flip({
+                    method: "show",
+                    direction: "bottom",
+                    callback: function (e) {
+                        $("#start-screen .widget").each(function (a, b) {
+                            $(b).css("transform", "scale(0.9)");
+                            setTimeout(function () { $(b).fadeIn("fast"), $(b).css("transform", "scale(1)") }, $(b).data("col") * 60 + $(b).data("row") * 30);
+                        });
+                    }
+                });
 
-                setTimeout(function () {
-                    $("#start-screen")
-                    .css("transition", 'transform .3s ease-out')
-                .css("-webkit-transition", '-webkit-transform .3s ease-out')
-                    .css("transform", "perspective(10000px) rotateX(0deg)")
-                    .css("-webkit-transform", "perspective(10000) rotateX(0deg)");
-                }, 150);
             });
 
 
@@ -733,7 +948,7 @@ var nJDSK = (function (wnd, d, $) {
                 widget_base_dimensions: [140, 140],
                 autogenerate_stylesheet: true,
                 namespace: ".widget_container",
-                max_cols: 5,
+                max_cols: 9,
                 draggable: {
                     stop: function () {
                         setTimeout(function () { fake = true; }, 100);
@@ -767,6 +982,49 @@ var nJDSK = (function (wnd, d, $) {
     };
 
 })(window, document, jQuery);
+//metro
+(function () {
+    var a = {
+        window_width: 0, window_height: 0, scroll_container_width: 0, widgets: null, widget_scroll_container: null, widget_containers: null,
+        widget_open: !1, dragging_x: 0, left: 60, widget_page_data: [], is_touch_device: !1, init: function () {
+            a.is_touch_device = "ontouchstart" in document.documentElement ? !0 : !1;
+            a.cacheElements();
+            a.Events.onWindowResize();
+            a.is_touch_device ? $(document.body).addClass("touch") : $(document).mousedown(a.Events.onMouseDown).mouseup(a.Events.onMouseUp).mousemove(a.Events.onMouseMove);
+        }, Events: {
+            onWindowResize: function () {
+                a.window_width = $(window).width();
+                a.window_height = $(window).height()
+            }, onMouseDown: function (b) {
+                
+                a.dragging_x = b.clientX
+            }, onMouseUp: function () {
+                $(document).scrollLeft(0);
+                a.dragging_x = 0;
+                var b = -1 * (a.scroll_container_width - a.window_width), c = function () {
+                    setTimeout(function () {
+                        a.widget_scroll_container.css("transition", "")
+                    }, 400)
+                };
+                60 < a.left || a.scroll_container_width +
+                60 < a.window_width ? (a.widget_scroll_container.css("transition", "left 0.2s ease-in"), a.widget_scroll_container.css("left", 60), a.left = 60, c()) : a.left < b && (a.widget_scroll_container.css("transition", "left 0.2s ease-in"), a.widget_scroll_container.css("left", b), a.left = b, c())
+            }, onMouseMove: function (b) {
+                if (a.dragging_x) {
+                    var c = a.left + b.clientX - a.dragging_x;
+                    a.widget_scroll_container.css("left", c);
+                    a.dragging_x = b.clientX;
+                    a.left = c
+                }
+            },
+        }, cacheElements: function () {
+            a.widgets = $("div.widget");
+            a.widget_containers = $("div.widget_container");
+            a.widget_scroll_container = $("#widget_scroll_container");
+            a.scroll_container_width = a.widget_scroll_container.width()
+        }
+    };
+    $(document).ready(a.init)
+})();
 
 (function (wnd, d, $) {
     $.extend(nJDSK.widgets, {

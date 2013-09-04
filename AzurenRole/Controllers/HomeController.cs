@@ -21,7 +21,7 @@ namespace AzurenRole.Controllers
 
         public ActionResult App()
         {
-            var x = GlobalData.user.Apps.Select(m=>new{id=m.Id,name=m.Name, url=m.Url, icon=m.Icon, height=m.Height, width=m.Width});
+            var x = GlobalData.user.Apps.Select(m=>new{id=m.Id,name=m.Name, url=m.Url, icon=m.Icon, height=m.Height, width=m.Width, iwidth=m.IWidth, iheight=m.IHeight, type=m.Type, tile=m.Tile});
             return Json(new {code=0, data=x}, JsonRequestBehavior.AllowGet);
         }
 

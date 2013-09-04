@@ -1,6 +1,7 @@
 ﻿li {
     list-style: none;
 }
+
 .btn {
     border-radius: 0;
 }
@@ -443,18 +444,6 @@ ul.member-list {
     padding: 10px;
 }
 
-.store-app {
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-}
-
-    .store-app:hover {
-        background-color: rgba(0,0,0,0.1);
-        cursor: pointer;
-        border-radius: 2px;
-    }
 
 .store-app-icon img {
     margin: 3px auto;
@@ -715,4 +704,171 @@ p {
 .browser-main .tab-pane {
     width: 100%;
     height: 100%;
+}
+
+.loading-dot {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 5000;
+    height: 10px;
+}
+
+    .loading-dot .dot {
+        -webkit-animation: slidein 1.5s infinite ease-in-out;
+        animation: slidein 1.5s infinite ease-in-out;
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+        background-color: white;
+        position: absolute;
+    }
+
+@-webkit-keyframes slidein {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 100%;
+    }
+}
+@keyframes slidein {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 100%;
+    }
+}
+
+#gallery {
+    width: 100%;
+    height: 100%;
+    padding: 70px 200px;
+    text-align: center;
+    z-index: 10;
+}
+
+
+#wrap {
+    overflow: hidden;
+    padding: 3%;
+}
+
+#pbOverlay.show ~ #wrap {
+    -webkit-filter: blur(2px) grayscale(.4);
+}
+
+#gallery li {
+    list-style: none;
+    perspective: 100px;
+    -webkit-perspective: 100px;
+    margin: 3px;
+    float: left;
+    position: relative;
+    transition: .1s;
+    -webkit-transition: 0.1s;
+}
+
+    #gallery li.video::before {
+        content: '\25BA';
+        color: #FFF;
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+        line-height: 0.9;
+        position: absolute;
+        bottom: 3px;
+        left: 4px;
+        z-index: 1;
+        background: rgba(0,0,0,0.4);
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.4);
+        border-radius: 0 3px 0 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: .5s 0.2s;
+    }
+
+    #gallery li.loaded.video::before {
+        opacity: 1;
+    }
+
+#gallery a {
+    display: block;
+    width: 200px;
+    height: 136px;
+    vertical-align: bottom;
+    overflow: hidden;
+    background: rgba(0,0,0,0.1);
+    transition: .4s ease-out;
+    -webkit-transition: 0.4s ease-out;
+    -webkit-transform: rotateX(90deg) translate(-50px,-50%);
+    transform: rotateX(90deg) translate(-50px,-50%);
+}
+
+    #gallery a:active, #gallery a:focus {
+        outline: none;
+    }
+
+    #gallery a img {
+        min-height: 100%;
+        width: 100%;
+        transition: .3s ease-out;
+        -webkit-transition: 0.3s ease-out;
+    }
+
+#gallery .loaded a {
+    -webkit-transform: rotateX(0deg) translate(0,0);
+    transform: rotateX(0deg) translate(0,0);
+}
+
+#gallery li.loaded:hover {
+    z-index: 2;
+    transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+}
+
+#gallery li.loaded a:hover {
+    box-shadow: 0 0 0 2px #FFF, 0 0 20px 5px #000;
+    transition: .1s;
+    -webkit-transition: 0.1s;
+}
+
+#gallery li.loaded:hover img {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+}
+
+#gallery li.loaded.video:hover::before {
+    opacity: 0;
+}
+
+.gallery-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.photo-header {
+    z-index: 20;
+    display: block;
+    font-size: 36px;
+    position: relative;
+    margin: 40px 0 0 100px;
+    font-weight: bolder;
+    color: white;
+}
+.appbar-hide {
+    opacity: 0;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    bottom: -70px;
+}
+.appbar-hide:hover {
+    bottom: 0;
+    opacity: 1;
 }

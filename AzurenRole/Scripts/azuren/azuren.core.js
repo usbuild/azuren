@@ -147,6 +147,7 @@
     window.Azuren = window.Azuren || { app: {}, widget: {} };
     Azuren.init = desk.init;
     Azuren.WindowList = desk.WindowList;
+    Azuren.metroList = desk.metroList;
     Azuren.terminal = function (selector, url) {
         $(selector).Azuren(url);
     };
@@ -155,8 +156,8 @@
     Azuren.desktop.setBackground = nJDSK.setBackground;
     Azuren.isIE = navigator.userAgent.indexOf("MSIE") > -1 ? true : false;
 
-    Azuren.app.install = function (id, name, icon, callback, callback2) {
-        var icon = desk.iconHelper.addIcon(id, name, icon, callback, callback2);
+    Azuren.app.install = function (id, name, icon, iwidth, iheight, type, tile, callback) {
+        var icon = desk.iconHelper.addIcon(id, name, icon, iwidth, iheight, type, tile, callback);
         $.contextMenu({
             selector: icon.selector,
             callback: function (key, options) {
@@ -171,23 +172,37 @@
             }
         });
     };
-    
+
     var appList = {};
     Azuren.app.uninstall = function (id) {
         delete appList[id];
         desk.iconHelper.removeIcon(id);
     };
-    Azuren.app.installEx = function (id, name, icon, url, width, height) {
+    Azuren.app.installEx = function (id, name, icon, url, width, height, iwidth, iheight, type, tile) {
         appList[id] = { name: name, url: url, icon: icon };
-        var icon = desk.iconHelper.addIcon(id, name, icon, function () {
-            desk.frameWindow(id, name, url, width, height, function (e) {
-                e.$content.bind("ready", function () {
-                    Azuren.app.sendMessage(id, "event", { name: "ready", data: { id: id } });
+        var icn = desk.iconHelper.addIcon(id, name, icon, iwidth, iheight, type,tile, function (app) {
+            if (type == 0) {
+                desk.frameWindow(id, name, url, width, height, function(e) {
+                    e.$content.bind("ready", function() {
+                        Azuren.app.sendMessage(id, "event", { name: "ready", data: { id: id } });
+                    });
                 });
-            });
+            } else {
+                
+                desk.metroFrameWindow(id, name, url, icon, function (e) {
+                    if (e.isNew) {
+                        Azuren.desktop.startLoading();
+                    }
+                    e.$content.bind("ready", function () {
+                        Azuren.desktop.stopLoading();
+                        app.ready();
+                        Azuren.app.sendMessage(id, "event", { name: "ready", data: { id: id } });
+                    });
+                });
+            }
         });
         $.contextMenu({
-            selector: icon.selector,
+            selector: icn.selector,
             callback: function (key, options) {
                 var appId = $(this).data("id");
                 switch (key) {
@@ -211,6 +226,64 @@
             }
         });
     };
+
+    $(document).on('click', ".appbar-item", function () {
+        var win = $(this).parents(".metro-win");
+        var id = win.data("id");
+        Azuren.app.sendMessage(id, "event", { name: "app.appbar", data: { name: $(this).data("name") } });
+        win.trigger("appbar", { name: $(this).data("name") });
+    });
+    var iconMap = {        
+        "home": 'url("/Scripts/MetroJs/images/metroIcons.jpg") -107px -14px',
+        "search": 'url("/Scripts/MetroJs/images/metroIcons.jpg") -16px -14px',
+        "remove": 'url("/Scripts/MetroJs/images/metroIcons.jpg") -475px -101px',
+        "download": 'url("/Scripts/MetroJs/images/metroIcons.jpg") -475px -14px'
+    };
+
+    Azuren.app.setAppBar = function (appId, appBar) {
+        var metro = Azuren.metroList.get_window(appId);
+        if (appBar.autoHide) {
+            metro.$appbar.addClass("appbar-hide");
+        } else {
+            metro.$appbar.removeClass("appbar-hide");
+        }
+        
+        
+        if (metro) {
+            var menu = appBar.menu;
+            console.dir(metro.$appbar);
+            if (menu.length == 0) {
+                metro.$appbar.hide(0);
+                return;
+            } else {
+                metro.$appbar.show();
+            }
+            metro.$appbar.animate({ bottom: '-' + (metro.$appbar.height() + 10) + "px" }, 200, function () {
+                metro.$appbar.html("");
+                
+                for (x in menu) {
+                    var item = $("<div>").addClass("appbar-item").attr("data-name", menu[x].name);
+                    if (menu[x].background) {
+                        item.css("background", menu[x].background);
+                    } else {
+                        if (iconMap[menu[x].name]) {
+                            item.css("background", iconMap[menu[x].name]);
+                        } else {
+                            item.css("background", 'url("/Scripts/MetroJs/images/metroIcons.jpg") -292px -280px');
+                        }
+                    }
+                    if (menu[x].title) {
+                        item.attr("title", menu[x].title);
+                    }
+                    metro.$appbar.append(item);
+                }
+                metro.$appbar.animate({ bottom: 0 }, 200);
+            });
+        }
+    };
+
+
+
     Azuren.store = {};
     Azuren.store.view = function (appId) {
         Azuren.showWindow(600, 480, "0002", "Azuren Store", "", function (win) {
@@ -238,6 +311,13 @@
         }, "json");
     };
 
+    Azuren.file = {};
+    Azuren.file.fileList = function (type, callback) {
+        $.post("/File/FileListByType", { type: type }, function (e) {
+            callback(e);
+        });
+    };
+
     Azuren.system.logout = function () {
         window.location.href = "/Account/logout";
     };
@@ -255,7 +335,7 @@
             win.$content.css("height", size + "px");
         }
     };
-    Azuren.app.start = function(appId) {
+    Azuren.app.start = function (appId) {
         $("#app-icon-" + appId).trigger("click");
     };
 
@@ -338,6 +418,24 @@
     Azuren.desktop.clear = function () {
         $("#showdesktop").trigger("click");
     };
+    Azuren.desktop.startLoading = function () {
+        var loadingDot = $(".loading-dot");
+        if (loadingDot.length == 0) {
+            loadingDot = $('<div class="loading-dot">');
+            loadingDot.appendTo($("body"));
+
+            for (var i = 0; i < 10; ++i) {
+                loadingDot.append($('<div class="dot">').css("animation-delay", i * 100 + "ms").css("-webkit-animation-delay", i * 50 + "ms"));
+                i++;
+            };
+        } else {
+            loadingDot.show();
+        }
+    };
+    Azuren.desktop.stopLoading = function () {
+        $(".loading-dot").hide();
+    };
+
     Azuren.desktop.refresh = function () {
         /*
         for (var x in appList) {
@@ -355,8 +453,8 @@
         return new desk.Window(height, width, title, content, id, callback);
     };
 
-    Azuren.metroWindow = function (id, title, icon, callback) {
-        return new desk.MetroWindow(id, title, icon, callback);
+    Azuren.metroWindow = function (id, title, icon,content, callback) {
+        return new desk.MetroWindow(id, title, icon,content, callback);
     };
 
 
@@ -378,7 +476,7 @@
     };
 
     Azuren.browser = {};
-    
+
 
     var serverEvents = {
         "app_msg": function (data) {
@@ -440,10 +538,10 @@
         Azuren.desktop.unlock();
     };
 
-    Azuren.events["desktop.clear"] = function(id, data) {
+    Azuren.events["desktop.clear"] = function (id, data) {
         Azuren.desktop.clear();
     };
-    Azuren.events["desktop.setTheme"] = function(id, data) {
+    Azuren.events["desktop.setTheme"] = function (id, data) {
         Azuren.desktop.setTheme(data.theme);
     };
 
@@ -459,24 +557,30 @@
     Azuren.events["app.setHeight"] = function (id, data) {
         Azuren.app.setHeight(id, data.size);
     };
+    Azuren.events["app.setAppBar"] = function (id, data) {
+        Azuren.app.setAppBar(id, data.appbar);
+    };
     Azuren.events["store.install"] = function (id, data) {
         Azuren.store.install(data.id);
     };
     Azuren.events["store.uninstall"] = function (id, data) {
         Azuren.store.uninstall(data.id);
     };
-    Azuren.events["browser.open"] = function(id, data) {
+    Azuren.events["browser.open"] = function (id, data) {
         Azuren.browser.open(data.url);
     };
-    Azuren.events["app.start"] = function(id, data) {
+    Azuren.events["app.start"] = function (id, data) {
         Azuren.app.start(data.id);
     };
-     
+    Azuren.events["file.fileList"] = function (id, data) {
+        Azuren.file.fileList(data.type, data.callback);
+    };
+
     Azuren.prompt = function (title, value, callback) {
-        $.MetroMessageBox({ title: "", content: title, NormalButton: "#232323", ActiveButton: "#1ba1e2", buttons: "[Cancel][Accept]", input: "text", value: value }, function(a, b) {
-          if (a == "Accept") {
-              callback(b);
-          }  
+        $.MetroMessageBox({ title: "", content: title, NormalButton: "#232323", ActiveButton: "#1ba1e2", buttons: "[Cancel][Accept]", input: "text", value: value }, function (a, b) {
+            if (a == "Accept") {
+                callback(b);
+            }
         });
     };
     Azuren.alert = function (title, content, callback) {
@@ -501,19 +605,19 @@
             }, time);
         });
         infoDialog.click(function () {
-            
+
             infoDialog.animate({ "top": "-" + (infoDialog.height() + 20) + "px" }, 100, function () {
                 type && infoDialog.find(".modal-content").removeClass("alert-" + type).removeClass("alert");
                 callback && callback();
             });
-            
+
         });
     };
-    
+
     Azuren.alert.success = function (content, time, callback) { notifyDialog(content, time, "success", callback); };
     Azuren.alert.info = function (content, time, callback) { notifyDialog(content, time, "info", callback); };
     Azuren.alert.warn = function (content, time, callback) { notifyDialog(content, time, "warning", callback); };
-    Azuren.alert.error = function(content, time, callback) {
+    Azuren.alert.error = function (content, time, callback) {
         notifyDialog(content, time, "danger", callback);
     };
 

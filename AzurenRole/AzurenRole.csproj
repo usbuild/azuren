@@ -319,6 +319,7 @@
     <Compile Include="Controllers\BrowserController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
@@ -333,6 +334,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AzureServiceHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Hubs\AzurenHub.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\TableEntities.cs" />
@@ -352,12 +354,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AzureModel.edmx.sql" />
+    <Content Include="Content\app\boredtodeath.js" />
     <Content Include="Content\app\browser.js" />
     <Content Include="Content\app\chat.js" />
     <Content Include="Content\app\clock\clockface.png" />
     <Content Include="Content\app\clock\hourhand.png" />
     <Content Include="Content\app\clock\minhand.png" />
     <Content Include="Content\app\clock\sechand.png" />
+    <Content Include="Content\app\cuttherope.js" />
     <Content Include="Content\app\file.js" />
     <Content Include="Content\app\minesweeper\audio\click.mp3" />
     <Content Include="Content\app\minesweeper\audio\explode.mp3" />
@@ -386,6 +390,7 @@
     <Content Include="Content\app\minesweeper\js\Demo.js" />
     <Content Include="Content\app\minesweeper\js\FeatureDetection.js" />
     <Content Include="Content\app\minesweeper\js\Square.js" />
+    <Content Include="Content\app\photo.js" />
     <Content Include="Content\app\store.js" />
     <Content Include="Content\app\todo\icon.png" />
     <Content Include="Content\app\todo\main.css" />
@@ -395,6 +400,7 @@
     <Content Include="Content\app\weather\navigator.png" />
     <Content Include="Content\themes\default.css" />
     <Content Include="Content\themes\pink.css" />
+    <Content Include="Images\boredtodeath.png" />
     <Content Include="Images\icons\apitest.png" />
     <Content Include="Images\icons\douban.png" />
     <Content Include="Images\icons\file.png" />
@@ -414,8 +420,12 @@
     <Content Include="Images\icons\metro\store.png" />
     <Content Include="Images\icons\start.png" />
     <Content Include="Images\icons\store.png" />
+    <Content Include="Images\cuttherope.jpg" />
     <Content Include="Images\Lock-Screen.png" />
     <Content Include="Images\background.jpg" />
+    <Content Include="Images\icons\metro\photos.png" />
+    <Content Include="Images\metro-main.png" />
+    <Content Include="Images\photo-back.jpg" />
     <Content Include="Images\start_screen.png" />
     <Content Include="Scripts\azuren\azuren.api.js" />
     <Content Include="Scripts\azuren\azuren.core.js" />
@@ -502,37 +512,17 @@
     <Content Include="Scripts\MetroJs\MetroJs.js" />
     <Content Include="Scripts\MetroJs\MetroJs.min.css" />
     <Content Include="Scripts\MetroJs\MetroJs.min.js" />
+    <Content Include="Scripts\metroLayout\jquery.metronav.min.js" />
+    <Content Include="Scripts\metroLayout\jquery.metroLayout.css" />
+    <Content Include="Scripts\metroLayout\sprite.png" />
     <Content Include="Scripts\metroNotification\metro-notification.css" />
     <Content Include="Scripts\metroNotification\metro-notification.js" />
-    <Content Include="Scripts\metro\img\2.jpg" />
-    <Content Include="Scripts\metro\img\bullet.png" />
-    <Content Include="Scripts\metro\img\colour.png" />
-    <Content Include="Scripts\metro\img\metro\back.png" />
-    <Content Include="Scripts\metro\img\metro\cancel.png" />
-    <Content Include="Scripts\metro\img\metro\next.png" />
-    <Content Include="Scripts\metro\img\metro\refresh.png" />
-    <Content Include="Scripts\metro\img\metro\save.png" />
-    <Content Include="Scripts\metro\img\page_loader.gif" />
-    <Content Include="Scripts\metro\img\settings.png" />
-    <Content Include="Scripts\metro\img\twitter_w.png" />
-    <Content Include="Scripts\metro\img\widget_aboutme.png" />
-    <Content Include="Scripts\metro\img\widget_admin7.png" />
-    <Content Include="Scripts\metro\img\widget_blog.png" />
-    <Content Include="Scripts\metro\img\widget_chart.png" />
-    <Content Include="Scripts\metro\img\widget_contact.png" />
-    <Content Include="Scripts\metro\img\widget_editable.png" />
-    <Content Include="Scripts\metro\img\widget_gallery.png" />
-    <Content Include="Scripts\metro\img\widget_metro_gallery.png" />
-    <Content Include="Scripts\metro\img\widget_royal_preloader.png" />
-    <Content Include="Scripts\metro\img\widget_slider.png" />
-    <Content Include="Scripts\metro\img\widget_sliding_menu.png" />
-    <Content Include="Scripts\metro\img\widget_tab.png" />
-    <Content Include="Scripts\metro\img\widget_timeline.png" />
-    <Content Include="Scripts\metro\img\background.jpg" />
-    <Content Include="Scripts\metro\metro.css" />
-    <Content Include="Scripts\metro\metro.js" />
-    <Content Include="Scripts\metro\metro_mobile.css" />
+    <Content Include="Images\start-back.jpg" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\photobox\images\loading.gif" />
+    <Content Include="Scripts\photobox\photobox\photobox.css" />
+    <Content Include="Scripts\photobox\photobox\photobox.ie.css" />
+    <Content Include="Scripts\photobox\photobox\photobox.js" />
     <Content Include="Scripts\pnotify\jquery.pnotify.default.css" />
     <Content Include="Scripts\pnotify\jquery.pnotify.js" />
     <Content Include="Scripts\pnotify\jquery.pnotify.min.js" />
@@ -1072,6 +1062,7 @@
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\App\Test.cshtml" />
     <Content Include="Views\Browser\Index.cshtml" />
+    <Content Include="Views\Photo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

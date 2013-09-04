@@ -519,6 +519,102 @@ namespace AzurenRole
         private global::System.String _Install;
         partial void OnInstallChanging(global::System.String value);
         partial void OnInstallChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, "Type");
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Type;
+        partial void OnTypeChanging(Nullable<global::System.Int32> value);
+        partial void OnTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IWidth
+        {
+            get
+            {
+                return _IWidth;
+            }
+            set
+            {
+                OnIWidthChanging(value);
+                ReportPropertyChanging("IWidth");
+                _IWidth = StructuralObject.SetValidValue(value, "IWidth");
+                ReportPropertyChanged("IWidth");
+                OnIWidthChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IWidth;
+        partial void OnIWidthChanging(Nullable<global::System.Int32> value);
+        partial void OnIWidthChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IHeight
+        {
+            get
+            {
+                return _IHeight;
+            }
+            set
+            {
+                OnIHeightChanging(value);
+                ReportPropertyChanging("IHeight");
+                _IHeight = StructuralObject.SetValidValue(value, "IHeight");
+                ReportPropertyChanged("IHeight");
+                OnIHeightChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IHeight;
+        partial void OnIHeightChanging(Nullable<global::System.Int32> value);
+        partial void OnIHeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Tile
+        {
+            get
+            {
+                return _Tile;
+            }
+            set
+            {
+                OnTileChanging(value);
+                ReportPropertyChanging("Tile");
+                _Tile = StructuralObject.SetValidValue(value, true, "Tile");
+                ReportPropertyChanged("Tile");
+                OnTileChanged();
+            }
+        }
+        private global::System.String _Tile;
+        partial void OnTileChanging(global::System.String value);
+        partial void OnTileChanged();
 
         #endregion
 

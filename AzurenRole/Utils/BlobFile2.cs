@@ -183,8 +183,9 @@ namespace AzurenRole.Utils
         private TableQuery<FileEntity> PrefixQuery()
         {
             return new TableQuery<FileEntity>().Where(
+                TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, _username), TableOperators.And,
                 TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("Path", QueryComparisons.GreaterThan, _path.Path() + "/"), TableOperators.And,
-                    TableQuery.GenerateFilterCondition("Path", QueryComparisons.LessThanOrEqual, _path.Path() + "/" + (char)255)));
+                    TableQuery.GenerateFilterCondition("Path", QueryComparisons.LessThanOrEqual, _path.Path() + "/" + (char)255))));
         }
 
         public IEnumerable<BlobFile2> ListFiles()
@@ -192,8 +193,11 @@ namespace AzurenRole.Utils
             ValidateDirectory();
 
             var query = new TableQuery<FileEntity>().Where(
+                TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, _username),
+                TableOperators.And,
                 TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("Parent", QueryComparisons.Equal, _path.Path()), TableOperators.And,
-                    TableQuery.GenerateFilterCondition("Path", QueryComparisons.NotEqual, _path.Path())));
+                    TableQuery.GenerateFilterCondition("Path", QueryComparisons.NotEqual, _path.Path()))
+             ));
             return FileTable.ExecuteQuery(query).Select(m => new BlobFile2(m));
         }
 
@@ -220,7 +224,7 @@ namespace AzurenRole.Utils
 
         public int Move(string p)
         {
-            if(_path.Contains(p)) throw new Exception("You can't move a directory into itself");
+            if (_path.Contains(p)) throw new Exception("You can't move a directory into itself");
             var target = new BlobFile2(_username, p);
             if (target.Exists())
             {
@@ -256,7 +260,7 @@ namespace AzurenRole.Utils
 
         public int Copy(string p)
         {
-            if(_path.Contains(p)) throw new Exception("You can't copy a directory into itself");
+            if (_path.Contains(p)) throw new Exception("You can't copy a directory into itself");
             var target = new BlobFile2(_username, p);
             if (target.Exists())
             {

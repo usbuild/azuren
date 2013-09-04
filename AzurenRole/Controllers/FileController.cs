@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using AzurenRole.Helpers;
 using AzurenRole.Utils;
+using Microsoft.Ajax.Utilities;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace AzurenRole.Controllers
@@ -152,6 +154,24 @@ namespace AzurenRole.Controllers
                 Response.StatusCode = 404;
             }
             return new EmptyResult();
+        }
+
+        [Authorize]
+        public ActionResult FileListByType(string type)
+        {
+            try
+            {
+                var file = new BlobFile2(User.Identity.Name, "/");
+                var list = file.ListFiles();
+                var regex = new Regex("^" + Regex.Escape(type).Replace(@"\*", ".*").Replace(@"\?", ".") + "$",
+                    RegexOptions.IgnoreCase);
+                var data = list.Where(m => regex.IsMatch(m.ContentType())).Select(m=>m.Path().Path());
+                return Json(new {code = 0, data = data});
+            }
+            catch (Exception ex)
+            {
+                return Json(new {code = 1});
+            }
         }
     }
 }

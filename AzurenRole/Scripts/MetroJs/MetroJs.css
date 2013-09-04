@@ -901,6 +901,7 @@ a.live-tile .metroExtraSmall:link {
 }
 
 /*live tile accent colors */
+.b-amber,
 .amber .accent,
 .amber .accentBg,
 .amber .accentBgHover:hover,
@@ -944,6 +945,7 @@ a.live-tile .metroExtraSmall:link {
 .amber .accentBorderTop {
   border-top-color: #f1a30b;
 }
+.b-blue,
 .blue .accent,
 .blue .accentBg,
 .blue .accentBgHover:hover,
@@ -987,6 +989,7 @@ a.live-tile .metroExtraSmall:link {
 .blue .accentBorderTop {
   border-top-color: #1ba1e2;
 }
+.b-brown,
 .brown .accent,
 .brown .accentBg,
 .brown .accentBgHover:hover,
@@ -1030,6 +1033,7 @@ a.live-tile .metroExtraSmall:link {
 .brown .accentBorderTop {
   border-top-color: #a05000;
 }
+.b-cobalt,
 .cobalt .accent,
 .cobalt .accentBg,
 .cobalt .accentBgHover:hover,
@@ -1073,6 +1077,7 @@ a.live-tile .metroExtraSmall:link {
 .cobalt .accentBorderTop {
   border-top-color: #0050ef;
 }
+.b-crimson,
 .crimson .accent,
 .crimson .accentBg,
 .crimson .accentBgHover:hover,
@@ -1116,6 +1121,7 @@ a.live-tile .metroExtraSmall:link {
 .crimson .accentBorderTop {
   border-top-color: #a20025;
 }
+.b-cyan,
 .cyan .accent,
 .cyan .accentBg,
 .cyan .accentBgHover:hover,
@@ -1159,6 +1165,7 @@ a.live-tile .metroExtraSmall:link {
 .cyan .accentBorderTop {
   border-top-color: #1ba0e1;
 }
+.b-emerald,
 .emerald .accent,
 .emerald .accentBg,
 .emerald .accentBgHover:hover,
@@ -1202,6 +1209,7 @@ a.live-tile .metroExtraSmall:link {
 .emerald .accentBorderTop {
   border-top-color: #008a00;
 }
+.b-green,
 .green .accent,
 .green .accentBg,
 .green .accentBgHover:hover,
@@ -1245,6 +1253,7 @@ a.live-tile .metroExtraSmall:link {
 .green .accentBorderTop {
   border-top-color: #339933;
 }
+.b-indigo,
 .indigo .accent,
 .indigo .accentBg,
 .indigo .accentBgHover:hover,
@@ -1288,6 +1297,7 @@ a.live-tile .metroExtraSmall:link {
 .indigo .accentBorderTop {
   border-top-color: #6a00ff;
 }
+.b-lime,
 .lime .accent,
 .lime .accentBg,
 .lime .accentBgHover:hover,
@@ -1331,6 +1341,7 @@ a.live-tile .metroExtraSmall:link {
 .lime .accentBorderTop {
   border-top-color: #a2c139;
 }
+.b-magenta,
 .magenta .accent,
 .magenta .accentBg,
 .magenta .accentBgHover:hover,
@@ -1374,6 +1385,7 @@ a.live-tile .metroExtraSmall:link {
 .magenta .accentBorderTop {
   border-top-color: #d80073;
 }
+.b-mango,
 .mango .accent,
 .mango .accentBg,
 .mango .accentBgHover:hover,
@@ -1417,6 +1429,7 @@ a.live-tile .metroExtraSmall:link {
 .mango .accentBorderTop {
   border-top-color: #f09609;
 }
+.b-mauve,
 .mauve .accent,
 .mauve .accentBg,
 .mauve .accentBgHover:hover,
@@ -1460,6 +1473,7 @@ a.live-tile .metroExtraSmall:link {
 .mauve .accentBorderTop {
   border-top-color: #765f89;
 }
+.b-olive,
 .olive .accent,
 .olive .accentBg,
 .olive .accentBgHover:hover,
@@ -1503,6 +1517,7 @@ a.live-tile .metroExtraSmall:link {
 .olive .accentBorderTop {
   border-top-color: #6d8764;
 }
+.b-orange,
 .orange .accent,
 .orange .accentBg,
 .orange .accentBgHover:hover,
@@ -1546,6 +1561,7 @@ a.live-tile .metroExtraSmall:link {
 .orange .accentBorderTop {
   border-top-color: #fa6801;
 }
+.b-pink,
 .pink .accent,
 .pink .accentBg,
 .pink .accentBgHover:hover,
@@ -1589,6 +1605,7 @@ a.live-tile .metroExtraSmall:link {
 .pink .accentBorderTop {
   border-top-color: #e671b8;
 }
+.b-purple,
 .purple .accent,
 .purple .accentBg,
 .purple .accentBgHover:hover,
@@ -1632,6 +1649,7 @@ a.live-tile .metroExtraSmall:link {
 .purple .accentBorderTop {
   border-top-color: #a200ff;
 }
+.b-violet,
 .violet .accent,
 .violet .accentBg,
 .violet .accentBgHover:hover,
@@ -1675,6 +1693,7 @@ a.live-tile .metroExtraSmall:link {
 .violet .accentBorderTop {
   border-top-color: #a200ff;
 }
+.b-red,
 .red .accent,
 .red .accentBg,
 .red .accentBgHover:hover,
@@ -1718,6 +1737,7 @@ a.live-tile .metroExtraSmall:link {
 .red .accentBorderTop {
   border-top-color: #e51400;
 }
+.b-sienna,
 .sienna .accent,
 .sienna .accentBg,
 .sienna .accentBgHover:hover,
@@ -1761,6 +1781,7 @@ a.live-tile .metroExtraSmall:link {
 .sienna .accentBorderTop {
   border-top-color: #7b3a3e;
 }
+.b-steel,
 .steel .accent,
 .steel .accentBg,
 .steel .accentBgHover:hover,
@@ -1804,6 +1825,7 @@ a.live-tile .metroExtraSmall:link {
 .steel .accentBorderTop {
   border-top-color: #657688;
 }
+.b-teal,
 .teal .accent,
 .teal .accentBg,
 .teal .accentBgHover:hover,
@@ -1847,6 +1869,7 @@ a.live-tile .metroExtraSmall:link {
 .teal .accentBorderTop {
   border-top-color: #00aba9;
 }
+.b-yellow,
 .yellow .accent,
 .yellow .accentBg,
 .yellow .accentBgHover:hover,
@@ -1890,6 +1913,7 @@ a.live-tile .metroExtraSmall:link {
 .yellow .accentBorderTop {
   border-top-color: #d8c101;
 }
+.b-trans,
 .trans .accent,
 .trans .accentBg,
 .trans .accentBgHover:hover,
@@ -1933,6 +1957,7 @@ a.live-tile .metroExtraSmall:link {
 .trans .accentBorderTop {
   border-top-color: transparent;
 }
+.b-white,
 .white .accent,
 .white .accentBg,
 .white .accentBgHover:hover,
@@ -1976,6 +2001,7 @@ a.live-tile .metroExtraSmall:link {
 .white .accentBorderTop {
   border-top-color: #ffffff;
 }
+.b-black,
 .black .accent,
 .black .accentBg,
 .black .accentBgHover:hover,
@@ -3353,7 +3379,7 @@ html body .black.accentBorderTop {
   bottom: 0px;
   color: #fff;
   font-size: .9em;
-  height: 60px;
+  height: 80px;
   left: 0px;
   line-height: normal;
   margin: 0;
@@ -3940,3 +3966,9 @@ html body .black.accentBorderTop {
   }
 }
 
+html body .live-tile>div.tile-info {
+    position: relative;
+    padding-left: 10px;
+    margin-top: 42%;
+    background: rgba(0, 0, 0, 0.7);
+}

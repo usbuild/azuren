@@ -152,9 +152,6 @@ body {
 }
 
 #boardContainer {
-    float: left;
-    width: 1050px;
-    height: 525px;
     text-align: center;
 }
 
