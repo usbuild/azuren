@@ -13,11 +13,11 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace AzurenRole.Utils
 {
-    public class GlobalData
+    public static class GlobalData
     {
-        public static void SentMail(string target, string subject, string body)
+        public static void SendMail(string target, string subject, string body)
         {
-            SmtpClient client = new SmtpClient(ConfigurationManager.AppSettings["SmtpServer"],
+            var client = new SmtpClient(ConfigurationManager.AppSettings["SmtpServer"],
                 Int32.Parse(ConfigurationManager.AppSettings["SmtpPort"]))
             {
                 UseDefaultCredentials = false,
@@ -27,9 +27,9 @@ namespace AzurenRole.Utils
                 EnableSsl = true
             };
 
-            MailAddress fromAddr = new MailAddress(ConfigurationManager.AppSettings["MailAccount"], "Azuren OS");
-            MailAddress toAddr = new MailAddress(target);
-            MailMessage message = new MailMessage(fromAddr, toAddr) {Body = body, Subject = subject};
+            var fromAddr = new MailAddress(ConfigurationManager.AppSettings["MailAccount"], "Azuren OS");
+            var toAddr = new MailAddress(target);
+            var message = new MailMessage(fromAddr, toAddr) {Body = body, Subject = subject, IsBodyHtml = true};
             client.Send(message);
         }
 
@@ -78,7 +78,7 @@ namespace AzurenRole.Utils
             }
             else
             {
-                ObjectQuery<User> query = GetDBContext(ctx).Users.Where("it.username = @username", new ObjectParameter("username", ctx.User.Identity.Name));
+                ObjectQuery<User> query = GetDBContext(ctx).Users.Where("it.Username = @username", new ObjectParameter("username", ctx.User.Identity.Name));
                 string sql = query.ToString();
                 user = query.First();
                 ctx.Request.Items.Add(UserKey, user);
@@ -100,9 +100,21 @@ namespace AzurenRole.Utils
                     }
                     else
                     {
-                        ObjectQuery<User> query = dbContext.Users.Where("it.username = @username", new ObjectParameter("username", HttpContext.Current.User.Identity.Name));
+                        ObjectQuery<User> query = dbContext.Users.Where("it.Username = @username", new ObjectParameter("username", HttpContext.Current.User.Identity.Name));
                         string sql = query.ToString();
                         _user = query.First();
+                        if (_user.Customize == null)
+                        {
+                            _user.Customize = new Customize()
+                            {
+                                Desktop = "/Images/background.jpg",
+                                App = "",
+                                ThemeId = 1
+                            };
+
+                            dbContext.SaveChanges();
+                            dbContext.Refresh(RefreshMode.StoreWins, _user.Customize);
+                        }
                         HttpContext.Current.Items.Add(UserKey, _user);
                         return _user;
                     }

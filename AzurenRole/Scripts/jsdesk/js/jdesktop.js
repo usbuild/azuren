@@ -38,7 +38,10 @@
                 .css("transform", end)
                 .show(0)
                 .css("transition", 'transform ' + settings.time + 'ms')
-                .css("-webkit-transition", '-webkit-transform ' + settings.time + 'ms');
+                .css("-webkit-transition", '-webkit-transform ' + settings.time + 'ms')
+                .attr('data-trans', "show")
+            ;
+
 
             setTimeout(function () {
                 ele.css("-webkit-transform", "perspective(10000) " + start)
@@ -54,7 +57,9 @@
             this.css("-webkit-transform-origin", origin)
             .css("transform-origin", origin)
                 .css("transition", 'transform ' + settings.time + 'ms')
-                .css("-webkit-transition", '-webkit-transform ' + settings.time + 'ms');
+                .css("-webkit-transition", '-webkit-transform ' + settings.time + 'ms')
+            .attr('data-trans', "hide")
+            ;
             setTimeout(function () {
                 ele.css("-webkit-transform", "perspective(10000) " + end)
                     .css("transform", "perspective(10000px) " + end);
@@ -186,6 +191,8 @@ var nJDSK = (function (wnd, d, $) {
                 return self;
             }
 
+            self.onClose = function () {
+            };
 
             self.$base = $("<div/>").addClass("metro-win").css("z-index", nJDSK.metroList.lastZIndex).attr("id", identifier).addClass("widget_" + theme);
             self.$base.attr("data-id", id);
@@ -203,9 +210,9 @@ var nJDSK = (function (wnd, d, $) {
             if (!$("#metro-desktop").is(":visible")) {
                 showMetroDesktop();
             }
-            self.close = function() {
+            self.close = function () {
                 self.$appbar.remove();
-                self.$task.hide(function() { self.$task.remove();});
+                self.$task.hide(function () { self.$task.remove(); });
                 self.$base.remove();
                 nJDSK.metroList.delete_item(id);
             };
@@ -217,14 +224,14 @@ var nJDSK = (function (wnd, d, $) {
                 .attr("data-id", id)
                 .appendTo($("#metro-taskbar"));
             self.$task.append($('<div class="metro-close glyphicon glyphicon-remove-circle"></div>'));
-            self.$task.find(".metro-close").click(function(evt) {
+            self.$task.find(".metro-close").click(function (evt) {
                 evt.stopPropagation();
                 evt.preventDefault();
                 if ($(".metro-win").length == 1) {
                     $("#metro-desktop").flip({
                         method: "hide",
                         direction: "top",
-                        callback: function(e) {
+                        callback: function (e) {
                             e.hide();
                             self.close();
                         }
@@ -233,10 +240,10 @@ var nJDSK = (function (wnd, d, $) {
                     $("#start-screen").flip({
                         method: "show",
                         direction: "bottom",
-                        callback: function(e) {
-                            $("#start-screen .widget").each(function(a, b) {
+                        callback: function (e) {
+                            $("#start-screen .widget").each(function (a, b) {
                                 $(b).css("transform", "scale(0.9)");
-                                setTimeout(function() { $(b).fadeIn("fast"), $(b).css("transform", "scale(1)") }, $(b).data("col") * 60 + $(b).data("row") * 30);
+                                setTimeout(function () { $(b).fadeIn("fast"), $(b).css("transform", "scale(1)") }, $(b).data("col") * 60 + $(b).data("row") * 30);
                             });
                         }
                     });
@@ -245,12 +252,12 @@ var nJDSK = (function (wnd, d, $) {
                         method: "hide",
                         direction: "bottom",
                         callback: function () {
-                            
+
                             self.close();
                         }
                     });
                 }
-                
+
             });
 
             self.$task.click(function () {
@@ -268,8 +275,9 @@ var nJDSK = (function (wnd, d, $) {
 
 
             if (self.$base.find("iframe.metro-frame").length > 0) {
+                self.$content.css("overflow", "hidden")
                 var iframe = self.$base.find("iframe.metro-frame").get(0);
-                
+
                 if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
                     iframe.onreadystatechange = function () {
                         if (iframe.readyState == "complete") {
@@ -278,7 +286,7 @@ var nJDSK = (function (wnd, d, $) {
                     };
                 } else {
                     iframe.onload = function () {
-                        
+
                         self.$content.trigger("ready");
                     };
                 }
@@ -419,10 +427,8 @@ var nJDSK = (function (wnd, d, $) {
                 .attr('href', '#')
                 .html('').addClass('minimizebtn')
                 .click(function () {
-                    self.$base.effect("transfer", { to: "#tskbrbtn_" + id, className: "ui-effects-transfer" }, 300, function () {
-                        self.$base.hide().removeClass("win-active");
-                        setTopActive();
-                    });
+                    self.$base.hide().removeClass("win-active");
+                    setTopActive();
                 });
 
             /*maximize button*/
@@ -524,17 +530,20 @@ var nJDSK = (function (wnd, d, $) {
 
             if (nJDSK.iconList[id]) {
                 this.$taskbarBtn.
-                css("background-image", 'url("' + nJDSK.iconList[id] + '")');
+                css("background-image", 'url("' + nJDSK.iconList[id].image + '")');
             }
             taskbar.append(this.$taskbarBtn);
+
+            this.setTaskbarBtn = function(url) {
+                this.$taskbarBtn.
+                css("background-image", 'url("' + url + '")');
+            };
 
             // add taskbar button behavior
             this.$taskbarBtn.click(function () {
                 if (self.$taskbarBtn.hasClass('activetsk') && self.$base.is(':visible')) {
-                    self.$base.effect("transfer", { to: "#tskbrbtn_" + id, className: "ui-effects-transfer" }, 300, function () {
-                        self.$base.hide().removeClass("win-active");
-                        setTopActive();
-                    });
+                    self.$base.hide().removeClass("win-active");
+                    setTopActive();
                 } else {
                     self.$base.css({ 'z-index': nJDSK.WindowList.lastZIndex });
                     nJDSK.WindowList.lastZIndex += 1;
@@ -633,10 +642,10 @@ var nJDSK = (function (wnd, d, $) {
             });
             return win;
         },
-        
-        metroFrameWindow: function (id,title, src, icon, callback) {
+
+        metroFrameWindow: function (id, title, src, icon, callback) {
             var html = '<div class="iframe-window-error" /><iframe data-id="' + id + '" src="' + src + '" class="metro-frame"></iframe>';
-            var win = new nJDSK.MetroWindow(id, title, icon, html,function (win) {
+            var win = new nJDSK.MetroWindow(id, title, icon, html, function (win) {
                 if (win.isNew) {
                     callback && callback(win);
                 }
@@ -660,9 +669,9 @@ var nJDSK = (function (wnd, d, $) {
              * @param string iconImage	url for icon image
              * @param function callback	click function
              */
-            addIcon: function (iconId, iconTitle, iconImage, iconWidth, iconHeight, type, tile,callback) {
+            addIcon: function (iconId, iconTitle, iconImage, iconWidth, iconHeight, type, tile, callback) {
 
-                nJDSK.iconList[iconId + ""] = iconImage;
+                nJDSK.iconList[iconId + ""] = { image: iconImage, title: iconTitle };
 
                 var themes = ["amber", 'blue', 'brown', 'cobalt', 'crimson', 'cyan', 'emerald', 'green', 'indigo', 'lime', 'magenta', 'mango', 'mauve', 'olive', 'orange', 'pink', 'purple', 'violet', 'red',
                 'sienna', 'steel', 'teal', 'yellow'];
@@ -675,7 +684,7 @@ var nJDSK = (function (wnd, d, $) {
                     '<div><img class="full" src="', iconImage, '" width="110" height="110"/></div>',
                     '</li>'].join(""));
                 metroIcon.find("img").css("margin-top", 10 + 90 * (y - 1) + "px");
-
+                metroIcon.data("info", { id: iconId, image: iconImage, title: iconTitle });
 
                 metroIcon.mousedown(function (e) {
                     $(this).addClass("widget-press");
@@ -691,12 +700,6 @@ var nJDSK = (function (wnd, d, $) {
                 nJDSK.gridster.add_widget('<li><a class="icon app-icon" data-id="' + iconId + '" id="app-icon-' + iconId + '" ><img src="' + iconImage + '" /><span>' + iconTitle + '</span></a></li>');
                 */
                 if (typeof (callback) == 'function') {
-                    $('#app-icon-' + iconId).click(
-                        function (e) {
-                            if (fake) {
-                                return callback(app);
-                            }
-                        });
 
                     metroIcon.
                         click(function (e) {
@@ -705,6 +708,7 @@ var nJDSK = (function (wnd, d, $) {
                                     nJDSK.showDesktop();
                                     return callback(e);
                                 } else {
+
                                     $("#start-screen").flip({
                                         method: "hide",
                                         direction: "bottom"
@@ -740,15 +744,6 @@ var nJDSK = (function (wnd, d, $) {
                         });
                 }
 
-                var icn = $('#app-icon-' + iconId);
-                icn.mousedown(function (e) {
-                    nJDSK.clearActive();
-                    icn.addClass('activeIcon');
-                });
-
-                icn.click(function (e) {
-                    e.stopPropagation();
-                });
 
                 if (typeof tile === 'function') {
                     tile(app);
@@ -759,7 +754,7 @@ var nJDSK = (function (wnd, d, $) {
                     }
 
                 }
-                return icn;
+                return metroIcon;
             },
 
             /**
@@ -767,7 +762,6 @@ var nJDSK = (function (wnd, d, $) {
              * @param string iconId	The icon ID
              */
             removeIcon: function (iconId) {
-                //nJDSK.gridster.remove_widget($('#app-icon-' + iconId).parents("li"));
                 nJDSK.metroster.remove_widget($("#metro-icon-" + iconId));
             }
         },
@@ -799,16 +793,18 @@ var nJDSK = (function (wnd, d, $) {
             $('.activeIcon').removeClass('activeIcon');
         },
         showDesktop: function () {
-            $("#wrapper").flip({
-                method: "show",
-                direction: "left"
-            });
-            $("#start-screen").flip({
-                method: "hide",
-                direction: "right",
-                callback: function () {
-                }
-            });
+            if ($("#wrapper").attr("data-trans") === "hide" || $("#start-screen").attr("data-trans") == "show") {
+                $("#wrapper").flip({
+                    method: "show",
+                    direction: "left"
+                });
+                $("#start-screen").flip({
+                    method: "hide",
+                    direction: "right",
+                    callback: function () {
+                    }
+                });
+            }
         },
 
         /**
@@ -856,6 +852,7 @@ var nJDSK = (function (wnd, d, $) {
                     $('.window').show();
                 }
             });
+
             $("#start-menu").click(function () {
                 $("#start-screen .widget").hide(0, function () {
                     $("#start-screen").flip({
@@ -887,14 +884,14 @@ var nJDSK = (function (wnd, d, $) {
             $("#left-showdesktop").click(function (e) {
                 nJDSK.showDesktop();
             });
-            $("#left-metrodesk").click(function(e) {
+            $("#left-metrodesk").click(function (e) {
                 $("#start-screen").flip({
                     method: "hide",
                     direction: "bottom",
                 });
                 $("#metro-desktop").flip({
                     method: "show",
-                    direction:"top"
+                    direction: "top"
                 });
             }).hover(function () {
                 if ($(".metro-win").length > 0) {
@@ -904,12 +901,32 @@ var nJDSK = (function (wnd, d, $) {
                 $(this).removeClass("show-metrodesk-hover");
             });
 
-            $(".start-profile").click(function (e) {
-                $(".profile-setting").show(0).animate({ right: 0 }, 200, "easeInOutQuad", function() {
+
+            $("#start-screen").scroll(function (e) {
+                $("#start-screen>div:not(#widget_scroll_container)").css("left", $(this).scrollLeft());
+            });
+            var closeProfile = function () {
+                $(".profile-setting").animate({ right: "-400px" }, 200, "easeInOutQuad", function () {
+                    $(this).hide(0);
+                    $("#start-screen").off("click", closeProfile);
                 });
+            };
+
+            $(".start-profile").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(".profile-setting").show(0);
+                $(".profile-setting").find("iframe").get(0).contentWindow.location.reload();
+                
+                setTimeout(function () {
+                    $(".profile-setting").animate({ right: 0 }, 400, "easeInOutQuad", function () {
+                    });
+                }, 200);
+                $("#start-screen").on("click", closeProfile);
+
             });
             $(".profile-setting .close-profile").click(function (e) {
-                $(".profile-setting").animate({ right: "-400px" }, 200, "easeInOutQuad", function () {
+                $(".profile-setting").animate({ right: "-400px" }, 400, "easeInOutQuad", function () {
                     $(this).hide(0);
                 });
             });
@@ -941,7 +958,9 @@ var nJDSK = (function (wnd, d, $) {
                 });
 
             });
-
+            $(document).on("click", ".desktop-icon", function () {
+                $("#metro-icon-" + $(this).data("id")).trigger("click");
+            });
 
             nJDSK.metroster = $(".widget_container").gridster({
                 widget_margins: [5, 5],
@@ -952,13 +971,14 @@ var nJDSK = (function (wnd, d, $) {
                 draggable: {
                     stop: function () {
                         setTimeout(function () { fake = true; }, 100);
-                        $(".ui-mask-layer").hide();
+                        $(".ui-mask-layer").hide(0);
                     },
                     start: function () {
                         fake = false;
-                        $(".ui-mask-layer").show();
+                        $(".ui-mask-layer").show(0);
                     }
                 }
+
             }).data("gridster");
 
             nJDSK.gridster = nJDSK.icons.gridster({
@@ -970,19 +990,22 @@ var nJDSK = (function (wnd, d, $) {
                 draggable: {
                     stop: function () {
                         setTimeout(function () { fake = true; }, 10);
-                        $(".ui-mask-layer").hide();
+                        $(".ui-mask-layer").hide(0);
                     },
                     start: function () {
                         fake = false;
-                        $(".ui-mask-layer").show();
+                        $(".ui-mask-layer").show(0);
                     }
                 }
             }).data("gridster");
+
+
         }
     };
 
 })(window, document, jQuery);
 //metro
+
 (function () {
     var a = {
         window_width: 0, window_height: 0, scroll_container_width: 0, widgets: null, widget_scroll_container: null, widget_containers: null,
@@ -990,24 +1013,33 @@ var nJDSK = (function (wnd, d, $) {
             a.is_touch_device = "ontouchstart" in document.documentElement ? !0 : !1;
             a.cacheElements();
             a.Events.onWindowResize();
-            a.is_touch_device ? $(document.body).addClass("touch") : $(document).mousedown(a.Events.onMouseDown).mouseup(a.Events.onMouseUp).mousemove(a.Events.onMouseMove);
+            $(window).bind("resize", a.Events.onWindowResize);
+            a.is_touch_device ? $("#widget_scroll_container").addClass("touch") : $("#widget_scroll_container").mousedown(a.Events.onMouseDown).mouseup(a.Events.onMouseUp).mousemove(a.Events.onMouseMove);
+
         }, Events: {
             onWindowResize: function () {
                 a.window_width = $(window).width();
                 a.window_height = $(window).height()
+                a.Events.onMouseUp();
             }, onMouseDown: function (b) {
-                
-                a.dragging_x = b.clientX
+                a.dragging_x = b.clientX;
             }, onMouseUp: function () {
-                $(document).scrollLeft(0);
                 a.dragging_x = 0;
-                var b = -1 * (a.scroll_container_width - a.window_width), c = function () {
-                    setTimeout(function () {
-                        a.widget_scroll_container.css("transition", "")
-                    }, 400)
-                };
-                60 < a.left || a.scroll_container_width +
-                60 < a.window_width ? (a.widget_scroll_container.css("transition", "left 0.2s ease-in"), a.widget_scroll_container.css("left", 60), a.left = 60, c()) : a.left < b && (a.widget_scroll_container.css("transition", "left 0.2s ease-in"), a.widget_scroll_container.css("left", b), a.left = b, c())
+
+                $(document).scrollLeft(0);
+
+
+                a.dragging_x = 0;
+                var b = -1 * (a.scroll_container_width - a.window_width),
+                    c = function () {
+                        setTimeout(function () {
+                            a.widget_scroll_container.css("transition", "")
+                        }, 400)
+                    };
+
+                60 < a.left || a.scroll_container_width + 60 < a.window_width ?
+                    (a.widget_scroll_container.css("transition", "left 0.2s ease-in"), a.widget_scroll_container.css("left", 60), a.left = 60, c()) :
+                    a.left < b && (a.widget_scroll_container.css("transition", "left 0.2s ease-in"), a.widget_scroll_container.css("left", b), a.left = b, c())
             }, onMouseMove: function (b) {
                 if (a.dragging_x) {
                     var c = a.left + b.clientX - a.dragging_x;
@@ -1026,6 +1058,8 @@ var nJDSK = (function (wnd, d, $) {
     $(document).ready(a.init)
 })();
 
+
+
 (function (wnd, d, $) {
     $.extend(nJDSK.widgets, {
         /**
@@ -1042,8 +1076,8 @@ var nJDSK = (function (wnd, d, $) {
 	            '</div><div class="widget-content"><iframe frameborder="0" src="' + url + '" style="width:' + width + 'px;height:' + height + 'px"></iframe></div></div>').addClass("ui-draggable");
             $('#widgets').append(item);
             item.draggable({
-                handle: ".widget-title .wdg-move", start: function () { $(".ui-mask-layer").show(); }
-                , stop: function () { $(".ui-mask-layer").hide(); }
+                handle: ".widget-title .wdg-move", start: function () { $(".ui-mask-layer").show(0); }
+                , stop: function () { $(".ui-mask-layer").hide(0); }
             });
 
             item.find(".wdg-close").click(function (e) {

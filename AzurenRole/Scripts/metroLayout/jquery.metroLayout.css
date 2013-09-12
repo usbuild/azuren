@@ -106,7 +106,7 @@ img, object, embed {
 }
 
 .metro-layout .content {
-    height: 80%;
+    height: 600px;
     overflow: hidden;
 }
 
@@ -127,8 +127,7 @@ img, object, embed {
 .metro-layout .box {
     float: left;
     position: relative;
-    margin: 0.5em;
-    padding: 0.5em;
+    margin: 5px;
     background: #555;
     width: 15em;
     height: 8em;
@@ -147,19 +146,31 @@ img, object, embed {
 
     .metro-layout .box span {
         position: absolute;
-        left: 0.5em;
-        bottom: 0.5em;
         font-size: 1em;
         font-weight: normal;
         z-index: 8;
+        display: block;
+        background-color: rgba(0,0,0,0.3);
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+        bottom: 0;
+        height: 30px;
+        padding: 5px;
+        font-weight: bold;
+        font-size: 18px;
+        -webkit-transition: height .2s ease-in-out;
+        transition: height .2s ease-in-out;
+    }
+
+    .metro-layout .box:hover span {
+        height: 50px;
     }
 
     .metro-layout .box img.icon {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -32px;
-        margin-top: -32px;
+        margin: 0;
+        height: 100%;
+        width: 100%;
         z-index: 7;
     }
 
@@ -176,28 +187,36 @@ img, object, embed {
         z-index: 6;
     }
 
+.metro-layout .width1 {
+    width: 110px;
+}
+
 .metro-layout .width2 {
-    width: 32em;
+    width: 230px;
 }
 
 .metro-layout .width3 {
-    width: 49em;
+    width: 350px;
 }
 
 .metro-layout .width4 {
-    width: 66em;
+    width: 470px;
+}
+
+.metro-layout .height1 {
+    height: 110px;
 }
 
 .metro-layout .height2 {
-    height: 18em;
+    height: 230px;
 }
 
 .metro-layout .height3 {
-    height: 28em;
+    height: 350px;
 }
 
 .metro-layout .height4 {
-    height: 38em;
+    height: 470px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {

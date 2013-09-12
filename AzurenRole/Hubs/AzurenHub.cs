@@ -61,7 +61,7 @@ namespace SignalR
 
             User c = GlobalData.getUser(Context);
             if (u == null) Users.TryAdd(Context.ConnectionId, c);
-            else if (u.id != c.id) Users.TryUpdate(Context.ConnectionId, c, u);
+            else if (u.Id != c.Id) Users.TryUpdate(Context.ConnectionId, c, u);
             return base.OnReconnected();
         }
 
@@ -78,7 +78,7 @@ namespace SignalR
         public static bool SendMessage(User user, string type, object message)
         {
             var conns = from u in Users
-                        where u.Value.id == user.id
+                        where u.Value.Id == user.Id
                         select u.Key;
             QueueClient client = AzureServiceHelper.GetQueueClient("message");
             var bMessage = new BrokeredMessage();

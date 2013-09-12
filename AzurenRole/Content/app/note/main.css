@@ -1,0 +1,154 @@
+﻿body {
+    margin: 0;
+    font-family: "Segoe UI Light";
+    overflow: hidden;
+    background-color: #be213e;
+}
+
+.btn {
+    display: inline-block;
+    width: 100px;
+    border: solid 3px #ccc;
+    text-decoration: none;
+    color: white;
+    font-size: 19px;
+    text-align: center;
+    border: solid 1px black;
+}
+
+    .btn:hover {
+        border: solid 1px #4c4c4c;
+    }
+
+    .btn:active {
+        border: solid 1px white;
+    }
+
+
+
+.note-panel {
+    float: left;
+    width: 200px;
+    background-color: #be213e;
+    height: 100%;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+}
+
+.note-content {
+    height: 100%;
+    background: url("/Content/app/note/bg.jpg");
+    margin-left: 200px;
+}
+
+.note-add {
+    margin: 10px auto;
+    display: block;
+    width: 160px;
+}
+
+.note-content {
+    padding: 30px 50px;
+    overflow-y: auto;
+}
+
+.note-edit-title-control:focus, .note-edit-title-control:active {
+    outline: 0;
+}
+
+.note-edit-title-control {
+    margin-top: 20px;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 40px;
+    padding: 3px 20px;
+    text-align: center;
+}
+
+    .note-edit-title-control::-webkit-input-placeholder {
+        font-weight: normal;
+        font-style: italic;
+        font-size: 25px;
+        line-height: 50px;
+    }
+
+    .note-edit-title-control::-ms-input-placeholder {
+        font-weight: normal;
+        font-style: italic;
+        font-size: 25px;
+        line-height: 50px;
+    }
+
+.note-edit-content {
+}
+
+.note-edit-content-control {
+    border: none;
+    background: none;
+    -moz-resize: vertical;
+    -ms-resize: vertical;
+    -o-resize: vertical;
+    resize: vertical;
+    width: 100%;
+    min-height: 200px;
+    font-size: 17px;
+    border: dashed 1px #ccc;
+    vertical-align: top;
+    padding: 10px;
+    line-height: 30px;
+}
+
+    .note-edit-content-control:focus, .note-edit-content-control:active {
+        outline: 0;
+    }
+
+.note-edit-submit {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    color: black;
+    border: solid 1px black;
+}
+
+    .note-edit-submit:hover {
+        border: solid 1px #4c4c4c;
+    }
+
+    .note-edit-submit:active {
+        border: solid 1px white;
+    }
+
+.note-item {
+    height: 40px;
+    padding: 5px 10px;
+    margin: 5px 0;
+    font-size: 19px;
+}
+
+.note-title {
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .note-title:hover {
+        cursor: pointer;
+    }
+
+.note-delete {
+    float: right;
+    line-height: 40px;
+    width: 20px;
+    text-align: center;
+}
+
+    .note-delete a {
+        text-decoration: none;
+        color: white;
+    }

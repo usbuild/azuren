@@ -43,7 +43,7 @@ namespace SinalRChat
 
             User c = GlobalData.getUser(Context);
             if (u == null) users.TryAdd(Context.ConnectionId, c);
-            else if (u.id != c.id) users.TryUpdate(Context.ConnectionId, c, u);
+            else if (u.Id != c.Id) users.TryUpdate(Context.ConnectionId, c, u);
             return base.OnReconnected();
         }
 
@@ -54,7 +54,7 @@ namespace SinalRChat
             RoomChatEntity entity = new RoomChatEntity();
             entity.PartitionKey = groupId;
             entity.RowKey = string.Format("{0:D19}", DateTime.MaxValue.Ticks - DateTime.UtcNow.Ticks);
-            entity.Author = GlobalData.user.id;
+            entity.Author = GlobalData.user.Id;
             entity.Content = message;
             entity.RoomId = groupId;
             entity.Time = DateTimeOffset.Now;
@@ -79,10 +79,10 @@ namespace SinalRChat
                 GroupMap.Add(new UserGroupPair { connectionId = Context.ConnectionId, user = u, groupId = groupId });
             }
             u = GlobalData.getUser(Context);
-            var v = GroupMap.Where(_ => _.groupId == groupId && _.user.id == u.id);
+            var v = GroupMap.Where(_ => _.groupId == groupId && _.user.Id == u.Id);
             if (v.Count() == 1) Clients.Group(groupId, new string[] { Context.ConnectionId }).UserOnline(groupId, u);
 
-            var t = GroupMap.Where(_ => _.groupId == groupId).Select(_ => _.user).GroupBy(_ => _.id).Select(_ => _.First());
+            var t = GroupMap.Where(_ => _.groupId == groupId).Select(_ => _.user).GroupBy(_ => _.Id).Select(_ => _.First());
             Clients.Caller.UpdateGroupUsers(groupId, t);
         }
 
@@ -99,7 +99,7 @@ namespace SinalRChat
                 IEnumerable<UserGroupPair> hs = GroupMap.Where(_ => _.connectionId == Context.ConnectionId);
                 foreach (UserGroupPair ugp in hs)
                 {
-                    var v = GroupMap.Where(_ => _.groupId == ugp.groupId && _.user.id == user.id);
+                    var v = GroupMap.Where(_ => _.groupId == ugp.groupId && _.user.Id == user.Id);
                     if (v.Count() == 1) Clients.Group(ugp.groupId).UserOffline(ugp.groupId, user);
                 }
                 GroupMap.RemoveWhere(_ => _.connectionId == Context.ConnectionId);
@@ -116,7 +116,7 @@ namespace SinalRChat
                 GroupMap.RemoveWhere(_ => _.groupId == groupId && _.connectionId == Context.ConnectionId);
             }
             User u = GlobalData.getUser(Context);
-            var v = GroupMap.Where(_ => _.groupId == groupId && _.user.id == u.id);
+            var v = GroupMap.Where(_ => _.groupId == groupId && _.user.Id == u.Id);
             if (v.Count() == 0) Clients.Group(groupId).UserOffline(groupId, u);
         }
 
@@ -125,7 +125,7 @@ namespace SinalRChat
             lock (GroupMap)
             {
 
-                var v = GroupMap.Where(_ => _.groupId == groupId).Select(_ => _.user).GroupBy(_ => _.id).Select(_ => _.First());
+                var v = GroupMap.Where(_ => _.groupId == groupId).Select(_ => _.user).GroupBy(_ => _.Id).Select(_ => _.First());
                 Clients.Caller.UpdateGroupUsers(groupId, v);
             }
         }
@@ -151,11 +151,11 @@ namespace SinalRChat
             if (users.Length > 0)
             {
                 AzurenEntities context = new AzurenEntities();
-                ObjectQuery<User> query = context.Users.Where("it.id IN {" + String.Join(",", users) + "}");
+                ObjectQuery<User> query = context.Users.Where("it.Id IN {" + String.Join(",", users) + "}");
                 IList u = new ArrayList();
                 foreach (User t in query.ToList<User>())
                 {
-                    t.password = "";
+                    t.Password = "";
                     u.Add(t);
                 }
 

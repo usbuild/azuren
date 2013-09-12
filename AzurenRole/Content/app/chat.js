@@ -6,7 +6,7 @@ Chat.userInfoList = [];
 Chat.chatHub = $.connection.chatHub;
 var userWrapper = function (userId) {
     if (Chat.userInfoList[userId] != undefined) {
-        return '<span class="user-id ' + (userId == Chat.myId ? "my-id" : "") + '" data-id="' + userId + '">' + Chat.userInfoList[userId].displayname + '</span>';
+        return '<span class="user-id ' + (userId == Chat.myId ? "my-id" : "") + '" data-id="' + userId + '">' + Chat.userInfoList[userId].Username + '</span>';
     } else {
         return '<span class="raw-user-id ' + (userId == Chat.myId ? "my-id" : "") + '" data-id="' + userId + '">' + userId + '</span>';
     }
@@ -43,16 +43,16 @@ Chat.chatHub.client.addNewMessageToPage = function (groupId, obj) {
 
 var addUserToList = function (roomId, user) {
     var list = getChatWindow(roomId).$content.find(".chat-box-user-list ul");
-    if (list.find('[data-id=' + user.id + "]").length == 0) {
-        Chat.userInfoList[user.id] = user;
-        var li = $("<li />").addClass("chat-box-user-item").attr("data-id", user.id).html(userWrapper(user.id));
+    if (list.find('[data-id=' + user.Id + "]").length == 0) {
+        Chat.userInfoList[user.Id] = user;
+        var li = $("<li />").addClass("chat-box-user-item").attr("data-id", user.Id).html(userWrapper(user.Id));
         list.append(li);
     }
 };
 
 Chat.chatHub.client.updateUserInfo = function (data) {
     for (x in data) {
-        Chat.userInfoList[data[x].id] = data[x];
+        Chat.userInfoList[data[x].Id] = data[x];
     }
 
     $("span.raw-user-id").each(function () {
@@ -91,7 +91,7 @@ Chat.chatHub.client.updateGroupUsers = function (groupId, users) {
 
 
 Chat.chatHub.client.userOffline = function (groupId, user) {
-    getChatWindow(groupId).$content.find(".chat-box-user-list [data-id=" + user.id + "]").remove();
+    getChatWindow(groupId).$content.find(".chat-box-user-list [data-id=" + user.Id + "]").remove();
 };
 
 Chat.chatHub.client.userOnline = function (groupId, user) {
@@ -120,95 +120,73 @@ Azuren.app.install("0001", "IM", "/Images/icons/metro/im.png", 1, 1, 0, function
 
     Azuren.showWindow(280, 600, "0001", "Chat", "", function (w) {
         win = w;
-        
-    if (win.isNew) {
-        win.$content.html('<img src="/Images/loading.gif" style="width: 220px;height:20px; margin:60% auto 0 auto";display:block; />');
-        $.get("/Chat/Index", {}, function (e) {
-            win.$content.html(e);
-            Chat.myId = $("#logged-id").val();
-        });
 
-        win.$content.on("click", ".chat-info-setting", function (e) {
-            $.get("/Account/Settings", {}, function (e) {
-                var set_win = Azuren.showWindow(600, 690, "chat-setting", "Settings", e);
-                if (set_win.isNew) {
-                    
-                    var fun = function (e) {
-                        set_win.$content.html(e);
-                        if (set_win.$content.find(".error-msg").length == 0) {
-                            
-                            var myName = set_win.$content.find(".displayname").val();
-                            
-                            Chat.userInfoList[Chat.myId] && (Chat.userInfoList[Chat.myId].displayname = myName);
-                            $(".my-id").html(myName);
-                            win.$content.find(".username").html(myName);
-                            set_win.close();
-                        } else {
-                            set_win.$content.find("form").ajaxForm(fun);
+        if (win.isNew) {
+            win.$content.html('<img src="/Images/jar-loading.gif" style="margin-top: 40%" />');
+            $.get("/Chat/Index", {}, function (e) {
+                win.$content.html(e);
+                Chat.myId = $("#logged-id").val();
+            });
+
+            win.$content.on("click", ".room-list-name a", function (data) {
+                data.preventDefault();
+                var id = $(this).data("id");
+                $.get("/Chat/Chat?name=" + id, {}, function (e) {
+                    Azuren.showWindow(600, 480, "talk" + id, id, e, function (talk) {
+                        if (talk.isNew) {
+                            talk.setTaskbarBtn("/Images/icons/message.png");
+                            Chat.chatHub.server.addGroup(id);
+                            talk.unnotify = function () {
+                                $("#tskbrbtn_" + talk.id).removeClass("blink");
+                            };
+                            talk.onClose = function () {
+                                Chat.chatHub.server.removeGroup(id);
+                            };
+                            Chat.chatHub.server.getRecent(id);
                         }
-                    };
-                    set_win.$content.find("form").ajaxForm(fun);
-                }
-            });
-
-        });
-        win.$content.on("click", ".room-list-name a", function (data) {
-            data.preventDefault();
-            var id = $(this).data("id");
-            $.get("/Chat/Chat?name=" + id, {}, function (e) {
-                var talk = Azuren.showWindow(600, 480, "talk" + id, id, e);
-                if (talk.isNew) {
-                    Chat.chatHub.server.addGroup(id);
-                    talk.unnotify = function () {
-                        $("#tskbrbtn_" + talk.id).removeClass("blink");
-                    };
-                    talk.onClose = function () {
-                        Chat.chatHub.server.removeGroup(id);
-                    };
-                    Chat.chatHub.server.getRecent(id);
-                }
-            });
-            return false;
-        });
-
-        win.$content.on("click", ".group-remove", function (e) {
-            e.preventDefault();
-            var id = $(this).data("id");
-            var cwin = getChatWindow(id);
-            cwin && cwin.close();
-            $.get("/Chat/RemoveGroup", { name: id }, function (e) {
-                if (e.code == 0) {
-                    $.get("/Chat/Index", {}, function (e) {
-                        win.$content.html(e);
                     });
-                }
+                });
+                return false;
             });
 
-            return false;
-        });
-        win.$content.on("click", ".add-new-room-btn", function (e) {
-            e.preventDefault();
-            var name = $(this).prev(".add-new-room-text").val().trim();
-            if (/[^\w-_]/.test(name)) {
-                alert("Only allow letters and number");
-                return;
-            }
-            if (name.length < 4) {
-                alert("Length should >= 4");
-                return;
-            }
+            win.$content.on("click", ".group-remove", function (e) {
+                e.preventDefault();
+                var id = $(this).data("id");
+                var cwin = getChatWindow(id);
+                cwin && cwin.close();
+                $.get("/Chat/RemoveGroup", { name: id }, function (e) {
+                    if (e.code == 0) {
+                        $.get("/Chat/Index", {}, function (e) {
+                            win.$content.html(e);
+                        });
+                    }
+                });
 
-            $.getJSON("/Chat/AddGroup", { name: name }, function (e) {
-
-                if (e.code == 0) {
-                    $.get("/Chat/Index", {}, function (e) {
-                        win.$content.html(e);
-                    });
-                }
+                return false;
             });
-            return false;
-        });
-    }
+            win.$content.on("click", ".add-new-room-btn", function (e) {
+                e.preventDefault();
+                var name = $(this).prev(".add-new-room-text").val().trim();
+                if (/[^\w-_]/.test(name)) {
+                    alert("Only allow letters and number");
+                    return;
+                }
+                if (name.length < 4) {
+                    alert("Length should >= 4");
+                    return;
+                }
+
+                $.getJSON("/Chat/AddGroup", { name: name }, function (e) {
+
+                    if (e.code == 0) {
+                        $.get("/Chat/Index", {}, function (e) {
+                            win.$content.html(e);
+                        });
+                    }
+                });
+                return false;
+            });
+        }
     });
 
     return false;

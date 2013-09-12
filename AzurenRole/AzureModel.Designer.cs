@@ -21,6 +21,10 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("AzurenModel", "UserApp", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AzurenRole.User), "App", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AzurenRole.App))]
 [assembly: EdmRelationshipAttribute("AzurenModel", "FK_ToDoProjectToDoTask", "ToDoProject", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AzurenRole.ToDoProject), "ToDoTask", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AzurenRole.ToDoTask), true)]
+[assembly: EdmRelationshipAttribute("AzurenModel", "FK_ID", "App", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AzurenRole.App), "Store", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AzurenRole.Store), true)]
+[assembly: EdmRelationshipAttribute("AzurenModel", "FK_APP", "OApp", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AzurenRole.OApp), "OAppStore", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AzurenRole.OAppStore), true)]
+[assembly: EdmRelationshipAttribute("AzurenModel", "FK_Theme", "Theme", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AzurenRole.Theme), "Customize", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AzurenRole.Customize), true)]
+[assembly: EdmRelationshipAttribute("AzurenModel", "FK_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AzurenRole.User), "Customize", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AzurenRole.Customize), true)]
 
 #endregion
 
@@ -135,6 +139,102 @@ namespace AzurenRole
             }
         }
         private ObjectSet<ToDoTask> _ToDoTasks;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Store> Stores
+        {
+            get
+            {
+                if ((_Stores == null))
+                {
+                    _Stores = base.CreateObjectSet<Store>("Stores");
+                }
+                return _Stores;
+            }
+        }
+        private ObjectSet<Store> _Stores;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Note> Notes
+        {
+            get
+            {
+                if ((_Notes == null))
+                {
+                    _Notes = base.CreateObjectSet<Note>("Notes");
+                }
+                return _Notes;
+            }
+        }
+        private ObjectSet<Note> _Notes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<OApp> OApps
+        {
+            get
+            {
+                if ((_OApps == null))
+                {
+                    _OApps = base.CreateObjectSet<OApp>("OApps");
+                }
+                return _OApps;
+            }
+        }
+        private ObjectSet<OApp> _OApps;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<OAppStore> OAppStores
+        {
+            get
+            {
+                if ((_OAppStores == null))
+                {
+                    _OAppStores = base.CreateObjectSet<OAppStore>("OAppStores");
+                }
+                return _OAppStores;
+            }
+        }
+        private ObjectSet<OAppStore> _OAppStores;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Customize> Customizes
+        {
+            get
+            {
+                if ((_Customizes == null))
+                {
+                    _Customizes = base.CreateObjectSet<Customize>("Customizes");
+                }
+                return _Customizes;
+            }
+        }
+        private ObjectSet<Customize> _Customizes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Theme> Themes
+        {
+            get
+            {
+                if ((_Themes == null))
+                {
+                    _Themes = base.CreateObjectSet<Theme>("Themes");
+                }
+                return _Themes;
+            }
+        }
+        private ObjectSet<Theme> _Themes;
 
         #endregion
 
@@ -170,6 +270,54 @@ namespace AzurenRole
         public void AddToToDoTasks(ToDoTask toDoTask)
         {
             base.AddObject("ToDoTasks", toDoTask);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Stores EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStores(Store store)
+        {
+            base.AddObject("Stores", store);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Notes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToNotes(Note note)
+        {
+            base.AddObject("Notes", note);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the OApps EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOApps(OApp oApp)
+        {
+            base.AddObject("OApps", oApp);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the OAppStores EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOAppStores(OAppStore oAppStore)
+        {
+            base.AddObject("OAppStores", oAppStore);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Customizes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCustomizes(Customize customize)
+        {
+            base.AddObject("Customizes", customize);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Themes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToThemes(Theme theme)
+        {
+            base.AddObject("Themes", theme);
         }
 
         #endregion
@@ -641,6 +789,1086 @@ namespace AzurenRole
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_ID", "Store")]
+        public Store Store
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Store>("AzurenModel.FK_ID", "Store").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Store>("AzurenModel.FK_ID", "Store").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Store> StoreReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Store>("AzurenModel.FK_ID", "Store");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Store>("AzurenModel.FK_ID", "Store", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="Customize")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Customize : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Customize object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="desktop">Initial value of the Desktop property.</param>
+        /// <param name="themeId">Initial value of the ThemeId property.</param>
+        public static Customize CreateCustomize(global::System.Int32 id, global::System.String desktop, global::System.Int32 themeId)
+        {
+            Customize customize = new Customize();
+            customize.Id = id;
+            customize.Desktop = desktop;
+            customize.ThemeId = themeId;
+            return customize;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Desktop
+        {
+            get
+            {
+                return _Desktop;
+            }
+            set
+            {
+                OnDesktopChanging(value);
+                ReportPropertyChanging("Desktop");
+                _Desktop = StructuralObject.SetValidValue(value, false, "Desktop");
+                ReportPropertyChanged("Desktop");
+                OnDesktopChanged();
+            }
+        }
+        private global::System.String _Desktop;
+        partial void OnDesktopChanging(global::System.String value);
+        partial void OnDesktopChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ThemeId
+        {
+            get
+            {
+                return _ThemeId;
+            }
+            set
+            {
+                OnThemeIdChanging(value);
+                ReportPropertyChanging("ThemeId");
+                _ThemeId = StructuralObject.SetValidValue(value, "ThemeId");
+                ReportPropertyChanged("ThemeId");
+                OnThemeIdChanged();
+            }
+        }
+        private global::System.Int32 _ThemeId;
+        partial void OnThemeIdChanging(global::System.Int32 value);
+        partial void OnThemeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String App
+        {
+            get
+            {
+                return _App;
+            }
+            set
+            {
+                OnAppChanging(value);
+                ReportPropertyChanging("App");
+                _App = StructuralObject.SetValidValue(value, true, "App");
+                ReportPropertyChanged("App");
+                OnAppChanged();
+            }
+        }
+        private global::System.String _App;
+        partial void OnAppChanging(global::System.String value);
+        partial void OnAppChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_Theme", "Theme")]
+        public Theme Theme
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Theme>("AzurenModel.FK_Theme", "Theme").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Theme>("AzurenModel.FK_Theme", "Theme").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Theme> ThemeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Theme>("AzurenModel.FK_Theme", "Theme");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Theme>("AzurenModel.FK_Theme", "Theme", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("AzurenModel.FK_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("AzurenModel.FK_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("AzurenModel.FK_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("AzurenModel.FK_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="Note")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Note : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Note object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="user">Initial value of the User property.</param>
+        public static Note CreateNote(global::System.Int32 id, global::System.String title, global::System.String user)
+        {
+            Note note = new Note();
+            note.Id = id;
+            note.Title = title;
+            note.User = user;
+            return note;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false, "Title");
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Content
+        {
+            get
+            {
+                return _Content;
+            }
+            set
+            {
+                OnContentChanging(value);
+                ReportPropertyChanging("Content");
+                _Content = StructuralObject.SetValidValue(value, true, "Content");
+                ReportPropertyChanged("Content");
+                OnContentChanged();
+            }
+        }
+        private global::System.String _Content;
+        partial void OnContentChanging(global::System.String value);
+        partial void OnContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                OnUserChanging(value);
+                ReportPropertyChanging("User");
+                _User = StructuralObject.SetValidValue(value, false, "User");
+                ReportPropertyChanged("User");
+                OnUserChanged();
+            }
+        }
+        private global::System.String _User;
+        partial void OnUserChanging(global::System.String value);
+        partial void OnUserChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="OApp")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class OApp : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new OApp object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="secret">Initial value of the Secret property.</param>
+        /// <param name="redirectUri">Initial value of the RedirectUri property.</param>
+        public static OApp CreateOApp(global::System.String id, global::System.String secret, global::System.String redirectUri)
+        {
+            OApp oApp = new OApp();
+            oApp.Id = id;
+            oApp.Secret = secret;
+            oApp.RedirectUri = redirectUri;
+            return oApp;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, false, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.String _Id;
+        partial void OnIdChanging(global::System.String value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Secret
+        {
+            get
+            {
+                return _Secret;
+            }
+            set
+            {
+                OnSecretChanging(value);
+                ReportPropertyChanging("Secret");
+                _Secret = StructuralObject.SetValidValue(value, false, "Secret");
+                ReportPropertyChanged("Secret");
+                OnSecretChanged();
+            }
+        }
+        private global::System.String _Secret;
+        partial void OnSecretChanging(global::System.String value);
+        partial void OnSecretChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RedirectUri
+        {
+            get
+            {
+                return _RedirectUri;
+            }
+            set
+            {
+                OnRedirectUriChanging(value);
+                ReportPropertyChanging("RedirectUri");
+                _RedirectUri = StructuralObject.SetValidValue(value, false, "RedirectUri");
+                ReportPropertyChanged("RedirectUri");
+                OnRedirectUriChanged();
+            }
+        }
+        private global::System.String _RedirectUri;
+        partial void OnRedirectUriChanging(global::System.String value);
+        partial void OnRedirectUriChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, true, "Type");
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_APP", "OAppStore")]
+        public OAppStore OAppStore
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OAppStore>("AzurenModel.FK_APP", "OAppStore").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OAppStore>("AzurenModel.FK_APP", "OAppStore").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<OAppStore> OAppStoreReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OAppStore>("AzurenModel.FK_APP", "OAppStore");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<OAppStore>("AzurenModel.FK_APP", "OAppStore", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="OAppStore")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class OAppStore : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new OAppStore object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static OAppStore CreateOAppStore(global::System.String id, global::System.String name)
+        {
+            OAppStore oAppStore = new OAppStore();
+            oAppStore.Id = id;
+            oAppStore.Name = name;
+            return oAppStore;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, false, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.String _Id;
+        partial void OnIdChanging(global::System.String value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Icon
+        {
+            get
+            {
+                return _Icon;
+            }
+            set
+            {
+                OnIconChanging(value);
+                ReportPropertyChanging("Icon");
+                _Icon = StructuralObject.SetValidValue(value, true, "Icon");
+                ReportPropertyChanged("Icon");
+                OnIconChanged();
+            }
+        }
+        private global::System.String _Icon;
+        partial void OnIconChanging(global::System.String value);
+        partial void OnIconChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, true, "Url");
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_APP", "OApp")]
+        public OApp OApp
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OApp>("AzurenModel.FK_APP", "OApp").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OApp>("AzurenModel.FK_APP", "OApp").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<OApp> OAppReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OApp>("AzurenModel.FK_APP", "OApp");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<OApp>("AzurenModel.FK_APP", "OApp", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="Store")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Store : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Store object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static Store CreateStore(global::System.Int32 id)
+        {
+            Store store = new Store();
+            store.Id = id;
+            return store;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Shot
+        {
+            get
+            {
+                return _Shot;
+            }
+            set
+            {
+                OnShotChanging(value);
+                ReportPropertyChanging("Shot");
+                _Shot = StructuralObject.SetValidValue(value, true, "Shot");
+                ReportPropertyChanged("Shot");
+                OnShotChanged();
+            }
+        }
+        private global::System.String _Shot;
+        partial void OnShotChanging(global::System.String value);
+        partial void OnShotChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Detail
+        {
+            get
+            {
+                return _Detail;
+            }
+            set
+            {
+                OnDetailChanging(value);
+                ReportPropertyChanging("Detail");
+                _Detail = StructuralObject.SetValidValue(value, true, "Detail");
+                ReportPropertyChanged("Detail");
+                OnDetailChanged();
+            }
+        }
+        private global::System.String _Detail;
+        partial void OnDetailChanging(global::System.String value);
+        partial void OnDetailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Icon
+        {
+            get
+            {
+                return _Icon;
+            }
+            set
+            {
+                OnIconChanging(value);
+                ReportPropertyChanging("Icon");
+                _Icon = StructuralObject.SetValidValue(value, true, "Icon");
+                ReportPropertyChanged("Icon");
+                OnIconChanged();
+            }
+        }
+        private global::System.String _Icon;
+        partial void OnIconChanging(global::System.String value);
+        partial void OnIconChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IHeight
+        {
+            get
+            {
+                return _IHeight;
+            }
+            set
+            {
+                OnIHeightChanging(value);
+                ReportPropertyChanging("IHeight");
+                _IHeight = StructuralObject.SetValidValue(value, "IHeight");
+                ReportPropertyChanged("IHeight");
+                OnIHeightChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IHeight;
+        partial void OnIHeightChanging(Nullable<global::System.Int32> value);
+        partial void OnIHeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IWidth
+        {
+            get
+            {
+                return _IWidth;
+            }
+            set
+            {
+                OnIWidthChanging(value);
+                ReportPropertyChanging("IWidth");
+                _IWidth = StructuralObject.SetValidValue(value, "IWidth");
+                ReportPropertyChanged("IWidth");
+                OnIWidthChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IWidth;
+        partial void OnIWidthChanging(Nullable<global::System.Int32> value);
+        partial void OnIWidthChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_ID", "App")]
+        public App App
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<App>("AzurenModel.FK_ID", "App").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<App>("AzurenModel.FK_ID", "App").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<App> AppReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<App>("AzurenModel.FK_ID", "App");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<App>("AzurenModel.FK_ID", "App", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AzurenModel", Name="Theme")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Theme : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Theme object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="url">Initial value of the Url property.</param>
+        public static Theme CreateTheme(global::System.Int32 id, global::System.String name, global::System.String url)
+        {
+            Theme theme = new Theme();
+            theme.Id = id;
+            theme.Name = name;
+            theme.Url = url;
+            return theme;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false, "Name");
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, false, "Url");
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_Theme", "Customize")]
+        public EntityCollection<Customize> Customizes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Customize>("AzurenModel.FK_Theme", "Customize");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Customize>("AzurenModel.FK_Theme", "Customize", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1099,17 +2327,15 @@ namespace AzurenRole
         /// <summary>
         /// Create a new User object.
         /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="username">Initial value of the username property.</param>
-        /// <param name="displayname">Initial value of the displayname property.</param>
-        /// <param name="password">Initial value of the password property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String username, global::System.String displayname, global::System.String password)
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="username">Initial value of the Username property.</param>
+        /// <param name="password">Initial value of the Password property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String username, global::System.String password)
         {
             User user = new User();
-            user.id = id;
-            user.username = username;
-            user.displayname = displayname;
-            user.password = password;
+            user.Id = id;
+            user.Username = username;
+            user.Password = password;
             return user;
         }
 
@@ -1122,99 +2348,147 @@ namespace AzurenRole
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 id
+        public global::System.Int32 Id
         {
             get
             {
-                return _id;
+                return _Id;
             }
             set
             {
-                if (_id != value)
+                if (_Id != value)
                 {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value, "id");
-                    ReportPropertyChanged("id");
-                    OnidChanged();
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
                 }
             }
         }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
-        partial void OnidChanged();
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String username
+        public global::System.String Username
         {
             get
             {
-                return _username;
+                return _Username;
             }
             set
             {
-                OnusernameChanging(value);
-                ReportPropertyChanging("username");
-                _username = StructuralObject.SetValidValue(value, false, "username");
-                ReportPropertyChanged("username");
-                OnusernameChanged();
+                OnUsernameChanging(value);
+                ReportPropertyChanging("Username");
+                _Username = StructuralObject.SetValidValue(value, false, "Username");
+                ReportPropertyChanged("Username");
+                OnUsernameChanged();
             }
         }
-        private global::System.String _username;
-        partial void OnusernameChanging(global::System.String value);
-        partial void OnusernameChanged();
+        private global::System.String _Username;
+        partial void OnUsernameChanging(global::System.String value);
+        partial void OnUsernameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String displayname
+        public global::System.String Password
         {
             get
             {
-                return _displayname;
+                return _Password;
             }
             set
             {
-                OndisplaynameChanging(value);
-                ReportPropertyChanging("displayname");
-                _displayname = StructuralObject.SetValidValue(value, false, "displayname");
-                ReportPropertyChanged("displayname");
-                OndisplaynameChanged();
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, false, "Password");
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
             }
         }
-        private global::System.String _displayname;
-        partial void OndisplaynameChanging(global::System.String value);
-        partial void OndisplaynameChanged();
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String password
+        public global::System.String Salt
         {
             get
             {
-                return _password;
+                return _Salt;
             }
             set
             {
-                OnpasswordChanging(value);
-                ReportPropertyChanging("password");
-                _password = StructuralObject.SetValidValue(value, false, "password");
-                ReportPropertyChanged("password");
-                OnpasswordChanged();
+                OnSaltChanging(value);
+                ReportPropertyChanging("Salt");
+                _Salt = StructuralObject.SetValidValue(value, true, "Salt");
+                ReportPropertyChanged("Salt");
+                OnSaltChanged();
             }
         }
-        private global::System.String _password;
-        partial void OnpasswordChanging(global::System.String value);
-        partial void OnpasswordChanged();
+        private global::System.String _Salt;
+        partial void OnSaltChanging(global::System.String value);
+        partial void OnSaltChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true, "Email");
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, "Status");
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Status;
+        partial void OnStatusChanging(Nullable<global::System.Int32> value);
+        partial void OnStatusChanged();
 
         #endregion
 
@@ -1238,6 +2512,44 @@ namespace AzurenRole
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<App>("AzurenModel.UserApp", "App", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AzurenModel", "FK_User", "Customize")]
+        public Customize Customize
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Customize>("AzurenModel.FK_User", "Customize").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Customize>("AzurenModel.FK_User", "Customize").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Customize> CustomizeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Customize>("AzurenModel.FK_User", "Customize");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Customize>("AzurenModel.FK_User", "Customize", value);
                 }
             }
         }

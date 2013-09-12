@@ -1,0 +1,26 @@
+﻿@using AzurenRole.Utils
+@{
+    ViewBag.Title = "Customize";
+    Layout = null;
+}
+<div style="padding: 20px;">
+    <legend>Themes</legend>
+    <div class="cus-themes">
+        @foreach (var x in GlobalData.dbContext.Themes)
+        {
+            <div class="radio">
+                <label>
+                    @if (GlobalData.user.Customize.ThemeId == x.Id)
+                    {
+                        <input type="radio" name="themeRadios" id="theme-radio-@x.Id" value="@x.Id" checked="checked">
+                    }
+                    else
+                    {
+                        <input type="radio" name="themeRadios" id="theme-radio-@x.Id" value="@x.Id">
+                    }
+                    @x.Name
+                </label>
+            </div>
+        }
+    </div>
+</div>

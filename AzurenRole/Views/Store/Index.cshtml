@@ -16,36 +16,16 @@
         <div class="items">
             @foreach (var item in Model)
             {
-                <a class="box store-app b-blue" href="#" data-id="@item.Id">
-                    <span>@item.Name</span>
-                    <img class="icon" src="@item.Icon" alt="" style="width: 100px;height: 100px;margin-top: -50px;margin-left: -20px;" />
+                <a class="box store-app b-blue width@{@item.Store.IWidth } height@{@item.Store.IHeight}" href="#" data-id="@item.Id">
+                        <span>@item.Name</span>
+                        <img class="icon" src="@item.Store.Icon" alt=""/>
                 </a>
             }
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    (function () {
 
-
-
-<!--
-<div class="store-header clearfix">
-    <div class="store-search">
-        <form class="store-search-form">
-        <button class="btn btn-small btn-default store-search-btn glyphicon glyphicon-search"></button>
-        <input placeholder="Search..." name="search" class="store-search-content form-control" />
-     </form>
-    </div>
-</div>
-
-<div class="store-container">
-    @foreach (var item in Model)
-    {
-        <div class="store-app" data-id="@item.Id">
-            <div class="store-app-icon">
-                <img src="@item.Icon"/></div>
-            <div class="store-app-text"><span class="store-app-name">@item.Name</span></div>
-        </div>
-    }
-    
-</div>
-    -->
+    })();
+</script>

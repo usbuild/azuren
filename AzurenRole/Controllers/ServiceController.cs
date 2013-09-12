@@ -11,7 +11,7 @@ namespace AzurenRole.Controllers
         private readonly AzurenEntities _entities = GlobalData.dbContext;
         private Tuple<User, App> CheckAccess(int appid, string secret, string username)
         {
-            User user = _entities.Users.SingleOrDefault(u => u.username == username);
+            User user = _entities.Users.SingleOrDefault(u => u.Username == username);
             if (user != null)
             {
                 App app = user.Apps.SingleOrDefault(a => a.Id == appid && a.Secret == secret);
@@ -47,7 +47,56 @@ namespace AzurenRole.Controllers
             return Fail("Request Failed");
         }
 
+        public JsonResult UserInfo(int appId, string secret, string user)
+        {
+            var result = CheckAccess(appId, secret, user);
+            if (result != null)
+            {
+                return Success(new { name = result.Item1.Username, email = result.Item1.Email });
+            }
+            return Fail("Request Failed");
+        }
 
+        public JsonResult AppInstall(int appId, string secret, string user, int id)
+        {
+            var result = CheckAccess(appId, secret, user);
+            if (result != null)
+            {
+                var app = _entities.Apps.SingleOrDefault(m => m.Id == id);
+                if (app != null)
+                {
+                    result.Item1.Apps.Add(app);
+                    _entities.SaveChanges();
+                    return Success(new { name = result.Item1.Username, id = id });
+                }
+            }
+            return Fail("Request Failed");
+        }
 
+        public JsonResult AppUnnstall(int appId, string secret, string user, int id)
+        {
+            var result = CheckAccess(appId, secret, user);
+            if (result != null)
+            {
+                var app = _entities.Apps.SingleOrDefault(m => m.Id == id);
+                if (app != null)
+                {
+                    result.Item1.Apps.Remove(app);
+                    _entities.SaveChanges();
+                    return Success(new { name = result.Item1.Username, id = id });
+                }
+            }
+            return Fail("Request Failed");
+        }
+
+        public JsonResult AppList(int appId, string secret, string user)
+        {
+            var result = CheckAccess(appId, secret, user);
+            if (result != null)
+            {
+                return Success(new { name = result.Item1.Username, appList = result.Item1.Apps.Select(m => m.Id) });
+            }
+            return Fail("Request Failed");
+        }
     }
 }

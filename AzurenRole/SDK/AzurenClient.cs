@@ -72,5 +72,58 @@ namespace AzurenRole.SDK
             }
             return false;
         }
+
+        public dynamic UserInfo(string username)
+        {
+            var d = HttpPost(ApiServer + "/UserInfo", new{
+                user = username
+            });
+            if (d.code == 0)
+            {
+                return d.data;
+            }
+            return null;
+        }
+        public dynamic AppInstall(string username, int appId)
+        {
+            var d = HttpPost(ApiServer + "/AppInstall", new
+            {
+                user = username,
+                id=appId
+            });
+            if (d.code == 0)
+            {
+                return d.data;
+            }
+            return null;
+        }
+
+        public dynamic AppUninstall(string username, int appId)
+        {
+            var d = HttpPost(ApiServer + "/AppUninstall", new
+            {
+                user = username,
+                id = appId
+            });
+            if (d.code == 0)
+            {
+                return d.data;
+            }
+            return null;
+        }
+
+        public dynamic AppList(string username)
+        {
+            var d = HttpPost(ApiServer + "/AppUninstall", new
+            {
+                user = username
+            });
+            if (d.code == 0)
+            {
+                return d.data;
+            }
+            return null;
+        }
+
     }
 }

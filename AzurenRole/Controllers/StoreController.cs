@@ -45,7 +45,7 @@ namespace AzurenRole.Controllers
             {
                 user.Apps.Add(app);
                 db.SaveChanges();
-                return Json(new {code = 0, data=new{id=app.Id, name=app.Name, url=app.Url, icon=app.Icon, width=app.Width, height=app.Height}}, JsonRequestBehavior.AllowGet);
+                return Json(new {code = 0, data=new{id=app.Id, name=app.Name, url=app.Url, icon=app.Icon, width=app.Width, height=app.Height, iwidth=app.IWidth, iheight=app.IHeight, tile=app.Tile, type=app.Type}}, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -61,7 +61,7 @@ namespace AzurenRole.Controllers
             {
                 user.Apps.Remove(app);
                 db.SaveChanges();
-                return Json(new { code = 0, data = new { Id = app.Id} }, JsonRequestBehavior.AllowGet);
+                return Json(new { code = 0, data = new { id = app.Id} }, JsonRequestBehavior.AllowGet);
             }
             else
             {

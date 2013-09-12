@@ -7,13 +7,35 @@
     <Schema Namespace="AzurenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="AzurenModelStoreContainer">
           <EntitySet Name="Apps" EntityType="AzurenModel.Store.Apps" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customize" EntityType="AzurenModel.Store.Customize" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notes" EntityType="AzurenModel.Store.Notes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OApps" EntityType="AzurenModel.Store.OApps" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OAppStore" EntityType="AzurenModel.Store.OAppStore" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Store" EntityType="AzurenModel.Store.Store" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Themes" EntityType="AzurenModel.Store.Themes" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ToDoProjects" EntityType="AzurenModel.Store.ToDoProjects" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ToDoTasks" EntityType="AzurenModel.Store.ToDoTasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserApp" EntityType="AzurenModel.Store.UserApp" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="AzurenModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_APP" Association="AzurenModel.Store.FK_APP">
+            <End Role="OApps" EntitySet="OApps" />
+            <End Role="OAppStore" EntitySet="OAppStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID" Association="AzurenModel.Store.FK_ID">
+            <End Role="Apps" EntitySet="Apps" />
+            <End Role="Store" EntitySet="Store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Theme" Association="AzurenModel.Store.FK_Theme">
+            <End Role="Themes" EntitySet="Themes" />
+            <End Role="Customize" EntitySet="Customize" />
+          </AssociationSet>
           <AssociationSet Name="FK_ToDoProjectToDoTask" Association="AzurenModel.Store.FK_ToDoProjectToDoTask">
             <End Role="ToDoProjects" EntitySet="ToDoProjects" />
             <End Role="ToDoTasks" EntitySet="ToDoTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User" Association="AzurenModel.Store.FK_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Customize" EntitySet="Customize" />
           </AssociationSet>
           <AssociationSet Name="FK_UserApp_App" Association="AzurenModel.Store.FK_UserApp_App">
             <End Role="Apps" EntitySet="Apps" />
@@ -46,6 +68,61 @@
           <Property Name="IHeight" Type="int" />
           <Property Name="Tile" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="Customize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Desktop" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ThemeId" Type="int" Nullable="false" />
+          <Property Name="App" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Content" Type="text" />
+          <Property Name="User" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="OApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Secret" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="RedirectUri" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="OAppStore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Icon" Type="varchar" MaxLength="255" />
+          <Property Name="Url" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Shot" Type="text" />
+          <Property Name="Detail" Type="text" />
+          <Property Name="Icon" Type="varchar" MaxLength="255" />
+          <Property Name="IHeight" Type="int" />
+          <Property Name="IWidth" Type="int" />
+        </EntityType>
+        <EntityType Name="Themes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Url" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
         <EntityType Name="ToDoProjects">
           <Key>
             <PropertyRef Name="Id" />
@@ -70,21 +147,63 @@
         </EntityType>
         <EntityType Name="UserApp">
           <Key>
-            <PropertyRef Name="Users_id" />
+            <PropertyRef Name="Users_Id" />
             <PropertyRef Name="Apps_Id" />
           </Key>
-          <Property Name="Users_id" Type="int" Nullable="false" />
+          <Property Name="Users_Id" Type="int" Nullable="false" />
           <Property Name="Apps_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="displayname" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="password" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Salt" Type="varchar" MaxLength="40" />
+          <Property Name="Email" Type="varchar" MaxLength="320" />
+          <Property Name="Status" Type="int" />
         </EntityType>
+        <Association Name="FK_APP">
+          <End Role="OApps" Type="AzurenModel.Store.OApps" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OAppStore" Type="AzurenModel.Store.OAppStore" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OApps">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OAppStore">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID">
+          <End Role="Apps" Type="AzurenModel.Store.Apps" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Store" Type="AzurenModel.Store.Store" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Apps">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Theme">
+          <End Role="Themes" Type="AzurenModel.Store.Themes" Multiplicity="1" />
+          <End Role="Customize" Type="AzurenModel.Store.Customize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Themes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customize">
+              <PropertyRef Name="ThemeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ToDoProjectToDoTask">
           <End Role="ToDoProjects" Type="AzurenModel.Store.ToDoProjects" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -96,6 +215,20 @@
             </Principal>
             <Dependent Role="ToDoTasks">
               <PropertyRef Name="ToDoProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User">
+          <End Role="Users" Type="AzurenModel.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customize" Type="AzurenModel.Store.Customize" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customize">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -120,10 +253,10 @@
           <End Role="UserApp" Type="AzurenModel.Store.UserApp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserApp">
-              <PropertyRef Name="Users_id" />
+              <PropertyRef Name="Users_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -144,16 +277,41 @@
             <End Role="ToDoProject" EntitySet="ToDoProjects" />
             <End Role="ToDoTask" EntitySet="ToDoTasks" />
           </AssociationSet>
+          <EntitySet Name="Stores" EntityType="AzurenModel.Store" />
+          <AssociationSet Name="FK_ID" Association="AzurenModel.FK_ID">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Store" EntitySet="Stores" />
+          </AssociationSet>
+          <EntitySet Name="Notes" EntityType="AzurenModel.Note" />
+          <EntitySet Name="OApps" EntityType="AzurenModel.OApp" />
+          <EntitySet Name="OAppStores" EntityType="AzurenModel.OAppStore" />
+          <AssociationSet Name="FK_APP" Association="AzurenModel.FK_APP">
+            <End Role="OApp" EntitySet="OApps" />
+            <End Role="OAppStore" EntitySet="OAppStores" />
+          </AssociationSet>
+          <EntitySet Name="Customizes" EntityType="AzurenModel.Customize" />
+          <EntitySet Name="Themes" EntityType="AzurenModel.Theme" />
+          <AssociationSet Name="FK_Theme" Association="AzurenModel.FK_Theme">
+            <End Role="Theme" EntitySet="Themes" />
+            <End Role="Customize" EntitySet="Customizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User" Association="AzurenModel.FK_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Customize" EntitySet="Customizes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Name="username" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="displayname" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Apps" Relationship="AzurenModel.UserApp" FromRole="User" ToRole="App" />
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Salt" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="320" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Status" />
+          <NavigationProperty Name="Customize" Relationship="AzurenModel.FK_User" FromRole="User" ToRole="Customize" />
         </EntityType>
         <EntityType Name="App">
           <Key>
@@ -177,6 +335,7 @@
           <Property Type="Int32" Name="IWidth" />
           <Property Type="Int32" Name="IHeight" />
           <Property Type="String" Name="Tile" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Store" Relationship="AzurenModel.FK_ID" FromRole="App" ToRole="Store" />
         </EntityType>
         <Association Name="UserApp">
           <End Type="AzurenModel.User" Role="User" Multiplicity="*" />
@@ -218,6 +377,121 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Shot" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Detail" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Icon" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="App" Relationship="AzurenModel.FK_ID" FromRole="Store" ToRole="App" />
+          <Property Type="Int32" Name="IHeight" />
+          <Property Type="Int32" Name="IWidth" />
+        </EntityType>
+        <Association Name="FK_ID">
+          <End Type="AzurenModel.App" Role="App" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AzurenModel.Store" Role="Store" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Content" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="User" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OApp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Secret" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RedirectUri" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Type" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OAppStore" Relationship="AzurenModel.FK_APP" FromRole="OApp" ToRole="OAppStore" />
+        </EntityType>
+        <EntityType Name="OAppStore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Icon" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Url" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OApp" Relationship="AzurenModel.FK_APP" FromRole="OAppStore" ToRole="OApp" />
+        </EntityType>
+        <Association Name="FK_APP">
+          <End Type="AzurenModel.OApp" Role="OApp" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AzurenModel.OAppStore" Role="OAppStore" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OApp">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OAppStore">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Customize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Desktop" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ThemeId" Nullable="false" />
+          <Property Type="String" Name="App" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Theme" Relationship="AzurenModel.FK_Theme" FromRole="Customize" ToRole="Theme" />
+          <NavigationProperty Name="User" Relationship="AzurenModel.FK_User" FromRole="Customize" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Url" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customizes" Relationship="AzurenModel.FK_Theme" FromRole="Theme" ToRole="Customize" />
+        </EntityType>
+        <Association Name="FK_Theme">
+          <End Type="AzurenModel.Theme" Role="Theme" Multiplicity="1" />
+          <End Type="AzurenModel.Customize" Role="Customize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customize">
+              <PropertyRef Name="ThemeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User">
+          <End Type="AzurenModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AzurenModel.Customize" Role="Customize" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customize">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -227,11 +501,13 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="IsTypeOf(AzurenModel.User)">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="displayname" ColumnName="displayname" />
-          <ScalarProperty Name="password" ColumnName="password" />
-        </MappingFragment>
+          <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Apps">
@@ -259,9 +535,9 @@
     </EntitySetMapping>
     <AssociationSetMapping Name="UserApp" TypeName="AzurenModel.UserApp" StoreEntitySet="UserApp">
       <EndProperty Name="User">
-        <ScalarProperty Name="id" ColumnName="Users_id" />
-      </EndProperty>
-      <EndProperty Name="App">
+              <ScalarProperty Name="Id" ColumnName="Users_Id" />
+            </EndProperty>
+            <EndProperty Name="App">
         <ScalarProperty Name="Id" ColumnName="Apps_Id" />
       </EndProperty>
     </AssociationSetMapping>
@@ -289,6 +565,67 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="AzurenModel.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="IWidth" ColumnName="IWidth" />
+                <ScalarProperty Name="IHeight" ColumnName="IHeight" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Shot" ColumnName="Shot" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="AzurenModel.Note">
+              <MappingFragment StoreEntitySet="Notes">
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OApps">
+            <EntityTypeMapping TypeName="AzurenModel.OApp">
+              <MappingFragment StoreEntitySet="OApps">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="RedirectUri" ColumnName="RedirectUri" />
+                <ScalarProperty Name="Secret" ColumnName="Secret" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OAppStores">
+            <EntityTypeMapping TypeName="AzurenModel.OAppStore">
+              <MappingFragment StoreEntitySet="OAppStore">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customizes">
+            <EntityTypeMapping TypeName="AzurenModel.Customize">
+              <MappingFragment StoreEntitySet="Customize">
+                <ScalarProperty Name="App" ColumnName="App" />
+                <ScalarProperty Name="ThemeId" ColumnName="ThemeId" />
+                <ScalarProperty Name="Desktop" ColumnName="Desktop" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Themes">
+            <EntityTypeMapping TypeName="AzurenModel.Theme">
+              <MappingFragment StoreEntitySet="Themes">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -312,9 +649,19 @@
         <EntityTypeShape EntityType="AzurenModel.User" Width="1.5" PointX="0.875" PointY="0.75" Height="1.787985026041667" IsExpanded="true" />
         <EntityTypeShape EntityType="AzurenModel.App" Width="1.5" PointX="3.375" PointY="0.875" />
         <AssociationConnector Association="AzurenModel.UserApp" />
-        <EntityTypeShape EntityType="AzurenModel.ToDoProject" Width="1.5" PointX="7.375" PointY="1.5" />
-        <EntityTypeShape EntityType="AzurenModel.ToDoTask" Width="1.5" PointX="5.375" PointY="1.375" />
+        <EntityTypeShape EntityType="AzurenModel.ToDoProject" Width="1.5" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="AzurenModel.ToDoTask" Width="1.5" PointX="5.375" PointY="0.5" />
         <AssociationConnector Association="AzurenModel.FK_ToDoProjectToDoTask" />
+        <EntityTypeShape EntityType="AzurenModel.Store" Width="1.5" PointX="5.375" PointY="4" />
+        <AssociationConnector Association="AzurenModel.FK_ID" />
+        <EntityTypeShape EntityType="AzurenModel.Note" Width="1.5" PointX="9.75" PointY="0.625" />
+        <EntityTypeShape EntityType="AzurenModel.OApp" Width="1.5" PointX="0.875" PointY="5.75" />
+        <EntityTypeShape EntityType="AzurenModel.OAppStore" Width="1.5" PointX="0.875" PointY="3.375" />
+        <AssociationConnector Association="AzurenModel.FK_APP" />
+        <EntityTypeShape EntityType="AzurenModel.Customize" Width="1.5" PointX="2.625" PointY="5.75" />
+        <EntityTypeShape EntityType="AzurenModel.Theme" Width="1.5" PointX="4.5" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="AzurenModel.FK_Theme" />
+        <AssociationConnector Association="AzurenModel.FK_User" />
       </Diagram>
     </Diagrams>
   </Designer>

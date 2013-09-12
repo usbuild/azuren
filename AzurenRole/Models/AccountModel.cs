@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Globalization;
-using System.Web.Mvc;
-using System.Web.Security;
-using System.Data.Objects;
-using System.Configuration;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AzurenRole.Models
 {
@@ -15,8 +6,8 @@ namespace AzurenRole.Models
     public class LoginForm
     {
         [Required]
-        [Display(Name="User Name")]
-        public string UserName { set; get; }
+        [Display(Name="Email or Username")]
+        public string EmailOrUserName { set; get; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -28,13 +19,13 @@ namespace AzurenRole.Models
     {
         [Required]
         [Display(Name = "User Name")]
-        [StringLength(int.MaxValue, MinimumLength = 4)]
+        [RegularExpression(@"^[\w-]{4,}", ErrorMessage = "UserName must be at least 4 letters and numbers")]
         public string UserName { set; get; }
 
         [Required]
-        [Display(Name = "Display Name")]
-        [StringLength(int.MaxValue, MinimumLength = 4)]
-        public string DisplayName { set; get; }
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { set; get; }
 
         [Required]
         [Display(Name = "Password")]
@@ -50,9 +41,7 @@ namespace AzurenRole.Models
 
     public class SettingForm
     {
-        [Display(Name = "Display Name")]
-        [StringLength(int.MaxValue, MinimumLength = 4)]
-        public string DisplayName { set; get; }
+
 
         [Display(Name = "Old Password")]
         [StringLength(int.MaxValue, MinimumLength = 4)]

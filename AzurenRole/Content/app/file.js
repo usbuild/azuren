@@ -1,14 +1,13 @@
 ﻿Azuren.app.install("0005", "Files", "/Images/icons/metro/file.png", 2, 1, 0, function () {
 }, function (e) {
-    Azuren.showWindow(600, 480, "0005", "Files", "", 1, 1, 0, function (win) {
+    Azuren.showWindow(600, 480, "0005", "Files", "", function (win) {
         if (win.isNew) {
-
             var pasteCmd = null;
             var pasteBoard = null;
 
 
             var navigateTo = function (path) {
-                win.$content.html('<img src="/Images/loading.gif" style="display:block;margin: 100px auto" />');
+                win.$content.html('<img src="/Images/jar-loading.gif" style="display:block;margin: 0 auto;" />');
                 $.post("File/Index", { path: path }, function (e) {
                     win.$content.html(e);
                     win.$content.find(".files-list").data("path", path);
@@ -30,6 +29,7 @@
                         formData.append("file", files[x]);
                         formData.append("name", files[x].name);
                         formData.append("path", $(".files-list").data("path"));
+                        Azuren.desktop.startLoading();
                         $.ajax({
                             url: "/File/Upload",
                             contentType: false,
@@ -39,6 +39,7 @@
                             dataType: "json",
                             data: formData,
                             success: function (e) {
+                                Azuren.desktop.stopLoading();
                                 if (e.code != 0) {
                                     Azuren.alert.error(e.data);
                                 } else {
@@ -46,6 +47,7 @@
                                 }
                             },
                             error: function (e) {
+                                Azuren.desktop.stopLoading();
                                 Azuren.alert.error(e);
                             }
                         });
@@ -97,6 +99,7 @@
                             formData.append("name", file.files[0].name);
 
                             formData.append("path", $(".files-list").data("path"));
+                            Azuren.desktop.startLoading();
                             $.ajax({
                                 url: "/File/Upload",
                                 contentType: false,
@@ -106,11 +109,12 @@
                                 dataType: "json",
                                 data: formData,
                                 success: function (e) {
+                                    Azuren.desktop.stopLoading();
                                     $("#select_up_file").replaceWith($("#select_up_file").clone(true));
                                     navigateTo($(".files-list").data("path"));
                                 },
                                 error: function () {
-
+                                    Azuren.desktop.stopLoading();
                                 }
                             });
                         }
@@ -173,7 +177,17 @@
                                 pasteBoard = $(this).data("path");
                             }
                             break;
-                        case "download":
+                        case "setback":
+                            {
+                                $.post("/Customize/SetDesktop", { url: "/File/Detail?path=" + $(this).data("path") }, function(e) {
+                                    if (e.code == 0) {
+                                        Azuren.desktop.setBackground(e.data.Desktop);
+                                    } else {
+                                        Azuren.alert.error("Set background failed");
+                                    }
+                                });
+                            }break;
+                    case "download":
                             {
                                 $.fileDownload("/File/Download?name=" + $(this).data('name') + "&path=" + $(this).parents(".files-list").data('path'));
                             }
@@ -186,6 +200,11 @@
                     "delete": { name: "Delete" },
                     "copy": { name: "Copy" },
                     "cut": { name: "Cut" },
+                    "setback": {
+                        name: "Set As Background", disabled: function () {
+                            return $(this).data("type").indexOf("image") != 0;
+                        }
+                    },
                     "download": {
                         name: "Download", disabled: function () {
                             return $(this).hasClass("item-folder");

@@ -13,14 +13,47 @@ else
 }
 <div class="va-container">
     <input type="hidden" id="va-app-id" value="@Model.Id"/>
-    <h2>@Model.Name</h2>
-    <img src="@Model.Icon"/>
-    <div class="va-desc">@Model.Desc</div>
-    <div class="va-star">Stars: @Model.Star</div>
+    <div class="va-header">@Model.Name&nbsp;&nbsp;<span style="font-size: 32px">@Model.Desc</span></div>
+    <div class="va-shots">
+        <div class="va-title">Screenshots</div>
+        <div class="screenshots">
+            <ul class="bjqs">
+                @foreach (string s in Model.Store.Shot.Split(','))
+                {
+                    <li>
+                        <img src="@s"></li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="va-desc">
+        <div class="va-title">Details</div>
+        <div class="va-detail-content">
+            @if (Model.Store.Detail == null || Model.Store.Detail.Trim().Length == 0)
+            {
+                <i style="font-weight: bold;">No details.</i>
+            }
+            else
+            {
+                @Model.Store.Detail
+            }
+        </div>
+    </div>
     <br />
     <div class="va-comment">
-        <ul>
-            <li>usbuild: Good Application</li>
-        </ul>
+        <div class="va-title">Comments</div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'azurenos';
+            var disqus_url = window.location.href + "/appstore/@Model.Id";
+
+            (function () {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
 </div>

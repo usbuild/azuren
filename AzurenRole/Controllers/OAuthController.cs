@@ -44,11 +44,11 @@ namespace AzurenRole.Controllers
             MemoryCache cache = MemoryCache.Default;
             if (cache.Contains(key))
             {
-                OAuthInfo info = (OAuthInfo)cache.Get(key);
+                var info = (OAuthInfo)cache.Get(key);
                 if (info.app.Secret == secret)
                 {
                     cache.Remove(key);
-                    return Json(new {code = 0, data = info.user.username}, JsonRequestBehavior.AllowGet);
+                    return Json(new {code = 0, data = info.user.Username}, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new {code = 1}, JsonRequestBehavior.AllowGet);

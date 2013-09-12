@@ -15,5 +15,7 @@
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="BlobEndpoint=https://azuren.blob.core.chinacloudapi.cn/;QueueEndpoint=https://azuren.queue.core.chinacloudapi.cn/;TableEndpoint=https://azuren.table.core.chinacloudapi.cn/;AccountName=azuren;AccountKey=uVbz9x/aZBTg4f/OApXQF0+UaC3JujLHHCS+vpRdjnQjN+HRESlszFHQnJrah2pg3elaFxNiy6dQr6n9qA9hKQ==" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </Role>
 </ServiceConfiguration>

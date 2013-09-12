@@ -1,46 +1,82 @@
 ﻿@model AzurenRole.Models.RegisterForm
 <html>
 <head>
-    <title>Register</title>
+    <title>Signup</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
 </head>
-<body>
-    <div class="signup-form">
-@using (Html.BeginForm())
-{
-        <legend>Register</legend>
-        <fieldset>
-        @if (!ViewData.ModelState.IsValid)
-        {
-            <div class="alert">
-            @Html.ValidationSummary("Please fix following errors:")
-            </div>
-        }
-            <div class="form-group">
-                    @Html.LabelFor(m => m.UserName)
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                    @Html.LabelFor(m => m.DisplayName)
-                    @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                    @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            </div>
+<body style="background: url('/Images/bg-login.jpg') no-repeat center;background-size: 100% 100%;overflow-y: hidden;">
+    <div class="login-container">
+        <div class="login-ad">
+            <ul>
+                <li style="background-image: url('http://i.s-microsoft.com/global/ImageStore/PublishingImages/FY14/Asset/features/Win8_BTSBG_0715_1600x540_EN_US.jpg');">
+                    <div class="ad-float-text ad-easy">
+                        Easy, Simple
+                    </div>
+                </li>
 
-            <div class="form-group">
-                    @Html.LabelFor(m => m.ConfirmPassword)
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
+                <li style="background-image: url('http://i.s-microsoft.com/global/ImageStore/PublishingImages/FY13/Asset/features/SurfacePro_DeltaBG_0211_1600x540_EN_US.jpg');">
+                    <div class="ad-float-text ad-safe">
+                        Light, Safe
+                    </div>
+                </li>
 
-            <div class="login-link">
-            Already have an account? &nbsp;&nbsp; @Html.ActionLink("Login", "Login", null, new { @style="font-weight:bold;"})&nbsp!
-            </div>
-            <button type="submit" class="btn btn-primary signup-btn">Register</button>
-        </fieldset>
-}
+                <li style="background-image: url('http://i.s-microsoft.com/global/ImageStore/PublishingImages/FY13/Asset/features/Ofc365BTS_AllDevicesBG_0611_1600x540_EN_US.jpg');">
+                    <div class="ad-float-text ad-open">
+                        Open, Cooperation
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="login-form">
+            <div style="color:white;font-size: 40px;background-color: #01bcf3;padding:0 20px; margin-left: 250px;">Azuren OS</div>
+            <div style="height: 0px;width: 100%;"></div>
+            @using (Html.BeginForm())
+            {
+                
+                <fieldset>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert">
+                            @Html.ValidationSummary("Please fix following errors:")
+                        </div>
+                    }
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+
+                    <div class="reg-link">
+                        Already have an account? &nbsp;&nbsp; @Html.ActionLink("Login", "Login", null, new { @style = "font-weight:bold;" })&nbsp!
+                    </div>
+                    <button type="submit" class="btn btn-primary login-btn">Register</button>
+                </fieldset>
+            }
+        </div>
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/unslider.js")
+    <script type="text/javascript">
+        $(function () {
+            $(".login-ad").unslider({
+                speed: 500,
+                delay: 7000,
+                dots: true
+            });
+        });
+    </script>
 </body>
 </html>

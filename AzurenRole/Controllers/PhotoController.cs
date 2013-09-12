@@ -45,7 +45,7 @@ namespace AzurenRole.Controllers
 
         public ActionResult Index()
         {
-            var type = "image/*";
+            const string type = "image/*";
             try
             {
                 var file = new BlobFile2(User.Identity.Name, "/");

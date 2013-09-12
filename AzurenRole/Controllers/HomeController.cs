@@ -25,6 +25,28 @@ namespace AzurenRole.Controllers
             return Json(new {code=0, data=x}, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Customize()
+        {
+            return View();
+        }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Test(HttpPostedFileBase file)
+        {
+            CloudBlobContainer container = AzureServiceHelper.GetBlobContainer("image");
+            string key = DateTime.Now.ToString("yyyyMMddHHmmssffff");
+            CloudBlockBlob blob = container.GetBlockBlobReference(key);
+            blob.Properties.ContentType = file.ContentType;
+            blob.UploadFromStream(file.InputStream);
+            ViewData["key"] = key;
+            return View("Upload");
+        }
+
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase upfile, string pictitle, string filename)
         {

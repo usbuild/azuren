@@ -1,0 +1,163 @@
+﻿@using System.Collections
+@using AzurenRole
+@using AzurenRole.OAuth
+@{
+    ViewBag.Title = "Authorize";
+    Layout = null;
+}
+<html>
+<head>
+    <title>Authorize</title>
+    <style type="text/css">
+        body {
+            font-family: "Segoe UI Light", "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Semibold", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial;
+        }
+
+        .oauth-info {
+            width: 400px;
+            margin: 20px auto;
+            border: solid 1px #ccc;
+            padding: 0 20px;
+        }
+
+        .btn {
+            height: 2.142em;
+            min-width: 6em;
+            font-size: 100%;
+            background-color: rgba(182,182,182,0.7);
+            color: #212121;
+            padding: 3px 12px 5px;
+            border: 0px;
+            background-color: #2672EC;
+            color: #fff;
+        }
+
+            .btn:hover {
+                background-color: #5A94F1;
+            }
+
+            .btn:active {
+                background-color: #212121;
+            }
+
+        .oauth-operation {
+            text-align: right;
+        }
+
+        .oauth-scope {
+            list-style: none;
+        }
+
+        .oauth-header {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .oauth-icon {
+            display: block;
+            border: none;
+            margin-right: 20px;
+            float: left;
+        }
+
+        .oauth-error {
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        .oauth-logo {
+            background-color: #0072c6;
+            margin: 0 -20px 20px -20px;
+            height: 50px;
+            color: white;
+            font-size: 35px;
+            padding: 0 20px;
+            line-height: 50px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        input[type=text]:hover, input[type=password]:hover {
+            border-color: rgb(143,143,143);
+        }
+
+        input[type=text], input[type=password] {
+            display: block;
+            height: 2em;
+            padding: 4px 8px;
+            font-size: 15px;
+            color: #212121;
+            border: 1px solid rgb(186,186,186);
+            background-color: rgba(255,255,255,0.8);
+            width: 100%;
+            margin: 10px auto;
+        }
+
+        .oauth-login-error {
+            height: 25px;
+            background-color: #dc3c00;
+            margin-bottom: 15px;
+            padding: 5px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    @{
+        var client = (OAppStore)ViewData["Client"];
+    }
+    @if (client != null)
+    {
+        <div class="oauth-info">
+            <div class="oauth-logo">Azuren OS</div>
+            @if ((bool)ViewData["Error"])
+            {
+                <div class="oauth-login-error">Wrong Username(Email) or password</div>
+            }
+
+            <img src="@client.Icon" class="oauth-icon"/>
+            <div class="oauth-header">
+                <a href="@client.Url">@client.Name</a> will receive the following info:
+            </div>
+            <ul class="oauth-scope">
+                @foreach (var s in (IEnumerable<string>)ViewData["Scope"])
+                {
+                    <li>@ScopeUtils.scopes[s]</li>
+                }
+            </ul>
+
+
+            @using (Html.BeginForm("Authorize", "OAuth2", FormMethod.Post))
+            {
+                @AntiForgery.GetHtml()
+                @Html.Hidden("client_id", ViewData["ClientId"])
+                @Html.Hidden("client_secret", ViewData["ClientSecret"])
+                @Html.Hidden("redirect_uri", ViewData["RedirectUri"])
+                @Html.Hidden("response_type", "code")
+                @Html.Hidden("scope", string.Join(" ", (IEnumerable<string>)ViewData["Scope"]))
+                if (!User.Identity.IsAuthenticated)
+                {
+                <input type="text" name="username" placeholder="Username or Email" />
+                <input type="password" name="password" placeholder="Password" />
+
+                }
+                <div class="oauth-operation">
+                    <input type="submit" value="Allow" class="btn">
+                </div>
+            }
+        </div>
+             
+    }
+    else
+    {
+        <div class="oauth-info">
+            <div class="oauth-logo">Azuren OS</div>
+            <div class="oauth-error">
+                Invalid client_id;
+            </div>
+        </div>
+    }
+</body>
+</html>

@@ -4,41 +4,77 @@
     Layout = null;
     ViewBag.Title = "Settings";
 }
-<div class="chat-settings">
 
-    <h2>Settings</h2>
-    <input type="hidden" class="displayname" value="@GlobalData.user.displayname"/>
-<div class="alert alert-info">Leave it blank if you don't want to change. </div>
-@using(Html.BeginForm())  {
-        <fieldset>
-        @if (!ViewData.ModelState.IsValid)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azuren OS</title>
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body style="background-color: #339933;">
+    <div class="chat-settings">
+        @if (GlobalData.user.Status == 1)
         {
-            <div class="alert error-msg">
-            @Html.ValidationSummary("Please fix following errors:")
+            <div class="validate-email alert alert-info">
+                <span>Your email has been verified.</span>
             </div>
         }
-        <legend>Change Display Name</legend>
-            <div class="form-group">
-                    @Html.LabelFor(m => m.DisplayName)
-                    @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+        else
+        {
+            <div class="validate-email alert alert-error">
+                <span>Your email is not verified. <a href="javascript:;" class="btn-small btn-primary" id="validate">Verify</a></span>
             </div>
-            <legend>Change Password</legend>
-            <div class="form-group">
+        }
+
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert error-msg">
+                        @Html.ValidationSummary("Please fix following errors:")
+                    </div>
+                }
+                <legend>Change Password</legend>
+                <div class="form-group">
                     @Html.LabelFor(m => m.OldPassword)
                     @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
+                </div>
+                <div class="form-group">
                     @Html.LabelFor(m => m.NewPassword)
                     @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
-            </div>
+                </div>
 
-            <div class="form-group">
+                <div class="form-group">
                     @Html.LabelFor(m => m.ConfirmPassword)
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
+                </div>
 
-            <input type="submit" class="btn btn-primary signup-btn" value="save" />
-        </fieldset>
-}
+                <input type="submit" class="btn btn-primary login-btn" value="save" style="width: 100%;" />
+            </fieldset>
+        }
+        <div class="alert" style="margin-top: 20px;">Go to <a href="http://gravatar.com" target="_blank">gravatar.com</a> to change your avatar!</div>
+    </div>
+    
+    <script type="text/javascript">
+        $(function() {
+            $("#validate").click(function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                window.parent.Azuren.desktop.startLoading();
+                $.get("/Account/SendEmail", {}, function (e) {
+                    window.parent.Azuren.desktop.stopLoading();
+                    if (e.code == 0) {
+                        window.parent.Azuren.alert.info("A validate mail has been sent to your email.", 3000);
+                    } else {
+                        window.parent.Azuren.alert.error("An error occured while sending mail to you.", 3000);
+                    }
+                });
+            });
+        });
+    </script>
 
-</div>
+</body>
+</html>

@@ -21,8 +21,8 @@ namespace AzurenRole.Controllers
             CloudTable table = GetTable();
             TableQuery<GroupInfo> query =
                 new TableQuery<GroupInfo>().Where(TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey",
-                    QueryComparisons.Equal, GlobalData.user.id.ToString()), TableOperators.And, TableQuery.GenerateFilterCondition("PartitionKey",
-                    QueryComparisons.Equal, GlobalData.user.id.ToString())));
+                    QueryComparisons.Equal, GlobalData.user.Id.ToString()), TableOperators.And, TableQuery.GenerateFilterCondition("PartitionKey",
+                    QueryComparisons.Equal, GlobalData.user.Id.ToString())));
             IEnumerable<GroupInfo> infos = table.ExecuteQuery(query);
             ViewData["roomList"] = infos.Select(_ => _.group);
             return View();
@@ -43,14 +43,14 @@ namespace AzurenRole.Controllers
             CloudTable table = GetTable();
             TableQuery<GroupInfo> query =
                 new TableQuery<GroupInfo>().Where(TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey",
-                    QueryComparisons.Equal, GlobalData.user.id.ToString()), TableOperators.And, TableQuery.GenerateFilterCondition("group",
+                    QueryComparisons.Equal, GlobalData.user.Id.ToString()), TableOperators.And, TableQuery.GenerateFilterCondition("group",
                     QueryComparisons.Equal, name)));
             if (table.ExecuteQuery(query).Any())
             {
                 return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
             }
             GroupInfo info = new GroupInfo();
-            info.PartitionKey = GlobalData.user.id.ToString();
+            info.PartitionKey = GlobalData.user.Id.ToString();
             info.RowKey = string.Format("{0:D19}", DateTime.MaxValue.Ticks - DateTime.UtcNow.Ticks);
             info.group = name;
             TableOperation to = TableOperation.Insert(info);
@@ -63,7 +63,7 @@ namespace AzurenRole.Controllers
             CloudTable table = GetTable();
             TableQuery<GroupInfo> query =
                 new TableQuery<GroupInfo>().Where(TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("PartitionKey",
-                    QueryComparisons.Equal, GlobalData.user.id.ToString()), TableOperators.And, TableQuery.GenerateFilterCondition("group",
+                    QueryComparisons.Equal, GlobalData.user.Id.ToString()), TableOperators.And, TableQuery.GenerateFilterCondition("group",
                     QueryComparisons.Equal, name)));
 
             var res = table.ExecuteQuery(query);

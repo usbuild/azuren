@@ -153,42 +153,41 @@
     };
     Azuren.system = {};
     Azuren.desktop = {};
-    Azuren.desktop.setBackground = nJDSK.setBackground;
+    Azuren.core = desk;
+    Azuren.desktop.setBackground = Azuren.core.setBackground;
+    Azuren.app.list = Azuren.core.iconList;
+
     Azuren.isIE = navigator.userAgent.indexOf("MSIE") > -1 ? true : false;
 
     Azuren.app.install = function (id, name, icon, iwidth, iheight, type, tile, callback) {
-        var icon = desk.iconHelper.addIcon(id, name, icon, iwidth, iheight, type, tile, callback);
-        $.contextMenu({
-            selector: icon.selector,
-            callback: function (key, options) {
-                var appId = $(this).data("id");
-                switch (key) {
-                    case "open":
-                        break;
-                }
-            },
-            items: {
-                "open": { name: "Open" }
-            }
-        });
+        desk.iconHelper.addIcon(id, name, icon, iwidth, iheight, type, tile, callback);
     };
 
     var appList = {};
     Azuren.app.uninstall = function (id) {
         delete appList[id];
+        if (desk.WindowList.get_window(id)) {
+            desk.WindowList.get_window(id).close();
+        }
+
+        if (desk.metroList.get_window(id)) {
+            desk.metroList.get_window(id).close();
+        }
+
         desk.iconHelper.removeIcon(id);
+        Azuren.desktop.removeIcon(id);
     };
     Azuren.app.installEx = function (id, name, icon, url, width, height, iwidth, iheight, type, tile) {
         appList[id] = { name: name, url: url, icon: icon };
-        var icn = desk.iconHelper.addIcon(id, name, icon, iwidth, iheight, type,tile, function (app) {
+        var icn = desk.iconHelper.addIcon(id, name, icon, iwidth, iheight, type, tile, function (app) {
             if (type == 0) {
-                desk.frameWindow(id, name, url, width, height, function(e) {
-                    e.$content.bind("ready", function() {
+                desk.frameWindow(id, name, url, width, height, function (e) {
+                    e.$content.bind("ready", function () {
                         Azuren.app.sendMessage(id, "event", { name: "ready", data: { id: id } });
                     });
                 });
             } else {
-                
+
                 desk.metroFrameWindow(id, name, url, icon, function (e) {
                     if (e.isNew) {
                         Azuren.desktop.startLoading();
@@ -201,30 +200,7 @@
                 });
             }
         });
-        $.contextMenu({
-            selector: icn.selector,
-            callback: function (key, options) {
-                var appId = $(this).data("id");
-                switch (key) {
-                    case "open":
-                        {
-                            $(this).trigger("click");
-                        }
-                        break;
-                    case "uninstall":
-                        Azuren.store.uninstall(appId);
-                        break;
-                    case "store":
-                        Azuren.store.view(appId);
-                        break;
-                }
-            },
-            items: {
-                "open": { name: "Open" },
-                "uninstall": { name: "Uninstall" },
-                "store": { name: "View in app store" }
-            }
-        });
+
     };
 
     $(document).on('click', ".appbar-item", function () {
@@ -233,7 +209,7 @@
         Azuren.app.sendMessage(id, "event", { name: "app.appbar", data: { name: $(this).data("name") } });
         win.trigger("appbar", { name: $(this).data("name") });
     });
-    var iconMap = {        
+    var iconMap = {
         "home": 'url("/Scripts/MetroJs/images/metroIcons.jpg") -107px -14px',
         "search": 'url("/Scripts/MetroJs/images/metroIcons.jpg") -16px -14px',
         "remove": 'url("/Scripts/MetroJs/images/metroIcons.jpg") -475px -101px',
@@ -247,11 +223,10 @@
         } else {
             metro.$appbar.removeClass("appbar-hide");
         }
-        
-        
+
+
         if (metro) {
             var menu = appBar.menu;
-            console.dir(metro.$appbar);
             if (menu.length == 0) {
                 metro.$appbar.hide(0);
                 return;
@@ -260,7 +235,7 @@
             }
             metro.$appbar.animate({ bottom: '-' + (metro.$appbar.height() + 10) + "px" }, 200, function () {
                 metro.$appbar.html("");
-                
+
                 for (x in menu) {
                     var item = $("<div>").addClass("appbar-item").attr("data-name", menu[x].name);
                     if (menu[x].background) {
@@ -336,7 +311,7 @@
         }
     };
     Azuren.app.start = function (appId) {
-        $("#app-icon-" + appId).trigger("click");
+        $("#metro-icon-" + appId).trigger("click");
     };
 
     var scrollDiv = function (div, distance, duration) {
@@ -345,6 +320,37 @@
         var value = (distance < 0 ? "" : "-") + Math.abs(distance).toString();
         div.css("-webkit-transform", "translate3d(0px," + value + "px,0px)");
         div.css("transform", "translate3d(0px," + value + "px,0px)");
+    };
+
+    Azuren.desktop.addIcon = function (id) {
+        if ($('#app-icon-' + id).length == 0) {
+            $.post("/Customize/AddDesktopIcon?id=" + id, {}, function(e) {
+                if (e.code == 0) {
+                    Azuren.desktop.pin(id);
+                } else {
+                    Azuren.alert.error("Add to desktop failed");
+                }
+            });
+        } else {
+            Azuren.alert.error("Desktop icon already exists");
+        }
+    };
+    Azuren.desktop.removeIcon = function (id) {
+        if ($('#app-icon-' + id).length > 0) {
+            $.post("/Customize/RemoveDesktopIcon?id=" + id, {}, function (e) {
+                if (e.code == 0) {
+                    Azuren.desktop.unpin(id);
+                } else {
+                    Azuren.alert.error("Remove desktop icon failed");
+                }
+            });
+        }
+    };
+    Azuren.desktop.pin = function (id) {
+        Azuren.core.gridster.add_widget('<li class="desktop-icon" data-id="' + id + '"><a class="icon app-icon" data-id="' + id + '" id="app-icon-' + id + '" ><img src="' + Azuren.app.list[id].image + '" /><span>' + Azuren.app.list[id].title + '</span></a></li>');
+    };
+    Azuren.desktop.unpin = function (id) {
+        Azuren.core.gridster.remove_widget($('#app-icon-' + id).parents("li"));
     };
 
     var lockImgUrl = "";
@@ -410,10 +416,12 @@
     };
     Azuren.desktop.setlock = function (url) {
         lockImgUrl = url;
+        $.get(url, {}, function () {// This is just for cache
+        });
     };
 
     Azuren.desktop.setTheme = function (theme) {
-        $("#theme-css").attr("href", "/Content/themes/" + theme + ".css");
+        $("#theme-css").attr("href", theme);
     };
     Azuren.desktop.clear = function () {
         $("#showdesktop").trigger("click");
@@ -437,24 +445,14 @@
     };
 
     Azuren.desktop.refresh = function () {
-        /*
-        for (var x in appList) {
-            Azuren.app.uninstall(x);
-        }
-        $.getJSON("/Home/App", {}, function (e) {
-            for (x in e.data) {
-                Azuren.app.installEx(e.data[x].id, e.data[x].name, e.data[x].icon, e.data[x].url, e.data[x].width, e.data[x].height);
-            }
-        });
-        */
     };
 
     Azuren.showWindow = function (height, width, id, title, content, callback) {
         return new desk.Window(height, width, title, content, id, callback);
     };
 
-    Azuren.metroWindow = function (id, title, icon,content, callback) {
-        return new desk.MetroWindow(id, title, icon,content, callback);
+    Azuren.metroWindow = function (id, title, icon, content, callback) {
+        return new desk.MetroWindow(id, title, icon, content, callback);
     };
 
 

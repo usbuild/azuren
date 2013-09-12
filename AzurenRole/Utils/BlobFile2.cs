@@ -14,8 +14,8 @@ namespace AzurenRole.Utils
     [DataServiceKey("PartitionKey", "RowKey")]
     public class FileEntity : TableEntity
     {
-        public static int Directory = 0;
-        public static int RegularFile = 1;
+        public const int Directory = 0;
+        public const int RegularFile = 1;
         public string Path { set; get; }
         public string Key { set; get; }
         public string Parent { set; get; }

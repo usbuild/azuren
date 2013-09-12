@@ -4,5 +4,7 @@
     <ActivePublishProfile>azurenProduction</ActivePublishProfile>
     <UseIISExpress>True</UseIISExpress>
     <UseEmulatorExpress>False</UseEmulatorExpress>
+    <WebRoleSkipLaunchInBrowser>
+    </WebRoleSkipLaunchInBrowser>
   </PropertyGroup>
 </Project>

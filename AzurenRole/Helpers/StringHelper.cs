@@ -25,5 +25,15 @@ namespace AzurenRole.Helpers
 
             return strBuilder.ToString();
         }
+
+        public static string GetUniqueId()
+        {
+            return Guid.NewGuid().ToString("N");
+        }
+
+        public static string CalcPassword(string password, string salt)
+        {
+            return Md5Hash(password + salt);
+        }
     }
 }
