@@ -1,4 +1,89 @@
-﻿Azuren.app.install("0005", "Files", "/Images/icons/metro/file.png", 2, 1, 0, function () {
+﻿Azuren.file.edit = function (path) {
+    var id = path.replace("-", "--").replace("_", "__").replace("/", "-").replace(".", "_");
+    Azuren.showWindow(600, 480, "0005editor-" + id, "Edit: " + path, "", function (win) {
+
+        if (win.isNew) {
+
+            var loadContent = function () {
+                $.ajax({ url: "/File/Detail?path=" + path + "&stamp=" + new Date().getTime(), type: "get" })
+                .fail(function () {
+                    Azuren.alert.error("File Not Exists.", 400);
+                    win.close();
+                })
+                    .done(function (e) {
+                        var contentArea = $("<textarea>").css("width", "100%").css("height", "100%");
+                        win.$content.html(contentArea);
+                        contentArea.val(e);
+                        var change = false;
+                        win.$closeBtn.unbind("click");
+                        win.$closeBtn.click(function () {
+                            if (change) {
+                                Azuren.confirm("Changes not saved! Are you sure to exit?", "[Cancel][Discard][SaveAndExit]", function (e) {
+                                    switch (e) {
+                                        case "Cancel":
+                                            {
+
+                                            }
+                                            break;
+                                        case "Discard":
+                                            {
+                                                win.close();
+                                            }
+                                            break;
+                                        case "SaveAndExit":
+                                            {
+                                                saveContent(function (e) {
+                                                    if (e) {
+                                                        win.close();
+                                                    } else {
+                                                        Azuren.alert("An error occurred while saving your file");
+                                                    }
+                                                });
+                                            }
+                                            break;
+                                    }
+                                });
+                            } else {
+                                win.close();
+                            }
+                        });
+                        
+                        var saveContent = function (callback) {
+                            $.post("/File/UpdateText", { name: path, path: "", content: contentArea.val() }, function (e) {
+                                if (e.code == 0) {
+                                    callback(true);
+                                } else {
+                                    callback(false);
+                                }
+                            });
+                        };
+
+                        contentArea.keydown(function (e) {
+                            if (e.ctrlKey && e.keyCode == "83") {
+                                e.preventDefault();
+                                saveContent(function (e) {
+                                    if (e) {
+                                        Azuren.alert.info("File saved", 1000);
+                                        change = false;
+                                    } else {
+                                        Azuren.alert.error("Update file failed");
+                                    }
+                                });
+                            } else {
+                                change = true;
+                            }
+                        });
+                    });
+            };
+
+            win.setTaskbarBtn("/Images/icons/filetypes/empty.png");
+            win.$content.html('<img src="/Images/jar-loading.gif" style="display:block;margin: 0 auto;" />');
+            loadContent();
+        }
+    });
+};
+
+Azuren.app.install("0005", "Files", "/Images/icons/metro/file.png", 2, 1, 0, function () {
 }, function (e) {
     Azuren.showWindow(600, 480, "0005", "Files", "", function (win) {
         if (win.isNew) {
@@ -62,6 +147,11 @@
                 if ($(this).hasClass("item-folder")) {
                     navigateTo($(this).data("path"));
                 } else {
+                    var temp = $(this).data("name").split(".");
+                    var fileext = "";
+                    if (temp.length > 0) {
+                        fileext = temp[temp.length - 1];
+                    }
                     if ($(this).data("type").indexOf("image") == 0) {
                         var t = $(this);
                         if ($("#fancybox-container").length > 0) {
@@ -81,7 +171,10 @@
 
                         $("body").append(p);
                         $(".fancybox").fancybox().eq(location).trigger("click");
-                    } else {
+                    } else if (fileext === "abf") {
+                        Azuren.shell.execFile("/File/Detail?path=" + $(this).data("path") + "&stamp="+new Date().getTime());
+                    }
+                    else {
                         Azuren.alert.warn("File type not supported");
                     }
                 }
@@ -165,6 +258,10 @@
                                 });
                             }
                             break;
+                        case "edit":
+                            {
+                                Azuren.file.edit($(this).data("path"));
+                            } break;
                         case "copy":
                             {
                                 pasteCmd = "copy";
@@ -179,15 +276,15 @@
                             break;
                         case "setback":
                             {
-                                $.post("/Customize/SetDesktop", { url: "/File/Detail?path=" + $(this).data("path") }, function(e) {
+                                $.post("/Customize/SetDesktop", { url: "/File/Detail?path=" + $(this).data("path") }, function (e) {
                                     if (e.code == 0) {
                                         Azuren.desktop.setBackground(e.data.Desktop);
                                     } else {
                                         Azuren.alert.error("Set background failed");
                                     }
                                 });
-                            }break;
-                    case "download":
+                            } break;
+                        case "download":
                             {
                                 $.fileDownload("/File/Download?name=" + $(this).data('name') + "&path=" + $(this).parents(".files-list").data('path'));
                             }
@@ -196,6 +293,11 @@
                     }
                 },
                 items: {
+                    "edit": {
+                        name: "Edit", disabled: function () {
+                            return $(this).hasClass("item-folder");
+                        }
+                    },
                     "rename": { name: "Rename" },
                     "delete": { name: "Delete" },
                     "copy": { name: "Copy" },

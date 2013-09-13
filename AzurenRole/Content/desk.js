@@ -17,7 +17,8 @@ $(document).ready(function () {
     setBack();
     */
 
-    Azuren.terminal("#terminal", "/Console");
+    
+
     Azuren.widget.install('wdgClock', '/Widget/Clock', 180, 180);
     Azuren.widget.install('wdgWeather', '/Widget/Weather', 250, 150);
     $.contextMenu({

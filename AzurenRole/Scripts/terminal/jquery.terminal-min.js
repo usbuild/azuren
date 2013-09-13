@@ -2240,6 +2240,14 @@
                 if (settings.beforeCmd && typeof settings.beforeCmd === 'object' && settings.beforeCmd[command.name] && settings.beforeCmd[command.name](self, command.args)) {
                     return;
                 }
+                
+                if (terminal.externalCommands && typeof terminal.externalCommands[command.name] == "function") {
+                    terminal.externalCommands[command.name](self, command.args);
+                    return;
+                }
+
+                
+
                 if (!settings.login || command.name === 'help') {
                     // allow to call help without token
                     service(command.name, command.args);

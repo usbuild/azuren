@@ -464,6 +464,7 @@ var nJDSK = (function (wnd, d, $) {
             this.$titlebar.dblclick(function () {
                 self.$maximizeBtn.trigger("click");
             });
+            
 
             /*close button - always visible*/
             this.$closeBtn = $("<a />");
@@ -472,6 +473,7 @@ var nJDSK = (function (wnd, d, $) {
                 .html('')
                 .addClass('closebtn')
                 .click(function () {
+                    
                     /*this line with tinymce should be removed, if you aren't using tinyMCE, as it will cause an error*/
                     self.$base.fadeOut('fast', function () {
                         self.$base.remove();
@@ -817,6 +819,10 @@ var nJDSK = (function (wnd, d, $) {
         gridster: null,
         metroster: null,
         init: function () {
+            
+            //set up shell!
+            Azuren.term = Azuren.terminal("#terminal", "/Console");
+            
             $(wnd).resize(function () {
                 nJDSK.desktopWidth = $(wnd).width();
                 nJDSK.desktopHeight = $(wnd).height() - nJDSK.taskbarHeight;
@@ -998,8 +1004,8 @@ var nJDSK = (function (wnd, d, $) {
                     }
                 }
             }).data("gridster");
-
-
+            
+            
         }
     };
 

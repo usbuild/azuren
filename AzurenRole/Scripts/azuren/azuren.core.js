@@ -1,147 +1,4 @@
-﻿(function ($) {
-    $.fn.Azuren = function (url, options) {
-        if ($('body').data('azuren-term')) {
-            return $('body').data('azuren-term').terminal;
-        }
-        this.addClass('azuren-term');
-        options = options || {};
-        var settings = {
-            prompt: 'Azuren / >',
-            name: 'azuren',
-            enabled: false,
-            greetings: "Welcome to use azuren console",
-            keypress: function (e) {
-                if (e.which == 96) {
-                    return false;
-                }
-            },
-            processArguments: false,
-            env: {
-                path: "/"
-            },
-            afterCmd: {
-                cd: function (args, term, result) {
-                    if (result.code == 0) {
-                        term.env.path = result.data;
-                        term.set_prompt("Azuren " + term.env.path + " >");
-                        return true;
-                    }
-                },
-                download: function (args, term, result) {
-                    if (result.code == 0) {
-                        console.dir(result);
-                        $.fileDownload("/File/Download?name=" + args[0] + "&path=" + term.env.path);
-                        return true;
-                    }
-                }
-            },
-            beforeCmd: {
-                cd: function (term, args) {
-                    if (args[0] == "/") {
-                        term.env.path = "/";
-                        term.set_prompt("Azuren " + term.env.path + " >");
-                        return true;
-                    }
-                    return false;
-                },
-                download: function (term, args) {
-                    if (args.length < 1) {
-                        term.error("Usage: donwload filename");
-                        return true;
-                    }
-                },
-                app: function (term, args) {
-                    if (args.length == 2) {
-                        if (args[0] == "install") {
-                            term.pause();
-                            $.post("/Store/Install", { id: args[1] }, function (e) {
-                                if (e.code == 0) {
-                                    term.echo("App \"" + e.data.name + "\" installed successfully.");
-                                } else {
-                                    term.error("App install failed");
-                                }
-                                term.resume();
-                            }, "json");
-                            return true;
-                        } else if (args[0] == "uninstall") {
-                            term.pause();
-                            $.post("/Store/Uninstall", { id: args[1] }, function (e) {
-                                if (e.code == 0) {
-                                    term.echo("App removed successfully.");
-                                } else {
-                                    term.error("Remove app failed");
-                                }
-                                term.resume();
-                            }, "json");
-                            return true;
-                        } else if (args[0] == "start") {
-                            Azuren.app.start(args[1]);
-                            return true;
-                        }
-                    }
-                    term.error("Usage: app [install | uninstall] app_id");
-                    return true;
-                },
-                upload: function (term, args) {
-                    if (args.length < 1) {
-                        term.error("Usage: upload filename");
-                        return true;
-                    }
-                    if ($("#select_file_term").length == 0) {
-                        var form = $('<form enctype="multipart/form-data" id="file_term_form"><input name="file" type="file" id="select_file_term"/> </form>');
-                        $("body").append(form);
-                        $(document).on("change", '#select_file_term', function (e) {
-                            var file = $(this).get(0);
-                            if (file.files.length > 0) {
-                                var formData = new FormData($("#file_term_form").get(0));
-                                formData.append("args", $(this).data("args"));
-                                formData.append("path", term.env.path);
-                                $.ajax({
-                                    url: "/Console/Upload",
-                                    contentType: false,
-                                    cache: false,
-                                    processData: false,
-                                    type: "POST",
-                                    dataType: "json",
-                                    data: formData,
-                                    success: function (e) {
-                                        $("#select_file_term").replaceWith($("#select_file_term").clone(true));
-                                        term.echo("File upload successfully");
-                                    },
-                                    error: function () {
-                                        term.error("File upload failed");
-                                    }
-                                });
-                            }
-                        });
-                    }
-                    $("#select_file_term").data("args", args).click();
-                    return true;
-                }
-            }
-
-        };
-        if (options) {
-            $.extend(settings, options);
-        }
-        this.append('<div class="azuren-td"></div>');
-        var self = this;
-        self.terminal = this.find('.azuren-td').terminal(url, settings);
-        var focus = false;
-        $(document.documentElement).keypress(function (e) {
-            if (e.which == 96) {
-                self.slideToggle('fast');
-                self.terminal.focus(focus = !focus);
-                self.terminal.attr({
-                    scrollTop: self.terminal.attr("scrollHeight")
-                });
-            }
-        });
-        $('body').data('azuren-term', this);
-        this.hide();
-        return self;
-    };
-})(jQuery);
+﻿
 ///
 (function ($, desk) {
     window.Azuren = window.Azuren || { app: {}, widget: {} };
@@ -149,10 +6,11 @@
     Azuren.WindowList = desk.WindowList;
     Azuren.metroList = desk.metroList;
     Azuren.terminal = function (selector, url) {
-        $(selector).Azuren(url);
+        return $(selector).Azuren(url).terminal;
     };
     Azuren.system = {};
     Azuren.desktop = {};
+    Azuren.shell = {};
     Azuren.core = desk;
     Azuren.desktop.setBackground = Azuren.core.setBackground;
     Azuren.app.list = Azuren.core.iconList;
@@ -162,6 +20,72 @@
     Azuren.app.install = function (id, name, icon, iwidth, iheight, type, tile, callback) {
         desk.iconHelper.addIcon(id, name, icon, iwidth, iheight, type, tile, callback);
     };
+
+
+    var echo = false;
+    var term_exec = function (cmd) {
+        cmd = cmd.trim();
+        if (cmd == "echo off" || cmd == "@echo off") {
+            echo = true;
+        } else if (cmd == "echo on" || cmd == "@echo on") {
+            echo = false;
+        } else {
+            if (cmd.indexOf("@") == 0) {
+                Azuren.term.exec(cmd.substr(1), true);
+            } else {
+                Azuren.term.exec(cmd, echo);
+            }
+        }
+    };
+
+    Azuren.shell.show = function (callback) {
+        if (Azuren.term.$.is(":hidden")) {
+            Azuren.term.focus(true);
+            Azuren.term.$.slideDown('fast', callback);
+            Azuren.term.attr({
+                scrollTop: Azuren.term.attr("scrollHeight")
+            });
+        }
+    };
+
+    Azuren.shell.hide = function () {
+        if (Azuren.term.$.is(":visible")) {
+            Azuren.term.$.slideUp('fast');
+            Azuren.term.focus(false);
+            Azuren.term.attr({
+                scrollTop: Azuren.term.attr("scrollHeight")
+            });
+        }
+    };
+
+    Azuren.shell.exec = function (data) {
+        Azuren.shell.show(function () {
+            if (typeof data === "string") {
+                term_exec(data);
+            } else {
+                for (x in data) {
+                    term_exec(data[x]);
+                }
+            }
+        });
+    };
+    Azuren.shell.execFile = function (url) {
+        $.get(url, {}, function (e) {
+            Azuren.shell.exec(e.split("\n"));
+        });
+    };
+    Azuren.shell.execExternalFile = function (url) {
+        $.get("/Helper/HttpGet?url=" + url, {}, function (e) {
+            if (e.code == 200) {
+                Azuren.shell.exec(e.data.split("\n"));
+            }
+        });
+    };
+
+    Azuren.shell.install = function (command, func) {
+        Azuren.term.externalCommands[command] = func;
+    };
+
 
     var appList = {};
     Azuren.app.uninstall = function (id) {
@@ -324,7 +248,7 @@
 
     Azuren.desktop.addIcon = function (id) {
         if ($('#app-icon-' + id).length == 0) {
-            $.post("/Customize/AddDesktopIcon?id=" + id, {}, function(e) {
+            $.post("/Customize/AddDesktopIcon?id=" + id, {}, function (e) {
                 if (e.code == 0) {
                     Azuren.desktop.pin(id);
                 } else {
@@ -579,6 +503,11 @@
             if (a == "Accept") {
                 callback(b);
             }
+        });
+    };
+    Azuren.confirm = function(title, buttons, callback) {
+        $.MetroMessageBox({ content: title, NormalButton: "#232323", ActiveButton: "#1ba1e2", buttons: buttons}, function (a, b) {
+            callback(a);
         });
     };
     Azuren.alert = function (title, content, callback) {

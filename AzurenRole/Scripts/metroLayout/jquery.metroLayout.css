@@ -223,7 +223,7 @@ img, object, embed {
     .metro-layout .content {
         overflow: auto;
     }
-
+    /*
     ::-webkit-scrollbar {
         width: 10px;
         height: 10px;
@@ -232,14 +232,15 @@ img, object, embed {
     ::-webkit-scrollbar-track:enabled {
         background-color: #0d0d0d;
     }
-
+    
     ::-webkit-scrollbar-thumb:vertical {
-        background-color: #fff;
+        background-color: #ccc;
     }
 
     ::-webkit-scrollbar-thumb:horizontal {
-        background-color: #fff;
+        background-color: #ccc;
     }
+    */
 }
 
 ::selection {

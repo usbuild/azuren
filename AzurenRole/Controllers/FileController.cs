@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -50,11 +51,11 @@ namespace AzurenRole.Controllers
             try
             {
                 new BlobFile2(User.Identity.Name, path + "/" + name).CreateDirectory();
-                return Json(new { code = 0});
+                return Json(new { code = 0 });
             }
             catch (Exception ex)
             {
-                return Json(new { code = 1,data=ex.Message});
+                return Json(new { code = 1, data = ex.Message });
             }
         }
 
@@ -63,12 +64,31 @@ namespace AzurenRole.Controllers
         {
             try
             {
-                new BlobFile2(User.Identity.Name, path +"/" + name).CreateFile(file.InputStream);
+                new BlobFile2(User.Identity.Name, path + "/" + name).CreateFile(file.InputStream);
                 return Json(new { code = 0 });
             }
             catch (Exception ex)
             {
-                return Json(new { code = 1,data=ex.Message});
+                return Json(new { code = 1, data = ex.Message });
+            }
+        }
+        [Authorize]
+        public ActionResult UpdateText(String content, string name, string path)
+        {
+            try
+            {
+                var f = new BlobFile2(User.Identity.Name, path + "/" + name);
+                var stream = new MemoryStream();
+                var writer = new StreamWriter(stream);
+                writer.Write(content);
+                writer.Flush();
+                stream.Position = 0;
+                f.GetBlob().UploadFromStream(stream);
+                return Json(new { code = 0 });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { code = 1, data = ex.Message });
             }
         }
 
@@ -82,7 +102,7 @@ namespace AzurenRole.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { code = 1,data=ex.Message});
+                return Json(new { code = 1, data = ex.Message });
             }
         }
 
@@ -96,7 +116,7 @@ namespace AzurenRole.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { code = 1,data=ex.Message});
+                return Json(new { code = 1, data = ex.Message });
             }
         }
 
@@ -105,12 +125,12 @@ namespace AzurenRole.Controllers
         {
             try
             {
-                new BlobFile2(User.Identity.Name, path1).Copy( path2);
+                new BlobFile2(User.Identity.Name, path1).Copy(path2);
                 return Json(new { code = 0 });
             }
             catch (Exception ex)
             {
-                return Json(new { code = 1,data=ex.Message});
+                return Json(new { code = 1, data = ex.Message });
             }
         }
 
@@ -120,7 +140,7 @@ namespace AzurenRole.Controllers
             var file = new BlobFile2(User.Identity.Name, path + name);
             if (file.Exists() && !file.IsDirectory())
             {
-                
+
                 if (name != null)
                 {
                     Response.StatusCode = 200;
@@ -160,12 +180,12 @@ namespace AzurenRole.Controllers
                 var list = file.ListFiles();
                 var regex = new Regex("^" + Regex.Escape(type).Replace(@"\*", ".*").Replace(@"\?", ".") + "$",
                     RegexOptions.IgnoreCase);
-                var data = list.Where(m => regex.IsMatch(m.ContentType())).Select(m=>m.Path().Path());
-                return Json(new {code = 0, data = data});
+                var data = list.Where(m => regex.IsMatch(m.ContentType())).Select(m => m.Path().Path());
+                return Json(new { code = 0, data = data });
             }
             catch (Exception ex)
             {
-                return Json(new {code = 1});
+                return Json(new { code = 1 });
             }
         }
     }

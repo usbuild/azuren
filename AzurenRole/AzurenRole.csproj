@@ -313,6 +313,7 @@
     <Compile Include="Controllers\CustomizeController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\HelperController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\OAuth2Controller.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
@@ -1052,6 +1053,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Signup.cshtml" />
     <Content Include="Content\app\minesweeper\font\pulp.woff" />
+    <Content Include="Scripts\azuren\azuren.shell.js" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
