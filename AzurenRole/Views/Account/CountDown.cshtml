@@ -1,0 +1,12 @@
+﻿@{ Layout = null; }
+<html>
+<head>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+</head>
+<body>
+    <div class="msg-container">
+        @Html.Raw(ViewData["message"].ToString())
+    </div>
+</body>
+</html>

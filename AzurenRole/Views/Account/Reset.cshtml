@@ -1,0 +1,34 @@
+﻿@using Recaptcha
+@{ Layout = null; }
+<html>
+<head>
+    <title>Reset Password</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+</head>
+<body>
+    <div class="reset-container">
+            @using (Html.BeginForm())
+            {
+                <legend>Password Reset</legend>
+                <fieldset>
+                    @if (ViewData["error"] != null)
+                    {
+                        <div class="alert">
+                            @Html.Raw(ViewData["error"])
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" id="email" class="form-control" value="@ViewData["email"]"/>
+                    </div>
+                    <div class="form-group">
+                        @Html.Raw(Html.GenerateCaptcha("captcha", "clean"))
+                    </div>
+                    <input type="submit" class="btn btn-primary login-btn" value="Send Me Email" />
+                </fieldset>
+            }
+
+    </div>
+</body>
+</html>

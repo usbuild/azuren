@@ -1,4 +1,5 @@
 ﻿//Azuren.ready(function () {
+$.ajaxSetup({ cache: false });
 $(function () {
     var buildProject = function (project) {
         var html = '<li class="project-item" data-id="' + project.Id + '" data-email="' + project.Email + '"> <div class="proj-color color-' + project.Color + '" /> <div class="name">' + project.Name +
@@ -82,8 +83,12 @@ $(function () {
         $(".add-project-form").show();
     });
 
-    var formatDate = function(date) {
-        return (new Date(date)).toString("yyyy-MM-dd HH:mm:ss");
+    var formatDate = function (date) {
+        var d = new Date(date);
+        console.log(date);
+        console.dir(d);
+        //return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        return (new Date(date)).toString("yyyy/MM/dd HH:mm:ss"); 
     };
 
 

@@ -1,11 +1,19 @@
-﻿.form-control {
+﻿body,div,p {
+    font-family: 'Segoe UI Semilight', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+}
+.form-control {
     border-radius: 0;
 }
+
 li {
     list-style: none;
 }
 
 .btn {
+    border-radius: 0;
+    border: none;
+}
+.form-control {
     border-radius: 0;
 }
 
@@ -27,6 +35,7 @@ li {
         text-align: right;
         color: white;
     }
+
     .login-form label {
         color: white;
     }
@@ -41,17 +50,20 @@ li {
         border-radius: 0;
         background-color: #01bcf3;
     }
+
     .login-form input:-webkit-autofill {
         color: white !important;
     }
-    .login-form [type=text],.login-form [type=password] {
+
+    .login-form [type=text], .login-form [type=password] {
         border: #cccccc 2px solid;
         color: white;
         font-weight: bold;
         background-color: transparent;
     }
-    .login-form [type=text]:focus,.login-form [type=password]:focus {
-    }
+
+        .login-form [type=text]:focus, .login-form [type=password]:focus {
+        }
 
 .login-ad {
     float: left;
@@ -72,7 +84,7 @@ li {
             float: left;
             width: 100%;
             height: 100%;
-            background-size: auto 100% ;
+            background-size: auto 100%;
             background-position: -100% 0;
         }
 
@@ -103,19 +115,41 @@ li {
                 opacity: 1;
             }
 
+.reset-container {
+    margin: 100px auto;
+    background-color: white;
+    width: 500px;
+    padding: 40px 40px;
+    border: solid 1px #ccc;
+}
 
+    .reset-container form {
+        width: 440px;
+        margin: 0 auto;
+    }
 
+    .reset-container input {
+        width: 100%;
+        border-radius: 0;
+    }
+
+.msg-container {
+    border: solid 1px #ccc;
+width: 500px;
+margin: 100px auto;
+padding: 50px 40px;
+font-size: 17px;
+}
 
 .login-container {
     height: 480px;
     width: 980px;
     margin: 120px auto;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(76, 76, 76, 0.5);;
 }
 
 .ad-float-text {
     font-size: 42px;
-    font-family: "Segoe UI Light";
     display: block;
     position: absolute;
     width: 400px;
@@ -486,7 +520,6 @@ ul.member-list {
 
 .chat-settings {
     padding: 10px;
-    
 }
 
 #widgets .widget {
@@ -610,87 +643,142 @@ ul.member-list {
 .va-container {
     background-color: #ededed;
 }
+
 .va-header {
     font-size: 60px;
-background-color: #464646;
-text-align: left;
-color: white;
-padding-left: 20px;
+    background-color: #464646;
+    text-align: left;
+    color: white;
+    padding-left: 20px;
 }
 
 .store-home {
     height: 30px;
 }
+
 .va-container .screenshots {
     margin: 20px auto;
     box-shadow: 1px 1px 20px #ccc;
 }
+
 .va-desc {
     margin: 40px 0;
 }
+
 .va-detail-content {
     padding: 10px;
 }
+
 .va-title {
-width: 180px;
-background-color: #bad80a;
-left: 0;
-position: relative;
-margin-left: 0;
-height: 32px;
-color: white;
-padding: 0 20px;
-font-size: 23px;
-line-height: 32px;
+    width: 180px;
+    background-color: #bad80a;
+    left: 0;
+    position: relative;
+    margin-left: 0;
+    height: 32px;
+    color: white;
+    padding: 0 20px;
+    font-size: 23px;
+    line-height: 32px;
 }
+
 #disqus_thread {
     margin-top: 10px;
-padding: 10px;
+    padding: 10px;
 }
 /* Basic jQuery Slider essential styles */
 
-ul.bjqs{position:relative; list-style:none;padding:0;margin:0;overflow:hidden; display:none;}
-li.bjqs-slide{position:absolute; display:none;}
-ul.bjqs-controls{list-style:none;margin:0;padding:0;z-index:9999;}
-ul.bjqs-controls.v-centered li a{position:absolute;}
-ul.bjqs-controls.v-centered li.bjqs-next a{right:0;}
-ul.bjqs-controls.v-centered li.bjqs-prev a{left:0;}
-ol.bjqs-markers{list-style: none; padding: 0; margin: 0; width:100%;}
-ol.bjqs-markers.h-centered{text-align: center;}
-ol.bjqs-markers li{display:inline;}
-ol.bjqs-markers li a{display:inline-block;}
-p.bjqs-caption{display:block;width:96%;margin:0;padding:2%;position:absolute;bottom:0;}
+ul.bjqs {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: none;
+}
 
-ul.bjqs-controls.v-centered li a{
-	display:block;
-	padding:10px;
-	background:#fff;
-	color:#000;
-	text-decoration: none;
+li.bjqs-slide {
+    position: absolute;
+    display: none;
+}
+
+ul.bjqs-controls {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 9999;
+}
+
+    ul.bjqs-controls.v-centered li a {
+        position: absolute;
+    }
+
+    ul.bjqs-controls.v-centered li.bjqs-next a {
+        right: 0;
+    }
+
+    ul.bjqs-controls.v-centered li.bjqs-prev a {
+        left: 0;
+    }
+
+ol.bjqs-markers {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+    ol.bjqs-markers.h-centered {
+        text-align: center;
+    }
+
+    ol.bjqs-markers li {
+        display: inline;
+    }
+
+        ol.bjqs-markers li a {
+            display: inline-block;
+        }
+
+p.bjqs-caption {
+    display: block;
+    width: 96%;
+    margin: 0;
+    padding: 2%;
+    position: absolute;
+    bottom: 0;
+}
+
+ul.bjqs-controls.v-centered li a {
+    display: block;
+    padding: 10px;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
     width: 70px;
     text-align: center;
 }
 
-ul.bjqs-controls.v-centered li a:hover{
-	background:#00bbf1;
-	color:#fff;
+    ul.bjqs-controls.v-centered li a:hover {
+        background: #00bbf1;
+        color: #fff;
+    }
+
+ol.bjqs-markers li a {
+    padding: 5px 10px;
+    background: #000;
+    color: #fff;
+    margin: 5px;
+    text-decoration: none;
 }
 
-ol.bjqs-markers li a{
-	padding:5px 10px;
-	background:#000;
-	color:#fff;
-	margin:5px;
-	text-decoration: none;
-}
+    ol.bjqs-markers li.active-marker a,
+    ol.bjqs-markers li a:hover {
+        background: #999;
+    }
 
-ol.bjqs-markers li.active-marker a,
-ol.bjqs-markers li a:hover{
-	background: #999;
-}
-
-p.bjqs-caption{
-	background: rgba(255,255,255,0.5);
+p.bjqs-caption {
+    background: rgba(255,255,255,0.5);
 }
 
 
@@ -714,9 +802,9 @@ p.bjqs-caption{
     float: left;
     padding: 5px;
     width: 120px;
-text-align: center;
-border: solid 1px #ccc;
-margin: 10px;
+    text-align: center;
+    border: solid 1px #ccc;
+    margin: 10px;
 }
 
 
@@ -822,6 +910,7 @@ p {
 .browser-addr-input {
     width: 100%;
     height: 30px;
+    padding: 0 20px;
 }
 
 .browser-main {
@@ -1045,6 +1134,7 @@ p {
         bottom: 0 !important;
         opacity: 1;
     }
+
 .close-profile {
     width: 80%;
     margin: 5px auto;

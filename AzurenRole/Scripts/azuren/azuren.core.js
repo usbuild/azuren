@@ -194,7 +194,7 @@
     Azuren.store.install = function (appId) {
         $.post("/Store/install", { id: appId }, function (e) {
             if (e.code == 0) {
-                Azuren.app.installEx(e.data.id, e.data.name, e.data.icon, e.data.url, e.data.width, e.data.height);
+                Azuren.app.installEx(e.data.id, e.data.name, e.data.icon, e.data.url, e.data.width, e.data.height, e.data.iwidth, e.data.iheight, e.data.type, e.data.tile);
             } else {
                 Azuren.alert.error("Install app failed");
             }

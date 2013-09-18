@@ -42,11 +42,13 @@ Chat.chatHub.client.addNewMessageToPage = function (groupId, obj) {
 
 
 var addUserToList = function (roomId, user) {
-    var list = getChatWindow(roomId).$content.find(".chat-box-user-list ul");
-    if (list.find('[data-id=' + user.Id + "]").length == 0) {
-        Chat.userInfoList[user.Id] = user;
-        var li = $("<li />").addClass("chat-box-user-item").attr("data-id", user.Id).html(userWrapper(user.Id));
-        list.append(li);
+    if (getChatWindow(roomId)) {
+        var list = getChatWindow(roomId).$content.find(".chat-box-user-list ul");
+        if (list.find('[data-id=' + user.Id + "]").length == 0) {
+            Chat.userInfoList[user.Id] = user;
+            var li = $("<li />").addClass("chat-box-user-item").attr("data-id", user.Id).html(userWrapper(user.Id));
+            list.append(li);
+        }
     }
 };
 
@@ -141,6 +143,7 @@ Azuren.app.install("0001", "IM", "/Images/icons/metro/im.png", 1, 1, 0, function
                             };
                             talk.onClose = function () {
                                 Chat.chatHub.server.removeGroup(id);
+                                window['ue_chat_' + id].destroy();
                             };
                             Chat.chatHub.server.getRecent(id);
                         }

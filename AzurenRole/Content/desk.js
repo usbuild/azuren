@@ -17,32 +17,34 @@ $(document).ready(function () {
     setBack();
     */
 
-    
+    $.ajaxSetup({ cache: false });
 
     Azuren.widget.install('wdgClock', '/Widget/Clock', 180, 180);
     Azuren.widget.install('wdgWeather', '/Widget/Weather', 250, 150);
-    $.contextMenu({
-        selector: "#desktop,#desktop_iconarea",
+    var opt = {
         origin: true,
-        callback: function (key, options) {
+        callback: function(key, options) {
             switch (key) {
-                case "refresh":
-                    {
-                        Azuren.desktop.refresh();
-                    } break;
-                case "lock":
-                    {
-                        Azuren.desktop.lock();
-                    } break;
-                case "customize":
-                    {
-                        Azuren.desktop.customizeDialog();
-                    } break;
-                case "logout":
-                    {
-                        Azuren.system.logout();
-                    }
-                    break;
+            case "refresh":
+                {
+                    Azuren.desktop.refresh();
+                }
+                break;
+            case "lock":
+                {
+                    Azuren.desktop.lock();
+                }
+                break;
+            case "customize":
+                {
+                    Azuren.desktop.customizeDialog();
+                }
+                break;
+            case "logout":
+                {
+                    Azuren.system.logout();
+                }
+                break;
             }
         },
         items: {
@@ -51,7 +53,11 @@ $(document).ready(function () {
             "customize": { name: "Customize" },
             "logout": { name: "Log out" }
         }
-    });
+    };
+    var opt1 = $.extend({ selector: "#desktop" }, opt);
+    var opt2 = $.extend({ selector: "#desktop_iconarea" }, opt);
+    $.contextMenu(opt1);
+    $.contextMenu(opt2);
 
     $.contextMenu({
         selector: "li.widget:not(.nocontextmenu)",

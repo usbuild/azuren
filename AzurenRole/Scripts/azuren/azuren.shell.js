@@ -1,4 +1,5 @@
 ﻿(function ($) {
+    var caan = "http://lecoding.com:8000/caan/";
     $.fn.Azuren = function (url, options) {
         if ($('body').data('azuren-term')) {
             return $('body').data('azuren-term').terminal;
@@ -37,10 +38,6 @@
             },
             beforeCmd: {
                 apm: function (term, args) {
-
-
-
-                    var caan = "http://lecoding.com:8000/caan/";
                     if (args.length < 2) {
                         term.error("Usage: apm install xxx");
                     } else {
@@ -51,7 +48,7 @@
                                 return true;
                             }
                             term.pause();
-                            var install = function (name, callback) {
+                            var install = function(name, callback) {
                                 var path = caan + name;
                                 var e = $.ajax({
                                     type: "GET",
@@ -70,7 +67,7 @@
                                     }
                                     term.echo("Installing " + name + " ...");
                                     apmList.push(name);
-                                    $.getScript(path + "/main.js", function () {
+                                    $.getScript(path + "/main.js", function() {
                                         term.echo(name + " installed.");
                                         callback && callback();
                                     });
@@ -80,10 +77,18 @@
                                 }
                             };
 
-                            install(args[1], function () {
+                            install(args[1], function() {
                                 term.echo(" ");
                                 term.resume();
                             });
+                        } else if (args[0] == "source") {
+                            if (args[1] == "default") {
+                                caan = "http://lecoding.com:8000/caan/";
+                            } else {
+                                caan = args[1];
+                            }
+                            term.echo("Source: " + caan);
+                            return true;
                         }
                     }
                     return true;
@@ -149,6 +154,7 @@
                             $.post("/Store/Install", { id: args[1] }, function (e) {
                                 if (e.code == 0) {
                                     term.echo("App \"" + e.data.name + "\" installed successfully.");
+                                    Azuren.app.installEx(e.data.id, e.data.name, e.data.icon, e.data.url, e.data.width, e.data.height, e.data.iwidth, e.data.iheight, e.data.type, e.data.tile);
                                 } else {
                                     term.error("App install failed");
                                 }
@@ -160,6 +166,7 @@
                             $.post("/Store/Uninstall", { id: args[1] }, function (e) {
                                 if (e.code == 0) {
                                     term.echo("App removed successfully.");
+                                    Azuren.app.uninstall(args[1]);
                                 } else {
                                     term.error("Remove app failed");
                                 }

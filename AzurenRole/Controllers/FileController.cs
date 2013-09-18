@@ -177,15 +177,19 @@ namespace AzurenRole.Controllers
             try
             {
                 var file = new BlobFile2(User.Identity.Name, "/");
-                var list = file.ListFiles();
+                var list = file.AllFiles();
                 var regex = new Regex("^" + Regex.Escape(type).Replace(@"\*", ".*").Replace(@"\?", ".") + "$",
                     RegexOptions.IgnoreCase);
-                var data = list.Where(m => regex.IsMatch(m.ContentType())).Select(m => m.Path().Path());
-                return Json(new { code = 0, data = data });
+                var data = list.Where(delegate(BlobFile2 m)
+                {
+                    return regex.IsMatch(m.ContentType()
+                        );
+                }).Select(m => m.Path().Path());
+                return Json(new { code = 0, data = data }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                return Json(new { code = 1 });
+                return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
             }
         }
     }

@@ -39,10 +39,22 @@ namespace AzurenRole.Models
         public string ConfirmPassword { set; get; }
     }
 
+
+    public class ResetForm
+    {
+        public string Token { set; get; }
+        [Display(Name = "New Password")]
+        [StringLength(int.MaxValue, MinimumLength = 4)]
+        public string NewPassword { set; get; }
+
+        [Display(Name = "Confirm Password")]
+        [StringLength(int.MaxValue, MinimumLength = 4)]
+        [System.Web.Mvc.Compare("NewPassword")]
+        public string ConfirmPassword { set; get; }
+    }
+
     public class SettingForm
     {
-
-
         [Display(Name = "Old Password")]
         [StringLength(int.MaxValue, MinimumLength = 4)]
         public string OldPassword { set; get; }

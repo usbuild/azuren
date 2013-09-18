@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
 using System.Runtime.Caching;
@@ -10,6 +9,7 @@ using AzurenRole.Filters;
 using System.Web.Security;
 using AzurenRole.Utils;
 using Microsoft.ApplicationServer.Caching;
+using Recaptcha;
 
 namespace AzurenRole.Controllers
 {
@@ -134,15 +134,6 @@ namespace AzurenRole.Controllers
         public ActionResult Settings(SettingForm form)
         {
             User user = GlobalData.user;
-            /*
-            if (form != null)
-            {
-                if(ModelState.IsValidField(form.DisplayName)){
-                    user.Displayname = form.DisplayName;
-                }
-            }
-             * */
-
 
             if (form.NewPassword != null)
             {
@@ -162,7 +153,7 @@ namespace AzurenRole.Controllers
             return View(form);
         }
 
-        private const string EmailBody = @"Please follow this link to verify your email address: <a href=""{0}"">{0}</a><br>This link will expire in 30 minutes.";
+        private const string ValidateEmailBody = @"Please follow this link to verify your email address: <a href=""{0}"">{0}</a><br>This link will expire in 30 minutes.";
 
         public ActionResult SendEmail()
         {
@@ -172,7 +163,7 @@ namespace AzurenRole.Controllers
                 MemoryCache cache = MemoryCache.Default;
                 var token = Guid.NewGuid().ToString("N");
                 cache.Add(token, email, DateTimeOffset.Now.AddMinutes(30));
-                GlobalData.SendMail(email, "Please validate your email", String.Format(EmailBody, "http://" + ConfigurationManager.AppSettings["host"] + "/Account/ValidateEmail?token="+token));
+                GlobalData.SendMail(email, "Please validate your email", String.Format(ValidateEmailBody, "http://" + ConfigurationManager.AppSettings["host"] + "/Account/ValidateEmail?token=" + token));
                 return Json(new { code = 0 }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -194,10 +185,93 @@ namespace AzurenRole.Controllers
                     u.Status = 1;
                     GlobalData.dbContext.SaveChanges();
                     cache.Remove(token);
-                    return Content("Your email has already been validated");
+                    return CountDown("Your email has already been validated");
                 }
             }
-            return Content("Invalid token");
+            return CountDown("Invalid token");
+        }
+
+        public ActionResult CountDown(string message, int countdown = 0)
+        {
+            ViewData["message"] = message;
+            ViewData["count"] = countdown;
+            return View("CountDown");
+        }
+
+        
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult ResetPassword(string token)
+        {
+            var model = new ResetForm { Token = token };
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ResetPassword(ResetForm form)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(form);
+            }
+            MemoryCache cache = MemoryCache.Default;
+            if (cache.Contains(form.Token))
+            {
+                var email = cache.Get(form.Token).ToString();
+                User u = GlobalData.dbContext.Users.SingleOrDefault(m => m.Email == email);
+                if (u != null)
+                {
+                    u.Password = StringHelper.CalcPassword(form.NewPassword, u.Salt);
+                    cache.Remove(form.Token);
+                    GlobalData.dbContext.SaveChanges();
+                    return CountDown("Your password has already been updated, please <a href=\"/Account/Login\">Login</a>!");
+                }
+            }
+            ModelState.AddModelError("", "Your token is invalid.");
+            return View();
+        }
+
+
+        private const string ResetEmailBody = @"Please follow this link to set your new password: <a href=""{0}"">{0}</a><br>This link will expire in 30 minutes.";
+        [AllowAnonymous]
+        [HttpPost]
+        [RecaptchaControlMvc.CaptchaValidator]
+        public ActionResult Reset(string email, bool captchaValid, string captchaErrorMessage)
+        {
+            User u = GlobalData.dbContext.Users.SingleOrDefault(m => m.Email == email);
+            ViewData["email"] = email;
+            if (!captchaValid)
+            {
+                ViewData["error"] = captchaErrorMessage;
+                return View();
+            }
+            if (u == null)
+            {
+                ViewData["error"] += "Email is not valid.<br/>";
+                return View();
+            }
+            try
+            {
+                MemoryCache cache = MemoryCache.Default;
+                var token = Guid.NewGuid().ToString("N");
+                cache.Add(token, email, DateTimeOffset.Now.AddMinutes(30));
+                GlobalData.SendMail(email, "Reset your password", String.Format(ResetEmailBody, "http://" + ConfigurationManager.AppSettings["host"] + "/Account/ResetPassword?token=" + token));
+                return CountDown("An email has been sent to : " + email + ", you have 30 minutes to check it out.");
+            }
+            catch (Exception ex)
+            {
+                ViewData["error"] += "An Error occured while sending to your email";
+                return View();
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Reset()
+        {
+            ViewData["email"] = "";
+            return View();
         }
     }
 }

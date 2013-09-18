@@ -20,16 +20,25 @@ namespace AzurenRole.Controllers
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(url);
-                if (response.Result.IsSuccessStatusCode)
+
+                try
                 {
-                    string content = response.Result.Content.ReadAsStringAsync().Result;
-                    return Json(new {code = response.Result.StatusCode, data = content, headers = Response.Headers},
-                        JsonRequestBehavior.AllowGet);
+                    if (response.Result.IsSuccessStatusCode)
+                    {
+                        string content = response.Result.Content.ReadAsStringAsync().Result;
+                        return Json(new {code = response.Result.StatusCode, data = content, headers = Response.Headers},
+                            JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new {code = response.Result.StatusCode},
+                            JsonRequestBehavior.AllowGet);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    return Json(new { code = response.Result.StatusCode },
-                        JsonRequestBehavior.AllowGet);
+                    return Json(new { code = 500 },
+                            JsonRequestBehavior.AllowGet);
                 }
             }
         }

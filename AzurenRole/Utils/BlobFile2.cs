@@ -188,6 +188,13 @@ namespace AzurenRole.Utils
                     TableQuery.GenerateFilterCondition("Path", QueryComparisons.LessThanOrEqual, _path.Path() + "/" + (char)255))));
         }
 
+        public IEnumerable<BlobFile2> AllFiles()
+        {
+            ValidateDirectory();
+            var query = PrefixQuery();
+            return FileTable.ExecuteQuery(query).Select(m => new BlobFile2(m));
+        }
+
         public IEnumerable<BlobFile2> ListFiles()
         {
             ValidateDirectory();

@@ -1,4 +1,5 @@
-﻿var ViewModel = function () {
+﻿$.ajaxSetup({ cache: false });
+var ViewModel = function () {
     var self = this;
     this.nid = ko.observable(-1);
     this.title = ko.observable("");

@@ -925,7 +925,7 @@ var nJDSK = (function (wnd, d, $) {
                 $(".profile-setting").find("iframe").get(0).contentWindow.location.reload();
                 
                 setTimeout(function () {
-                    $(".profile-setting").animate({ right: 0 }, 400, "easeInOutQuad", function () {
+                    $(".profile-setting").animate({ right: 0 }, 500, "easeInOutQuad", function () {
                     });
                 }, 200);
                 $("#start-screen").on("click", closeProfile);

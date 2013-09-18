@@ -18,7 +18,7 @@
 
         app.tile.addClass("red");
         app.tile.liveTile({
-            mode: "carousel",
+            mode: "flip",
             direction: "horizonal"
         });
         
@@ -28,14 +28,12 @@
 
                 var appbar1 = {
                     menu: [
-                        { name: "search", title:"Search Apps"}
                     ],
                     autoHide: true
                 };
                 var appbar2 = {
                     menu: [
                         { name: "home"},
-                        { name: "search"},
                         { name: "download"}
                     ],
                     autoHide: true
@@ -43,7 +41,6 @@
                 var appbar3 = {
                     menu: [
                         { name: "home"},
-                        { name: "search"},
                         { name: "remove"}
                     ],
                     autoHide: true

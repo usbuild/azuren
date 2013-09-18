@@ -195,6 +195,9 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Recaptcha">
+      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -1084,6 +1087,9 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Test\Callback.cshtml" />
     <Content Include="Views\Home\Customize.cshtml" />
+    <Content Include="Views\Account\Reset.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\CountDown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

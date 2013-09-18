@@ -60,7 +60,7 @@ namespace AzurenRole.Controllers
                         }
                     }
                 }
-                return Json(new { code = 0, data = result.Select(m => new { Id = m.Id, Content = m.Content, Color = m.Color, ProjectId = m.ProjectId, Due = m.Due.ToString("yyyy-MM-dd HH:mm:ss UTC") }).Reverse() }, JsonRequestBehavior.AllowGet);
+                return Json(new { code = 0, data = result.Select(m => new { Id = m.Id, Content = m.Content, Color = m.Color, ProjectId = m.ProjectId, Due = m.Due.ToString("yyyy/MM/dd HH:mm:ss UTC") }).Reverse() }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
@@ -113,7 +113,7 @@ namespace AzurenRole.Controllers
                 project.ToDoTasks.Add(task);
                 entities.SaveChanges();
                 ToDoTaskQueue.AddToQueue(task);
-                return Json(new { code = 0, data = new { Id = task.Id, Content = task.Content, Color = task.Color, ProjectId = task.ProjectId, Due = task.Due.ToString("yyyy-MM-dd HH:mm:ss UTC") } }, JsonRequestBehavior.AllowGet);
+                return Json(new { code = 0, data = new { Id = task.Id, Content = task.Content, Color = task.Color, ProjectId = task.ProjectId, Due = task.Due.ToString("yyyy/MM/dd HH:mm:ss UTC") } }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
         }
@@ -127,7 +127,7 @@ namespace AzurenRole.Controllers
                 entities.DeleteObject(task);
                 entities.SaveChanges();
                 ToDoTaskQueue.DeleteQueue(task);
-                return Json(new { code = 0, data = new { Id = task.Id, Content = task.Content, Color = task.Color, ProjectId = task.ProjectId, Due = task.Due.ToString("yyyy-MM-dd HH:mm:ss UTC") } }, JsonRequestBehavior.AllowGet);
+                return Json(new { code = 0, data = new { Id = task.Id, Content = task.Content, Color = task.Color, ProjectId = task.ProjectId, Due = task.Due.ToString("yyyy/MM/dd HH:mm:ss UTC") } }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
         }
@@ -150,7 +150,7 @@ namespace AzurenRole.Controllers
                 {
                     ToDoTaskQueue.DeleteQueue(t);
                 }
-                return Json(new { code = 0, data = new { Id = t.Id, Content = t.Content, Color = t.Color, ProjectId = t.ProjectId, Due = t.Due.ToString("yyyy-MM-dd HH:mm:ss UTC") } }, JsonRequestBehavior.AllowGet);
+                return Json(new { code = 0, data = new { Id = t.Id, Content = t.Content, Color = t.Color, ProjectId = t.ProjectId, Due = t.Due.ToString("yyyy/MM/dd HH:mm:ss UTC") } }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
         }

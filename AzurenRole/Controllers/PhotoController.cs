@@ -49,7 +49,7 @@ namespace AzurenRole.Controllers
             try
             {
                 var file = new BlobFile2(User.Identity.Name, "/");
-                var list = file.ListFiles();
+                var list = file.AllFiles();
                 var regex = new Regex("^" + Regex.Escape(type).Replace(@"\*", ".*").Replace(@"\?", ".") + "$",
                     RegexOptions.IgnoreCase);
                 var data = list.Where(m => regex.IsMatch(m.ContentType())).Select(m => m.Path().Path());
