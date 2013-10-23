@@ -98,25 +98,7 @@ $(document).ready(function () {
         }
     });
 
-
-
-    $.getScript("/Content/app/store.js", function () {
-    });
-    $.getScript("/Content/app/file.js", function () {
-
-    });
-    $.getScript("/Content/app/browser.js", function () {
-
-    });
-    $.getScript("/Content/app/chat.js", function () {
-
-    });
-
-    $.getScript("/Content/app/photo.js", function () {
-
-    });
-
-    $.getScript("/Content/app/customize.js", function () {
+    $.getScript("/bundles/initialize", function () {
     });
 
 

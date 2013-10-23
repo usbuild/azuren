@@ -23,6 +23,14 @@ namespace AzurenRole
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/backbone").Include("~/Scripts/underscore.js", "~/Scripts/backbone.js"));
+            bundles.Add(new ScriptBundle("~/bundles/initialize").Include(
+                "~/Content/app/store.js",
+                "~/Content/app/file.js",
+                "~/Content/app/photo.js",
+                "~/Content/app/chat.js",
+                "~/Content/app/browser.js",
+                "~/Content/app/customize.js"
+                ));
             bundles.Add(new ScriptBundle("~/bundles/jquerysignalr").Include(
                         "~/Scripts/jquery.signalR-{version}.js"
                 ));
@@ -34,6 +42,34 @@ namespace AzurenRole
             bundles.Add(new ScriptBundle("~/bundles/jsdesk").Include(
                 "~/Scripts/jsdesk/js/jquery.scrollTo-*",
                 "~/Scripts/jsdesk/js/jdesktop.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/terminal").Include(
+                "~/Scripts/terminal/jquery.mousewheel-*",
+                "~/Scripts/terminal/jquery.terminal-*"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/metro").Include(
+                    "~/Scripts/metroNotification/metro-notification.js",
+                    "~/Scripts/MetroJs/MetroJs.js",
+                    "~/Scripts/metroLayout/jquery.metronav*"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery.plugins").Include(
+                "~/Scripts/sizzle.js",
+                "~/Scripts/gridster/jquery.gridster.js",
+                "~/Scripts/jquery.form.js",
+            "~/Scripts/jquery.fileDownload.js",
+            "~/Scripts/pnotify/jquery.pnotify.js",
+            "~/Scripts/fancybox/jquery.fancybox.js",
+            "~/Scripts/contextMenu/jquery.contextMenu.js",
+            "~/Scripts/jquery.touchSwipe.js",
+            "~/Scripts/photobox/photobox/photobox.js",
+            "~/Scripts/bjqs-{version}.js"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/azuren").Include(
+                "~/Scripts/azuren/azuren.shell.js",
+                "~/Scripts/azuren/azuren.core.js"
                 ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

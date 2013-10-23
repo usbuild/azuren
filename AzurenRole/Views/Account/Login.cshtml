@@ -6,7 +6,7 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
 </head>
-<body style="background: url('/Images/bg-login.jpg') no-repeat center;background-size: 100% 100%;overflow-y: hidden;">
+<body style="background: url('/Images/bg-login.jpg') no-repeat center; background-size: 100% 100%; overflow-y: hidden;">
     <div class="login-container">
         <div class="login-ad">
             <ul>
@@ -30,8 +30,9 @@
             </ul>
         </div>
         <div class="login-form">
-            <div style="color:white;font-size: 40px;background-color: #01bcf3;padding:0 20px; margin-left: 250px;">Azuren OS</div>
-            <div style="height: 70px;width: 100%;"></div>
+            <div style="color: white; font-size: 40px; background-color: #01bcf3; padding: 0 20px; margin-left: 250px;">Azuren OS</div>
+
+            <div style="height: 70px; width: 100%;"></div>
             @using (Html.BeginForm())
             {
                 
@@ -53,20 +54,34 @@
                     <div class="reg-link">
                         Don't have an account? &nbsp;&nbsp;@Html.ActionLink("Register", "Signup", null, new { @style = "font-weight:bold;" })&nbsp!
                     </div>
-                    <button type="submit" class="btn btn-primary login-btn">
-                        Login</button>
-                    
-                    <div class="reg-link" style="margin-top:20px; ">
+                    <div class="login-submit">
+                        <div class="login-slide">
+                            <a class="login-with-live btn btn-primary" href="@Url.Action("LiveLogin")">
+                                <img class="login-live-image" src="/Images/icons/metro/im.png" style="float: right"/>
+                                Login With Live Account
+                            </a>
+                            <button type="submit" class="btn btn-primary login-btn">
+                                Login</button>
+                            <a href="@Url.Action("ADLogin")" class="login-with-azure btn btn-primary">
+                                <img class="login-live-image" src="/Images/icons/start.png" style="float: left;"/>
+                                Login With Azure AD
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="reg-link" style="margin-top: 20px;">
                         @Html.ActionLink("Forgot Password?", "Reset", null, new { @style = "font-weight:bold;" })
                     </div>
+
                 </fieldset>
             }
         </div>
-        
+
 
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/unslider.js")
+
     <script type="text/javascript">
         $(function () {
             $(".login-ad").unslider({
@@ -74,6 +89,25 @@
                 delay: 7000,
                 dots: true
             });
+            var reset = function () {
+                $(".login-slide").css("transform", "translateX(-295px)")
+                                .css("-webkit-transform", "translateX(-295px)");
+                $(".login-btn").css("width", "240px");
+            };
+            $(".login-with-live").hover(function() {
+                $(".login-slide").css("transform", "translateX(0px)")
+                                .css("-webkit-transform", "translateX(0px)");
+            }, reset);
+            $(".login-with-azure").hover(function() {
+                $(".login-slide").css("transform", "translateX(-590px)")
+                                .css("-webkit-transform", "translateX(-590px)");
+            }, reset);
+            $(".login-btn").hover(function() {
+                
+                $(".login-slide").css("transform", "translateX(-350px)")
+                                .css("-webkit-transform", "translateX(-350px)");
+                $(this).css("width", "350px");
+            }, reset);
         });
     </script>
 </body>

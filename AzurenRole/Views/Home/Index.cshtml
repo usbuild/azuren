@@ -6,7 +6,7 @@
     <title>Azuren OS</title>
     @Styles.Render("~/Content/themes/base/css")
 
-    
+
     @Styles.Render("~/Content/themes/base/jquery-ui.css")
 
     <!--[if IE]>
@@ -21,9 +21,9 @@
     @Styles.Render("~/Scripts/fancybox/jquery.fancybox.css")
     @Styles.Render("~/Scripts/contextMenu/jquery.contextMenu.css")
     @Styles.Render("~/Scripts/metroLayout/jquery.metroLayout.css")
-    
+
     @Styles.Render("~/Scripts/metroNotification/metro-notification.css")
-    
+
 
     @Styles.Render("~/Scripts/MetroJs/MetroJs.css")
     @Styles.Render("~/Scripts/photobox/photobox/photobox.css")
@@ -33,99 +33,85 @@
 
 </head>
 
-    <body style="background-color: #ccc; overflow: hidden;">
-        <div class="ui-mask-layer"></div>
-        <div id="terminal"></div>
-        <div id="wrapper">
-            <img id="nJDSKBG" src="@GlobalData.user.Customize.Desktop">
-            <div id="desktop">
-                <ul id="desktop_iconarea" class="gridster"></ul>
-                <div id="widgets"></div>
-            </div>
-            <div id="taskbar">
-                <a id="start-menu" href="#"></a>
-                <a id="showdesktop" href="#" title="Show desktop" class="show-desktop">Menu</a>
-                <div class="taskbarbuttons" id="taskbarbuttons"></div>
-            </div>
-        
+<body style="background-color: #ccc; overflow: hidden;">
+    <div class="ui-mask-layer"></div>
+    <div id="terminal"></div>
+    <div id="wrapper">
+        <img id="nJDSKBG" src="@GlobalData.user.Customize.Desktop">
+        <div id="desktop">
+            <ul id="desktop_iconarea" class="gridster"></ul>
+            <div id="widgets"></div>
         </div>
-        <div id="start-screen" class="metro-container">
-        
-            <div id="widget_scroll_container">
-                <ul class="widget_container full tile-group gridster" data-num="0">
-                    <li class="live-tile widget desktop nocontextmenu" data-theme="darkgreen" data-sizex="2" data-sizey="1" data-col="1" data-row="1">
-                        <div class="widget_content">
-                            <div class="main">
-                                <span>Desktop</span>
-                            </div>
+        <div id="taskbar">
+            <a id="start-menu" href="#"></a>
+            <a id="showdesktop" href="#" title="Show desktop" class="show-desktop">Menu</a>
+            <div class="taskbarbuttons" id="taskbarbuttons"></div>
+        </div>
+
+    </div>
+    <div id="start-screen" class="metro-container">
+
+        <div id="widget_scroll_container">
+            <ul class="widget_container full tile-group gridster" data-num="0">
+                <li class="live-tile widget desktop nocontextmenu" data-theme="darkgreen" data-sizex="2" data-sizey="1" data-col="1" data-row="1">
+                    <div class="widget_content">
+                        <div class="main">
+                            <span>Desktop</span>
                         </div>
-                    </li>
-
-                </ul>
-            </div>
-
-            <div id="left-metrodesk" class="show-metrodesk"></div>
-            <div id="left-showdesktop" class="show-desktop"></div>
-            <div class="start-header">
-                <div class="start-logo">Start</div>
-                <div class="start-profile">
-                    <div class="profile-name">
-                        @GlobalData.user.Username
                     </div>
-                    <img class="profile-image" src="http://www.gravatar.com/avatar/@StringHelper.Md5Hash(GlobalData.user.Email)?d=retro"></img>
+                </li>
+
+            </ul>
+        </div>
+
+        <div id="left-metrodesk" class="show-metrodesk"></div>
+        <div id="left-showdesktop" class="show-desktop"></div>
+        <div class="start-header">
+            <div class="start-logo">Start</div>
+            <div class="start-profile">
+                <div class="profile-name">
+                    @GlobalData.user.Username
                 </div>
-            
+                <img class="profile-image" src="http://www.gravatar.com/avatar/@StringHelper.Md5Hash(GlobalData.user.Email)?d=retro"></img>
             </div>
-            <div class="profile-setting">
-                <a class="metro-btn close-profile">Close</a>
-                <iframe src="/Account/Settings" style="width: 100%;height: 100%;margin-top:20px;border:none;background-color: #339933;"></iframe>
-            </div>
-        
+
         </div>
-        <div id="metro-desktop">
-            <div class="back">
-                <div class="back-main"></div>
-            </div>
-            <div id="metro-taskbar">
-            </div>
-            <div id="metro-winmain">
-            </div>
+        <div class="profile-setting">
+            <a class="metro-btn close-profile">Close</a>
+            <iframe src="/Account/Settings" style="width: 100%; height: 100%; margin-top: 20px; border: none; background-color: #339933;"></iframe>
         </div>
 
+    </div>
+    <div id="metro-desktop">
+        <div class="back">
+            <div class="back-main"></div>
+        </div>
+        <div id="metro-taskbar">
+        </div>
+        <div id="metro-winmain">
+        </div>
+    </div>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/Scripts/sizzle.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
 
-        @Scripts.Render("~/Scripts/gridster/jquery.gridster.min.js")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/backbone")
+    @Scripts.Render("~/bundles/jquerysignalr")
+    @Scripts.Render("~/bundles/ueditor")
+    @Scripts.Render("~/signalr/hubs")
 
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/backbone")
-        @Scripts.Render("~/bundles/jquerysignalr")
-        @Scripts.Render("~/bundles/ueditor")
-        @Scripts.Render("~/signalr/hubs")
-        @Scripts.Render("~/Scripts/jquery.form.js")
-        @Scripts.Render("~/Scripts/jquery.fileDownload.js")
-        @Scripts.Render("~/Scripts/terminal/jquery.mousewheel-min.js")
-        @Scripts.Render("~/Scripts/terminal/jquery.terminal-min.js")
-        @Scripts.Render("~/Scripts/pnotify/jquery.pnotify.min.js")
+    @Scripts.Render("~/bundles/jquery.plugins")
 
-        @Scripts.Render("~/Scripts/fancybox/jquery.fancybox.js")
-        @Scripts.Render("~/Scripts/contextMenu/jquery.contextMenu.js")
-        @Scripts.Render("~/Scripts/jquery.touchSwipe.js")
+    @Scripts.Render("~/bundles/terminal")
 
-        @Scripts.Render("~/Scripts/metroNotification/metro-notification.js")
-        @Scripts.Render("~/Scripts/MetroJs/MetroJs.js")
-        @Scripts.Render("~/Scripts/metroLayout/jquery.metronav.min.js")
+    @Scripts.Render("~/bundles/metro")
 
-        @Scripts.Render("~/Scripts/photobox/photobox/photobox.js")
-        @Scripts.Render("~/Scripts/bjqs-1.3.js")
+    @Scripts.Render("~/bundles/jsdesk")
 
-        @Scripts.Render("~/bundles/jsdesk")
-        @Scripts.Render("~/Scripts/azuren/azuren.shell.js")
-        @Scripts.Render("~/Scripts/azuren/azuren.core.js")
+    @Scripts.Render("~/bundles/azuren")
 
-        @Scripts.Render("~/Content/desk.js")
+    @Scripts.Render("~/Content/desk.js")
 
-    </body>
+</body>
 </html>

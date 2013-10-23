@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "LiveLogin";
+}
+<form method="GET" class="live-login-userform">
+    <legend>UserName</legend>
+    @if (ViewData["message"] != null)
+    {
+        <div>@ViewData["message"]</div>
+    }
+    <input type="text" name="name" class="form-control" style="width: 240px;display: inline-block;"/>
+    <input type="submit" class="btn btn-primary"/>
+</form>

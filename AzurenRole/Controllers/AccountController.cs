@@ -2,12 +2,17 @@
 using System.Configuration;
 using System.Linq;
 using System.Runtime.Caching;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using AzurenRole.Helpers;
 using AzurenRole.Models;
 using AzurenRole.Filters;
 using System.Web.Security;
 using AzurenRole.Utils;
+using DotNetOpenAuth.Messaging;
+using DotNetOpenAuth.OAuth2;
 using Microsoft.ApplicationServer.Caching;
 using Recaptcha;
 
@@ -43,6 +48,60 @@ namespace AzurenRole.Controllers
             return PartialView();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> LiveLogin(string name = null)
+        {
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            var client = new LiveConnect();
+            IAuthorizationState state;
+            if (Session["LiveToken"] != null)
+            {
+                state = (IAuthorizationState) Session["LiveToken"];
+            }
+            else
+            {
+                state = await client.ProcessUserAuthorizationAsync(Request);
+            }
+            if (state == null)
+            {
+                var request = await client.PrepareRequestUserAuthorizationAsync(
+                    scopes: new[] { LiveConnect.Scopes.Basic, LiveConnect.Scopes.Emails, LiveConnect.Scopes.SignIn });
+                await request.SendAsync(new HttpContextWrapper(System.Web.HttpContext.Current));
+                Response.End();
+            }
+            else
+            {
+                if (name != null && GlobalData.dbContext.Users.Any(m=>m.Username == name))
+                {
+                    ViewData["message"] = "UserName already exists!";
+                    return View();
+                }
+                User user = await client.GetUser(state, name);
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    if (user.Id == 0)
+                    {
+                        Session["LiveToken"] = state;
+                        return View();
+                    }
+                }
+                FormsAuthentication.SetAuthCookie(user.Username, true);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Login");
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(Models.LoginForm form, string ReturnUrl = "/")
@@ -61,7 +120,7 @@ namespace AzurenRole.Controllers
             User u;
             if (form.EmailOrUserName.Contains("@"))
             {
-                u = context.Users.SingleOrDefault(m => m.Email == form.EmailOrUserName);
+                u = context.Users.SingleOrDefault(m => m.Email == form.EmailOrUserName && m.Status != 3);
             }
             else
             {
@@ -198,7 +257,7 @@ namespace AzurenRole.Controllers
             return View("CountDown");
         }
 
-        
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ResetPassword(string token)
@@ -272,6 +331,37 @@ namespace AzurenRole.Controllers
         {
             ViewData["email"] = "";
             return View();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult> ADLogin()
+        {
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return Content("");
+
+            /*
+            var client = new LiveConnect();
+            IAuthorizationState state;
+            if (Session["LiveToken"] != null)
+            {
+                state = (IAuthorizationState)Session["LiveToken"];
+            }
+            else
+            {
+                state = await client.ProcessUserAuthorizationAsync(Request);
+            }
+            if (state == null)
+            {
+                var request = await client.PrepareRequestUserAuthorizationAsync(
+                    scopes: new[] { LiveConnect.Scopes.Basic, LiveConnect.Scopes.Emails, LiveConnect.Scopes.SignIn });
+                await request.SendAsync(new HttpContextWrapper(System.Web.HttpContext.Current));
+                Response.End();
+            }
+            */
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿body,div,p {
+﻿body, div, p {
     font-family: 'Segoe UI Semilight', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
 }
+
 .form-control {
     border-radius: 0;
 }
@@ -13,6 +14,7 @@ li {
     border-radius: 0;
     border: none;
 }
+
 .form-control {
     border-radius: 0;
 }
@@ -44,11 +46,75 @@ li {
         border-radius: 0;
     }
 
-    .login-form .login-btn {
-        width: 100%;
+    .login-form .login-submit {
         margin-top: 20px;
+        width: 350px;
+        overflow: hidden;
+    }
+
+    .login-form .login-slide {
+        width: 1200px;
+        -webkit-transform: translateX(-295px);
+        -moz-transform: translateX(-295px);
+        -ms-transform: translateX(-295px);
+        -o-transform: translateX(-295px);
+        transform: translateX(-295px);
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -ms-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+    }
+
+.login-form .btn {
         border-radius: 0;
-        background-color: #01bcf3;
+        background-color: #0072C6;
+        height: 40px;
+        margin: 0;
+        float: left;
+        width: 350px;
+        border-right: none;
+        border: none;
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -ms-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+        display: block;
+    }
+
+        .login-form .btn:active {
+            background-color: #007ad4;
+        }
+
+        .login-form .btn:hover {
+            background-color: #007ad4;
+        }
+
+    .login-form .login-btn {
+        border-left: none;
+        padding: 0;
+        width: 240px;
+
+
+    }
+    
+
+    .login-form .login-with-live:hover, .login-form .login-with-azure:hover {
+        background-color: #78AD00;
+    }
+
+    .login-form .login-with-azure,.login-form .login-with-live {
+        background-color: #78AD00;
+    }
+
+    .login-form .login-live-image {
+        width: 32px;
+        height: 32px;
+        margin-top: -4px;
+        margin-left: 0px;
+        padding: 0;
+        border: 0;
     }
 
     .login-form input:-webkit-autofill {
@@ -115,6 +181,18 @@ li {
                 opacity: 1;
             }
 
+.live-login-userform {
+    border: solid 1px #ccc;
+    width: 400px;
+    margin: 20px auto;
+    padding: 40px;
+}
+.live-login-userform input {
+    border-radius: 0;
+}
+.open-login {
+}
+
 .reset-container {
     margin: 100px auto;
     background-color: white;
@@ -135,17 +213,17 @@ li {
 
 .msg-container {
     border: solid 1px #ccc;
-width: 500px;
-margin: 100px auto;
-padding: 50px 40px;
-font-size: 17px;
+    width: 500px;
+    margin: 100px auto;
+    padding: 50px 40px;
+    font-size: 17px;
 }
 
 .login-container {
     height: 480px;
     width: 980px;
     margin: 120px auto;
-    background-color: rgba(76, 76, 76, 0.5);;
+    background-color: rgba(76, 76, 76, 0.7);
 }
 
 .ad-float-text {

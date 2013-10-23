@@ -688,11 +688,14 @@ var nJDSK = (function (wnd, d, $) {
                 metroIcon.find("img").css("margin-top", 10 + 90 * (y - 1) + "px");
                 metroIcon.data("info", { id: iconId, image: iconImage, title: iconTitle });
 
+                
                 metroIcon.mousedown(function (e) {
                     $(this).addClass("widget-press");
                 }).mouseup(function (e) {
                     $(this).removeClass("widget-press");
                 });
+                
+                
                 var app = {};
                 app.tile = metroIcon;
 
@@ -968,6 +971,7 @@ var nJDSK = (function (wnd, d, $) {
                 $("#metro-icon-" + $(this).data("id")).trigger("click");
             });
 
+            
             nJDSK.metroster = $(".widget_container").gridster({
                 widget_margins: [5, 5],
                 widget_base_dimensions: [140, 140],
